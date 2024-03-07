@@ -1,0 +1,111 @@
+<package xmlns="http://www.idpf.org/2007/opf" prefix="schema: http://schema.org/ rendition: http://www.idpf.org/vocab/rendition/# ibooks: http://vocabulary.itunes.apple.com/rdf/ibooks/vocabulary-extensions-1.0/" unique-identifier="EbookISBN" version="3.0" xml:lang="en-US">
+	<metadata xmlns:dc="http://purl.org/dc/elements/1.1/">
+		<dc:title id="title">The Laws of Human Nature</dc:title>
+		<meta property="title-type" refines="#title">main</meta>
+		<meta property="display-seq" refines="#title">1</meta>
+		<meta content="Viking" name="imprint"/>
+		<dc:creator id="creator1">Robert Greene</dc:creator>
+		<meta property="display-seq" refines="#creator1">1</meta>
+		<meta property="role" refines="#creator1" scheme="marc:relators">aut</meta>
+		<meta property="file-as" refines="#creator1">Greene, Robert</meta>
+		<dc:publisher>Penguin Publishing Group</dc:publisher>
+		<dc:language>en-US</dc:language>
+		<meta property="dcterms:modified">2018-09-24T14:01:42Z</meta>
+		<dc:date>2018-10-23</dc:date>
+		<dc:source id="SourceISBN">9780525428145</dc:source>
+		<meta content="Adobe InDesign 12.1 unZip_INDD_ePub.app 1.6" name="generator"/>
+		<meta content="2018-09-18" name="created"/>
+		<meta content="cover.jpg" name="cover"/>
+		<meta property="ibooks:specified-fonts">true</meta>
+		<dc:identifier id="EbookISBN">9780698184541</dc:identifier>
+		<dc:rights>Copyright © 2018 by Robert Greene</dc:rights>
+		<meta property="schema:accessMode">textual</meta>
+		<meta property="schema:accessMode">visual</meta>
+		<meta property="schema:accessModeSufficient">textual,visual</meta>
+		<meta property="schema:accessibilityFeature">displayTransformability</meta>
+		<meta property="schema:accessibilityFeature">tableOfContents</meta>
+		<meta property="schema:accessibilityFeature">bookmarks</meta>
+		<meta property="schema:accessibilityHazard">none</meta>
+	<description xmlns="http://purl.org/dc/elements/1.1/">&lt;b&gt;From the #1 &lt;i&gt;New York Times&lt;/i&gt;-bestselling author of &lt;i&gt;The 48 Laws of Power&lt;/i&gt; comes the definitive new book on decoding the behavior of the people around you&lt;/b&gt;&lt;br&gt;Robert Greene is a master guide for millions of readers, distilling ancient wisdom and philosophy into essential texts for seekers of power, understanding and mastery. Now he turns to the most important subject of all - understanding people's drives and motivations, even when they are unconscious of them themselves.&lt;br&gt;We are social animals. Our very lives depend on our relationships with people. Knowing why people do what they do is the most important tool we can possess, without which our other talents can only take us so far. Drawing from the ideas and examples of Pericles, Queen Elizabeth I, Martin Luther King Jr, and many others, Greene teaches us how to detach ourselves from our own emotions and master self-control, how to develop the empathy that leads to insight, how to look behind people's masks, and...</description>
+</metadata>
+	<manifest>
+		<item href="xhtml/01_Cover.xhtml" id="cover" media-type="application/xhtml+xml"/>
+		<item href="xhtml/02_Also_by_Robert_Greene.xhtml" id="x9780698184541_EPUB" media-type="application/xhtml+xml"/>
+		<item href="xhtml/03_Title_Page.xhtml" id="x9780698184541_EPUB-1" media-type="application/xhtml+xml"/>
+		<item href="xhtml/04_Copyright.xhtml" id="x9780698184541_EPUB-2" media-type="application/xhtml+xml"/>
+		<item href="xhtml/05_Dedication.xhtml" id="x9780698184541_EPUB-3" media-type="application/xhtml+xml"/>
+		<item href="xhtml/06_Contents.xhtml" id="x9780698184541_EPUB-4" media-type="application/xhtml+xml"/>
+		<item href="xhtml/07_Introduction.xhtml" id="x9780698184541_EPUB-5" media-type="application/xhtml+xml"/>
+		<item href="xhtml/08_1_Master_Your_Emotion.xhtml" id="x9780698184541_EPUB-6" media-type="application/xhtml+xml"/>
+		<item href="xhtml/09_2_Transform_Self-love.xhtml" id="x9780698184541_EPUB-7" media-type="application/xhtml+xml"/>
+		<item href="xhtml/10_3_See_Through_People_.xhtml" id="x9780698184541_EPUB-8" media-type="application/xhtml+xml"/>
+		<item href="xhtml/11_4_Determine_the_Stren.xhtml" id="x9780698184541_EPUB-9" media-type="application/xhtml+xml"/>
+		<item href="xhtml/12_5_Become_an_Elusive_O.xhtml" id="x9780698184541_EPUB-10" media-type="application/xhtml+xml"/>
+		<item href="xhtml/13_6_Elevate_Your_Perspe.xhtml" id="x9780698184541_EPUB-11" media-type="application/xhtml+xml"/>
+		<item href="xhtml/14_7_Soften_People_s_Res.xhtml" id="x9780698184541_EPUB-12" media-type="application/xhtml+xml"/>
+		<item href="xhtml/15_8_Change_Your_Circums.xhtml" id="x9780698184541_EPUB-13" media-type="application/xhtml+xml"/>
+		<item href="xhtml/16_9_Confront_Your_Dark_.xhtml" id="x9780698184541_EPUB-14" media-type="application/xhtml+xml"/>
+		<item href="xhtml/17_10_Beware_the_Fragile.xhtml" id="x9780698184541_EPUB-15" media-type="application/xhtml+xml"/>
+		<item href="xhtml/18_11_Know_Your_Limits_T.xhtml" id="x9780698184541_EPUB-16" media-type="application/xhtml+xml"/>
+		<item href="xhtml/19_12_Reconnect_to_the_M.xhtml" id="x9780698184541_EPUB-17" media-type="application/xhtml+xml"/>
+		<item href="xhtml/20_13_Advance_with_a_Sen.xhtml" id="x9780698184541_EPUB-18" media-type="application/xhtml+xml"/>
+		<item href="xhtml/21_14_Resist_the_Downwar.xhtml" id="x9780698184541_EPUB-19" media-type="application/xhtml+xml"/>
+		<item href="xhtml/22_15_Make_Them_Want_to_.xhtml" id="x9780698184541_EPUB-20" media-type="application/xhtml+xml"/>
+		<item href="xhtml/23_16_See_the_Hostility_.xhtml" id="x9780698184541_EPUB-21" media-type="application/xhtml+xml"/>
+		<item href="xhtml/24_17_Seize_the_Historic.xhtml" id="x9780698184541_EPUB-22" media-type="application/xhtml+xml"/>
+		<item href="xhtml/25_18_Meditate_on_Our_Co.xhtml" id="x9780698184541_EPUB-23" media-type="application/xhtml+xml"/>
+		<item href="xhtml/26_Acknowledgments.xhtml" id="x9780698184541_EPUB-24" media-type="application/xhtml+xml"/>
+		<item href="xhtml/27_Selected_Bibliography.xhtml" id="x9780698184541_EPUB-25" media-type="application/xhtml+xml"/>
+		<item href="xhtml/28_Index.xhtml" id="x9780698184541_EPUB-26" media-type="application/xhtml+xml"/>
+		<item href="toc.ncx" id="ncx" media-type="application/x-dtbncx+xml"/>
+		<item href="navDoc.xhtml" id="toc" media-type="application/xhtml+xml" properties="nav"/>
+		<item href="css/idGeneratedStyles.css" id="idGeneratedStyles.css" media-type="text/css"/>
+		<item href="image/cover.jpg" id="cover.jpg" media-type="image/jpeg" properties="cover-image"/>
+		<item href="image/page_13.jpg" id="page_13.jpg" media-type="image/jpeg"/>
+		<item href="image/page_74.jpg" id="page_74.jpg" media-type="image/jpeg"/>
+		<item href="image/page_v.jpg" id="page_v.jpg" media-type="image/jpeg"/>
+		<item href="xhtml/29_About_the_Author.xhtml" id="x29_About_the_Author.xhtml" media-type="application/xhtml+xml"/>
+		<item href="font/Shift-BoldItalic.otf" id="Shift-BoldItalic.otf" media-type="application/vnd.ms-opentype"/>
+		<item href="font/Shift-Light.otf" id="Shift-Light.otf" media-type="application/vnd.ms-opentype"/>
+		<item href="xhtml/next-reads.xhtml" id="next-reads.xhtml" media-type="application/xhtml+xml"/>
+		<item href="image/next-reads_logo.jpg" id="next-reads_logo.jpg" media-type="image/jpeg"/>
+	</manifest>
+	<spine toc="ncx">
+		<itemref idref="cover"/>
+		<itemref idref="x9780698184541_EPUB"/>
+		<itemref idref="x9780698184541_EPUB-1"/>
+		<itemref idref="x9780698184541_EPUB-2"/>
+		<itemref idref="x9780698184541_EPUB-3"/>
+		<itemref idref="x9780698184541_EPUB-4"/>
+		<itemref idref="x9780698184541_EPUB-5"/>
+		<itemref idref="x9780698184541_EPUB-6"/>
+		<itemref idref="x9780698184541_EPUB-7"/>
+		<itemref idref="x9780698184541_EPUB-8"/>
+		<itemref idref="x9780698184541_EPUB-9"/>
+		<itemref idref="x9780698184541_EPUB-10"/>
+		<itemref idref="x9780698184541_EPUB-11"/>
+		<itemref idref="x9780698184541_EPUB-12"/>
+		<itemref idref="x9780698184541_EPUB-13"/>
+		<itemref idref="x9780698184541_EPUB-14"/>
+		<itemref idref="x9780698184541_EPUB-15"/>
+		<itemref idref="x9780698184541_EPUB-16"/>
+		<itemref idref="x9780698184541_EPUB-17"/>
+		<itemref idref="x9780698184541_EPUB-18"/>
+		<itemref idref="x9780698184541_EPUB-19"/>
+		<itemref idref="x9780698184541_EPUB-20"/>
+		<itemref idref="x9780698184541_EPUB-21"/>
+		<itemref idref="x9780698184541_EPUB-22"/>
+		<itemref idref="x9780698184541_EPUB-23"/>
+		<itemref idref="x9780698184541_EPUB-24"/>
+		<itemref idref="x9780698184541_EPUB-25"/>
+		<itemref idref="x9780698184541_EPUB-26"/>
+		<itemref idref="x29_About_the_Author.xhtml"/>
+		<itemref idref="next-reads.xhtml"/>
+	</spine>
+	<guide>
+		<reference href="xhtml/01_Cover.xhtml" title="Cover" type="cover"/>
+		<reference href="xhtml/06_Contents.xhtml#_idParaDest-5" title="Table of Contents" type="toc"/>
+		<reference href="xhtml/07_Introduction.xhtml" title="Text" type="text"/>
+		<reference href="xhtml/07_Introduction.xhtml" title="Start" type="start"/>
+	</guide>
+</package>
