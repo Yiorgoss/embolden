@@ -1,5 +1,5 @@
 <script lang="ts">
-    import init, { convert } from "$lib/wasm/embolden.js";
+    <!-- import init, { convert } from "$lib/wasm/embolden.js"; -->
     import {
         mergeUint8Arr,
         incompressibleExt,
