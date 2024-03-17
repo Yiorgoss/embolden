@@ -1,5 +1,5 @@
 <script lang="ts">
-    <!-- import init, { convert } from "$lib/wasm/embolden.js"; -->
+    //import init, { convert } from "$lib/wasm/embolden.js";
     import {
         mergeUint8Arr,
         incompressibleExt,
@@ -36,31 +36,31 @@
             }
         };
 
-        unzip(compressed, (err, res) => {
-            init().then(() => {
-                if (err) throw new Error(`failed to parse unzip data ${err}`);
-                for (const [key, value] of Object.entries(res)) {
-                    const ext = key.slice(key.lastIndexOf(".") + 1) || "";
-                    // const ext2 = key.split(".")[-1];
-                    const filename = incompressibleExt.has(ext)
-                        ? new ZipPassThrough(key)
-                        : new ZipDeflate(key, { level: 9 });
-                    zipper.add(filename);
-
-                    if (epubTextExt.has(ext)) {
-                        // skip all files that arent text
-                        // then send to rust for converting
-                        let bold_raw = convert(value);
-                        filename.push(bold_raw);
-                    } else {
-                        filename.push(value);
-                    }
-                    filename.push(new Uint8Array(0), true);
-                }
-                zipper.end();
-                return finalZip;
-            });
-        });
+        // unzip(compressed, (err, res) => {
+        //     init().then(() => {
+        //         if (err) throw new Error(`failed to parse unzip data ${err}`);
+        //         for (const [key, value] of Object.entries(res)) {
+        //             const ext = key.slice(key.lastIndexOf(".") + 1) || "";
+        //             // const ext2 = key.split(".")[-1];
+        //             const filename = incompressibleExt.has(ext)
+        //                 ? new ZipPassThrough(key)
+        //                 : new ZipDeflate(key, { level: 9 });
+        //             zipper.add(filename);
+        //
+        //             if (epubTextExt.has(ext)) {
+        //                 // skip all files that arent text
+        //                 // then send to rust for converting
+        //                 let bold_raw = convert(value);
+        //                 filename.push(bold_raw);
+        //             } else {
+        //                 filename.push(value);
+        //             }
+        //             filename.push(new Uint8Array(0), true);
+        //         }
+        //         zipper.end();
+        //         return finalZip;
+        //     });
+        // });
     };
     </script>
 
