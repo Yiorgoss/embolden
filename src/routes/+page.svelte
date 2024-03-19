@@ -1,5 +1,5 @@
 <script lang="ts">
-   import init, { convert } from "$lib/wasm/embolden.js";
+    import init, { convert, alter_identifier } from "$lib/wasm/embolden.js";
     import {
         mergeUint8Arr,
         incompressibleExt,
@@ -11,15 +11,16 @@
     import { Button } from "$lib/components/ui/button";
     import { Zip, unzip, ZipDeflate, ZipPassThrough } from "fflate";
 
-    let url:string = "";
-    let originalFileName = ''
+    let url: string = "";
+    let originalFileName = "";
 
     const convertFile = async (event: FormInputEvent<Event>) => {
+        url = "";
         let target = event.target as HTMLInputElement;
         if (!target.files) {
             return;
         }
-        originalFileName = target.files[0].name
+        originalFileName = target.files[0].name;
         const file_u8 = await target.files[0].arrayBuffer();
         unzipParseZipFile(new Uint8Array(file_u8));
     };
@@ -31,7 +32,7 @@
             if (err) throw new Error(`failed while zipping ${err}`);
             finalZip = mergeUint8Arr(finalZip, data);
             if (final) {
-                url = URL.createObjectURL(new Blob([finalZip.buffer],     ));
+                url = URL.createObjectURL(new Blob([finalZip.buffer]));
                 // let url = new Blob([finalZip.buffer]);
             }
         };
@@ -39,9 +40,12 @@
         unzip(compressed, (err, res) => {
             init().then(() => {
                 if (err) throw new Error(`failed to parse unzip data ${err}`);
-                for (const [key, value] of Object.entries(res)) {
+                for (let [key, value] of Object.entries(res)) {
                     const ext = key.slice(key.lastIndexOf(".") + 1) || "";
                     // const ext2 = key.split(".")[-1];
+                    if (key == "content.opf") {
+                      value= alter_identifier(value);
+                    }
                     const filename = incompressibleExt.has(ext)
                         ? new ZipPassThrough(key)
                         : new ZipDeflate(key, { level: 9 });
@@ -62,7 +66,7 @@
             });
         });
     };
-    </script>
+</script>
 
 <div class="container flex-center flex-col min-h-svh gap-5">
     <div class="grid grid-cols-2">
@@ -71,7 +75,10 @@
             <Input on:change={(e) => convertFile(e)} type="file" />
         </div>
         <div class:hidden={url.length == 0} class="justify-end flex flex-col">
-            <a href={url} download={`EMBOLDEN_${originalFileName}`}><Button>Download</Button></a>
+            <Label class="w-full">{originalFileName}</Label>
+            <a href={url} download={`EMBOLDEN_${originalFileName}`}
+                ><Button>Download</Button></a
+            >
         </div>
     </div>
 </div>

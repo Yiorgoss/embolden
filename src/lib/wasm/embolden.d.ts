@@ -5,12 +5,18 @@
 * @returns {Uint8Array}
 */
 export function convert(arr: Uint8Array): Uint8Array;
+/**
+* @param {Uint8Array} arr
+* @returns {Uint8Array}
+*/
+export function alter_identifier(arr: Uint8Array): Uint8Array;
 
 export type InitInput = RequestInfo | URL | Response | BufferSource | WebAssembly.Module;
 
 export interface InitOutput {
   readonly memory: WebAssembly.Memory;
   readonly convert: (a: number, b: number, c: number) => void;
+  readonly alter_identifier: (a: number, b: number, c: number) => void;
   readonly __wbindgen_add_to_stack_pointer: (a: number) => number;
   readonly __wbindgen_malloc: (a: number, b: number) => number;
   readonly __wbindgen_free: (a: number, b: number, c: number) => void;
