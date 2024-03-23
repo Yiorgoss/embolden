@@ -1,4 +1,5 @@
 .DS_Store
+epubs/
 node_modules
 /build
 /.svelte-kit

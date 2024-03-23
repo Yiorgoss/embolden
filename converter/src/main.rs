@@ -1,9 +1,12 @@
-mod alter_uid;
+// mod alter_uid;
+mod convert_to_bold;
 use std::str;
 
-const INPUT: &str = include_str!("test/content.opf");
 fn main() {
-    let altered_vec = alter_uid::alter_uid(INPUT.as_bytes());
-    let altered = str::from_utf8(&altered_vec[..]);
-    println!("{:?}", altered.unwrap())
+    let input: &str = "<p >“No signal. i ”</p>";
+    // let input: &str = "<p class=\"calibre10\">“No signal. No Don Salvara. Can you breathe?”</p>";
+    let converted = convert_to_bold::insert_bold_tags(input.as_bytes());
+
+    println!("{}", input);
+    println!("{:?}", str::from_utf8(&converted.to_owned()).unwrap())
 }
