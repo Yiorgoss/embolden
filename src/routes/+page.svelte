@@ -86,7 +86,7 @@
 </script>
 
 <div
-    class="container max-w-[500px] overflow-hidden flex-center flex-col min-h-svh gap-5"
+    class="container py-10 max-w-[500px] overflow-hidden flex-center flex-col min-h-svh gap-5"
 >
     <div class="flex flex-col gap-5">
         <div class="">
@@ -122,7 +122,7 @@
     <Separator />
     <div
         class:hidden={urls.length === 0}
-        class="justify-end gap-5 flex pb-10 w-full flex-col"
+        class="justify-end gap-5 flex w-full flex-col"
     >
         {#each urls as url}
             <div
