@@ -12,9 +12,7 @@
     import * as Tooltip from "$lib/components/ui/tooltip";
     import { Separator } from "$lib/components/ui/separator";
 
-    let urls: { filename: string; url: string }[] = [
-        // { filename: "test", url: "test_url" },
-    ];
+    let urls: { filename: string; url: string }[] = [];
     let overwrite = false;
     $: console.log(urls);
 
@@ -91,7 +89,7 @@
     <div class="flex flex-col gap-5">
         <div class="">
             <Label class="w-full">Upload a book to begin</Label>
-            <Input on:change={(e) => convertFile(e)} multiple type="file" />
+            <Input on:change={(e) => convertFile(e)} accept=".epub" type="file" />
         </div>
         <div class="flex items-center space-x-2">
             <Switch bind:checked={overwrite} />
