@@ -122,7 +122,7 @@
     <Separator />
     <div
         class:hidden={urls.length === 0}
-        class="justify-end gap-5 flex w-full flex-col"
+        class="justify-end gap-5 flex pb-10 w-full flex-col"
     >
         {#each urls as url}
             <div
