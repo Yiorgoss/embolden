@@ -5,7 +5,7 @@
 
     import { Input, type FormInputEvent } from "$lib/components/ui/input";
     import { Label } from "$lib/components/ui/label";
-    import * as Popover from "$lib/components/ui/popover"
+    import * as Popover from "$lib/components/ui/popover";
     import { Button } from "$lib/components/ui/button";
     import { Zip, unzip, ZipDeflate, ZipPassThrough } from "fflate";
     import { Switch } from "$lib/components/ui/switch";
@@ -89,7 +89,12 @@
     <div class="flex flex-col gap-5">
         <div class="">
             <Label class="w-full">Upload a book to begin</Label>
-            <Input on:change={(e) => convertFile(e)} accept=".epub" type="file" />
+            <Input
+                on:change={(e) => convertFile(e)}
+                accept=".epub"
+                type="file"
+                multiple
+            />
         </div>
         <div class="flex items-center space-x-2">
             <Switch bind:checked={overwrite} />
@@ -103,14 +108,9 @@
                     </Tooltip.Trigger>
                     <Tooltip.Content>
                         <p class="max-w-[200px]">
-                            When enabled this will certain identifiers
-                            untouched. This causes some ebook readers to
-                            overwrite the previous book with the embolded
-                            version.
-                            <span class="block pt-2 text-destructive">
-                                WARNING:
-                            </span> Do not do this unless you have access to the
-                            original file.
+                            When enabled, this will change the identifier of the
+                            book, so that there will be two "copies" of the
+                            book inside the ebook reader. 
                         </p>
                     </Tooltip.Content>
                 </Tooltip.Root>
