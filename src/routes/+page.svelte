@@ -14,7 +14,8 @@
 
     let urls: { filename: string; url: string }[] = [];
     let overwrite = false;
-    $: console.log(urls);
+    let bold_fullstop = false;
+    // $: console.log(urls);
 
     const convertFile = async (event: FormInputEvent<Event>) => {
         let target = event.target as HTMLInputElement;
@@ -69,7 +70,7 @@
                         //
                         // skip all files that arent text
                         // then send to rust for converting
-                        let bold_raw = convert(value);
+                        let bold_raw = convert(value, bold_fullstop);
                         filename.push(bold_raw);
                     } else {
                         filename.push(value);
@@ -97,9 +98,9 @@
             />
         </div>
         <div class="flex items-center space-x-2">
-            <Switch bind:checked={overwrite} />
+            <Switch bind:checked={bold_fullstop} />
             <Label>
-                Overwrite Existing
+                Make periods bold.
                 <Tooltip.Root>
                     <Tooltip.Trigger>
                         <Info
@@ -108,14 +109,42 @@
                     </Tooltip.Trigger>
                     <Tooltip.Content>
                         <p class="max-w-[200px]">
-                            When enabled, this will change the identifier of the
-                            book, so that there will be two "copies" of the
-                            book inside the ebook reader. 
+                            When enabled periods will be made bold, this helps
+                            fast readers make out sentences easier.
+                            <span class="block text-lg">Example</span>
+                            <span class="pt-2 block"></span>
+                            Some text some text text. Some text some text. Some text
+                            some text more different.
+
+                            <span class="pt-2 block"></span>
+                            Some text some text text<b>.</b>
+                            Some text some text<b>.</b>
+                            Some text some text more different<b>.</b>
                         </p>
                     </Tooltip.Content>
                 </Tooltip.Root>
             </Label>
         </div>
+        <!-- <div class="flex items-center space-x-2"> -->
+        <!--     <Switch bind:checked={overwrite} /> -->
+        <!--     <Label> -->
+        <!--         Overwrite Existing -->
+        <!--         <Tooltip.Root> -->
+        <!--             <Tooltip.Trigger> -->
+        <!--                 <Info -->
+        <!--                     class="hover:text-primary/60 inline h-4 w-4 align-top" -->
+        <!--                 /> -->
+        <!--             </Tooltip.Trigger> -->
+        <!--             <Tooltip.Content> -->
+        <!--                 <p class="max-w-[200px]"> -->
+        <!--                     When enabled, this will change the identifier of the -->
+        <!--                     book, so that there will be two "copies" of the -->
+        <!--                     book inside the ebook reader.  -->
+        <!--                 </p> -->
+        <!--             </Tooltip.Content> -->
+        <!--         </Tooltip.Root> -->
+        <!--     </Label> -->
+        <!-- </div> -->
     </div>
     <Separator />
     <div

@@ -33,14 +33,15 @@ function getArrayU8FromWasm0(ptr, len) {
 }
 /**
 * @param {Uint8Array} arr
+* @param {boolean} bold_fullstop
 * @returns {Uint8Array}
 */
-export function convert(arr) {
+export function convert(arr, bold_fullstop) {
     try {
         const retptr = wasm.__wbindgen_add_to_stack_pointer(-16);
         const ptr0 = passArray8ToWasm0(arr, wasm.__wbindgen_malloc);
         const len0 = WASM_VECTOR_LEN;
-        wasm.convert(retptr, ptr0, len0);
+        wasm.convert(retptr, ptr0, len0, bold_fullstop);
         var r0 = getInt32Memory0()[retptr / 4 + 0];
         var r1 = getInt32Memory0()[retptr / 4 + 1];
         var v2 = getArrayU8FromWasm0(r0, r1).slice();

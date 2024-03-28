@@ -2,9 +2,10 @@
 /* eslint-disable */
 /**
 * @param {Uint8Array} arr
+* @param {boolean} bold_fullstop
 * @returns {Uint8Array}
 */
-export function convert(arr: Uint8Array): Uint8Array;
+export function convert(arr: Uint8Array, bold_fullstop: boolean): Uint8Array;
 /**
 * @param {Uint8Array} arr
 * @returns {Uint8Array}
@@ -15,7 +16,7 @@ export type InitInput = RequestInfo | URL | Response | BufferSource | WebAssembl
 
 export interface InitOutput {
   readonly memory: WebAssembly.Memory;
-  readonly convert: (a: number, b: number, c: number) => void;
+  readonly convert: (a: number, b: number, c: number, d: number) => void;
   readonly alter_identifier: (a: number, b: number, c: number) => void;
   readonly __wbindgen_add_to_stack_pointer: (a: number) => number;
   readonly __wbindgen_malloc: (a: number, b: number) => number;
