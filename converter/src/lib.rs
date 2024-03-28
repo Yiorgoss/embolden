@@ -4,8 +4,8 @@ mod convert_to_bold;
 use wasm_bindgen::prelude::*;
 
 #[wasm_bindgen]
-pub fn convert(arr: &[u8]) -> Vec<u8> {
-    convert_to_bold::insert_bold_tags(arr)
+pub fn convert(arr: &[u8], bold_fullstop: bool) -> Vec<u8> {
+    convert_to_bold::insert_bold_tags(arr, bold_fullstop)
 }
 
 #[wasm_bindgen]

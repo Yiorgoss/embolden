@@ -5,7 +5,7 @@ use quick_xml::name::QName;
 use quick_xml::reader::Reader;
 use quick_xml::Writer;
 
-pub fn insert_bold_tags(file_contents: &[u8]) -> Vec<u8> {
+pub fn insert_bold_tags(file_contents: &[u8], bold_fullstop: bool) -> Vec<u8> {
     // let mut reader = &file_contents;
     let mut reader = Reader::from_reader(file_contents);
     // reader.trim_text_end(true);
@@ -42,19 +42,16 @@ pub fn insert_bold_tags(file_contents: &[u8]) -> Vec<u8> {
                 for text in unescaped.split(" ") {
                     match text.len() {
                         0 => (),
-                        1 => {
-                            surround_with_bold_tags(&mut writer, text, 0);
-                        }
                         1..=4 => {
-                            surround_with_bold_tags(&mut writer, text, 1);
+                            surround_with_bold_tags(&mut writer, text, 1, bold_fullstop);
                         }
                         5..=7 => {
-                            surround_with_bold_tags(&mut writer, text, 2);
+                            surround_with_bold_tags(&mut writer, text, 2, bold_fullstop);
                         }
                         8..=10 => {
-                            surround_with_bold_tags(&mut writer, text, 3);
+                            surround_with_bold_tags(&mut writer, text, 3, bold_fullstop);
                         }
-                        _ => surround_with_bold_tags(&mut writer, text, 4),
+                        _ => surround_with_bold_tags(&mut writer, text, 4, bold_fullstop),
                     }
                 }
             }
@@ -67,19 +64,38 @@ pub fn insert_bold_tags(file_contents: &[u8]) -> Vec<u8> {
     // std::str::from_utf8(&result).unwrap().to_owned()
 }
 
-fn surround_with_bold_tags(writer: &mut Writer<Cursor<Vec<u8>>>, text: &str, index: usize) {
+fn surround_with_bold_tags(
+    writer: &mut Writer<Cursor<Vec<u8>>>,
+    text: &str,
+    index: usize,
+    bold_fullstop: bool,
+) {
+    //whats stopping me from using bold taags appended to string? might be faster?
+    if text.len() == 0 {
+        return;
+    }
     let bold = text
+        .trim()
         .char_indices()
         .take(index)
         .fold("".to_string(), |acc, x| acc + &x.1.to_string());
 
-    let rest = text
+    let mut rest = text
+        .trim()
         .char_indices()
         .skip(index)
         .fold("".to_string(), |acc, x| acc + &x.1.to_string());
 
-    // let bold = &text[0..index];
-    // let rest = &text[index..text.len()];
+    println!("full = {:?} bold - {:?} rrest - {:?}", text, bold, rest);
+    let mut last_fullstop = false;
+    if bold_fullstop && rest.len() > 0 {
+        let last = rest.chars().last().unwrap();
+        if last == '.' {
+            last_fullstop = true;
+            rest = rest[..rest.len() - 1].to_string()
+        }
+    }
+
     writer
         .write_event(Event::Start(BytesStart::new("b")))
         .unwrap();
@@ -91,6 +107,16 @@ fn surround_with_bold_tags(writer: &mut Writer<Cursor<Vec<u8>>>, text: &str, ind
     writer
         .write_event(Event::Text(BytesText::new(&rest)))
         .unwrap();
+
+    if bold_fullstop && last_fullstop {
+        writer
+            .write_event(Event::Start(BytesStart::new("b")))
+            .unwrap();
+        writer
+            .write_event(Event::Text(BytesText::new(".")))
+            .unwrap();
+        writer.write_event(Event::End(BytesEnd::new("b"))).unwrap();
+    }
     writer
         .write_event(Event::Text(BytesText::new(" ")))
         .unwrap();
