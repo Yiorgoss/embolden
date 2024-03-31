@@ -1,16 +1,20 @@
 <script lang="ts">
-    import init, { convert, alter_identifier } from "$lib/wasm/embolden.js";
+    import init, {
+        convert,
+        add_css,
+        alter_identifier,
+    } from "$lib/wasm/embolden.js";
     import { mergeUint8Arr, incompressibleExt } from "$lib/_helpers/index";
     import { Info, X } from "lucide-svelte";
 
     import { Input, type FormInputEvent } from "$lib/components/ui/input";
     import { Label } from "$lib/components/ui/label";
     import * as Popover from "$lib/components/ui/popover";
+    import * as RadioGroup from "$lib/components/ui/radio-group";
     import { Button } from "$lib/components/ui/button";
     import { Zip, unzip, ZipDeflate, ZipPassThrough } from "fflate";
     import { Switch } from "$lib/components/ui/switch";
     import * as Tooltip from "$lib/components/ui/tooltip";
-    import { Separator } from "$lib/components/ui/separator";
 
     let urls: { filename: string; url: string }[] = [];
     // urls.push({ filename: "1", url: "aotenarsotea" });
@@ -19,6 +23,8 @@
     // urls.push({ filename: "4", url: "aotenarsotea" });
     let overwrite = false;
     let bold_fullstop = false;
+    let bold_weight: "700";
+    let make_bolder = false;
     $: console.log(urls);
 
     const convertFile = async (event: FormInputEvent<Event>) => {
@@ -63,6 +69,9 @@
                     if (!overwrite && key == "content.opf") {
                         value = alter_identifier(value);
                     }
+                    if (bold_weight && ext.includes("css")) {
+                        value = add_css(value, +bold_weight);
+                    }
                     const filename = incompressibleExt.has(ext)
                         ? new ZipPassThrough(key)
                         : new ZipDeflate(key, { level: 9 });
@@ -88,8 +97,12 @@
     };
 </script>
 
-<div class="container mx-auto justify-center items-center overflow-hidden grid grid-cols-1 md:grid-cols-2 min-h-svh gap-5">
-    <div class="flex justify-end md:justify-normal flex-col gap-5 px-10 min-h-[200px]">
+<div
+    class="container mx-auto justify-center items-center overflow-hidden grid grid-cols-1 md:grid-cols-2 min-h-svh gap-5"
+>
+    <div
+        class="flex justify-end md:justify-normal flex-col gap-5 px-10 min-h-[200px]"
+    >
         <div class="">
             <Label class="w-full">Upload a book to begin</Label>
             <Input
@@ -98,6 +111,42 @@
                 type="file"
                 multiple
             />
+        </div>
+        <div class="flex flex-col items-start space-x-2">
+            <div class="flex items-center space-x-2">
+                <Switch bind:checked={make_bolder} />
+                <Label>
+                    Make periods bolder.
+                    <Tooltip.Root>
+                        <Tooltip.Trigger>
+                            <Info
+                                class="hover:text-primary/60 inline h-4 w-4 align-top"
+                            />
+                        </Tooltip.Trigger>
+                        <Tooltip.Content>
+                            <p class="max-w-[200px]">
+                                Choose bold font weight.
+                                <br />
+                                Defaults to 700.
+                            </p>
+                        </Tooltip.Content>
+                    </Tooltip.Root>
+                </Label>
+            </div>
+            <RadioGroup.Root class="flex pt-2 " bind:value={bold_weight}>
+                <div class="flex items-center space-x-2">
+                    <RadioGroup.Item disabled={make_bolder} value="800" id="option-two" />
+                    <Label for="option-two">800</Label>
+                </div>
+                <div class="flex items-center space-x-2">
+                    <RadioGroup.Item disabled={make_bolder} value="900" id="option-two" />
+                    <Label for="option-two">900</Label>
+                </div>
+                <div class="flex items-center space-x-2">
+                    <RadioGroup.Item disabled={make_bolder} value="1000" id="option-two" />
+                    <Label for="option-two">1000</Label>
+                </div>
+            </RadioGroup.Root>
         </div>
         <div class="flex items-center space-x-2">
             <Switch bind:checked={bold_fullstop} />
@@ -113,15 +162,6 @@
                         <p class="max-w-[200px]">
                             When enabled periods will be made bold, this helps
                             fast readers make out sentences easier.
-                            <span class="block text-lg">Example</span>
-                            <span class="pt-2 block"></span>
-                            Some text some text text. Some text some text. Some text
-                            some text more different.
-
-                            <span class="pt-2 block"></span>
-                            Some text some text text<b>.</b>
-                            Some text some text<b>.</b>
-                            Some text some text more different<b>.</b>
                         </p>
                     </Tooltip.Content>
                 </Tooltip.Root>
@@ -131,7 +171,7 @@
     <!-- <Separator orientation='vertical'/> -->
     <div
         class:hidden={urls.length === 0}
-        class="gap-5 flex min-h-svh  px-10 justify-start flex-col"
+        class="gap-5 flex min-h-svh py-10 px-10 justify-start flex-col"
     >
         {#each urls as url, index}
             <div class="rounded-md py-4 px-6 relative">

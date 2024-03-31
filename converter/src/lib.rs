@@ -1,7 +1,13 @@
+mod add_global_styles;
 mod alter_identifier;
 mod convert_to_bold;
 
 use wasm_bindgen::prelude::*;
+
+#[wasm_bindgen]
+pub fn add_css(arr: &[u8], bold_weight: usize) -> Vec<u8> {
+    add_global_styles::add_css(arr, bold_weight)
+}
 
 #[wasm_bindgen]
 pub fn convert(arr: &[u8], bold_fullstop: bool) -> Vec<u8> {
