@@ -23,8 +23,9 @@
     // urls.push({ filename: "4", url: "aotenarsotea" });
     let overwrite = false;
     let bold_fullstop = false;
+
     let bold_weight: "700";
-    let make_bolder = false;
+    let make_bolder = true;
     $: console.log(urls);
 
     const convertFile = async (event: FormInputEvent<Event>) => {
@@ -135,15 +136,15 @@
             </div>
             <RadioGroup.Root class="flex pt-2 " bind:value={bold_weight}>
                 <div class="flex items-center space-x-2">
-                    <RadioGroup.Item disabled={make_bolder} value="800" id="option-two" />
+                    <RadioGroup.Item disabled={!make_bolder} value="800" id="option-two" />
                     <Label for="option-two">800</Label>
                 </div>
                 <div class="flex items-center space-x-2">
-                    <RadioGroup.Item disabled={make_bolder} value="900" id="option-two" />
+                    <RadioGroup.Item disabled={!make_bolder} value="900" id="option-two" />
                     <Label for="option-two">900</Label>
                 </div>
                 <div class="flex items-center space-x-2">
-                    <RadioGroup.Item disabled={make_bolder} value="1000" id="option-two" />
+                    <RadioGroup.Item disabled={!make_bolder} value="1000" id="option-two" />
                     <Label for="option-two">1000</Label>
                 </div>
             </RadioGroup.Root>
