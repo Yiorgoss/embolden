@@ -25,7 +25,7 @@
     let bold_fullstop = false;
 
     let bold_weight: "700";
-    let make_bolder = false;
+    let font_weight: "400";
 
     const convertFile = async (event: FormInputEvent<Event>) => {
         let target = event.target as HTMLInputElement;
@@ -70,7 +70,7 @@
                         value = alter_identifier(value);
                     }
                     if (bold_weight && ext.includes("css")) {
-                        value = add_css(value, +bold_weight);
+                        value = add_css(value, +font_weight, +bold_weight);
                     }
                     const filename = incompressibleExt.has(ext)
                         ? new ZipPassThrough(key)
@@ -114,9 +114,47 @@
         </div>
         <div class="flex flex-col items-start space-x-2">
             <div class="flex items-center space-x-2">
-                <Switch bind:checked={make_bolder} />
                 <Label>
-                    Make periods bolder.
+                    Make font thinner.
+                    <Tooltip.Root>
+                        <Tooltip.Trigger>
+                            <Info
+                                class="hover:text-primary/60 inline h-4 w-4 align-top"
+                            />
+                        </Tooltip.Trigger>
+                        <Tooltip.Content>
+                            <p class="max-w-[200px]">
+                                Choose font weight of the unbolded text.
+                                <br />
+                                Defaults to 400 if unchecked.
+                            </p>
+                        </Tooltip.Content>
+                    </Tooltip.Root>
+                </Label>
+            </div>
+            <RadioGroup.Root class="flex pt-2" bind:value={font_weight}>
+                <div class="flex items-center space-x-2">
+                    <RadioGroup.Item value="400" />
+                    <Label for="option-two">Default</Label>
+                </div>
+                <div class="flex items-center space-x-2">
+                    <RadioGroup.Item value="300" />
+                    <Label for="option-two">Thin</Label>
+                </div>
+                <div class="flex items-center space-x-2">
+                    <RadioGroup.Item value="200" />
+                    <Label for="option-two">Thinner</Label>
+                </div>
+                <div class="flex items-center space-x-2">
+                    <RadioGroup.Item value="200" />
+                    <Label for="option-two">Thinnest</Label>
+                </div>
+            </RadioGroup.Root>
+        </div>
+        <div class="flex flex-col items-start space-x-2">
+            <div class="flex items-center space-x-2">
+                <Label>
+                    Make bold bolder.
                     <Tooltip.Root>
                         <Tooltip.Trigger>
                             <Info
@@ -135,28 +173,16 @@
             </div>
             <RadioGroup.Root class="flex pt-2 " bind:value={bold_weight}>
                 <div class="flex items-center space-x-2">
-                    <RadioGroup.Item
-                        disabled={!make_bolder}
-                        value="800"
-                        id="option-two"
-                    />
-                    <Label for="option-two">800</Label>
+                    <RadioGroup.Item value="700" />
+                    <Label for="option-two">Default</Label>
                 </div>
                 <div class="flex items-center space-x-2">
-                    <RadioGroup.Item
-                        disabled={!make_bolder}
-                        value="900"
-                        id="option-two"
-                    />
-                    <Label for="option-two">900</Label>
+                    <RadioGroup.Item value="800" />
+                    <Label for="option-two">Bolder</Label>
                 </div>
                 <div class="flex items-center space-x-2">
-                    <RadioGroup.Item
-                        disabled={!make_bolder}
-                        value="1000"
-                        id="option-two"
-                    />
-                    <Label for="option-two">1000</Label>
+                    <RadioGroup.Item value="900" />
+                    <Label for="option-two">Boldest</Label>
                 </div>
             </RadioGroup.Root>
         </div>

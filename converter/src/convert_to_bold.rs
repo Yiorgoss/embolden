@@ -39,7 +39,9 @@ pub fn insert_bold_tags(file_contents: &[u8], bold_fullstop: bool) -> Vec<u8> {
                 // let replace_text = e.borrow();
                 // let unescaped_u8 = e.borrow().unescape().unwrap().as_ref().split(" ");
                 let unescaped = e.unescape().unwrap().as_ref().to_owned();
-                for text in unescaped.split(" ") {
+                for text in unescaped.split(' ') {
+                    // for text in unescaped.split([' ', '-']) {
+                    // bug where dashed togethre words are treaded as one big word
                     match text.len() {
                         0 => (),
                         1..=4 => {
@@ -86,7 +88,7 @@ fn surround_with_bold_tags(
         .skip(index)
         .fold("".to_string(), |acc, x| acc + &x.1.to_string());
 
-    println!("full = {:?} bold - {:?} rrest - {:?}", text, bold, rest);
+    // println!("full = {:?} bold - {:?} rrest - {:?}", text, bold, rest);
     let mut last_fullstop = false;
     if bold_fullstop && rest.len() > 0 {
         let last = rest.chars().last().unwrap();
