@@ -27,14 +27,14 @@ pub fn add_css(input_file: &[u8], font_weight: usize, bold_weight: usize) -> Vec
     writer.into_inner().into_inner()
 }
 fn add_font_weight(writer: &mut Writer<Cursor<Vec<u8>>>, font_weight: usize) {
-    let font_css: String = format!("* {{ font_weight: {font_weight}; }}");
+    let font_css: String = format!("\n * {{ font-weight: {font_weight} !important; }}");
     writer
         .write_event(Event::Text(BytesText::new(&font_css)))
         .unwrap();
 }
 
 fn add_bold_value(writer: &mut Writer<Cursor<Vec<u8>>>, bold_weight: usize) {
-    let bold_css: String = format!("b {{ font-weight: {bold_weight}; }}");
+    let bold_css: String = format!("\n b {{ font-weight: {bold_weight} !important; }}");
     writer
         .write_event(Event::Text(BytesText::new(&bold_css)))
         .unwrap();
