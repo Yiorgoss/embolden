@@ -24,8 +24,8 @@
     let overwrite = false;
     let bold_fullstop = false;
 
-    let bold_weight: "700";
-    let font_weight: "400";
+    $: bold_weight= "700";
+    $: font_weight= "400";
 
     const convertFile = async (event: FormInputEvent<Event>) => {
         let target = event.target as HTMLInputElement;
@@ -69,7 +69,7 @@
                     if (!overwrite && key == "content.opf") {
                         value = alter_identifier(value);
                     }
-                    if (bold_weight && ext.includes("css")) {
+                    if (ext.includes("css")) {
                         value = add_css(value, +font_weight, +bold_weight);
                     }
                     const filename = incompressibleExt.has(ext)
@@ -146,7 +146,7 @@
                     <Label for="option-two">Thinner</Label>
                 </div>
                 <div class="flex items-center space-x-2">
-                    <RadioGroup.Item value="200" />
+                    <RadioGroup.Item value="100" />
                     <Label for="option-two">Thinnest</Label>
                 </div>
             </RadioGroup.Root>
