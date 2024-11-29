@@ -2,12 +2,13 @@
 /* eslint-disable */
 /**
 * @param {Uint8Array} arr
+* @param {boolean} no_custom_font
 * @param {boolean} undo_text_transform
 * @param {number} font_weight
 * @param {number} bold_weight
 * @returns {Uint8Array}
 */
-export function add_css(arr: Uint8Array, undo_text_transform: boolean, font_weight: number, bold_weight: number): Uint8Array;
+export function add_css(arr: Uint8Array, no_custom_font: boolean, undo_text_transform: boolean, font_weight: number, bold_weight: number): Uint8Array;
 /**
 * @param {Uint8Array} arr
 * @param {boolean} bold_fullstop
@@ -24,7 +25,7 @@ export type InitInput = RequestInfo | URL | Response | BufferSource | WebAssembl
 
 export interface InitOutput {
   readonly memory: WebAssembly.Memory;
-  readonly add_css: (a: number, b: number, c: number, d: number, e: number, f: number) => void;
+  readonly add_css: (a: number, b: number, c: number, d: number, e: number, f: number, g: number) => void;
   readonly convert: (a: number, b: number, c: number, d: number) => void;
   readonly alter_identifier: (a: number, b: number, c: number) => void;
   readonly __wbindgen_add_to_stack_pointer: (a: number) => number;

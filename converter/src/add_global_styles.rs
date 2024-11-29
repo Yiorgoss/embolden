@@ -6,6 +6,7 @@ use quick_xml::Writer;
 
 pub fn add_css(
     input_file: &[u8],
+    no_custom_font: bool,
     undo_text_transform: bool,
     font_weight: usize,
     bold_weight: usize,
@@ -23,8 +24,11 @@ pub fn add_css(
             Ok(e) => writer.write_event(e).unwrap(),
         }
     }
+    if no_custom_font {
+        remove_custom_font(&mut writer);
+    }
     if undo_text_transform {
-        remove_text_transform(&mut writer)
+        remove_text_transform(&mut writer);
     }
     if bold_weight != 0 {
         add_bold_value(&mut writer, bold_weight);
@@ -49,7 +53,14 @@ fn add_bold_value(writer: &mut Writer<Cursor<Vec<u8>>>, bold_weight: usize) {
 }
 
 fn remove_text_transform(writer: &mut Writer<Cursor<Vec<u8>>>) {
-    let transform_css: String = format!("\n *  {{ text-transform:none !important; }}");
+    let transform_css: String = format!("\n *  {{ text-transform: none !important; }}");
+    writer
+        .write_event(Event::Text(BytesText::new(&transform_css)))
+        .unwrap()
+}
+
+fn remove_custom_font(writer: &mut Writer<Cursor<Vec<u8>>>) {
+    let transform_css: String = format!("\n *  {{ font-family: sans-serif !important; }}");
     writer
         .write_event(Event::Text(BytesText::new(&transform_css)))
         .unwrap()

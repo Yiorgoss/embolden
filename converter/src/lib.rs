@@ -7,11 +7,18 @@ use wasm_bindgen::prelude::*;
 #[wasm_bindgen]
 pub fn add_css(
     arr: &[u8],
+    no_custom_font: bool,
     undo_text_transform: bool,
     font_weight: usize,
     bold_weight: usize,
 ) -> Vec<u8> {
-    add_global_styles::add_css(arr, undo_text_transform, font_weight, bold_weight)
+    add_global_styles::add_css(
+        arr,
+        no_custom_font,
+        undo_text_transform,
+        font_weight,
+        bold_weight,
+    )
 }
 
 #[wasm_bindgen]

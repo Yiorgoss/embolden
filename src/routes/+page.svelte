@@ -17,13 +17,11 @@
     import * as Tooltip from "$lib/components/ui/tooltip";
 
     let urls: { filename: string; url: string }[] = [];
-    // urls.push({ filename: "1", url: "aotenarsotea" });
-    // urls.push({ filename: "2", url: "aotenarsotea" });
-    // urls.push({ filename: "3", url: "aotenarsotea" });
-    // urls.push({ filename: "4", url: "aotenarsotea" });
+
     let overwrite = false;
     let bold_fullstop = false;
     let undo_text_transform = false;
+    let no_custom_font = false;
 
     $: bold_weight = "700";
     $: font_weight = "400";
@@ -73,6 +71,7 @@
                     if (ext.includes("css")) {
                         value = add_css(
                             value,
+                            no_custom_font,
                             undo_text_transform,
                             +font_weight,
                             +bold_weight,
@@ -208,6 +207,25 @@
                             uppercase. This causes words to become disjointed.
                             Thus you can remove all forced cases of text
                             transformations. Keep in mind this will apply to all
+                        </p>
+                    </Tooltip.Content>
+                </Tooltip.Root>
+            </Label>
+        </div>
+        <div class="flex items-center space-x-2">
+            <Switch bind:checked={no_custom_font} />
+            <Label>
+                Remove custom font
+                <Tooltip.Root>
+                    <Tooltip.Trigger>
+                        <Info
+                            class="hover:text-primary/60 inline h-4 w-4 align-top"
+                        />
+                    </Tooltip.Trigger>
+                    <Tooltip.Content>
+                        <p class="max-w-[200px]">
+                            Some publishers include a custom font, sometimes
+                            this isn't the easiest font to read.
                         </p>
                     </Tooltip.Content>
                 </Tooltip.Root>
