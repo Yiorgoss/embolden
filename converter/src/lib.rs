@@ -5,8 +5,13 @@ mod convert_to_bold;
 use wasm_bindgen::prelude::*;
 
 #[wasm_bindgen]
-pub fn add_css(arr: &[u8], font_weight: usize, bold_weight: usize) -> Vec<u8> {
-    add_global_styles::add_css(arr, font_weight, bold_weight)
+pub fn add_css(
+    arr: &[u8],
+    undo_text_transform: bool,
+    font_weight: usize,
+    bold_weight: usize,
+) -> Vec<u8> {
+    add_global_styles::add_css(arr, undo_text_transform, font_weight, bold_weight)
 }
 
 #[wasm_bindgen]

@@ -4,7 +4,12 @@ use quick_xml::events::{BytesText, Event};
 use quick_xml::reader::Reader;
 use quick_xml::Writer;
 
-pub fn add_css(input_file: &[u8], font_weight: usize, bold_weight: usize) -> Vec<u8> {
+pub fn add_css(
+    input_file: &[u8],
+    undo_text_transform: bool,
+    font_weight: usize,
+    bold_weight: usize,
+) -> Vec<u8> {
     let mut reader = Reader::from_reader(input_file);
     // reader.trim_text_end(true);
     reader.trim_text(true);
@@ -17,6 +22,9 @@ pub fn add_css(input_file: &[u8], font_weight: usize, bold_weight: usize) -> Vec
             Ok(Event::Eof) => break,
             Ok(e) => writer.write_event(e).unwrap(),
         }
+    }
+    if undo_text_transform {
+        remove_text_transform(&mut writer)
     }
     if bold_weight != 0 {
         add_bold_value(&mut writer, bold_weight);
@@ -38,4 +46,11 @@ fn add_bold_value(writer: &mut Writer<Cursor<Vec<u8>>>, bold_weight: usize) {
     writer
         .write_event(Event::Text(BytesText::new(&bold_css)))
         .unwrap();
+}
+
+fn remove_text_transform(writer: &mut Writer<Cursor<Vec<u8>>>) {
+    let transform_css: String = format!("\n *  {{ text-transform:none !important; }}");
+    writer
+        .write_event(Event::Text(BytesText::new(&transform_css)))
+        .unwrap()
 }
