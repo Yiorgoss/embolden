@@ -1,14 +1,11 @@
 /* tslint:disable */
 /* eslint-disable */
 /**
-* @param {Uint8Array} arr
-* @param {boolean} no_custom_font
-* @param {boolean} undo_text_transform
-* @param {number} font_weight
-* @param {number} bold_weight
+* @param {Uint8Array} input_file
+* @param {string} font_name
 * @returns {Uint8Array}
 */
-export function add_css(arr: Uint8Array, no_custom_font: boolean, undo_text_transform: boolean, font_weight: number, bold_weight: number): Uint8Array;
+export function insert_into_content_opf(input_file: Uint8Array, font_name: string): Uint8Array;
 /**
 * @param {Uint8Array} arr
 * @param {boolean} bold_fullstop
@@ -25,11 +22,12 @@ export type InitInput = RequestInfo | URL | Response | BufferSource | WebAssembl
 
 export interface InitOutput {
   readonly memory: WebAssembly.Memory;
-  readonly add_css: (a: number, b: number, c: number, d: number, e: number, f: number, g: number) => void;
+  readonly insert_into_content_opf: (a: number, b: number, c: number, d: number, e: number) => void;
   readonly convert: (a: number, b: number, c: number, d: number) => void;
   readonly alter_identifier: (a: number, b: number, c: number) => void;
   readonly __wbindgen_add_to_stack_pointer: (a: number) => number;
   readonly __wbindgen_malloc: (a: number, b: number) => number;
+  readonly __wbindgen_realloc: (a: number, b: number, c: number, d: number) => number;
   readonly __wbindgen_free: (a: number, b: number, c: number) => void;
 }
 

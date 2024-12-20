@@ -1,11 +1,11 @@
 <script lang="ts">
     import init, {
         convert,
-        add_css,
-        alter_identifier,
+        insert_into_content_opf,
     } from "$lib/wasm/embolden.js";
     import { mergeUint8Arr, incompressibleExt } from "$lib/_helpers/index";
     import { Info, X } from "lucide-svelte";
+    import { onMount } from "svelte";
 
     import { Input, type FormInputEvent } from "$lib/components/ui/input";
     import { Label } from "$lib/components/ui/label";
@@ -16,15 +16,101 @@
     import { Switch } from "$lib/components/ui/switch";
     import * as Tooltip from "$lib/components/ui/tooltip";
 
+    import montserratRegular from "$lib/fonts/Montserrat/Montserrat-Regular.ttf";
+    // import montserratItalic from "$lib/fonts/Montserrat/Montserrat-Italic.ttf";
+
+    import dyslexicRegular from "$lib/fonts/OpenDyslexic/OpenDyslexic-Regular.otf";
+    // import dyslexicBold from "$lib/fonts/OpenDyslexic/OpenDyslexic-Bold.otf";
+    // import dyslexicItalic from "$lib/fonts/OpenDyslexic/OpenDyslexic-Italic.otf";
+    // import dyslexicBoldItalic from "$lib/fonts/OpenDyslexic/OpenDyslexic-Bold-Italic.otf";
+    //
+    // const fontList = [
+    //     {
+    //         name: "Montserrat",
+    //         ext: "ttf",
+    //         variants: [
+    //             { name: "Regular", style: "normal", src: montserratRegular },
+    //             { name: "Italic", style: "italic", src: montserratItalic },
+    //         ],
+    //     },
+    //     {
+    //         name: "OpenDyslexic",
+    //         ext: "otf",
+    //         variants: [
+    //             {
+    //                 name: "Regular",
+    //                 style: "normal",
+    //                 weight: "normal",
+    //                 src: dyslexicRegular,
+    //             },
+    //             {
+    //                 name: "Bold",
+    //                 style: "normal",
+    //                 weight: "bold",
+    //                 src: dyslexicBold,
+    //             },
+    //             {
+    //                 name: "Italic",
+    //                 style: "italic",
+    //                 weight: "normal",
+    //                 src: dyslexicItalic,
+    //             },
+    //             {
+    //                 name: "Bold-Italic",
+    //                 style: "italic",
+    //                 weight: "bold",
+    //                 u8: dyslexicBoldItalic,
+    //             },
+    //         ],
+    //     },
+    // ];
+
+    let fontList = [
+        {
+            name: "OpenDyslexic-Regular",
+            ext: "otf",
+            style: "normal",
+            src: dyslexicRegular,
+        },
+        {
+            name: "Montserrat-Regular",
+            ext: "ttf",
+            style: "normal",
+            src: montserratRegular,
+        },
+    ];
+
     let urls: { filename: string; url: string }[] = [];
 
-    let overwrite = false;
-    let bold_fullstop = false;
-    let undo_text_transform = false;
-    let no_custom_font = false;
+    // let overwrite = false;
+    let boldFullstop = false;
+    let undoTextTransform = false;
+    let noCustomFont = false;
+    let font: { name: string; ext: string; u8Data: Uint8Array } | undefined;
+    // let font: (typeof fontNameList)[1] | (typeof fontNameList)[0] | undefined =
+    //     undefined;
+    let fontBindValue = "default";
 
-    $: bold_weight = "700";
-    $: font_weight = "400";
+    $: boldWeight = "700";
+    $: fontWeight = "400";
+    onMount(async () => {
+        font = await fetchFonts("OpenDyslexic-Regular");
+    });
+
+    const fetchFonts = async (fontName: string) => {
+        const fontObj = fontList.find(({ name }) => name == fontName);
+        if (!fontObj) return;
+
+        // return fontObj.variants.forEach(async ({ name, src }) => {
+        const response = await fetch(fontObj.src);
+        const arrayBuffer = await response.arrayBuffer().then();
+        return {
+            name: fontObj.name,
+            ext: fontObj.ext,
+            u8Data: new Uint8Array(arrayBuffer),
+        };
+        // });
+    };
 
     const convertFile = async (event: FormInputEvent<Event>) => {
         let target = event.target as HTMLInputElement;
@@ -60,42 +146,94 @@
         };
 
         unzip(compressed, (err, res) => {
+            let filePaths = Object.keys(res).filter(
+                (path) => path.slice(-3) == "opf" || path.slice(-3) == "css",
+            );
+            if (filePaths.length < 2)
+                throw Error("Ambiguous number of files - too few");
+            if (filePaths.length < 2)
+                throw Error("Ambiguous number of files - too many");
+
+            let relativeOPFPath = "../".repeat(
+                Math.abs(
+                    filePaths[0].split("/").length -
+                        filePaths[1].split("/").length,
+                ),
+            );
             init().then(() => {
                 if (err) throw new Error(`failed to parse unzip data ${err}`);
                 for (let [key, value] of Object.entries(res)) {
                     const ext = key.slice(key.lastIndexOf(".") + 1) || "";
-                    // const ext2 = key.split(".")[-1];
-                    if (!overwrite && key == "content.opf") {
-                        value = alter_identifier(value);
-                    }
-                    if (ext.includes("css")) {
-                        value = add_css(
-                            value,
-                            no_custom_font,
-                            undo_text_transform,
-                            +font_weight,
-                            +bold_weight,
-                        );
-                    }
-                    const filename = incompressibleExt.has(ext)
+                    const newFile = incompressibleExt.has(ext)
                         ? new ZipPassThrough(key)
                         : new ZipDeflate(key, { level: 9 });
-                    zipper.add(filename);
+                    zipper.add(newFile);
 
                     if (ext.includes("htm")) {
                         // because everyone has a different extension it seems.
-                        // Maybe a better way would be to get the files form the toc?
-                        //
-                        // skip all files that arent text
-                        // then send to rust for converting
-                        let bold_raw = convert(value, bold_fullstop);
-                        filename.push(bold_raw);
+                        // Maybe a better way would be to get the files from content.opf
+                        let boldRaw = convert(value, boldFullstop);
+                        newFile.push(boldRaw);
+                    } else if (ext.includes("css")) {
+                        // take care with the ordering of when these values are added
+                        let cssString = `
+b {
+  text-transform: none !important;  
+  font-weight: ${boldWeight} !important;
+}`;
+                        if (font)
+                            cssString = `${cssString}
+
+@font-face {
+  font-family: ${font.name};
+  font-style: normal; 
+  src: url("${relativeOPFPath}${font.name}.${font.ext}"); 
+}
+
+* {
+  font-weight: ${fontWeight} !important;
+`;
+                        if (font)
+                            cssString = `${cssString} 
+  font-family: ${font.name}, sans-serif !important;
+`;
+
+                        cssString = `${cssString} }`;
+
+                        const customCSS = new TextEncoder().encode(cssString);
+
+                        newFile.push(value);
+                        newFile.push(customCSS);
+                    } else if (ext.includes("opf")) {
+                        if (font) {
+                            const pathOPF = key
+                                .split("/")
+                                .slice(0, -1)
+                                .join("/");
+                            value = insert_into_content_opf(
+                                value,
+                                `${pathOPF ? pathOPF + "/" : pathOPF}${font.name}.${font.ext}`,
+                            );
+                        }
+                        newFile.push(value);
                     } else {
-                        filename.push(value);
+                        newFile.push(value);
                     }
-                    filename.push(new Uint8Array(0), true);
+                    newFile.push(new Uint8Array(0), true);
+                    if (font) {
+                        let fontFile = new ZipDeflate(
+                            `${relativeOPFPath}${font.name}.${font.ext}`,
+                            {
+                                level: 9,
+                            },
+                        );
+                        zipper.add(fontFile);
+                        fontFile.push(font.u8Data);
+                        fontFile.push(new Uint8Array(0), true);
+                    }
                 }
                 zipper.end();
+                console.log("done");
                 return finalZip;
             });
         });
@@ -137,7 +275,7 @@
                     </Tooltip.Root>
                 </Label>
             </div>
-            <RadioGroup.Root class="flex pt-2" bind:value={font_weight}>
+            <RadioGroup.Root class="flex pt-2" bind:value={fontWeight}>
                 <div class="flex items-center space-x-2">
                     <RadioGroup.Item value="400" />
                     <Label for="option-two">Default</Label>
@@ -176,7 +314,7 @@
                     </Tooltip.Root>
                 </Label>
             </div>
-            <RadioGroup.Root class="flex pt-2 " bind:value={bold_weight}>
+            <RadioGroup.Root class="flex pt-2 " bind:value={boldWeight}>
                 <div class="flex items-center space-x-2">
                     <RadioGroup.Item value="700" />
                     <Label for="option-two">Default</Label>
@@ -191,8 +329,24 @@
                 </div>
             </RadioGroup.Root>
         </div>
+        <div class="flex flex-col items-start space-x-2">
+            <RadioGroup.Root class="flex pt-2 " bind:value={fontBindValue}>
+                <div class="flex items-center space-x-2">
+                    <RadioGroup.Item value="default" />
+                    <Label for="option-two">Default</Label>
+                </div>
+                <div class="flex items-center space-x-2">
+                    <RadioGroup.Item value="Montserrat" />
+                    <Label for="option-two">Montserrat</Label>
+                </div>
+                <div class="flex items-center space-x-2">
+                    <RadioGroup.Item value="OpenDyslexic" />
+                    <Label for="option-two">OpenDyslexic</Label>
+                </div>
+            </RadioGroup.Root>
+        </div>
         <div class="flex items-center space-x-2">
-            <Switch bind:checked={undo_text_transform} />
+            <Switch bind:checked={undoTextTransform} />
             <Label>
                 Remove text transforms.
                 <Tooltip.Root>
@@ -213,7 +367,7 @@
             </Label>
         </div>
         <div class="flex items-center space-x-2">
-            <Switch bind:checked={no_custom_font} />
+            <Switch bind:checked={noCustomFont} />
             <Label>
                 Remove custom font
                 <Tooltip.Root>
@@ -232,7 +386,7 @@
             </Label>
         </div>
         <div class="flex items-center space-x-2">
-            <Switch bind:checked={bold_fullstop} />
+            <Switch bind:checked={boldFullstop} />
             <Label>
                 Make periods bold.
                 <Tooltip.Root>
