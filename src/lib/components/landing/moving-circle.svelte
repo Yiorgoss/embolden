@@ -13,10 +13,13 @@
 
     onMount(() => {
         let bb = boundary.getBoundingClientRect();
+        // let shadowCSS = ''
+        let shadowCSS =
+            "shadow-[inset_-10px_-10px_30px_-20px_#8f8f8f,inset_10px_10px_30px_-20px_#fff]";
         const circleInitials = [
             {
                 position: {
-                    speed: { x: 0.05, y: 0.01 },
+                    speed: { x: 0.1, y: 0.05 },
                     current: { x: 1, y: 1 },
                     direction: { x: 1, y: 1 },
                     bounds: {
@@ -30,12 +33,13 @@
                     direction: 1,
                     speed: 0.02,
                 },
-                css: "bg-green-400 ",
+                // css: " shadow-[inset_0_35px_60px_-15px_084fc]",
+                css: `${shadowCSS} bg-gradient-to-br from-[#d082fa] to-[#e37a42]`,
             },
             {
                 position: {
                     speed: { x: 0.1, y: 0.02 },
-                    current: { x: 500, y: 200 },
+                    current: { x: 1000, y: 600 },
                     direction: { x: -1, y: 1 },
                     bounds: {
                         min: { x: 0, y: 0 },
@@ -44,11 +48,11 @@
                 },
                 dimensions: {
                     current: 100,
-                    bounds: { min: 100, max: 120 },
+                    bounds: { min: 150, max: 180 },
                     direction: -1,
-                    speed: 0.02,
+                    speed: 0.04,
                 },
-                css: "bg-red-400",
+                css: `${shadowCSS} bg-gradient-to-br from-[#ffd2f0] to-[#92c7d8]`,
             },
             {
                 position: {
@@ -62,20 +66,40 @@
                 },
                 dimensions: {
                     current: 130,
-                    bounds: { min: 130, max: 150 },
+                    bounds: { min: 200, max: 230 },
                     direction: 1,
                     speed: 0.01,
                 },
-                css: "bg-blue-500",
+                css: `${shadowCSS} bg-gradient-to-br from-[#f9f2e5] to-[#9dd99b]`,
+            },
+            {
+                position: {
+                    speed: { x: 0.02, y: 0.01 },
+                    current: { x: 500, y: 600 },
+                    direction: { x: -1, y: -1 },
+                    bounds: {
+                        min: { x: 0, y: 0 },
+                        max: { x: bb.width, y: bb.height },
+                    },
+                },
+                dimensions: {
+                    current: 130,
+                    bounds: { min: 100, max: 230 },
+                    direction: 1,
+                    speed: 0.13,
+                },
+                css: `${shadowCSS} bg-gradient-to-br from-[#f9f2e5] to-[#9dd99b]`,
             },
         ];
 
         circleInitials.forEach((initial) =>
             animatedCircles.push(
-                new AnimatedCircle(
-                    initial,
-                    boundary.appendChild(document.createElement("div")),
-                ),
+                new AnimatedCircle({
+                    ...initial,
+                    circleDomRef: boundary.appendChild(
+                        document.createElement("div"),
+                    ),
+                }),
             ),
         ),
             (frameID = requestAnimationFrame(animate));
@@ -84,7 +108,9 @@
     // $inspect(box1)
 </script>
 
-<div class="flex pb-10 h-lvh w-full justify-center items-center">
-    <div bind:this={boundary} class="overflow-hidden bg-sky-950 relative w-full h-full"></div>
+<div class="flex h-lvh w-full justify-center items-center">
+    <div
+        bind:this={boundary}
+        class="overflow-hidden relative w-full h-full"
+    ></div>
 </div>
-
