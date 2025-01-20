@@ -12,14 +12,14 @@
             variant: {
                 // default: "bg-primary text-primary-foreground hover:bg-primary/90 shadow",
                 default:
-                    "bg-gradient-to-r from-blue-400 via-pink-400 to-blue-400 transition-all duration-500 bg-[size:300%] bg-left hover:bg-right text-primary py-2 px-6 rounded-lg",
+                    "bg-gradient text-white transition-all duration-500 bg-[size:300%] bg-left hover:bg-right py-2 px-6 rounded-lg",
                 destructive:
                     "bg-destructive text-destructive-foreground hover:bg-destructive/90 shadow-sm",
                 outline:
                     "border-input bg-background hover:bg-accent hover:text-accent-foreground border shadow-sm",
                 secondary:
                     "bg-secondary text-secondary-foreground hover:bg-secondary/80 shadow-sm",
-                ghost: "hover:bg-accent hover:text-accent-foreground",
+                ghost: "hover:bg-transparent hover:text-accent-foreground",
                 link: "text-primary underline-offset-4 hover:underline",
             },
             size: {

@@ -1,116 +1,54 @@
 <script lang="ts">
-    import { onMount } from "svelte";
+    import { onMount, tick } from "svelte";
+    import { prefersReducedMotion } from "svelte/motion";
+
     import { AnimatedCircle } from "$lib/classes/animated-circle";
+    import { getCircleData } from "$lib/data/circle-data";
+
+    let { boundary }: { boundary: HTMLElement } = $props();
 
     let frameID: number;
-    let boundary: HTMLElement;
     let animatedCircles: AnimatedCircle[] = [];
 
     const animate = () => {
         animatedCircles.forEach((circle) => circle.nextFrame());
+
         frameID = requestAnimationFrame(animate);
+
+        if (prefersReducedMotion.current) {
+          cancelAnimationFrame(frameID);
+          return
+        }
+
     };
 
-    onMount(() => {
-        let bb = boundary.getBoundingClientRect();
-        // let shadowCSS = ''
-        let shadowCSS =
-            "shadow-[inset_-10px_-10px_30px_-20px_#8f8f8f,inset_10px_10px_30px_-20px_#fff]";
-        const circleInitials = [
-            {
-                position: {
-                    speed: { x: 0.1, y: 0.05 },
-                    current: { x: 1, y: 1 },
-                    direction: { x: 1, y: 1 },
-                    bounds: {
-                        min: { x: 0, y: 0 },
-                        max: { x: bb.width, y: bb.height },
-                    },
-                },
-                dimensions: {
-                    current: 100,
-                    bounds: { min: 100, max: 120 },
-                    direction: 1,
-                    speed: 0.02,
-                },
-                // css: " shadow-[inset_0_35px_60px_-15px_084fc]",
-                css: `${shadowCSS} bg-gradient-to-br from-[#d082fa] to-[#e37a42]`,
-            },
-            {
-                position: {
-                    speed: { x: 0.1, y: 0.02 },
-                    current: { x: 1000, y: 600 },
-                    direction: { x: -1, y: 1 },
-                    bounds: {
-                        min: { x: 0, y: 0 },
-                        max: { x: bb.width, y: bb.height },
-                    },
-                },
-                dimensions: {
-                    current: 100,
-                    bounds: { min: 150, max: 180 },
-                    direction: -1,
-                    speed: 0.04,
-                },
-                css: `${shadowCSS} bg-gradient-to-br from-[#ffd2f0] to-[#92c7d8]`,
-            },
-            {
-                position: {
-                    speed: { x: 0.03, y: 0.08 },
-                    current: { x: 800, y: 0 },
-                    direction: { x: 1, y: -1 },
-                    bounds: {
-                        min: { x: 0, y: 0 },
-                        max: { x: bb.width, y: bb.height },
-                    },
-                },
-                dimensions: {
-                    current: 130,
-                    bounds: { min: 200, max: 230 },
-                    direction: 1,
-                    speed: 0.01,
-                },
-                css: `${shadowCSS} bg-gradient-to-br from-[#f9f2e5] to-[#9dd99b]`,
-            },
-            {
-                position: {
-                    speed: { x: 0.02, y: 0.01 },
-                    current: { x: 500, y: 600 },
-                    direction: { x: -1, y: -1 },
-                    bounds: {
-                        min: { x: 0, y: 0 },
-                        max: { x: bb.width, y: bb.height },
-                    },
-                },
-                dimensions: {
-                    current: 130,
-                    bounds: { min: 100, max: 230 },
-                    direction: 1,
-                    speed: 0.13,
-                },
-                css: `${shadowCSS} bg-gradient-to-br from-[#f9f2e5] to-[#9dd99b]`,
-            },
-        ];
+    onMount(async () => {
+        // need to wait a tick for boundary not to be undefined seems a hack maybe tehre is a better way
+        await tick();
+        init();
+    });
 
-        circleInitials.forEach((initial) =>
+    const init = () => {
+        let bb = boundary.getBoundingClientRect();
+
+        const circlesData = getCircleData(bb);
+
+        circlesData.forEach((circle) => {
             animatedCircles.push(
                 new AnimatedCircle({
-                    ...initial,
+                    ...circle,
                     circleDomRef: boundary.appendChild(
                         document.createElement("div"),
                     ),
                 }),
-            ),
-        ),
-            (frameID = requestAnimationFrame(animate));
-        return () => cancelAnimationFrame(frameID);
-    });
-    // $inspect(box1)
+            );
+        });
+        frameID = requestAnimationFrame(animate);
+    };
+    //     return () => cancelAnimationFrame(frameID);
+    // });
 </script>
 
-<div class="flex h-lvh w-full justify-center items-center">
-    <div
-        bind:this={boundary}
-        class="overflow-hidden relative w-full h-full"
-    ></div>
-</div>
+<!-- <div class="flex w-full justify-center items-center"> -->
+<!--     <div class="overflow-hidden relative w-full h-full"></div> -->
+<!-- </div> -->
