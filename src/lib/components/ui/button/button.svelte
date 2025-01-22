@@ -12,7 +12,7 @@
             variant: {
                 // default: "bg-primary text-primary-foreground hover:bg-primary/90 shadow",
                 default:
-                    "bg-gradient text-white transition-all duration-500 bg-[size:300%] bg-left hover:bg-right py-2 px-6 rounded-lg",
+                    "bg-gradient  transition-all duration-500 font-semibold bg-[size:200%] bg-left hover:bg-right py-2 px-6 rounded-lg",
                 destructive:
                     "bg-destructive text-destructive-foreground hover:bg-destructive/90 shadow-sm",
                 outline:

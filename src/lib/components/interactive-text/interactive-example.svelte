@@ -43,9 +43,9 @@
         </div>
     </div>
     <div class="max-w-md w-full px-2 pt-4 ">
-        <div class="w-full flex text-xl font-semibold justify-between">
-            <p>{value[0] / 100}</p>
-            <p class="">{value[1] / 100}</p>
+        <div class="w-full flex text-xl py-2 font-semibold justify-between">
+            <p class="font-thin">Thinnest</p>
+            <p class="font-semibold">Boldest</p>
         </div>
         <Slider
             class=""

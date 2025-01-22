@@ -24,7 +24,7 @@
             class="max-w-full md:container col-start-1 row-start-1 flex justify-center items-center h-lvh"
         >
             <div
-                class="bg-white/20 flex justify-center flex-col items-center backdrop-blur-sm shadow-xl rounded-lg py-16 w-full mb-12 mx-0 md:mx-4"
+                class="bg-white/20 flex justify-center flex-col items-center backdrop-blur-sm shadow-2xl rounded-lg py-16 w-full mb-12 mx-0 md:mx-4"
             >
                 <h2 class="text-center text-5xl font-bold pb-8">
                     Effortless Reading With Embolden
@@ -69,13 +69,13 @@
             class="row-start-1 col-start-1 row-span-2 min-h-[300px] px-2 pb-10 md:pb-0 pt-10 text-center bg-purple-200"
         >
             <h2 class="text-4xl font-bold">Why Use Embolden</h2>
-            <p class="text-lg font-thin pt-1">
+            <p class="text-lg font-light pt-1">
                 Custom reading experience designed to improve readability with
                 an effortless flow.
             </p>
         </div>
         <div
-            class="row-start-2 col-start-1 row-span-4 py-10 h-full shadow-xl backdrop-blur-sm bg-white/20 w-11/12 container rounded-xl"
+            class="row-start-2 col-start-1 row-span-4 py-10 h-full shadow-2xl backdrop-blur-sm bg-white/20 w-11/12 container rounded-xl"
         >
             <div class="flex flex-col md:flex-row flex-wrap items-stretch justify-center">
                 {#each featureList as feature}
@@ -107,10 +107,10 @@
             <Button href="/app" size="lg" variant="default">Get Started</Button>
         </div>
     </div>
-    <div class="py-10 container">
-        <FAQ {faqList} />
-    </div>
     <div class="py-10">
         <WhoAreWe />
+    </div>
+    <div class="py-10 container">
+        <FAQ {faqList} />
     </div>
 </div>

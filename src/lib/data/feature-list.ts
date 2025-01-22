@@ -1,16 +1,20 @@
+import learning from "$lib/icons/Learning.png";
+import delivery from "$lib/icons/Delivery Time.png";
+import settings from "$lib/icons/Settings.png";
+
 const features = [
   {
-    icon: "",
+    icon: learning,
     title: "Fully Customizable Reading",
     text: "Choose boldness, fonts, and punctuation to create a personalized reading experience.",
   },
   {
-    icon: "",
+    icon: delivery,
     title: "Learning Difficulty Supportive",
     text: "Reading tools enhance focus and simplify words for smoother reading.",
   },
   {
-    icon: "",
+    icon: settings,
     title: "Read Longer Without Fatigue",
     text: "Minimize effort with text designed to keep you reading comfortably for hours.",
   },

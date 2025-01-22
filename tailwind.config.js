@@ -20,7 +20,11 @@ const config = {
       },
       backgroundImage: {
         gradient:
-          "radial-gradient(circle at 60% 40%, #a855f7, #581c87)",
+          "linear-gradient(to right, #68bde2,#cecef0 ,#ec9fff,#ec9fff,#cecef0,#68bde2)",
+        // "linear-gradient(to right, #68bde2, #80c0e8, #95c3ec, #a9c6ef, #bac9f0, #bfc8f4, #c6c7f7, #cec5f9, #d2bdfe, #d8b4ff, #e1aaff, #ec9fff, #ec9fff, #e1aaff, #d8b4ff, #d2bdfe, #cec5f9, #c6c7f7, #bfc8f4, #bac9f0, #a9c6ef, #95c3ec, #80c0e8, #68bde2)",
+
+        // "radial-gradient(circle at 60% 40%, #ec9fff, #68bde2)",
+        //
       },
       colors: {
         border: "hsl(var(--border) / <alpha-value>)",
@@ -80,7 +84,7 @@ const config = {
         sm: "calc(var(--radius) - 4px)",
       },
       fontFamily: {
-        sans: [...fontFamily.sans],
+        sans: ["Montserrat", ...fontFamily.sans],
         cursive: ["Rouge Script", ...fontFamily.serif],
       },
       keyframes: {
