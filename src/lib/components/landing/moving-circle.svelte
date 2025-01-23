@@ -3,7 +3,7 @@
     import { prefersReducedMotion } from "svelte/motion";
 
     import { AnimatedCircle } from "$lib/classes/animated-circle";
-    import { getCircleData } from "$lib/data/circle-data";
+    import { getCircleData } from "$lib/assets/spheres/sphere-data";
 
     let { boundary }: { boundary: HTMLElement } = $props();
 
@@ -16,10 +16,9 @@
         frameID = requestAnimationFrame(animate);
 
         if (prefersReducedMotion.current) {
-          cancelAnimationFrame(frameID);
-          return
+            cancelAnimationFrame(frameID);
+            return;
         }
-
     };
 
     onMount(async () => {
@@ -30,16 +29,23 @@
 
     const init = () => {
         let bb = boundary.getBoundingClientRect();
-
         const circlesData = getCircleData(bb);
 
         circlesData.forEach((circle) => {
+            const sphere = document.createElement("img");
+            sphere.src = circle.image;
+            sphere.alt = "decorative";
+
+            sphere.style.minWidth = `${circle.dimensions.current}px`;
+            sphere.style.height = "auto";
+
+            sphere.style.left = `${circle.position.initial.x}px`;
+            sphere.style.top = `${circle.position.initial.y}px`;
+
             animatedCircles.push(
                 new AnimatedCircle({
                     ...circle,
-                    circleDomRef: boundary.appendChild(
-                        document.createElement("div"),
-                    ),
+                    circleDomRef: boundary.appendChild(sphere),
                 }),
             );
         });

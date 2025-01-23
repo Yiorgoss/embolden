@@ -1,6 +1,6 @@
-import learning from "$lib/icons/Learning.png";
-import delivery from "$lib/icons/Delivery Time.png";
-import settings from "$lib/icons/Settings.png";
+import learning from "$lib/assets/icons/Learning.png";
+import delivery from "$lib/assets/icons/Delivery Time.png";
+import settings from "$lib/assets/icons/Settings.png";
 
 const features = [
   {

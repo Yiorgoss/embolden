@@ -1,41 +1,35 @@
 import type { Font } from "./types";
-import montserratRegular from "$lib/fonts/Montserrat/Montserrat-Regular.ttf";
-import montserratItalic from "$lib/fonts/Montserrat/Montserrat-Italic.ttf";
+import montserratRegular from "$lib/assets/fonts/Montserrat/Montserrat-Regular.ttf";
 
-import dyslexicRegular from "$lib/fonts/OpenDyslexic/OpenDyslexic-Regular.otf";
-import dyslexicBold from "$lib/fonts/OpenDyslexic/OpenDyslexic-Bold.otf";
-import dyslexicItalic from "$lib/fonts/OpenDyslexic/OpenDyslexic-Italic.otf";
-import dyslexicBoldItalic from "$lib/fonts/OpenDyslexic/OpenDyslexic-Bold-Italic.otf";
-
-// import { Zip} from 'fflate'
+import dyslexicRegular from "$lib/assets/fonts/OpenDyslexic/OpenDyslexic-Regular.otf";
 
 export const mergeUint8Arr = (arr1: Uint8Array, arr2: Uint8Array) => {
-    let mergedArray = new Uint8Array(arr1.length + arr2.length);
-    mergedArray.set(arr1);
-    mergedArray.set(arr2, arr1.length); // add at offset
-    // console.log({ arr1: arr1, arr2: arr2 });
-    return mergedArray;
+  let mergedArray = new Uint8Array(arr1.length + arr2.length);
+  mergedArray.set(arr1);
+  mergedArray.set(arr2, arr1.length); // add at offset
+  // console.log({ arr1: arr1, arr2: arr2 });
+  return mergedArray;
 };
 
 interface generateCSSI {
-    font: Font;
-    regularWeight: string;
-    boldWeight: string;
-    relativeOPFPath: string;
+  font: Font;
+  regularWeight: string;
+  boldWeight: string;
+  relativeOPFPath: string;
 }
 export const generateCSS = ({
-    font,
-    boldWeight,
-    relativeOPFPath,
-    regularWeight,
+  font,
+  boldWeight,
+  relativeOPFPath,
+  regularWeight,
 }: generateCSSI): string => {
-    let cssString = `
+  let cssString = `
 b {
   text-transform: none !important;  
   font-weight: ${boldWeight} !important;
 }`;
-    if (font)
-        cssString = `${cssString}
+  if (font)
+    cssString = `${cssString}
 
 @font-face {
   font-family: ${font.name};
@@ -46,28 +40,28 @@ b {
 * {
   font-weight: ${regularWeight} !important;
 `;
-    if (font)
-        cssString = `${cssString} 
+  if (font)
+    cssString = `${cssString} 
   font-family: ${font.name}, sans-serif !important;
 `;
 
-    cssString = `${cssString} }`;
-    return cssString;
+  cssString = `${cssString} }`;
+  return cssString;
 };
 
 export const fetchFonts = async (fontName: string) => {
-    const fontObj = fontList.find(({ name }) => name == fontName);
-    if (!fontObj) return;
+  const fontObj = fontList.find(({ name }) => name == fontName);
+  if (!fontObj) return;
 
-    // return fontObj.variants.forEach(async ({ name, src }) => {
-    const response = await fetch(fontObj.src);
-    const arrayBuffer = await response.arrayBuffer().then();
-    return {
-        name: fontObj.name,
-        ext: fontObj.ext,
-        u8Data: new Uint8Array(arrayBuffer),
-    };
-    // });
+  // return fontObj.variants.forEach(async ({ name, src }) => {
+  const response = await fetch(fontObj.src);
+  const arrayBuffer = await response.arrayBuffer().then();
+  return {
+    name: fontObj.name,
+    ext: fontObj.ext,
+    u8Data: new Uint8Array(arrayBuffer),
+  };
+  // });
 };
 
 //
@@ -113,42 +107,42 @@ export const fetchFonts = async (fontName: string) => {
 // ];
 
 export const fontList = [
-    {
-        name: "OpenDyslexic-Regular",
-        ext: "otf",
-        style: "normal",
-        src: dyslexicRegular,
-    },
-    {
-        name: "Montserrat-Regular",
-        ext: "ttf",
-        style: "normal",
-        src: montserratRegular,
-    },
+  {
+    name: "OpenDyslexic-Regular",
+    ext: "otf",
+    style: "normal",
+    src: dyslexicRegular,
+  },
+  {
+    name: "Montserrat-Regular",
+    ext: "ttf",
+    style: "normal",
+    src: montserratRegular,
+  },
 ];
 export const incompressibleExt = new Set([
-    "zip",
-    "gz",
-    "png",
-    "jpg",
-    "jpeg",
-    "pdf",
-    "doc",
-    "docx",
-    "ppt",
-    "pptx",
-    "xls",
-    "xlsx",
-    "heic",
-    "heif",
-    "7z",
-    "bz2",
-    "rar",
-    "gif",
-    "webp",
-    "webm",
-    "mp4",
-    "mov",
-    "mp3",
-    "aifc",
+  "zip",
+  "gz",
+  "png",
+  "jpg",
+  "jpeg",
+  "pdf",
+  "doc",
+  "docx",
+  "ppt",
+  "pptx",
+  "xls",
+  "xlsx",
+  "heic",
+  "heif",
+  "7z",
+  "bz2",
+  "rar",
+  "gif",
+  "webp",
+  "webm",
+  "mp4",
+  "mov",
+  "mp3",
+  "aifc",
 ]);

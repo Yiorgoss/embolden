@@ -2,8 +2,8 @@
     import FeatureCard from "$lib/components/cards/feature-card.svelte";
     import FAQ from "$lib/components/faq.svelte";
     import WhoAreWe from "$lib/components/who-are-we.svelte";
-    import faqList from "$lib/data/faq-list";
-    import featureList from "$lib/data/feature-list";
+    import faqList from "$lib/assets/data/faq-list";
+    import featureList from "$lib/assets/data/feature-list";
     import { Button } from "$lib/components/ui/button";
     import MovingCircle from "$lib/components/landing/moving-circle.svelte";
     import InteractiveExample from "$lib/components/interactive-text/interactive-example.svelte";
