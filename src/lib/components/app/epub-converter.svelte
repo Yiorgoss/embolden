@@ -1,35 +1,32 @@
 <script lang="ts">
     import { X } from "lucide-svelte";
-    import { onMount } from "svelte";
 
     import { Input } from "$lib/components/ui/input";
     import { Label } from "$lib/components/ui/label";
     import * as Popover from "$lib/components/ui/popover";
-    import * as RadioGroup from "$lib/components/ui/radio-group";
     import { Button } from "$lib/components/ui/button";
     import { Switch } from "$lib/components/ui/switch";
+    import * as Select from "$lib/components/ui/select";
 
     import type { Font } from "$lib/functions/types";
     import { unzipParseZipFile } from "$lib/functions/process_files";
     import { fetchFonts } from "$lib/functions";
+    import { Slider } from "../ui/slider";
 
     let downloadList: { filename: string; url: string }[] = $state([]);
 
-    // let overwrite = false;
     let boldFullstop = $state(false);
-    let undoTextTransform = $state(false);
-    let noCustomFont = $state(false);
-    let font: Font;
-    // let font: (typeof fontNameList)[1] | (typeof fontNameList)[0] | undefined =
-    //     undefined;
-    let fontBindValue = $state("default");
+    let _embedFont = $state(false);
 
-    let boldWeight = $state("700");
-    let regularWeight = $state("400");
+    let _font = $state("Default");
+    let font: Promise<Font | undefined> = $derived.by(() => {
+        if (_font == "Default" || !_embedFont)
+            return Promise.resolve(undefined);
 
-    onMount(async () => {
-        font = await fetchFonts("OpenDyslexic-Regular");
+        return fetchFonts(_font);
     });
+
+    let fontWeights = $state([400, 700]);
 
     const convertFile = async (
         event: Event & { currentTarget: EventTarget & HTMLInputElement },
@@ -43,8 +40,12 @@
             unzipParseZipFile({
                 file: { compressed: new Uint8Array(file_u8), name: file.name },
                 downloadList,
-                font,
-                options:{boldFullstop, boldWeight, regularWeight}
+                font: _embedFont ? await font : undefined,
+                options: {
+                    boldFullstop,
+                    boldWeight: "" + fontWeights[1],
+                    regularWeight: "" + fontWeights[0],
+                },
             });
         }
     };
@@ -66,70 +67,59 @@
             />
         </div>
         <div class="flex flex-col items-start space-x-2">
-            <div class="flex items-center space-x-2">
-                <Label>Make font thinner.</Label>
+            <div class="max-w-md w-full px-2 pt-4">
+                <div
+                    class="w-full flex text-lg py-2 font-semibold justify-between"
+                >
+                    <p class="font-thin flex flex-col">
+                        Thinnest
+                        <span class="text-xs opacity-80">{fontWeights[0]}</span>
+                    </p>
+                    <p class="font-semibold flex flex-col">
+                        Boldest
+                        <span class="ml-auto text-xs opacity-80"
+                            >{fontWeights[1]}</span
+                        >
+                    </p>
+                </div>
+                <Slider
+                    class=""
+                    type="multiple"
+                    bind:value={fontWeights}
+                    max={900}
+                    min={100}
+                    step={100}
+                />
             </div>
-            <RadioGroup.Root class="flex pt-2" bind:value={regularWeight}>
-                <div class="flex items-center space-x-2">
-                    <RadioGroup.Item value="400" />
-                    <Label for="option-two">Default</Label>
-                </div>
-                <div class="flex items-center space-x-2">
-                    <RadioGroup.Item value="300" />
-                    <Label for="option-two">Thin</Label>
-                </div>
-                <div class="flex items-center space-x-2">
-                    <RadioGroup.Item value="200" />
-                    <Label for="option-two">Thinner</Label>
-                </div>
-                <div class="flex items-center space-x-2">
-                    <RadioGroup.Item value="100" />
-                    <Label for="option-two">Thinnest</Label>
-                </div>
-            </RadioGroup.Root>
         </div>
-        <div class="flex flex-col items-start space-x-2">
-            <div class="flex items-center space-x-2">
-                <Label>Make bold bolder.</Label>
+        <div class="flex gap-4 justify-start items-center">
+            <div class="flex justify-center items-center gap-2">
+                <Switch bind:checked={_embedFont} />
+                <Label>Embed Font</Label>
             </div>
-            <RadioGroup.Root class="flex pt-2 " bind:value={boldWeight}>
-                <div class="flex items-center space-x-2">
-                    <RadioGroup.Item value="700" />
-                    <Label for="option-two">Default</Label>
-                </div>
-                <div class="flex items-center space-x-2">
-                    <RadioGroup.Item value="800" />
-                    <Label for="option-two">Bolder</Label>
-                </div>
-                <div class="flex items-center space-x-2">
-                    <RadioGroup.Item value="900" />
-                    <Label for="option-two">Boldest</Label>
-                </div>
-            </RadioGroup.Root>
-        </div>
-        <div class="flex flex-col items-start space-x-2">
-            <RadioGroup.Root class="flex pt-2 " bind:value={fontBindValue}>
-                <div class="flex items-center space-x-2">
-                    <RadioGroup.Item value="default" />
-                    <Label for="option-two">Default</Label>
-                </div>
-                <div class="flex items-center space-x-2">
-                    <RadioGroup.Item value="Montserrat" />
-                    <Label for="option-two">Montserrat</Label>
-                </div>
-                <div class="flex items-center space-x-2">
-                    <RadioGroup.Item value="OpenDyslexic" />
-                    <Label for="option-two">OpenDyslexic</Label>
-                </div>
-            </RadioGroup.Root>
-        </div>
-        <div class="flex items-center space-x-2">
-            <Switch bind:checked={undoTextTransform} />
-            <Label>Remove text transforms.</Label>
-        </div>
-        <div class="flex items-center space-x-2">
-            <Switch bind:checked={noCustomFont} />
-            <Label>Remove custom font</Label>
+            <Select.Root
+                disabled={!_embedFont}
+                type="single"
+                bind:value={_font}
+            >
+                <Select.Trigger class="w-[180px]">
+                    {_font}
+                </Select.Trigger>
+                <Select.Content>
+                    <Select.Item value="Default" label="Default">
+                        Default
+                    </Select.Item>
+                    <Select.Item value="OpenDyslexic" label="OpenDyslexic">
+                        Open Dyslexic
+                    </Select.Item>
+                    <Select.Item value="Montserrat" label="Montserrat">
+                        Montserrat
+                    </Select.Item>
+                    <Select.Item value="NotoSansMono" label="NotoSansMono">
+                        Noto Sans Mono
+                    </Select.Item>
+                </Select.Content>
+            </Select.Root>
         </div>
         <div class="flex items-center space-x-2">
             <Switch bind:checked={boldFullstop} />
@@ -145,7 +135,10 @@
             <div class="rounded-md py-4 px-6 relative">
                 <Button
                     variant="ghost"
-                    onclick={() => (downloadList= downloadList.filter((_, i) => index != i))}
+                    onclick={() =>
+                        (downloadList = downloadList.filter(
+                            (_, i) => index != i,
+                        ))}
                     class="absolute hover:bg-transparent hover:opacity-50 -top-2 -right-2"
                 >
                     <X class="h-4 w-4 " />
@@ -178,12 +171,11 @@
                             </Popover.Close>
                         </Popover.Content>
                     </Popover.Root>
-                    <a href={url.url} download={`EMBOLDEN_${url.filename}`}>
-                        <Button>Download</Button>
-                    </a>
+                    <Button variant='outline' href={url.url} download={`EMBOLDEN_${url.filename}`}>
+                        Download
+                    </Button>
                 </div>
             </div>
         {/each}
     </div>
 </div>
-

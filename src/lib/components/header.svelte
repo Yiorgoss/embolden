@@ -5,7 +5,7 @@
 </script>
 
 <header
-    class="absolute backdrop-blur-none md:backdrop-blur-sm top-0 left-0 right-0 w-full flex z-10 h-[100px] items-center mb-12"
+    class="absolute  top-0 left-0 right-0 w-full flex z-10 h-[100px] items-center mb-12"
 >
     <div class="flex justify-between items-center w-full container">
         <Button href="/" variant="ghost">

@@ -1,6 +1,6 @@
 import type { Font } from "./types";
 import montserratRegular from "$lib/assets/fonts/Montserrat/Montserrat-Regular.ttf";
-
+import notoSansMono from "$lib/assets/fonts/NotoSansMono/NotoSansMono.ttf";
 import dyslexicRegular from "$lib/assets/fonts/OpenDyslexic/OpenDyslexic-Regular.otf";
 
 export const mergeUint8Arr = (arr1: Uint8Array, arr2: Uint8Array) => {
@@ -50,9 +50,8 @@ b {
 };
 
 export const fetchFonts = async (fontName: string) => {
-  const fontObj = fontList.find(({ name }) => name == fontName);
+  const fontObj = fontMap.get(fontName);
   if (!fontObj) return;
-
   // return fontObj.variants.forEach(async ({ name, src }) => {
   const response = await fetch(fontObj.src);
   const arrayBuffer = await response.arrayBuffer().then();
@@ -61,65 +60,40 @@ export const fetchFonts = async (fontName: string) => {
     ext: fontObj.ext,
     u8Data: new Uint8Array(arrayBuffer),
   };
-  // });
 };
 
-//
-// const fontList = [
-//     {
-//         name: "Montserrat",
-//         ext: "ttf",
-//         variants: [
-//             { name: "Regular", style: "normal", src: montserratRegular },
-//             { name: "Italic", style: "italic", src: montserratItalic },
-//         ],
-//     },
-//     {
-//         name: "OpenDyslexic",
-//         ext: "otf",
-//         variants: [
-//             {
-//                 name: "Regular",
-//                 style: "normal",
-//                 weight: "normal",
-//                 src: dyslexicRegular,
-//             },
-//             {
-//                 name: "Bold",
-//                 style: "normal",
-//                 weight: "bold",
-//                 src: dyslexicBold,
-//             },
-//             {
-//                 name: "Italic",
-//                 style: "italic",
-//                 weight: "normal",
-//                 src: dyslexicItalic,
-//             },
-//             {
-//                 name: "Bold-Italic",
-//                 style: "italic",
-//                 weight: "bold",
-//                 u8: dyslexicBoldItalic,
-//             },
-//         ],
-//     },
-// ];
+const fontMap = new Map([
+  [
+    "OpenDyslexic",
+    {
+      name: "OpenDyslexic-Regular",
+      ext: "otf",
+      style: "normal",
+      src: dyslexicRegular,
+    },
+  ],
+  [
+    "Montserrat",
+    {
+      name: "Montserrat-Regular",
+      ext: "ttf",
+      style: "normal",
+      src: montserratRegular,
+    },
+  ],
+  [
+    "NotoSansMono",
+    {
+      name: "NotoSansMono",
+      ext: "ttf",
+      style: "normal",
+      src: notoSansMono,
+    },
+  ],
+]);
 
-export const fontList = [
-  {
-    name: "OpenDyslexic-Regular",
-    ext: "otf",
-    style: "normal",
-    src: dyslexicRegular,
-  },
-  {
-    name: "Montserrat-Regular",
-    ext: "ttf",
-    style: "normal",
-    src: montserratRegular,
-  },
-];
+export const singleStaticFontList = ["OpenDyslexic-Regular"];
+
 export const incompressibleExt = new Set([
   "zip",
   "gz",

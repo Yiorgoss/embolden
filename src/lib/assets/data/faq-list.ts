@@ -24,13 +24,25 @@ const faqList = [
     ],
   },
   {
-    question: "How can I provide feedback/ request new features?",
+    question: "Can I provide feedback and/or request new features?",
     contentList: [
       {
-        text: "We'd love to hear from you and are here to answer any questions you may have.",
+        text: "Of course! We'd love to hear from you and are here to answer any questions you may have.",
       },
       {
-        text: "Contact us at embolden@calisto.studio or write to us on our feedback form listed on our website.",
+        text: "Contact us at embolden@calisto.studio or write to us on our feedback form listed on our business website.",
+      },
+    ],
+  },
+  {
+    question:
+      "why is only the bold part of the font is using the custom embedded font?",
+    contentList: [
+      {
+        text: "This is a known problem within iBooks, due to iBooks forcing precedence to the fonts picked inside the app.",
+      },
+      {
+        text: "The solution is to switch the font back to Original, within iBooks.",
       },
     ],
   },
