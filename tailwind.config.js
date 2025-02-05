@@ -85,7 +85,7 @@ const config = {
       },
       fontFamily: {
         sans: ["Montserrat", ...fontFamily.sans],
-        cursive: ["Rouge Script", ...fontFamily.serif],
+        cursive: ["RougeScript", ...fontFamily.serif],
       },
       keyframes: {
         "accordion-down": {

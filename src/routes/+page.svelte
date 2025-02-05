@@ -57,10 +57,10 @@
                     guides your eyes naturally through the text, making reading
                     faster, easier and more enjoyable.
                 </div>
-                <Button href="/app" size="lg" variant="default">
-                    Get Started
-                </Button>
             </div>
+            <Button href="/app" size="lg" variant="default">
+                Try For Free
+            </Button>
             <InteractiveExample />
         </div>
     </div>
@@ -77,9 +77,13 @@
         <div
             class="row-start-2 col-start-1 row-span-4 py-10 h-full shadow-2xl backdrop-blur-sm bg-white/20 w-11/12 container rounded-xl"
         >
-            <div class="flex flex-col md:flex-row flex-wrap items-stretch justify-center">
+            <div
+                class="flex flex-col md:flex-row flex-wrap items-stretch justify-center"
+            >
                 {#each featureList as feature}
-                    <div class="px-0 md:px-2 lg:px-6 py-6 md:py-0 max-w-sm mx-auto w-full md:w-1/3">
+                    <div
+                        class="px-0 md:px-2 lg:px-6 py-6 md:py-0 max-w-sm mx-auto w-full md:w-1/3"
+                    >
                         <FeatureCard {...feature} />
                     </div>
                 {/each}

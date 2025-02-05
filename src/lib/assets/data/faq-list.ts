@@ -36,7 +36,7 @@ const faqList = [
   },
   {
     question:
-      "why is only the bold part of the font is using the custom embedded font?",
+      "Why is only the bold part of the font is using the custom embedded font?",
     contentList: [
       {
         text: "This is a known problem within iBooks, due to iBooks forcing precedence to the fonts picked inside the app.",
