@@ -29,12 +29,12 @@
                 <h2 class="text-center text-5xl font-bold pb-8">
                     Effortless Reading With Embolden
                 </h2>
-                <p class="text-lg py-2 text-center text-primary/80 mb-8">
+                <p class="text-lg py-2 text-center font-light  mb-8">
                     Upload your book, customize your font, and read with ease.
                 </p>
-                <Button href="/app" size="lg" variant="default"
-                    >Get Started</Button
-                >
+                <Button href="/app" size="lg" variant="default">
+                    Try For Free
+                </Button>
             </div>
         </div>
     </div>
@@ -57,10 +57,10 @@
                     guides your eyes naturally through the text, making reading
                     faster, easier and more enjoyable.
                 </div>
+                <Button href="/app" size="lg" variant="default">
+                    Get Started
+                </Button>
             </div>
-            <Button href="/app" size="lg" variant="default">
-                Try For Free
-            </Button>
             <InteractiveExample />
         </div>
     </div>

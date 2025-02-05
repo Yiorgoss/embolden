@@ -74,18 +74,3 @@
     @apply bg-background text-foreground;
   }
 }
-
-@font-face {
-  font-family: "Monstserrat";
-  src: url("Montserrat-Regular.ttf");
-}
-
-@font-face {
-  font-family: "IBM Plex Mono";
-  src: url("IBMPlexMono-Bold.ttf");
-}
-
-@font-face {
-  font-family: "RougeScript";
-  src: url("RougeScript-Regular.ttf");
-}

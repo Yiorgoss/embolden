@@ -84,7 +84,7 @@ const config = {
         sm: "calc(var(--radius) - 4px)",
       },
       fontFamily: {
-        sans: ["Montserrat", ...fontFamily.sans],
+        sans: ["Montserrat", ...fontFamily.serif],
         cursive: ["RougeScript", ...fontFamily.serif],
       },
       keyframes: {
