@@ -33,7 +33,7 @@
                     Upload your book, customize your font, and read with ease.
                 </p>
                 <Button href="/app" size="lg" variant="default">
-                    Try For Free
+          Try It Now
                 </Button>
             </div>
         </div>
@@ -64,9 +64,9 @@
             <InteractiveExample />
         </div>
     </div>
-    <div class="grid">
+    <div class="">
         <div
-            class="row-start-1 col-start-1 row-span-2 min-h-[300px] px-2 pb-10 md:pb-0 pt-10 text-center bg-purple-200"
+            class=" px-2  pb-[100px] pt-10 text-center bg-purple-200"
         >
             <h2 class="text-4xl font-bold">Why Use Embolden</h2>
             <p class="text-lg font-light pt-1">
@@ -75,7 +75,7 @@
             </p>
         </div>
         <div
-            class="row-start-2 col-start-1 row-span-4 py-10 h-full shadow-2xl backdrop-blur-sm bg-white/20 w-11/12 container rounded-xl"
+            class="-mt-[80px] row-start-2 col-start-1 row-span-4 py-10 h-full shadow-2xl backdrop-blur-sm bg-white/20 w-11/12 container rounded-xl"
         >
             <div
                 class="flex flex-col md:flex-row flex-wrap items-stretch justify-center"
@@ -90,9 +90,9 @@
             </div>
         </div>
     </div>
-    <div class="container p-10 max-w-5xl">
+    <div class="container p-0 md:p-10 max-w-5xl">
         <div
-            class="justify-center flex gap-10 px-10 col-span-2 py-10 flex-col items-start"
+            class="justify-center flex gap-10 px-2 md:px-10 col-span-2 py-10 flex-col items-start"
         >
             <div class="">
                 <div class="font-semibold text-secondary-foreground">

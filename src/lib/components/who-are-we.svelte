@@ -2,12 +2,12 @@
     import { Button } from "./ui/button";
 </script>
 
-<div class="grid grid-rows-5">
+<div class="">
     <div
-        class="col-start-1 row-start-1 row-span-3 w-full flex gap-4 py-10 justify-start items-center flex-col bg-secondary"
+        class="pb-[100px] w-full flex gap-4 py-10 justify-start items-center flex-col bg-secondary"
     >
         <p class="font-light">The Team Behind Embolden</p>
-        <h3 class="text-3xl font-mono font-medium">
+        <h3 class="text-3xl text-center font-mono font-medium">
             <span class="text-5xl font-cursive">C</span>alisto
             <span class="text-5xl font-cursive">S</span>tudio
         </h3>
@@ -17,7 +17,7 @@
         </p>
     </div>
 
-    <div class="container px-4 row-start-3 col-start-1 row-span-3">
+    <div class="container px-4 -mt-[80px]">
         <div
             class="shadow-2xl rounded-xl flex justify-center items-center flex-col  py-10 bg-white/30 backdrop-blur-2xl"
         >

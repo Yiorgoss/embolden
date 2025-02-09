@@ -11,7 +11,7 @@
     <div
         class="flex bg-white grow flex-col px-0 md:px-4 py-10 gap-5 justify-start items-center"
     >
-        <div class="icon"><img src={icon} alt=""/></div>
+        <div class=" object-cover overflow-hidden"><img class="h-auto w-[50px] object-cover" src={icon} alt=""/></div>
         <h3 class="text-center font-medium text-lg">{title}</h3>
         <p class="text-center text-primary/80 px-2">{text}</p>
     </div>

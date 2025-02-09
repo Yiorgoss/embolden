@@ -24,17 +24,6 @@ const faqList = [
     ],
   },
   {
-    question: "Can I provide feedback and/or request new features?",
-    contentList: [
-      {
-        text: "Of course! We'd love to hear from you and are here to answer any questions you may have.",
-      },
-      {
-        text: "Contact us at embolden@calisto.studio or write to us on our feedback form listed on our business website.",
-      },
-    ],
-  },
-  {
     question:
       "Why is only the bold part of the font is using the custom embedded font?",
     contentList: [
@@ -43,6 +32,17 @@ const faqList = [
       },
       {
         text: "The solution is to switch the font back to Original, within iBooks.",
+      },
+    ],
+  },
+  {
+    question: "Need a question answered that isn't covered here?",
+    contentList: [
+      {
+        text: "We'd love to hear from you and are here to answer any questions you may have.",
+      },
+      {
+        text: "Contact us at embolden@calisto.studio or write to us on our feedback form listed on our business website.",
       },
     ],
   },
