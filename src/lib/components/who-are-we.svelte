@@ -6,7 +6,7 @@
     <div
         class="pb-[100px] w-full flex gap-4 py-10 justify-start items-center flex-col bg-secondary"
     >
-        <p class="font-light">The Team Behind Embolden</p>
+        <p class="font-medium text-xs">The Team Behind Embolden</p>
         <h3 class="text-3xl text-center font-mono font-medium">
             <span class="text-5xl font-cursive">C</span>alisto
             <span class="text-5xl font-cursive">S</span>tudio

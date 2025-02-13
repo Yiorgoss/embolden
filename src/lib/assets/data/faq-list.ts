@@ -35,17 +35,17 @@ const faqList = [
       },
     ],
   },
-  {
-    question: "Need a question answered that isn't covered here?",
-    contentList: [
-      {
-        text: "We'd love to hear from you and are here to answer any questions you may have.",
-      },
-      {
-        text: "Contact us at embolden@calisto.studio or write to us on our feedback form listed on our business website.",
-      },
-    ],
-  },
+  // {
+  //   question: "Need a question answered that isn't covered here?",
+  //   contentList: [
+  //     {
+  //       text: "We'd love to hear from you and are here to answer any questions you may have.",
+  //     },
+  //     {
+  //       text: "Contact us at embolden@calisto.studio or write to us on our feedback form listed on our business website.",
+  //     },
+  //   ],
+  // },
   // {
   //   question: "",
   //   contentList: [

@@ -11,7 +11,7 @@ const features = [
   },
   {
     icon: learning,
-    title: "Accessible Reading (For All)",
+    title: "Accessible Reading For All",
     text: "Designed to assist everyone, including individuals with learning difficulties, enhancing reading comprehension and focus.",
   },
   {

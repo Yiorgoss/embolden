@@ -29,11 +29,11 @@
                 <h2 class="text-center text-5xl font-bold pb-8">
                     Effortless Reading With Embolden
                 </h2>
-                <p class="text-lg py-2 text-center font-light  mb-8">
+                <p class="text-lg py-2 text-center font-light mb-8">
                     Upload your book, customize your font, and read with ease.
                 </p>
                 <Button href="/app" size="lg" variant="default">
-          Try It Now
+                    Try It Now
                 </Button>
             </div>
         </div>
@@ -65,9 +65,7 @@
         </div>
     </div>
     <div class="">
-        <div
-            class=" px-2  pb-[100px] pt-10 text-center bg-purple-200"
-        >
+        <div class=" px-2 pb-[100px] pt-10 text-center bg-purple-200">
             <h2 class="text-4xl font-bold">Why Use Embolden</h2>
             <p class="text-lg font-light pt-1">
                 Custom reading experience designed to improve readability with
@@ -116,5 +114,16 @@
     </div>
     <div class="py-10 container">
         <FAQ {faqList} />
+    </div>
+    <div class="flex flex-col pb-10 justify-center items-center">
+        <h3 class="text-3xl text-balance py-5 font-medium">
+            Need a question answered that isn't covered here?
+        </h3>
+        <p class="text-balance ">
+            Contact us at
+            <a class="underline underline-offset-4 " href="mailto:embolden@calisto.studio">
+                embolden@calisto.studio
+            </a> or write to us on our feedback form listed on our business website.
+        </p>
     </div>
 </div>

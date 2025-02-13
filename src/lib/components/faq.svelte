@@ -5,8 +5,8 @@
 
 <div class="flex justify-center items-center">
     <Accordion.Root type="single" class="max-w-[800px] w-full ">
-        <h2 class="text-4xl py-5 text-center font-bold">Frequently Asked Questions</h2>
-        <p class="font-light pb-10 text-center">
+        <h2 class="text-4xl py-5  font-bold">Frequently Asked Questions</h2>
+        <p class="font-light pb-10 ">
             We're here to answer any and all of your Embolden related questions.
         </p>
         {#each faqList as faq}
