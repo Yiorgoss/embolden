@@ -51,11 +51,10 @@
                 </div>
                 <div class="py-10 max-w-prose">
                     With Embolden, you have the power to personalize every
-                    aspect of your reading material Through the use of bionic
-                    reading principles, Embolden allows you to enhance your
-                    focus and comprehension. By bolding key parts of words, it
-                    guides your eyes naturally through the text, making reading
-                    faster, easier and more enjoyable.
+                    aspect of your reading material. Embolden allows you to
+                    enhance your focus and comprehension. By bolding the start
+                    of words, it guides your eyes naturally through the text,
+                    making reading faster, easier and more enjoyable.
                 </div>
                 <Button href="/app" size="lg" variant="default">
                     Get Started
@@ -119,9 +118,12 @@
         <h3 class="text-3xl text-balance py-5 font-medium">
             Need a question answered that isn't covered here?
         </h3>
-        <p class="text-balance ">
+        <p class="text-balance">
             Contact us at
-            <a class="underline underline-offset-4 " href="mailto:embolden@calisto.studio">
+            <a
+                class="underline underline-offset-4"
+                href="mailto:embolden@calisto.studio"
+            >
                 embolden@calisto.studio
             </a> or write to us on our feedback form listed on our business website.
         </p>
