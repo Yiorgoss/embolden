@@ -1,5 +1,7 @@
+import { PUBLIC_ENV, PUBLIC_DEV_CMS, PUBLIC_PROD_CMS, PUBLIC_DOMAIN_NAME } from '$env/static/public';
+
 export const site = {
-  CMS: 'http://localhost:3000',
+  CMS: PUBLIC_ENV == 'PROD' ? PUBLIC_PROD_CMS : PUBLIC_DEV_CMS,
   currency: '&euro;',
-  domainName: "calisto.studio",
+  domainName: PUBLIC_DOMAIN_NAME
 };

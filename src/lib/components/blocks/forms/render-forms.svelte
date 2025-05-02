@@ -142,7 +142,10 @@
 				{#snippet children({ canSubmit, isSubmitting })}
 					<Button type="submit" disabled={!canSubmit}>
 						{#if isSubmitting}
+              <div class="flex justify-center items-center gap-2 ">
 							<Spinner /> 
+                Submit
+              </div>
 						{:else}
               Submit
 					  {/if}
