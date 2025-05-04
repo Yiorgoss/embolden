@@ -21,7 +21,6 @@
 	let loading: 'lazy' | 'eager' | null | undefined = 'lazy';
 </script>
 
-<!-- {#if data.url} -->
 {#await resolveID({ collection: 'assets', data: data.url })}
 	<div class="flex h-full w-full items-center justify-center">
 		<Icon name="loader-circle" class="animate-[spin_2s_linear_infinite] " />
@@ -44,7 +43,5 @@
 		/>
 	</picture>
 {:catch error}
-	<!-- promise was rejected -->
-	<p>Something went wrong: {error.message}</p>
+	<p>ERROR: {error}</p>
 {/await}
-<!-- {/if} -->

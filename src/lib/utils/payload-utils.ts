@@ -11,7 +11,7 @@ export async function fetchFromCMS({
   lang?: string | undefined | null;
 }) {
   const response = fetch(
-    `http://localhost:3000/api/${collection}?where[id][equals]=${id}&locale=${lang ?? 'en'}`,
+    `${site.CMS}/api/${collection}?where[id][equals]=${id}&locale=${lang ?? 'en'}`,
     {
       headers: {
         'Content-Type': 'application/json'
@@ -37,8 +37,12 @@ export async function resolveID({
       if (!response.ok) {
         throw new Error(`Response status: ${response.status}`);
       }
-      const json = await response.json()
-      return json.docs[0]
+      const json: any = await response.json();
+
+      if (!json && !json.docs && json.docs.length > 0) {
+        throw new Error(`No data returned: CMS returned nothing`);
+      }
+      return json.docs[0];
     } catch (err) {
       return Promise.reject(`Resolving ID failed: ${err}`);
     }

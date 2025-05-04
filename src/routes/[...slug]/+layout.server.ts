@@ -1,15 +1,12 @@
 import type { LayoutServerLoad } from './$types';
-import { site as siteConfig } from '@/config';
+import { site } from '@/config';
 
 import type { Page, Tenant } from '@payload-types';
 import { error } from '@sveltejs/kit';
 
 export const load: LayoutServerLoad = async (args) => {
   //@ts-ignore
-  console.log(siteConfig.CMS)
-  const response = fetch(
-    `${siteConfig.CMS}/api/tenants?[where][domainName][equal]=${siteConfig.domainName}`
-  )
+  const response = fetch(`${site.CMS}/api/tenants?[where][domainName][equal]=${site.domainName}`)
     .then((res) => res.json())
     .then((json) => ({
       //@ts-ignore
@@ -17,13 +14,14 @@ export const load: LayoutServerLoad = async (args) => {
       //@ts-ignore
       pages: json.docs[0].pages
     }))
-    .catch((err) =>
-      error(404, {
-        message: err
-      })
-    );
+    .catch((err) => {
+      console.log(err),
+        error(404, {
+          message: err
+        });
+    });
 
   return await response;
 };
 
-export const prerender = true;
+export const prerender = 'auto';

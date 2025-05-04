@@ -7,13 +7,26 @@
 	"name": "calisto-studio",
 	"main": ".svelte-kit/cloudflare/_worker.js",
 	"compatibility_date": "2025-04-30",
+  "compatibility_flags": [
+    "nodejs_compat"
+  ],
 	"assets": {
 		"binding": "ASSETS",
 		"directory": ".svelte-kit/cloudflare"
 	},
 	"observability": {
 		"enabled": true
-	}
+	},
+	"routes": [
+		{
+			"pattern": "calisto.studio",
+			"custom_domain": true
+		},
+		{
+			"pattern": "www.calisto.studio",
+			"custom_domain": true
+		}
+	]
 	/**
 	 * Smart Placement
 	 * Docs: https://developers.cloudflare.com/workers/configuration/smart-placement/#smart-placement

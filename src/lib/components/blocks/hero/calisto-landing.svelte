@@ -11,7 +11,7 @@ const { image, richText, ctaOne, ctaTwo } = blockData;
 </script>
 
 <div id="calisto-landing" class="grid min-h-lvh grid-cols-3 grid-rows-3 md:min-h-screen">
-  <div class="-z-10 col-span-full row-span-full">
+  <div class="z-0 col-span-full row-span-full">
     {#if image}
       <Picture data={image} />
     {/if}
