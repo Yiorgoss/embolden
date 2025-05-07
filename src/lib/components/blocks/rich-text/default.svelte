@@ -1,15 +1,38 @@
 <script lang="ts">
-  import { cn } from "@/utils";
+	import { cn } from '@/utils';
+	import { onMount } from 'svelte';
 
-  const { html, overrides }: { html: string; overrides?: string } = $props();
+	const {
+		html,
+		defaultCSS,
+		overrides,
+		style
+	}: { html: string; defaultCSS: string; overrides?: string; style: string } = $props();
+
+  let element:HTMLDivElement;
+
+	onMount(() => {
+		if (style) {
+			var sheet = window.document.styleSheets[0];
+
+			const randomClassName = "random-class-"+Math.random().toString().slice(2)
+
+      console.log(randomClassName)
+			sheet.insertRule(`.${randomClassName} > .payload-rich-text { ${style ? style : ''} }`, sheet.cssRules.length);
+
+			element.classList.add(randomClassName);
+		}
+	});
 </script>
 
 <div
-  id="default-rich-text"
-  class={cn(
-    "prose prose-headings:font-serif prose-h3:text-3xl",
-    overrides,
-  )}
+	id="default-rich-text"
+  bind:this={element}
+	class={cn(
+		defaultCSS,
+		'prose-h1:text-xl prose-headings:font-semibold prose-p:font-normal',
+		overrides
+	)}
 >
-  {@html html}
+	{@html html}
 </div>

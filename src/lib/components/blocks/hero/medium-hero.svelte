@@ -1,30 +1,30 @@
 <script lang="ts">
-  import { type IMediumHero } from "@payload-types";
-  import { RichTextRender } from "@/components/blocks/rich-text";
-  import Picture from "@/components/common/picture.svelte";
+	import { type IMediumHero } from '@payload-types';
+	import { RichTextRender } from '@/components/blocks/rich-text';
+	import Picture from '@/components/common/picture.svelte';
+	import { Button } from '@/components/ui/button';
 
-  const { blockData }: { blockData: IMediumHero } = $props();
-  const { image, richText, link } = blockData;
+	const { blockData }: { blockData: IMediumHero } = $props();
+	const { image, richText, link } = blockData;
 </script>
 
-  <section id='medium-hero' class="grid grid-cols-1 min-h-[20vh] md:h-[80svh]  ">
-    <div class=" h-full w-full overflow-hidden col-span-full row-span-full">
-      {#if image}
-        <Picture class="rounded-none" data={image} />
-      {/if}
-    </div>
+<section id="medium-hero" class="grid min-h-[20vh] grid-cols-1 md:h-[80svh]">
+	<div class=" col-span-full row-span-full h-full w-full overflow-hidden">
+		{#if image}
+			<Picture class="rounded-none" data={image} />
+		{/if}
+	</div>
 
-    <div
-      class="h-full w-full bg-background/30 col-span-full row-span-full "
-    ></div>
-    <div
-      class="pb-10 col-span-full row-span-full flex justify-center items-center max-h-svh flex-col md:py-0 pt-(--header-height) container mx-auto
+	<div
+		class="z-10 col-span-full row-span-full container mx-auto flex max-h-svh flex-col items-center justify-center pt-(--header-height) pb-10 md:py-0
 "
-    >
-      <RichTextRender
-        overrides="prose-h2:font-extralight prose-h2:my-5 prose-h2:text-4xl prose-h2:md:text-7xl w-full max-w-full container"
-        {richText}
-      />
-      <!-- <Button {link} /> -->
-    </div>
-  </section>
+	>
+		<RichTextRender
+			overrides="prose-headings:text-balance prose-headings:text-xl max-w-full container"
+			{richText}
+		/>
+    <div class="pt-10">
+		<Button cmsData={link} />
+      </div>
+	</div>
+</section>

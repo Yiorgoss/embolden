@@ -1,4 +1,4 @@
-import type { IPill } from '@payload-types';
+import type { IPill, ICursiveText } from '@payload-types';
 
 import type {
   DefaultNodeTypes,
@@ -10,11 +10,15 @@ import { type HTMLConvertersFunctionAsync } from '@payloadcms/richtext-lexical/h
 
 import { richTextImg } from '@/utils';
 
-export type NodeTypes = DefaultNodeTypes | SerializedInlineBlockNode<IPill> | SerializedBlockNode;
+export type NodeTypes = DefaultNodeTypes | SerializedInlineBlockNode<IPill, ICursiveText> | SerializedBlockNode;
 export const htmlConverters: HTMLConvertersFunctionAsync<NodeTypes> = ({ defaultConverters }) => ({
   ...defaultConverters,
   inlineBlocks: {
     // Each key should match your inline block's slug
+    cursiveText: async (args) => {
+      const { text, style } = args.node.fields
+      return `<span class='font-cursive font-normal' style='${style}'>${text}</span>`
+    },
     pill: async (args) => {
       const { image, size } = args.node.fields;
 

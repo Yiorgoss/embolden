@@ -4,6 +4,7 @@
 	import Switch from '@/components/ui/switch/switch.svelte';
 	import { cn } from '@/utils';
 	import { site } from '@/config';
+	import { Button } from '@/components/ui/button';
 
 	const { blockData }: { blockData: IDiscountCard } = $props();
 	const { cards } = blockData;
@@ -28,20 +29,30 @@
 	</div>
 	<div class="flex flex-col items-center justify-center md:flex-row">
 		{#if cards}
-			{#each cards as { richText, price, yearlyDiscount, includeDiscount }}
+			{#each cards as { richText, price, yearlyDiscount, includeDiscount, link}}
 				<div class="relative w-full max-w-md flex-auto px-10 py-2">
 					<div class="bg-primary flex flex-col rounded-3xl p-10">
 						<RichTextRender
 							overrides="prose-headings:text-background  prose-li:text-background prose-p:text-background"
 							{richText}
 						/>
-						<div class="text-background mx-auto flex text-4xl">
-							{@html site.currency}
-							{#if includeDiscount && checked}
-								{yearlyDiscount}
-							{:else}
-								{price}
-							{/if}
+						<div class="flex flex-col gap-4">
+							<div class="text-background mx-auto flex flex-col text-balance font-thin">
+								{#if includeDiscount && checked}
+									<span class="text-4xl font-semibold">
+										{@html site.currency}
+										{yearlyDiscount}
+									</span>
+									<p class="px-2">per month, billed yearly</p>
+								{:else}
+									<span class="text-4xl font-semibold">
+										{@html site.currency}
+										{price}
+									</span>
+									<p class="">per month, billed monthly</p>
+								{/if}
+							</div>
+              <Button class="w-fit" cmsData={link}/>
 						</div>
 					</div>
 				</div>

@@ -5,19 +5,16 @@
 	// import { convertLexicalToHTML } from './converters';
 	import { htmlConverters } from './converters';
 	import { convertLexicalToHTMLAsync } from '@payloadcms/richtext-lexical/html-async';
-	import type { IPill } from '@payload-types';
-	import type { DefaultNodeTypes, SerializedBlockNode, SerializedInlineBlockNode } from '@payloadcms/richtext-lexical';
 	import Icon from '@/components/common/icon.svelte';
 
-	// there exists both richText overriides and component specific overrides
+	// there exists both richText overrides and component specific overrides
 	const { richText, overrides }: { richText: any; overrides?: string } = $props();
 	const _html =
 		richText && richText.text
 			? convertLexicalToHTMLAsync({ data: richText.text, converters: htmlConverters })
 			: '';
-	// convertLexicalToHTMLAsync({ data: richText.text })
 	const defaultCSS =
-		'mx-auto prose-headings:mx-2 prose-headings:md:mx-0 prose-p:mx-2 prose-p:md:mx-2 prose-headings:my-0 prose-headings:py-0 prose-p:my-0 prose-p:first-of-type:pt-10 prose-p:text-foreground prose-headings:text-foreground ';
+		'mx-auto prose prose-headings:mx-2 prose-headings:md:mx-0 prose-p:mx-2 prose-p:md:mx-2 prose-headings:my-0 prose-headings:py-0 prose-p:my-0 prose-p:first-of-type:pt-10 prose-p:text-foreground prose-headings:text-foreground prose-h1:md:text-7xl prose-h1:text-5xl prose-h2:md:text-5xl prose-h2:text-3xl prose-h3:md:text-3xl prose-h3:text-2xl prose-h4:md:text-2xl prose-h4:text-xl ';
 </script>
 
 {#await _html}
@@ -26,8 +23,8 @@
 	</div>
 {:then html}
 	{#if richText && richText.type == 'calisto'}
-		<CalistoRichText overrides={cn(defaultCSS, overrides, richText.overrides)} html={html ?? ''} />
+		<CalistoRichText style={richText.overrides} {defaultCSS} overrides={overrides} html={html ?? ''} />
 	{:else}
-		<DefaultRichText overrides={cn(defaultCSS, overrides, richText.overrides)} html={html ?? ''} />
+		<DefaultRichText style={richText.overrides} {defaultCSS} overrides={overrides} html={html ?? ''} />
 	{/if}
 {/await}

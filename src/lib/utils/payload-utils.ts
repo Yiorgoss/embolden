@@ -29,7 +29,7 @@ export async function resolveID({
   collection: string;
   data: number | any;
   lang?: string;
-}): Promise<Form> {
+}) {
   if (!data) return Promise.reject();
   if (typeof data === 'number') {
     try {

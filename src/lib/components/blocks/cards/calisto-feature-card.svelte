@@ -23,8 +23,8 @@ const { cards } = blockData;
               class="bg-foreground absolute top-0 left-1/6 size-18 -translate-y-1/2 rounded-xl"
             >
               <Icon
-                class="text-background h-full w-full rounded-xl bg-gray-800/50 py-2 "
-                icon={icon!.name}
+                class="text-background h-full w-full rounded-xl bg-gray-800/50 p-3"
+                {icon}
               />
             </div>
           </div>

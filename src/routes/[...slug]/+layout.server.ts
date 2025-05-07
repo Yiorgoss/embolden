@@ -15,13 +15,10 @@ export const load: LayoutServerLoad = async (args) => {
       pages: json.docs[0].pages
     }))
     .catch((err) => {
-      console.log(err),
-        error(404, {
-          message: err
-        });
+      error(404, {
+        message: err
+      });
     });
 
   return await response;
 };
-
-export const prerender = 'auto';
