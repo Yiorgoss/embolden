@@ -52,7 +52,7 @@
 									<p class="">per month, billed monthly</p>
 								{/if}
 							</div>
-              <Button class="w-fit" cmsData={link}/>
+              <Button class="w-fit" {link}/>
 						</div>
 					</div>
 				</div>
