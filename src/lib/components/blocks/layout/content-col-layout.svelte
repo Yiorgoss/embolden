@@ -20,5 +20,5 @@
       </div>
     </div>
   {/each}
-  <Button cmsData={link} />
+  <Button {link} />
 </section>

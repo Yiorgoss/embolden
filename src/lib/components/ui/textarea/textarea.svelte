@@ -1,6 +1,6 @@
 <script lang="ts">
 	import type { WithElementRef, WithoutChildren } from "bits-ui";
-	import type { HTMLTextareaAttributes } from "svelte/elements";
+	import type { HTMLTextareaAttributes } from "svelte";
 	import { cn } from "@/utils";
 
 	let {

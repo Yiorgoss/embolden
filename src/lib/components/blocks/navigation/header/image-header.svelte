@@ -17,7 +17,7 @@
 		<Nav.Root class="hidden items-center justify-between md:flex">
 			<a href="/" class="">
 				<div class="h-(--header-height) w-auto">
-					<Picture class="py-2 object-contain" data={image} />
+					<Picture class="object-contain py-2" {image} />
 				</div>
 			</a>
 			<Nav.List class="flex items-center justify-center pr-10 ">
@@ -25,7 +25,7 @@
 					<Nav.Item class="px-2">
 						<Nav.Link>
 							{#snippet child()}
-								<Button variant="ghost" class="h-full text-lg font-semibold " cmsData={link} />
+								<Button variant="ghost" class="h-full text-lg font-semibold " {link} />
 							{/snippet}
 						</Nav.Link>
 					</Nav.Item>
@@ -48,12 +48,12 @@
 						<Nav.List class="flex h-full w-full flex-col items-start justify-center ">
 							{#each nav ?? [] as { link }}
 								<Nav.Item class="w-full py-4">
-									<Nav.Link class="" onclick={(open = false)}>
+									<Nav.Link class="" onclick={() => (open = false)}>
 										{#snippet child()}
 											<Button
 												variant="ghost"
 												class="text-primary w-full py-10 text-xl font-semibold hover:bg-black/20"
-												cmsData={link}
+												{link}
 											/>
 										{/snippet}
 									</Nav.Link>

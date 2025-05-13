@@ -6,12 +6,12 @@
 	import Icon from './icon.svelte';
 
 	const {
-		data,
+		image,
 		pictureClass,
 		class: imageClass = 'object-cover',
 		sizes: imageSizes = '100vw'
 	}: {
-		data: IImageField;
+		image?: IImageField;
 		pictureClass?: string;
 		class?: string;
 		sizes?: string;
@@ -25,8 +25,8 @@
 	let loading: 'lazy' | 'eager' | null | undefined = 'lazy';
 </script>
 
-{#if data && data.url}
-	{#await resolveID({ collection: 'assets', data: data.url })}
+{#if image && image.url}
+	{#await resolveID({ collection: 'assets', data: image.url })}
 		<div class="flex h-full w-full items-center justify-center">
 			<Icon name="loader-circle" class="animate-[spin_2s_linear_infinite] " />
 		</div>
@@ -43,15 +43,15 @@
 				{/each}
 				<img
 					src={`${site.CMS}${asset.url}`}
-					alt={data.alt}
+					alt={image.alt}
 					{loading}
 					class={cn('object-cover h-full w-full', imageClass)}
 				/>
 			</picture>
 			<!-- overlay color -->
 			<div
-        style:background-color={data.style?.color}
-        style:opacity={data.style?.opacity}
+        style:background-color={image.style?.color}
+        style:opacity={image.style?.opacity}
 				class="z-10 col-start-1 row-start-1 h-full w-full"
 			></div>
 		</div>

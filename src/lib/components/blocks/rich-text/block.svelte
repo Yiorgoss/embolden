@@ -12,6 +12,6 @@ const { link, richText } = blockData;
   <RichTextRender richText={richText} />
 
   {#if link && link.url}
-    <Button cmsData={link} />
+    <Button {link} />
   {/if}
 </section>

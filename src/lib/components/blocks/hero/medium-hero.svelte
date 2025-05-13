@@ -11,7 +11,7 @@
 <section id="medium-hero" class="grid min-h-[20vh] grid-cols-1 md:h-[80svh]">
 	<div class=" col-span-full row-span-full h-full w-full overflow-hidden">
 		{#if image}
-			<Picture class="rounded-none" data={image} />
+			<Picture class="rounded-none" {image} />
 		{/if}
 	</div>
 
@@ -24,7 +24,7 @@
 			{richText}
 		/>
     <div class="pt-10">
-		<Button cmsData={link} />
+		<Button {link} />
       </div>
 	</div>
 </section>

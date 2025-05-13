@@ -32,7 +32,7 @@
 					class={cn('h-[300px] w-full p-12 md:h-[700px]', left && 'h-[295px] md:h-[695px]')}
 				>
 					{#if image}
-						<Picture class="rounded-2xl " data={image} />
+						<Picture class="rounded-2xl " {image} />
 					{/if}
 				</div>
 				<div

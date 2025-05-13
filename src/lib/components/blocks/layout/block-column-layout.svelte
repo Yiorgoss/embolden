@@ -40,8 +40,8 @@
   const widthClass = normaliseWidth(layout ?? "oneColumn");
 </script>
 
-<section id="block-column-layout" class="py-5">
-  <div class="flex flex-col px-0 py-7 md:py-0 md:px-5 md:flex-row justify-center items-center container mx-auto flex-wrap">
+<section id="block-column-layout" class="py-5 group block-col-group-selector">
+  <div class="@container/block-col flex flex-col px-0 py-7 md:py-0 md:px-5 md:flex-row justify-center items-center container mx-auto flex-wrap">
     <div class={cn("h-full w-full justify-center items-center", widthClass[0])}>
       <RenderBlocks blockData={columnOne![0]} />
     </div>

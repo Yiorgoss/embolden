@@ -12,7 +12,7 @@ const { image, richText, contact, nav, socials } = blockData;
 <div class="container md:px-0 px-2 pb-10 mx-auto flex justify-between items-center flex-col gap-4 md:flex-row">
   {#if image && image.url}
     <div class="mb-auto w-full max-w-[100px] md:w-1/8">
-      <Picture class="object-contain" data={image} />
+      <Picture class="object-contain" {image} />
     </div>
   {/if}
   <div class="w-full md:px-0 md:w-4/8 grow pt-10 md:pt-0">
@@ -35,13 +35,13 @@ const { image, richText, contact, nav, socials } = blockData;
       <div class="flex flex-col items-start">
         <h3 class="font-semibold text-xl">Sitemap</h3>
         {#each nav ?? [] as { link }}
-          <Button variant="ghost" size="sm" class="p-1" cmsData={link} />
+          <Button variant="ghost" size="sm" class="p-1" {link} />
         {/each}
       </div>
       <div class="flex flex-col items-start">
         <h3 class="font-semibold text-xl">Social Links</h3>
         {#each socials ?? [] as { link }}
-          <Button variant="ghost" cmsData={link} />
+          <Button variant="ghost" {link} />
         {/each}
       </div>
     </div>

@@ -37,7 +37,7 @@
 		WithElementRef<HTMLAnchorAttributes> & {
 			variant?: ButtonVariant;
 			size?: ButtonSize;
-			cmsData?: IButton;
+			link?: IButton;
 		};
 </script>
 
@@ -50,15 +50,15 @@
 		size = 'default',
 		ref = $bindable(null),
 		type = 'button',
-		cmsData,
+		link,
 		children,
 		...restProps
 	}: ButtonProps = $props();
 
-	const { type: urlType, reference, url, display } = { ...cmsData };
+	const { type: urlType, reference, url, display } = { ...link };
 
 	let _href = $state(
-		cmsData && urlType == 'reference' && reference 
+		link && urlType == 'reference' && reference 
 			? resolveID({ collection: reference!.relationTo, data: reference?.value })
 			: Promise.resolve(url)
 	);

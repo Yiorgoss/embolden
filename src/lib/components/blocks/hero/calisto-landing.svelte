@@ -12,7 +12,7 @@ const { image, richText, ctaOne, ctaTwo } = blockData;
 <div id="calisto-landing" class="grid min-h-lvh grid-cols-3 grid-rows-3 md:min-h-screen">
   <div class="z-0 col-span-full row-span-full">
     {#if image}
-      <Picture data={image} />
+      <Picture {image} />
     {/if}
   </div>
   <div
@@ -24,8 +24,8 @@ const { image, richText, ctaOne, ctaTwo } = blockData;
         <RichTextRender richText={richText} />
       {/if}
       <div class="self-start md:self-end pt-10 flex gap-5 ">
-        <Button class="py-5  px-5" cmsData={ctaTwo} />
-        <Button class="py-5  px-5" cmsData={ctaOne} />
+        <Button class="py-5  px-5" link={ctaTwo} />
+        <Button class="py-5  px-5" link={ctaOne} />
       </div>
     </div>
   </div>

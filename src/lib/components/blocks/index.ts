@@ -8,6 +8,7 @@ import Gutter from "./common/gutter.svelte"
 
 import CalistoFeatureCard from "./cards/calisto-feature-card.svelte"
 import DiscountCard from "./cards/discount-card.svelte"
+import SingleCard from "./cards/single-card.svelte"
 
 import BlockColumnLayout from "./layout/block-column-layout.svelte"
 import ContentColLayout from "./layout/content-col-layout.svelte"
@@ -15,6 +16,7 @@ import ContentColLayout from "./layout/content-col-layout.svelte"
 import StickyContainers from "./special/sticky-containers.svelte";
 import BentoGrid from "./special/bento-grid.svelte"
 import Accordion from "./special/accordion.svelte"
+import Carousel from "./special/carousel.svelte"
 
 import RichTextFooter from './navigation/footer/rich-text-footer.svelte'
 import ImageHeader from './navigation/header/image-header.svelte'
@@ -31,10 +33,12 @@ blockList.set("mediumHero", MediumHero)
 blockList.set("stickyContainers", StickyContainers);
 blockList.set("bentoGrid", BentoGrid);
 blockList.set("accordion", Accordion);
+blockList.set("carousel", Carousel)
 
 //cards
 blockList.set("calistoFeatureCard", CalistoFeatureCard);
 blockList.set("discountCard", DiscountCard)
+blockList.set("singleCard", SingleCard)
 
 //layout
 blockList.set("blockColumnLayout", BlockColumnLayout);
