@@ -30,7 +30,7 @@ export async function resolveID({
   data: number | any;
   lang?: string;
 }) {
-  if (!data) return Promise.reject();
+  if (!data) return Promise.reject("Data undefined");
   if (typeof data === 'number') {
     try {
       const response = await fetchFromCMS({ collection, id: data, lang });
