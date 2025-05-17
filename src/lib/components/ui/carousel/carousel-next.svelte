@@ -10,8 +10,9 @@
 		class: className,
 		variant = 'outline',
 		size = 'icon',
+		right = true,
 		...restProps
-	}: WithoutChildren<Props> = $props();
+	}: WithoutChildren<Props & { right?: boolean }> = $props();
 
 	const emblaCtx = getEmblaContext('<Carousel.Next/>');
 </script>
@@ -23,7 +24,7 @@
 	class={cn(
 		'absolute size-8 rounded-full',
 		emblaCtx.orientation === 'horizontal'
-			? 'top-1/2 -right-0 md:-right-12 -translate-y-1/2'
+			? cn('top-1/2 -right-0 -translate-y-1/2 md:-right-12', !right && '-left-0 md:-left-12')
 			: '-bottom-12 left-1/2 -translate-x-1/2 rotate-90',
 		className
 	)}

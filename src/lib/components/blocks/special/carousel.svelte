@@ -3,6 +3,7 @@
 	import RenderBlocks from '../render-blocks.svelte';
 	import * as Carousel from '@/components/ui/carousel';
 	import { type CarouselAPI } from '@/components/ui/carousel/context.svelte';
+	import { MediaQuery } from 'svelte/reactivity';
 
 	const { blockData }: { blockData: ICarousel; class?: string } = $props();
 	const { items } = blockData;
@@ -18,6 +19,8 @@
 			});
 		}
 	});
+
+  const medium = new MediaQuery('(min-width: 640px) and (max-width: 1024px)');
 </script>
 
 <Carousel.Root
@@ -33,8 +36,8 @@
 			</Carousel.Item>
 		{/each}
 	</Carousel.Content>
-	<div class="hidden lg:block">
-		<Carousel.Previous />
+	<div class="hidden md:block bg-red-400">
+		<Carousel.Previous left={!medium.current}  />
 	</div>
 	<div class="hidden md:block">
 		<Carousel.Next />

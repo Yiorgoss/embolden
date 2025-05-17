@@ -48,9 +48,10 @@
 						<Nav.List class="flex h-full w-full flex-col items-start justify-center ">
 							{#each nav ?? [] as { link }}
 								<Nav.Item class="w-full py-4">
-									<Nav.Link class="" onclick={() => (open = false)}>
+									<Nav.Link class="" >
 										{#snippet child()}
 											<Button
+                        onclick={() => (open = false)}
 												variant="ghost"
 												class="text-primary w-full py-10 text-xl font-semibold hover:bg-black/20"
 												{link}

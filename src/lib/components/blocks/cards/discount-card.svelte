@@ -27,7 +27,7 @@
 		<Switch id="discount-switch" size="xl" bind:checked />
 		<label for="discount-switch">Yearly Discount </label>
 	</div>
-	<div class="flex flex-col items-center justify-center md:flex-row">
+	<div class="flex flex-col items-stretch justify-stretch md:flex-row">
 		{#if cards}
 			{#each cards as { richText, price, yearlyDiscount, includeDiscount, link}}
 				<div class="relative w-full max-w-md flex-auto px-10 py-2">
@@ -36,16 +36,16 @@
 							overrides="prose-headings:text-background  prose-li:text-background prose-p:text-background"
 							{richText}
 						/>
-						<div class="flex flex-col gap-4">
+						<div class="flex flex-col gap-8">
 							<div class="text-background mx-auto flex flex-col text-balance font-thin">
 								{#if includeDiscount && checked}
-									<span class="text-4xl font-semibold">
+									<span class="text-4xl pt-5 font-semibold">
 										{@html site.currency}
 										{yearlyDiscount}
 									</span>
 									<p class="px-2">per month, billed yearly</p>
 								{:else}
-									<span class="text-4xl font-semibold">
+									<span class="text-4xl pt-5 font-semibold">
 										{@html site.currency}
 										{price}
 									</span>
