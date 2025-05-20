@@ -38,11 +38,11 @@
 						type={img.mimeType}
 						sizes={imageSizes}
 						media={`(max-width: ${img.width}px)`}
-						srcset={`${site.CMS}${img.url}`}
+						srcset={img.url}
 					/>
 				{/each}
 				<img
-					src={`${site.CMS}${asset.url}`}
+					src={asset.url}
 					alt={image.alt}
 					{loading}
 					class={cn('h-full w-full row-start-1 col-start-1 object-cover', imageClass)}

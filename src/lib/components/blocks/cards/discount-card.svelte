@@ -27,7 +27,7 @@
 		<Switch id="discount-switch" size="xl" bind:checked />
 		<label for="discount-switch">Yearly Discount </label>
 	</div>
-	<div class="flex flex-col items-stretch justify-stretch md:flex-row">
+	<div class="flex flex-col items-stretch justify-center md:flex-row">
 		{#if cards}
 			{#each cards as { richText, price, yearlyDiscount, includeDiscount, link}}
 				<div class="relative w-full max-w-md flex-auto px-10 py-2">

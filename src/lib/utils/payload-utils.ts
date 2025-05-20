@@ -60,8 +60,8 @@ export const richTextImg = async ({ imgData }: { imgData: Asset | number }) => {
   const sources =
     sizes &&
     Object.entries(sizes).reduce((acc: string, [_, img]) => {
-      return (acc += `<source media="(max-width: ${img.width})"  srcset="${site.CMS}${img.url}" />`);
+      return (acc += `<source media="(max-width: ${img.width})"  srcset="${img.url}" />`);
     }, '');
-  return `<picture style="margin:0;width:100%;height:100%;"> ${sources ?? ''}<img style="object-fit:stretch;width:100%;height:100%;" src="${site.CMS}${url}" alt="" /></picture>`;
+  return `<picture style="margin:0;width:100%;height:100%;"> ${sources ?? ''}<img style="object-fit:stretch;width:100%;height:100%;" src="${url}" alt="" /></picture>`;
   // return `<img style="object-fit:cover;height:inherit;width:inherit;margin:0px;" src="${devCMS.value}${url}" alt=""/>`
 };
