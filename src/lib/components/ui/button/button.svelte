@@ -43,6 +43,7 @@
 
 <script lang="ts">
 	import { cn, resolveID } from '@/utils';
+	import { getContext, hasContext, onMount } from 'svelte';
 
 	let {
 		class: className,
@@ -57,8 +58,16 @@
 
 	const { type: urlType, reference, url, display } = { ...link };
 
+	onMount(() => {
+		if (hasContext('loaded')) {
+			let loaded = getContext('loaded');
+			//@ts-ignore // must make sure there arent multiple pictures loading
+			loaded.button = true;
+		}
+	});
+
 	let _href = $state(
-		link && urlType == 'reference' && reference 
+		link && urlType == 'reference' && reference
 			? resolveID({ collection: reference!.relationTo, data: reference?.value })
 			: Promise.resolve(url)
 	);
@@ -67,29 +76,26 @@
 		_href = Promise.resolve(restProps.href);
 	}
 
-//   let _href = $state(
-//   restProps.href
-//     ? restProps.href
-//     : cmsData && urlType
-//       ? urlType == "reference"
-//         ? // should never be null if urltype ir referrence
-//           resolveID({
-//             collection: reference!.relationTo,
-//             data: reference?.value,
-//             lang: "en",
-//           })
-//         : url
-//       : undefined,
-// );
-
-
 	const variant = _variant != 'default' ? _variant : (display?.variant ?? _variant);
 
 	// const text = display?.text ?? undefined;
-	const text = display?.text ?? children ;
+	const text = display?.text ?? children;
 </script>
 
-{#await _href then href}
+{#await _href}
+	{#if variant != 'ghost'}
+		<div
+			class={cn(
+				buttonVariants(),
+				'bg-foreground/20 mix-blend-difference p-0 min-h-9 min-w-20 w-fit animate-pulse'
+			)}
+		>
+			<div
+				class={cn(buttonVariants(), 'bg-background/20 p-0 min-h-9 min-w-20 w-fit animate-pulse')}
+			></div>
+		</div>
+	{/if}
+{:then href}
 	{#if href || text}
 		{#if href}
 			{@const slug = urlType == 'reference' ? href.slug : href}

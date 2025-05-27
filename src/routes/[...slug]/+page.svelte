@@ -26,7 +26,7 @@
 		{/if}
 		<div
 			id="render-block-container"
-			class={`relative bg-background ${currentPage.hero?.[0] ? '' : 'pt-(--header-height)'}`}
+			class={`bg-background relative ${currentPage.hero?.[0] ? '' : 'pt-(--header-height)'}`}
 		>
 			{#each currentPage.layout as block}
 				<RenderBlocks blockData={block} />
