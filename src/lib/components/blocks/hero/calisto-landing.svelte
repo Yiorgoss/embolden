@@ -11,10 +11,9 @@
 	const { image, richText, ctaOne, ctaTwo } = blockData;
 
 	let bgLoaded = $state(false);
-	$inspect(bgLoaded);
 </script>
 
-<div id="calisto-landing" class="grid min-h-lvh grid-cols-3 grid-rows-3 md:min-h-screen">
+<div id="calisto-landing" class="grid h-lvh grid-cols-3 grid-rows-3 md:min-h-screen">
 	<div class="z-0 col-span-full row-span-full">
 		{#if image}
 			<Picture cb={() => (bgLoaded = true)} {image} />
