@@ -16,10 +16,12 @@
 <div id="calisto-landing" class="grid h-lvh grid-cols-3 grid-rows-3 md:min-h-screen">
 	<div class="z-0 col-span-full row-span-full">
 		{#if image}
-			<Picture cb={() => (bgLoaded = true)} {image} />
+			<Picture loading="eager" cb={() => (bgLoaded = true)} {image} />
 		{/if}
 	</div>
-	<div class="bg-background/30 z-10 col-span-full row-span-full h-full w-full"></div>
+	<div
+		class="z-10 col-span-full row-span-full h-full w-full bg-background/20 mix-blend-lighten"
+	></div>
 	<div class="z-10 col-span-full row-start-2 row-end-4 container px-5">
 		{#key bgLoaded}
 			<div

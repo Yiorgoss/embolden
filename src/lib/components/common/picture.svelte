@@ -9,17 +9,18 @@
 		pictureClass,
 		class: imageClass = 'object-cover',
 		sizes: imageSizes = '100vw',
+		loading = 'lazy',
 		cb
 	}: {
 		image?: IImageField;
 		pictureClass?: string;
+		loading?: 'eager' | 'lazy';
 		class?: string;
 		sizes?: string;
 		cb?: () => void;
 	} = $props();
 
 	// let assetPromise = $state(resolveID({ collection: 'assets', data: data.url }))
-	let loading: 'lazy' | 'eager' | null | undefined = 'lazy';
 </script>
 
 {#if image && image.url}
@@ -28,7 +29,15 @@
 			<Icon name="loader-circle" class="animate-[spin_2s_linear_infinite] " />
 		</div>
 	{:then asset: Asset}
-		<PicturePrimitive {cb} {image} class={imageClass} sizes={imageSizes} {pictureClass} {asset} />
+		<PicturePrimitive
+			{loading}
+			{cb}
+			{image}
+			class={imageClass}
+			sizes={imageSizes}
+			{pictureClass}
+			{asset}
+		/>
 	{:catch error}
 		<p>ERROR: {error}</p>
 	{/await}

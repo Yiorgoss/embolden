@@ -1,5 +1,5 @@
 <script lang="ts">
-	import { type Asset, type IImage, type IImageField } from '@payload-types';
+	import { type Asset, type IImageField } from '@payload-types';
 	import { cn, fetchFromCMS, resolveID } from '@/utils';
 	import { getContext, hasContext, onMount } from 'svelte';
 
@@ -7,12 +7,14 @@
 		asset,
 		image,
 		pictureClass,
+		loading,
 		class: imageClass = 'object-cover',
 		sizes: imageSizes = '100vw',
 		cb
 	}: {
 		asset: Asset;
 		image?: IImageField;
+		loading?: 'eager' | 'lazy';
 		pictureClass?: string;
 		class?: string;
 		sizes?: string;
@@ -24,17 +26,34 @@
 	});
 
 	let imageLoaded = $state(false);
-	let loading: 'lazy' | 'eager' | null | undefined = 'lazy';
 	let placeholder = asset?.sizes?.['placeholder'];
+	let mobile = asset?.sizes?.['sm'];
 </script>
 
+<!-- -->
+<svelte:head>
+	{#if loading == 'eager'}
+		{#if placeholder && placeholder.filename}
+			<link
+				rel="preload"
+				as="image"
+				href={placeholder.url}
+				media={`(max-width: ${placeholder.width}px)`}
+			/>
+		{/if}
+		{#if mobile}
+			<link rel="preload" as="image" href={mobile.url} media={`(max-width: ${mobile.width}px)`} />
+		{/if}
+	{/if}
+</svelte:head>
+<!-- -->
 <div class="grid h-full w-full grid-cols-1 grid-rows-1">
-	{#if placeholder && placeholder.url}
+	{#if placeholder && placeholder.filename}
 		<img
 			src={placeholder.url}
 			class:hidden={imageLoaded}
-			loading="eager"
 			sizes={imageSizes}
+			{loading}
 			class={cn('-z-10 h-full w-full', pictureClass, imageClass)}
 			alt=""
 		/>
@@ -59,9 +78,4 @@
 		/>
 	</picture>
 	<!-- overlay color -->
-	<div
-		style:background-color={image?.style?.color ?? ''}
-		style:opacity={image?.style?.opacity ?? ''}
-		class="z-10 col-start-1 row-start-1 h-full w-full"
-	></div>
 </div>
