@@ -2,7 +2,7 @@
 	import { type ICalistoLanding } from '@payload-types';
 
 	import Picture from '@/components/common/picture.svelte';
-	import Button from '@/components/ui/button/button.svelte';
+	import Button from '@/components/common/button.svelte';
 	import { RichTextRender } from '@/components/blocks/rich-text';
 	import { fade } from 'svelte/transition';
 	import { setContext } from 'svelte';

@@ -2,7 +2,7 @@
 	import { NavigationMenu as Nav } from 'bits-ui';
 	import Icon from '@/components/common/icon.svelte';
 	import Picture from '@/components/common/picture.svelte';
-	import Button from '@/components/ui/button/button.svelte';
+	import Button from '@/components/common/button.svelte';
 	import Dialog from '@/components/ui/dialog/dialog.svelte';
 	import { type IImageHeader } from '@payload-types';
 	const { blockData }: { blockData: IImageHeader } = $props();
@@ -48,10 +48,10 @@
 						<Nav.List class="flex h-full w-full flex-col items-start justify-center ">
 							{#each nav ?? [] as { link }}
 								<Nav.Item class="w-full py-4">
-									<Nav.Link class="" >
+									<Nav.Link class="">
 										{#snippet child()}
 											<Button
-                        onclick={() => (open = false)}
+												onclick={() => (open = false)}
 												variant="ghost"
 												class="text-primary w-full py-10 text-xl font-semibold hover:bg-black/20"
 												{link}

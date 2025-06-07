@@ -2,7 +2,7 @@
 	import type { WithoutChildren } from 'bits-ui';
 	import { getEmblaContext } from './context.svelte';
 	import { cn } from '@/utils';
-	import { Button, type Props } from '@/components/ui/button';
+	import Button from '@/components/common/button.svelte';
 	import Icon from '@/components/common/icon.svelte';
 
 	let {

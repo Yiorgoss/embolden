@@ -2,7 +2,7 @@
 	import { type IMediumHero } from '@payload-types';
 	import { RichTextRender } from '@/components/blocks/rich-text';
 	import Picture from '@/components/common/picture.svelte';
-	import { Button } from '@/components/ui/button';
+	import Button from '@/components/common/button.svelte';
 
 	const { blockData }: { blockData: IMediumHero } = $props();
 	const { image, richText, link } = blockData;
@@ -23,8 +23,8 @@
 			overrides="prose-headings:text-balance prose-headings:text-xl max-w-full container"
 			{richText}
 		/>
-    <div class="pt-10">
-		<Button {link} />
-      </div>
+		<div class="pt-10">
+			<Button {link} />
+		</div>
 	</div>
 </section>

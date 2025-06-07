@@ -78,4 +78,9 @@
 		/>
 	</picture>
 	<!-- overlay color -->
+	<div
+		style:background-color={image?.style?.color ?? ''}
+		style:opacity={image?.style?.opacity ?? ''}
+		class="z-10 col-start-1 row-start-1 h-full mix-blend-lighten w-full"
+	></div>
 </div>

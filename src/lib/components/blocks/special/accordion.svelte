@@ -3,7 +3,7 @@
 	import { type IAccordion } from '@payload-types';
 	import { Accordion } from 'bits-ui';
 	import { RichTextRender } from '@/components/blocks/rich-text';
-	import Button from '@/components/ui/button/button.svelte';
+	import Button from '@/components/common/button.svelte';
 
 	const { blockData }: { blockData: IAccordion } = $props();
 
@@ -19,10 +19,10 @@
 					<Accordion.Trigger
 						class="flex font-serif text-3xl w-full items-center justify-between py-5 transition-all duration-200 select-none [&[data-state=open]>span>svg]:rotate-180"
 					>
-							<span class="pr-4">{i + 1}.</span>
-							<span class="px-8 font-normal">
-								{item.title}
-							</span>
+						<span class="pr-4">{i + 1}.</span>
+						<span class="px-8 font-normal">
+							{item.title}
+						</span>
 						<span
 							class="bg-ransparent hover:bg-dark-10 inline-flex size-8 items-center justify-center rounded-[7px]"
 						>
