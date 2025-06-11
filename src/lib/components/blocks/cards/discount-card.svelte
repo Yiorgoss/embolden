@@ -14,7 +14,7 @@
 
 	let observer: IntersectionObserver;
 	let startAnimation = $state(false);
-	let el: HTMLElement;
+	let el: HTMLElement | undefined = $state();
 
 	onMount(() => {
 		observer = new IntersectionObserver(
@@ -27,12 +27,15 @@
 		);
 		if (!el) return;
 		observer.observe(el);
-		() => observer!.unobserve(el);
+		() => {
+			if (el) observer!.unobserve(el);
+		};
 	});
 
 	$effect(() => {
-		if (!el && !observer) return;
-		startAnimation && observer!.unobserve(el);
+		if (startAnimation && observer && el) {
+			observer.unobserve(el);
+		}
 	});
 
 	const hasOneDiscount =

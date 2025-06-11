@@ -2,7 +2,7 @@
 	import { type ICalistoFeatureCard } from '@payload-types';
 	import RichTextRender from '@/components/blocks/rich-text/render.svelte';
 	import Icon from '@/components/common/icon.svelte';
-	import { onMount, tick } from 'svelte';
+	import { onMount } from 'svelte';
 	import { fade } from 'svelte/transition';
 	import { expoOut } from 'svelte/easing';
 
@@ -11,7 +11,7 @@
 
 	let observer: IntersectionObserver | undefined = $state();
 	let startAnimation = $state(false);
-	let el: HTMLElement;
+	let el: HTMLElement | undefined = $state();
 
 	onMount(() => {
 		observer = new IntersectionObserver(
@@ -20,16 +20,19 @@
 					startAnimation = true;
 				}
 			},
-			{ rootMargin: '-40%' }
+			{ rootMargin: '-30%' }
 		);
 		if (!el) return;
 		observer.observe(el);
-		() => observer!.unobserve(el);
+		() => {
+			if (el) observer!.unobserve(el);
+		};
 	});
 
 	$effect(() => {
-		if (!el && !observer) return;
-		startAnimation && observer!.unobserve(el);
+		if (startAnimation && el && observer) {
+			observer.unobserve(el);
+		}
 	});
 </script>
 
