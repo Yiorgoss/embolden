@@ -1,7 +1,8 @@
 <script lang="ts">
-	import type { ISEOInterface } from '@payload-types';
+	import type { ISEO } from '@payload-types';
+	import { site } from '@/config';
 
-	const { meta }: { meta: ISEOInterface } = $props();
+	const { meta }: { meta: ISEO } = $props();
 
 	const image =
 		typeof meta.image == 'number'
@@ -10,9 +11,7 @@
 </script>
 
 <svelte:head>
-	{#if meta.title}
-		<title>{meta.title}</title>
-	{/if}
+	<title>{meta.title ?? site.domainName ?? ''}</title>
 	{#if meta.description}
 		<meta name="description" content={meta.description} />
 	{/if}
@@ -20,4 +19,3 @@
 		<meta property="og:image" content={image?.sizes?.sm?.url} />
 	{/if}
 </svelte:head>
-
