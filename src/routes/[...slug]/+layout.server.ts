@@ -6,7 +6,7 @@ import { error } from '@sveltejs/kit';
 
 export const load: LayoutServerLoad = async (args) => {
   //@ts-ignore
-  const response = fetch(`${site.CMS}/api/tenants?[where][domainName][equal]=${site.domainName}`)
+  const response = fetch(`${site.CMS}/api/tenants?[where][domainName][equal]=${site.domainName}&depth=10`)
     .then((res) => res.json())
     .then((json) => ({
       //@ts-ignore
