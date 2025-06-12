@@ -21,7 +21,6 @@
 
 			const randomClassName = 'random-class-' + Math.random().toString().slice(2);
 
-			console.log(randomClassName);
 			sheet.insertRule(`.${randomClassName} { ${style ? style : ''} }`, sheet.cssRules.length);
 
 			element.classList.add(randomClassName);

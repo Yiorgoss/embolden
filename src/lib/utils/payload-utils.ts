@@ -10,7 +10,6 @@ export async function fetchFromCMS({
   id: number;
   lang?: string | undefined | null;
 }) {
-
   const response = fetch(
     `${site.CMS}/api/${collection}?where[id][equals]=${id}&locale=${lang ?? 'en'}&depth=10`,
     {

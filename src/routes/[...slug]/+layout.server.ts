@@ -20,5 +20,5 @@ export const load: LayoutServerLoad = async (args) => {
       });
     });
 
-  return await response;
+  return response;
 };

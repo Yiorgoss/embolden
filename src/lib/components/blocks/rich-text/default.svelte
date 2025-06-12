@@ -20,7 +20,6 @@
 
 			const randomClassName = 'random-class-' + Math.random().toString().slice(2);
 
-			console.log(randomClassName);
 			sheet.insertRule(
 				`.${randomClassName} > .payload-rich-text { ${style ? style : ''} }`,
 				sheet.cssRules.length

@@ -8,7 +8,7 @@
 	const { link, richText } = blockData;
 </script>
 
-<section id="rich-text-block" class=" container mx-auto py-5">
+<section id="rich-text-block" class=" container mx-auto py-0 md:py-5">
 	<RichTextRender {richText} />
 
 	{#if link && link.url}

@@ -13,7 +13,7 @@
 	let bgLoaded = $state(false);
 </script>
 
-<div id="calisto-landing" class="grid h-lvh grid-cols-3 grid-rows-3 md:min-h-screen">
+<div id="calisto-landing" class="grid h-lvh grid-cols-3 grid-rows-3 md:min-h-lvh">
 	<div class="z-0 col-span-full row-span-full">
 		{#if image}
 			<Picture loading="eager" cb={() => (bgLoaded = true)} {image} />
