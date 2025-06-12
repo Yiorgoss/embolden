@@ -5,18 +5,27 @@
 	import Button from '@/components/common/button.svelte';
 	import { RichTextRender } from '@/components/blocks/rich-text';
 	import { fade } from 'svelte/transition';
-	import { setContext } from 'svelte';
+	import { onMount, setContext } from 'svelte';
 
-	const { blockData }: { blockData: ICalistoLanding } = $props();
+	const { blockData, cb }: { blockData: ICalistoLanding; cb?: () => void } = $props();
 	const { image, richText, ctaOne, ctaTwo } = blockData;
 
+	onMount(() => cb && cb());
+
 	let bgLoaded = $state(false);
+	console.time('a');
 </script>
 
 <div id="calisto-landing" class="grid h-lvh grid-cols-3 grid-rows-3 md:min-h-lvh">
 	<div class="z-0 col-span-full row-span-full">
 		{#if image}
-			<Picture loading="eager" cb={() => (bgLoaded = true)} {image} />
+			<Picture
+				loading="eager"
+				cb={() => {
+					bgLoaded = true;
+				}}
+				{image}
+			/>
 		{/if}
 	</div>
 	<div

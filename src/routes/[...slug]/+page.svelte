@@ -3,6 +3,7 @@
 	import RenderBlocks from '@/components/blocks/render-blocks.svelte';
 	import Meta from '@/components/blocks/seo/meta.svelte';
 
+	let heroLoaded = $state(false);
 	const pages = $state(page.data.pages.docs);
 	const { slug: currentSlug } = $derived(page.params);
 
@@ -21,16 +22,18 @@
 		<Meta meta={currentPage.meta} />
 		{#if currentPage && currentPage.hero.length > 0}
 			<section class="">
-				<RenderBlocks blockData={currentPage.hero[0]} />
+				<RenderBlocks cb={() => (heroLoaded = true)} blockData={currentPage.hero[0]} />
 			</section>
 		{/if}
-		<div
-			id="render-block-container"
-			class={`bg-background relative ${currentPage.hero?.[0] ? '' : 'pt-(--header-height)'}`}
-		>
-			{#each currentPage.layout as block}
-				<RenderBlocks blockData={block} />
-			{/each}
-		</div>
+		{#if heroLoaded}
+			<div
+				id="render-block-container"
+				class={`bg-background relative ${currentPage.hero?.[0] ? '' : 'pt-(--header-height)'}`}
+			>
+				{#each currentPage.layout as block}
+					<RenderBlocks blockData={block} />
+				{/each}
+			</div>
+		{/if}
 	{/if}
 {/key}

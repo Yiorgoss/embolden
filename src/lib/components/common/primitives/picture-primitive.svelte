@@ -39,6 +39,7 @@
 			<link
 				rel="preload"
 				as="image"
+				fetchpriority="high"
 				href={placeholder.url}
 				media={`(max-width: ${placeholder.width}px)`}
 			/>

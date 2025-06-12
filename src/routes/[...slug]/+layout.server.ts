@@ -5,7 +5,6 @@ import type { Page, Tenant } from '@payload-types';
 import { error } from '@sveltejs/kit';
 
 export const load: LayoutServerLoad = async (args) => {
-  //@ts-ignore
   const response = fetch(`${site.CMS}/api/tenants?[where][domainName][equal]=${site.domainName}&depth=10`)
     .then((res) => res.json())
     .then((json) => ({
@@ -19,6 +18,6 @@ export const load: LayoutServerLoad = async (args) => {
         message: err
       });
     });
+  return response
 
-  return response;
 };

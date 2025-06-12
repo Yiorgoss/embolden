@@ -24,7 +24,6 @@
 				`.${randomClassName} > .payload-rich-text { ${style ? style : ''} }`,
 				sheet.cssRules.length
 			);
-
 			element.classList.add(randomClassName);
 		}
 	});

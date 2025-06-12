@@ -1,13 +1,12 @@
 <script lang="ts">
-  import { blockList } from "$lib/components/blocks";
+	import { blockList } from '$lib/components/blocks';
 
-  const { blockData }:{ blockData:any} = $props();
+	const { blockData, cb }: { blockData: any; cb?: () => void } = $props();
 
-  const calculatedBlockType = blockList.get(blockData.blockType) ?? undefined;
-  const SvelteComponent = $derived(calculatedBlockType);
-
+	const calculatedBlockType = blockList.get(blockData.blockType) ?? undefined;
+	const SvelteComponent = $derived(calculatedBlockType);
 </script>
 
 {#if calculatedBlockType}
-  <SvelteComponent {blockData} />
+	<SvelteComponent {blockData} {cb} />
 {/if}
