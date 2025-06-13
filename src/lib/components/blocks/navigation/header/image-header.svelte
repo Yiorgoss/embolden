@@ -5,19 +5,42 @@
 	import Button from '@/components/common/button.svelte';
 	import Dialog from '@/components/ui/dialog/dialog.svelte';
 	import { type IImageHeader } from '@payload-types';
+	import { onMount } from 'svelte';
+	import { cn } from '@/utils';
+	import { throttle } from '@/utils';
+
 	const { blockData }: { blockData: IImageHeader } = $props();
 
 	const { image, nav } = blockData;
 	let open = $state(false);
+	let currentY = $state(0);
+	let previousY = $state(0);
+	let scrollingUp = $state(false);
+
+	const handleScroll = () => {
+		if (currentY > previousY) {
+			scrollingUp = true;
+		} else {
+			scrollingUp = false;
+		}
+		previousY = currentY;
+	};
 </script>
 
-<section class="absolute top-0 z-50 mx-auto h-(--header-height) w-full px-0 md:px-10">
-	<div class="container mx-auto h-full">
+<svelte:window bind:scrollY={currentY} onscroll={throttle(handleScroll, 100)} />
+
+<section class="fixed top-0 z-50 mx-auto h-(--header-height) w-full px-0 md:px-10">
+	<div class="lg:container mx-auto h-full">
 		<!-- desktop -->
-		<Nav.Root class="hidden items-center justify-between md:flex">
+		<Nav.Root
+			class={cn(
+				'translate-y-0 transition-transform duration-200 hidden w-full items-center justify-between md:flex',
+				scrollingUp && '-translate-y-full'
+			)}
+		>
 			<a href="/" class="">
-				<div class="h-(--header-height) w-auto">
-					<Picture class="object-contain py-2" {image} />
+				<div class="h-(--header-height) lg:p-2 md:p-4 w-auto">
+					<Picture class="object-contain py-2" loading="eager" {image} />
 				</div>
 			</a>
 			<Nav.List class="flex items-center justify-center pr-10 ">
