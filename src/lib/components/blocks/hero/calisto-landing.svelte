@@ -28,11 +28,11 @@
 			/>
 		{/if}
 	</div>
-	<div class="z-10 col-span-full row-start-2 row-end-4 container px-5">
-		<div
-			class:opacity-100={bgLoaded}
-			class="flex opacity-0 transition-opacity delay-500 duration-1000 h-full max-w-fit flex-col items-start justify-center"
-		>
+	<div
+		class:opacity-100={bgLoaded}
+		class="z-10 transition-opacity delay-500 duration-400 opacity-0 col-span-full row-start-2 row-end-4 container px-5"
+	>
+		<div class="flex h-full max-w-fit flex-col items-start justify-center">
 			{#if richText}
 				<RichTextRender {richText} />
 			{/if}
