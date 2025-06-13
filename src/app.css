@@ -58,20 +58,29 @@
   --radius-theme: 30px;
 }
 
+
 @font-face {
+  font-display: swap;
   font-family: 'Inter';
   font-style: 'normal';
   src: url('/fonts/Inter/Inter-VariableFont_opsz,wght.ttf') format('truetype');
 }
 
 @font-face {
+  font-display: swap;
   font-family: 'Instrument';
   font-style: 'normal';
   src: url('/fonts/Instrument_Serif/InstrumentSerif-Regular.ttf') format('truetype');
 }
 
 @font-face {
+  font-display: swap;
   font-family: 'Luxurious';
   font-style: 'normal';
   src: url('/fonts/Luxurious_Script/LuxuriousScript-Regular.ttf') format('truetype');
+}
+
+.debug {
+  border: darkred;
+  border-width: 3px;
 }
