@@ -17,7 +17,7 @@
 			<div
 				style:top={`${90 * i + 5}px`}
 				class={cn(
-					`text-background bg-primary rounded-theme sticky grid min-h-[600px] grid-cols-1 md:grid-cols-2 `,
+					`text-background bg-primary rounded-theme sticky grid grid-cols-1 md:grid-cols-2 `,
 					left && 'bg-secondary border-foreground border '
 				)}
 			>

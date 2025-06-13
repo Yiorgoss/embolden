@@ -1,8 +1,8 @@
 <script lang="ts">
 	import {
 		CircleArrowRight,
-    ArrowRight,
-    ArrowLeft,
+		ArrowRight,
+		ArrowLeft,
 		LoaderCircle,
 		Users,
 		Cog,

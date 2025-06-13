@@ -1,6 +1,6 @@
 <script lang="ts">
 	import { type Asset, type IImageField } from '@payload-types';
-	import { cn, fetchFromCMS, resolveID } from '@/utils';
+	import { cn } from '@/utils';
 	import { getContext, hasContext, onMount } from 'svelte';
 	import { MediaQuery } from 'svelte/reactivity';
 	import { fade, fly } from 'svelte/transition';
@@ -97,8 +97,7 @@
 	</picture>
 	<!-- overlay color -->
 	<div
-		style:background-color={image?.style?.color ?? ''}
-		style:opacity={image?.style?.opacity ?? ''}
+		style={`opacity:${image.style.opacity ?? '0'}%;background-color:${image.style.color ?? '#fff'}`}
 		class="z-10 col-start-1 row-start-1 h-full mix-blend-lighten w-full"
 	></div>
 </div>
