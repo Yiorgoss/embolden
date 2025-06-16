@@ -97,7 +97,7 @@
 	</picture>
 	<!-- overlay color -->
 	<div
-		style={`opacity:${image.style.opacity ?? '0'}%;background-color:${image.style.color ?? '#fff'}`}
+		style={`opacity:${image?.style?.opacity ?? '0'}%;background-color:${image?.style?.color ?? '#fff'}`}
 		class="z-10 col-start-1 row-start-1 h-full mix-blend-lighten w-full"
 	></div>
 </div>

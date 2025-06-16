@@ -3,7 +3,7 @@
 	import RenderBlocks from '@/components/blocks/render-blocks.svelte';
 	import Meta from '@/components/blocks/seo/meta.svelte';
 
-	let heroLoaded = $state(false);
+	let heroLoaded = $state(page.params.slug == '' ? false : true);
 	const pages = $state(page.data.pages.docs);
 	const { slug: currentSlug } = $derived(page.params);
 
