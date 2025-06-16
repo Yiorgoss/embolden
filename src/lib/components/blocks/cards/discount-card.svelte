@@ -70,11 +70,11 @@
 					<div class="relative w-full max-w-md flex-auto px-10 py-2">
 						<div class="bg-primary flex flex-col rounded-3xl p-10">
 							<RichTextRender
-								overrides="prose-headings:text-background  prose-li:text-background prose-p:text-background"
+								overrides="prose-headings:text-background prose-headings:font-bold  prose-li:text-lg prose-ul:pt-7 prose-li:text-background/70 prose-p:text-background"
 								{richText}
 							/>
-							<div class="flex flex-col gap-8">
-								<div class="text-background mx-auto flex flex-col text-balance font-thin">
+							<div class="flex flex-col gap-8 px-4">
+								<div class="text-background flex flex-col text-balance font-thin">
 									{#if includeDiscount && checked}
 										<span class="text-4xl pt-5 font-semibold">
 											{@html site.currency}
@@ -82,7 +82,7 @@
 										</span>
 										<p class="px-2">per month, billed yearly</p>
 									{:else}
-										<span class="text-4xl pt-5 font-semibold">
+										<span class="text-4xl pt-5 font-bold">
 											{@html site.currency}
 											{price}
 										</span>

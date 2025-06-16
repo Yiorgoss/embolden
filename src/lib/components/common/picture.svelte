@@ -25,9 +25,9 @@
 
 {#if image && image.url}
 	{#await resolveID({ collection: 'assets', data: image.url })}
-		<div class="flex h-full w-full items-center justify-center">
+		<!--  <div class="flex h-full w-full items-center justify-center">
 			<Icon name="loader-circle" class="animate-[spin_2s_linear_infinite] " />
-		</div>
+		</div>  -->
 	{:then asset: Asset}
 		<PicturePrimitive
 			{loading}

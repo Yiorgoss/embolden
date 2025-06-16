@@ -18,7 +18,6 @@
 	let currentY = $state(0);
 	let previousY = $state(0);
 	let scrollingUp = $state(false);
-	let scrollStarted = $state(false);
 
 	const handleScroll = () => {
 		if (currentY > previousY) {
@@ -27,7 +26,6 @@
 			scrollingUp = false;
 		}
 		previousY = currentY;
-		scrollStarted = true;
 	};
 	afterNavigate(() => (scrollStarted = false));
 </script>
@@ -39,9 +37,8 @@
 		<!-- desktop -->
 		<Nav.Root
 			class={cn(
-				'translate-y-0 px-10 transition-transform duration-300 hidden w-full items-center justify-between md:flex',
-				scrollingUp && '-translate-y-full',
-				scrollStarted && 'bg-background rounded-b-theme'
+				'translate-y-0 shadow-xl px-10 bg-background rounded-b-theme transition-transform ease-out duration-500 hidden w-full items-center justify-between md:flex',
+				scrollingUp && '-translate-y-2/1'
 			)}
 		>
 			<a href="/" class="">

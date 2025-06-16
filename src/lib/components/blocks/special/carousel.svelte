@@ -20,24 +20,22 @@
 		}
 	});
 
-  const medium = new MediaQuery('(min-width: 640px) and (max-width: 1024px)');
+	const medium = new MediaQuery('(min-width: 640px) and (max-width: 1024px)');
 </script>
 
 <Carousel.Root
-	opts={{ duration: 5, loop: true, align: 'start', containScroll: false }}
+	opts={{ duration: 70, loop: true, align: 'start', containScroll: false }}
 	setApi={(emblaApi: CarouselAPI | undefined) => (api = emblaApi)}
 >
-	<Carousel.Content
-		class="flex max-w-screen md:max-w-sm lg:max-w-lg "
-	>
+	<Carousel.Content class="flex max-w-screen md:max-w-sm lg:max-w-lg ">
 		{#each items ?? [] as item}
 			<Carousel.Item class="max-w-sm lg:max-w-lg">
 				<RenderBlocks blockData={item} />
 			</Carousel.Item>
 		{/each}
 	</Carousel.Content>
-	<div class="hidden md:block bg-red-400">
-		<Carousel.Previous left={!medium.current}  />
+	<div class="hidden md:block">
+		<Carousel.Previous left={!medium.current} />
 	</div>
 	<div class="hidden md:block">
 		<Carousel.Next />
