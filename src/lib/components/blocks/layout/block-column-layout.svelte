@@ -4,7 +4,7 @@
 	import { cn } from '@/utils';
 
 	const { blockData }: { blockData: IBlockColumnLayout } = $props();
-	const { layout, columnOne, columnTwo, columnThree } = blockData;
+	const { layout, columnOne, columnTwo, columnThree, style } = blockData;
 
 	const normaliseWidth = (layout: string) => {
 		const cssList = [];
@@ -37,10 +37,15 @@
 		}
 		return cssList;
 	};
+
 	const widthClass = normaliseWidth(layout ?? 'oneColumn');
 </script>
 
-<section id="block-column-layout" class="p-0 md:py-5 group block-col-group-selector">
+<section
+	id="block-column-layout"
+	style:background={style?.bgColor}
+	class="p-0 md:py-5 group block-col-group-selector"
+>
 	<div
 		class="@container/block-col flex flex-col px-0 py-0 md:py-0 md:px-5 md:flex-row justify-center items-center container mx-auto flex-wrap"
 	>

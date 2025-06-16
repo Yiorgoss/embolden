@@ -6,26 +6,25 @@
 		html,
 		defaultCSS,
 		overrides,
-		style,
 		cb
-	}: { html: string; defaultCSS: string; overrides?: string; style: string; cb?: () => void } =
-		$props();
+	}: { html: string; defaultCSS: string; overrides?: string; cb?: () => void } = $props();
 
 	let element: HTMLDivElement;
 
 	onMount(() => {
 		cb && cb();
-		if (style) {
-			var sheet = window.document.styleSheets[0];
+		//  old way of adding overrides, kept because we might switch back someday
+		//  if (style) {
+		//  	var sheet = window.document.styleSheets[0];
 
-			const randomClassName = 'random-class-' + Math.random().toString().slice(2);
+		//  	const randomClassName = 'random-class-' + Math.random().toString().slice(2);
 
-			sheet.insertRule(
-				`.${randomClassName} > .payload-rich-text { ${style ? style : ''} }`,
-				sheet.cssRules.length
-			);
-			element.classList.add(randomClassName);
-		}
+		//  	sheet.insertRule(
+		//  		`.${randomClassName} > .payload-rich-text { ${style ? style : ''} }`,
+		//  		sheet.cssRules.length
+		//  	);
+		//  	element.classList.add(randomClassName);
+		//  }
 	});
 </script>
 

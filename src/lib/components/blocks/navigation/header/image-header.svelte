@@ -8,6 +8,8 @@
 	import { onMount } from 'svelte';
 	import { cn } from '@/utils';
 	import { throttle } from '@/utils';
+	import { page } from '$app/state';
+	import { afterNavigate, beforeNavigate } from '$app/navigation';
 
 	const { blockData }: { blockData: IImageHeader } = $props();
 
@@ -16,6 +18,7 @@
 	let currentY = $state(0);
 	let previousY = $state(0);
 	let scrollingUp = $state(false);
+	let scrollStarted = $state(false);
 
 	const handleScroll = () => {
 		if (currentY > previousY) {
@@ -24,18 +27,21 @@
 			scrollingUp = false;
 		}
 		previousY = currentY;
+		scrollStarted = true;
 	};
+	afterNavigate(() => (scrollStarted = false));
 </script>
 
 <svelte:window bind:scrollY={currentY} onscroll={throttle(handleScroll, 100)} />
 
-<section class="fixed top-0 z-50 mx-auto h-(--header-height) w-full px-0 md:px-10">
-	<div class="lg:container mx-auto h-full">
+<section class="fixed top-0 z-50 mx-auto h-(--header-height) w-full px-0 md:px-0">
+	<div class="w-full h-full">
 		<!-- desktop -->
 		<Nav.Root
 			class={cn(
-				'translate-y-0 transition-transform duration-200 hidden w-full items-center justify-between md:flex',
-				scrollingUp && '-translate-y-full'
+				'translate-y-0 px-10 transition-transform duration-300 hidden w-full items-center justify-between md:flex',
+				scrollingUp && '-translate-y-full',
+				scrollStarted && 'bg-background rounded-b-theme'
 			)}
 		>
 			<a href="/" class="">
@@ -62,7 +68,7 @@
 					<div
 						class="focus-visible:ring-offset-background mr-4 w-fit p-2 focus-visible:outline-hidden"
 					>
-						<Icon class="size-10" name="menu" />
+						<Icon class="size-8" name="menu" />
 					</div>
 				{/snippet}
 				{#snippet content()}

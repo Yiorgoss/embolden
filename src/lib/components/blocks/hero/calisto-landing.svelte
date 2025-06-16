@@ -36,7 +36,7 @@
 			{#if richText}
 				<RichTextRender {richText} />
 			{/if}
-			<div class="flex gap-5 self-start pt-10 md:self-end">
+			<div class="flex gap-5 self-start pt-10">
 				<Button class="px-5  py-5" link={ctaTwo} />
 				<Button class="px-5  py-5" link={ctaOne} />
 			</div>

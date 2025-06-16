@@ -20,7 +20,7 @@
 "
 	>
 		<RichTextRender
-			overrides="prose-headings:text-balance prose-headings:text-xl max-w-full container"
+			overrides={'prose-headings:text-balance prose-headings:text-xl max-w-full container'}
 			{richText}
 		/>
 		<div class="pt-10">

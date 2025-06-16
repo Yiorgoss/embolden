@@ -6,25 +6,13 @@
 		html,
 		defaultCSS,
 		overrides,
-		style,
 		cb
-	}: { html: string; defaultCSS: string; overrides?: string; style: string; cb?: () => void } =
-		$props();
+	}: { html: string; defaultCSS: string; overrides?: string; cb?: () => void } = $props();
 
 	let element: HTMLDivElement;
 
 	onMount(() => {
 		cb && cb();
-
-		if (style) {
-			var sheet = window.document.styleSheets[0];
-
-			const randomClassName = 'random-class-' + Math.random().toString().slice(2);
-
-			sheet.insertRule(`.${randomClassName} { ${style ? style : ''} }`, sheet.cssRules.length);
-
-			element.classList.add(randomClassName);
-		}
 	});
 </script>
 

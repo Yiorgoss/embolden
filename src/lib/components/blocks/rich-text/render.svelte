@@ -25,8 +25,8 @@
 	</div>
 {:then html}
 	{#if richText && richText.type == 'calisto'}
-		<CalistoRichText style={richText.overrides} {defaultCSS} {overrides} html={html ?? ''} />
+		<CalistoRichText {defaultCSS} overrides={cn(overrides, richText.overrides)} html={html ?? ''} />
 	{:else}
-		<DefaultRichText style={richText.overrides} {defaultCSS} {overrides} html={html ?? ''} />
+		<DefaultRichText {defaultCSS} overrides={cn(overrides, richText.overrides)} html={html ?? ''} />
 	{/if}
 {/await}
