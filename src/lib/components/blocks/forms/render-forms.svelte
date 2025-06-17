@@ -48,7 +48,7 @@
 				// data.confirmationMessage ?? 'Thank you for contacting us. We will be in touch shortly'
 				'Thank you for contacting us. We will be in touch shortly'
 			);
-      form.reset()
+			form.reset();
 		}
 	}));
 </script>
@@ -81,7 +81,7 @@
 					<Input
 						id={field.name}
 						type="text"
-						placeholder="First Name"
+						placeholder="Name"
 						value={field.state.value}
 						onblur={() => field.handleBlur()}
 						oninput={(e: Event) => {
@@ -100,7 +100,7 @@
 			}}
 		>
 			{#snippet children(field)}
-				<div  class="px-2 basis-1/2 flex flex-col gap-2">
+				<div class="px-2 basis-1/2 flex flex-col gap-2">
 					<Label for={field.name}>Email</Label>
 					<Input
 						id={field.name}
@@ -119,7 +119,7 @@
 		</form.Field>
 		<form.Field name="message">
 			{#snippet children(field)}
-				<div  class="px-2 basis-full flex flex-col gap-2">
+				<div class="px-2 basis-full flex flex-col gap-2">
 					<Label for={field.name}>Message</Label>
 					<Textarea
 						placeholder="Message"
@@ -142,13 +142,13 @@
 				{#snippet children({ canSubmit, isSubmitting })}
 					<Button type="submit" disabled={!canSubmit}>
 						{#if isSubmitting}
-              <div class="flex justify-center items-center gap-2 ">
-							<Spinner /> 
-                Submit
-              </div>
+							<div class="flex justify-center items-center gap-2">
+								<Spinner />
+								Submit
+							</div>
 						{:else}
-              Submit
-					  {/if}
+							Submit
+						{/if}
 					</Button>
 				{/snippet}
 			</form.Subscribe>

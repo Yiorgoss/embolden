@@ -39,7 +39,7 @@
 {#key startAnimation}
 	<section
 		class:invisible={!startAnimation}
-		in:fade={{ duration: 2000, delay: 500, easing: expoOut }}
+		in:fade={{ duration: 2000, delay: 0, easing: expoOut }}
 		bind:this={el}
 		id="feature-card"
 		class="container mx-auto"
