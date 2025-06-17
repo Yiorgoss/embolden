@@ -27,7 +27,6 @@
 		}
 		previousY = currentY;
 	};
-	afterNavigate(() => (scrollStarted = false));
 </script>
 
 <svelte:window bind:scrollY={currentY} onscroll={throttle(handleScroll, 100)} />
