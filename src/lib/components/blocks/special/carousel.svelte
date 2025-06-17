@@ -29,7 +29,7 @@
 >
 	<Carousel.Content class="flex max-w-screen md:max-w-sm lg:max-w-lg ">
 		{#each items ?? [] as item}
-			<Carousel.Item class="max-w-sm lg:max-w-lg">
+			<Carousel.Item class="max-w-sm [&_img]:max-h-[300px] lg:max-w-lg">
 				<RenderBlocks blockData={item} />
 			</Carousel.Item>
 		{/each}
