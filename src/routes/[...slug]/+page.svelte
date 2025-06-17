@@ -21,7 +21,7 @@
 	{#if currentPage}
 		<Meta meta={currentPage.meta} />
 		{#if currentPage && currentPage.hero.length > 0}
-			<section class="">
+			<section id="hero-container" class="[&>#medium-hero]:h-[600px]">
 				<RenderBlocks cb={() => (heroLoaded = true)} blockData={currentPage.hero[0]} />
 			</section>
 		{/if}

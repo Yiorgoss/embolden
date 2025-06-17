@@ -6,7 +6,7 @@
 	import { MediaQuery } from 'svelte/reactivity';
 
 	const { blockData }: { blockData: ICarousel; class?: string } = $props();
-	const { items } = blockData;
+	const { items, options } = blockData;
 
 	let api = $state<CarouselAPI>();
 	let current = $state(0);
@@ -24,7 +24,7 @@
 </script>
 
 <Carousel.Root
-	opts={{ duration: 70, loop: true, align: 'start', containScroll: false }}
+	opts={{ duration: 70, loop: options?.loop, align: 'start', containScroll: false }}
 	setApi={(emblaApi: CarouselAPI | undefined) => (api = emblaApi)}
 >
 	<Carousel.Content class="flex max-w-screen md:max-w-sm lg:max-w-lg ">

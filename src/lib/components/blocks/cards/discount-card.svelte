@@ -67,7 +67,7 @@
 		<div class="flex flex-col items-stretch justify-center md:flex-row">
 			{#if cards}
 				{#each cards as { richText, price, yearlyDiscount, includeDiscount, link }}
-					<div class="relative w-full max-w-md flex-auto px-10 py-2">
+					<div class="relative w-full mx-auto max-w-md flex-auto px-10 py-2">
 						<div class="bg-primary flex flex-col rounded-3xl p-10">
 							<RichTextRender
 								overrides="prose-headings:text-background prose-headings:font-bold  prose-li:text-lg prose-ul:pt-7 prose-li:text-background/70 prose-p:text-background"

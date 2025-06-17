@@ -39,6 +39,7 @@
 	};
 
 	const widthClass = normaliseWidth(layout ?? 'oneColumn');
+	$inspect(layout);
 </script>
 
 <section
@@ -47,7 +48,7 @@
 	class="p-0 md:py-5 group block-col-group-selector"
 >
 	<div
-		class="@container/block-col flex flex-col px-0 py-0 md:py-0 md:px-5 md:flex-row justify-center items-center container mx-auto flex-wrap"
+		class="@container/block-col flex flex-col px-0 py-2 md:py-0 md:px-5 md:flex-row justify-center items-center container mx-auto flex-wrap"
 	>
 		<div class={cn('h-full w-full justify-center items-center', widthClass[0])}>
 			<RenderBlocks blockData={columnOne![0]} />
