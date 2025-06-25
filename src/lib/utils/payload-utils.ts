@@ -57,11 +57,21 @@ export const richTextImg = async ({ imgData }: { imgData: Asset | number }) => {
   }
   //@ts-ignore  if typeof  ^
   const { sizes, url } = imgData;
-  const sources =
-    sizes &&
-    Object.entries(sizes).reduce((acc: string, [_, img]) => {
-      return (acc += `<source media="(max-width: ${img.width})"  srcset="${img.url}" />`);
-    }, '');
-  return `<picture style="margin:0;width:100%;height:100%;"> ${sources ?? ''}<img loading="lazy" style="object-fit:stretch;width:100%;height:100%;" src="${url}" alt="" /></picture>`;
+  // const sources =
+  //   sizes &&
+  //   Object.entries(sizes).reduce((acc: string, [_, img]) => {
+  //     return (acc += `<source media="(max-width: ${img.width})" srcset="${img.url}" />`);
+  //   }, '');
+  // return `<picture style="margin:0;width:100%;height:100%;"> ${sources ?? ''}<img loading="lazy" style="object-fit:stretch;width:100%;height:100%;" src="${url}" alt="" /></picture>`;
   // return `<img style="object-fit:cover;height:inherit;width:inherit;margin:0px;" src="${devCMS.value}${url}" alt=""/>`
+
+
+  // for now just default to the smallest one
+  return `<img style="object-fit:cover;
+                      height:inherit;
+                      width:inherit;
+                      margin:0px;"
+                src="${sizes.sm.url}"
+                alt=""
+          />`
 };
