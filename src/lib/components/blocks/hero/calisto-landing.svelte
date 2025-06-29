@@ -13,7 +13,6 @@
 	onMount(() => cb && cb());
 
 	let bgLoaded = $state(false);
-	console.time('a');
 </script>
 
 <div id="calisto-landing" class="grid h-lvh grid-cols-3 grid-rows-3 md:min-h-lvh">

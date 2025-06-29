@@ -39,7 +39,6 @@
 	};
 
 	const widthClass = normaliseWidth(layout ?? 'oneColumn');
-	$inspect(layout);
 </script>
 
 <section
