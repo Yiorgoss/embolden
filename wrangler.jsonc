@@ -31,6 +31,12 @@
 			"pattern": "www.calisto.studio",
 			"custom_domain": true
 		}
+	],
+	"kv_namespaces": [
+		{
+			"binding": "CALISTO_STUDIO_KV_CACHE",
+			"id": "222c6845593445efa369f4eda7a02e31"
+		}
 	]
 	/**
 	 * Smart Placement

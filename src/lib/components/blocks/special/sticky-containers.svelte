@@ -8,7 +8,6 @@
 	const { list: maybeList, title, style } = blockData;
 
 	const list = maybeList ?? []; //typescript
-	$inspect(style);
 </script>
 
 <section
