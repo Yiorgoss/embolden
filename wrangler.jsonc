@@ -13,6 +13,7 @@
 		"PUBLIC_DEV_CMS": "http://localhost:3000",
 		"PUBLIC_PROD_CMS": "https://admin.calisto.studio",
 		"PUBLIC_ASSET_URL": "https://assets.calisto.studio",
+		"PUBLIC_TEST_ASSET_URL": "https://test-assets.calisto.studio",
 		"PUBLIC_DOMAIN_NAME": "calisto.studio"
 	},
 	"env": {
