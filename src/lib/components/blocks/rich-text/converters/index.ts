@@ -8,7 +8,7 @@ import type {
 
 import { type HTMLConvertersFunctionAsync } from '@payloadcms/richtext-lexical/html-async';
 
-import { richTextImg } from '@/utils';
+import { resolveID, richTextImg } from '@/utils';
 
 export type NodeTypes =
   | DefaultNodeTypes
@@ -25,7 +25,8 @@ export const htmlConverters: HTMLConvertersFunctionAsync<NodeTypes> = ({ default
     pill: async (args) => {
       const { image, size } = args.node.fields;
 
-      const imageString = await richTextImg({ imgData: image });
+      const imgData = await resolveID({ collection: 'assets', data: image })
+      const imageString = await richTextImg({ imgData });
       const imageID = typeof image == 'number' ? image : image.id;
 
       const normalSize =

@@ -1,5 +1,6 @@
-import type { Asset, Form, IImageField } from '@payload-types';
-import { site } from '@/config';
+import type { Asset } from '@payload-types';
+import { site, type SiteConfigType } from '@/config';
+import { error } from '@sveltejs/kit';
 
 export async function fetchFromCMS({
   collection,
@@ -11,7 +12,7 @@ export async function fetchFromCMS({
   lang?: string | undefined | null;
 }) {
   const response = fetch(
-    `${site.CMS}/api/${collection}?where[id][equals]=${id}&locale=${lang ?? 'en'}&depth=10`,
+    `${site.CMS}/api/${collection}?where[id][equals]=${id}&locale=${lang ?? 'en'}`,
     {
       headers: {
         'Content-Type': 'application/json'
@@ -19,6 +20,25 @@ export async function fetchFromCMS({
     }
   );
   return response;
+}
+
+export const getDataDirectFromCMS = async ({ site }: { site: SiteConfigType }) => {
+
+  const response = fetch(`${site.CMS}/api/tenants?[where][domainName][equal]=${site.domainName}&depth=10`)
+    .then((res) => res.json())
+    .then((json) => ({
+      //@ts-ignore
+      nav: json.docs[0].nav,
+      //@ts-ignore
+      pages: json.docs[0].pages
+    }))
+    .catch((err) => {
+      error(404, {
+        message: err
+      });
+    });
+
+  return response
 }
 
 export async function resolveID({

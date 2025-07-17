@@ -6,3 +6,5 @@ export const site = {
   currency: '&euro;',
   domainName: PUBLIC_DOMAIN_NAME
 };
+
+export type SiteConfigType = typeof site

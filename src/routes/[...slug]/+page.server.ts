@@ -1,20 +1,26 @@
- // import type { Page } from '@payload-types';
- // import type { EntryGenerator } from './$types';
- // import { site } from '@/config';
+// import { site } from '@/config';
+// import type { PageServerLoad } from './$types';
+// import { getDataDirectFromCMS } from '@/utils';
 
 
- // export const entries: EntryGenerator = async () => {
- //   const response = fetch(`${site.CMS}/api/tenants?[where][domainName][equal]=${site.domainName}`)
- //     .then((res) => res.json())
- //     .then((json) => ({
- //       //@ts-ignore
- //       pages: json.docs[0].pages
- //     }));
+// export const load: PageServerLoad = async (args) => {
+//   const { platform, url, parent } = args
 
- //   const { pages } = await response;
- //   const slugList = pages.docs.map(({ slug }: { slug: string }) => ({ slug: slug.charAt(0) == '/' ? slug.slice(1) : slug }));
+//   const layoutKey = `${site.domainName}__${url.pathname}`
+//   const text = await platform?.env?.CALISTO_STUDIO_KV_CACHE.get(layoutKey)
+//   const { pages } = await parent()
+//   let data;
 
- //   return slugList;
- // };
+//   if (text) {
+//     data = await JSON.parse(text)
+//   } else if (pages) {
+//     //data exists from layout
+//     return pages
+//   } else {
+//     //data does not exist
+//     // note: that if layout data exists but not page data you are making a cms call on every page call
+//     return getDataDirectFromCMS({ site })
+//   }
 
- // export const prerender = true;
+//   return data
+// };

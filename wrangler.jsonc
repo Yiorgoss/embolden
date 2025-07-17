@@ -15,6 +15,25 @@
 		"PUBLIC_ASSET_URL": "https://assets.calisto.studio",
 		"PUBLIC_DOMAIN_NAME": "calisto.studio"
 	},
+	"env": {
+		"test": {
+			"vars": {
+				"PUBLIC_ENV": "TEST",
+				"PUBLIC_DEV_CMS": "http://localhost:3000",
+				"PUBLIC_PROD_CMS": "https://admin.calisto.studio",
+				"PUBLIC_ASSET_URL": "https://assets.calisto.studio",
+				"PUBLIC_DOMAIN_NAME": "calisto.studio",
+				"PUBLIC_TEST_ASSET_URL": "https://test-assets.calisto.studio"
+			},
+			"kv_namespaces": [
+				{
+					"binding": "CALISTO_STUDIO_KV_CACHE",
+					"id": "222c6845593445efa369f4eda7a02e31",
+					"preview_id": "213ef123d5674ed2b153c1f1c2c25f07"
+				}
+			]
+		}
+	},
 	"assets": {
 		"binding": "ASSETS",
 		"directory": ".svelte-kit/cloudflare"
@@ -35,7 +54,8 @@
 	"kv_namespaces": [
 		{
 			"binding": "CALISTO_STUDIO_KV_CACHE",
-			"id": "222c6845593445efa369f4eda7a02e31"
+			"id": "222c6845593445efa369f4eda7a02e31",
+			"preview_id": "213ef123d5674ed2b153c1f1c2c25f07"
 		}
 	]
 	/**
