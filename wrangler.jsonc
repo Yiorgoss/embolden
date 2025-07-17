@@ -16,6 +16,13 @@
 		"PUBLIC_TEST_ASSET_URL": "https://test-assets.calisto.studio",
 		"PUBLIC_DOMAIN_NAME": "calisto.studio"
 	},
+	"kv_namespaces": [
+		{
+			"binding": "CALISTO_STUDIO_KV_CACHE",
+			"id": "222c6845593445efa369f4eda7a02e31",
+			"preview_id": "213ef123d5674ed2b153c1f1c2c25f07"
+		}
+	],
 	"env": {
 		"test": {
 			"vars": {
@@ -50,13 +57,6 @@
 		{
 			"pattern": "www.calisto.studio",
 			"custom_domain": true
-		}
-	],
-	"kv_namespaces": [
-		{
-			"binding": "CALISTO_STUDIO_KV_CACHE",
-			"id": "222c6845593445efa369f4eda7a02e31",
-			"preview_id": "213ef123d5674ed2b153c1f1c2c25f07"
 		}
 	]
 	/**
