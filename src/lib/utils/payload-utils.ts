@@ -72,19 +72,17 @@ export async function resolveID({
 
 export const richTextImg = async ({ imgData }: { imgData: Asset | number }) => {
   if (!imgData) return '';
+  let image
   if (typeof imgData == 'number') {
-    imgData = await resolveID({ collection: 'assets', data: imgData });
+    image = await resolveID({ collection: 'assets', data: imgData });
+  }
+
+  if (!image || !image.sizes) {
+    console.log(`sizes does not exist on image: ${image}`)
+    return ''
   }
   //@ts-ignore  if typeof  ^
-  const { sizes, url } = imgData;
-  // const sources =
-  //   sizes &&
-  //   Object.entries(sizes).reduce((acc: string, [_, img]) => {
-  //     return (acc += `<source media="(max-width: ${img.width})" srcset="${img.url}" />`);
-  //   }, '');
-  // return `<picture style="margin:0;width:100%;height:100%;"> ${sources ?? ''}<img loading="lazy" style="object-fit:stretch;width:100%;height:100%;" src="${url}" alt="" /></picture>`;
-  // return `<img style="object-fit:cover;height:inherit;width:inherit;margin:0px;" src="${devCMS.value}${url}" alt=""/>`
-
+  const { sizes } = image;
 
   // for now just default to the smallest one
   return `<img style="object-fit:cover;

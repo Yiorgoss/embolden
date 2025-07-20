@@ -14,6 +14,9 @@ export type NodeTypes =
   | DefaultNodeTypes
   | SerializedInlineBlockNode<IPill | ICursiveText>
   | SerializedBlockNode;
+
+export type htmlConvertersType = typeof htmlConverters
+
 export const htmlConverters: HTMLConvertersFunctionAsync<NodeTypes> = ({ defaultConverters }) => ({
   ...defaultConverters,
   inlineBlocks: {
@@ -25,8 +28,7 @@ export const htmlConverters: HTMLConvertersFunctionAsync<NodeTypes> = ({ default
     pill: async (args) => {
       const { image, size } = args.node.fields;
 
-      const imgData = await resolveID({ collection: 'assets', data: image })
-      const imageString = await richTextImg({ imgData });
+      const imageString = await richTextImg({ imgData: image });
       const imageID = typeof image == 'number' ? image : image.id;
 
       const normalSize =
