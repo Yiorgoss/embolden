@@ -1,3 +1,4 @@
+import { PUBLIC_ENV } from '$env/static/public';
 import type { LayoutServerLoad } from './$types';
 import { site } from '@/config';
 import { getDataDirectFromCMS } from '@/utils';
@@ -13,7 +14,12 @@ export const load: LayoutServerLoad = async (args) => {
   const locale = params.locale ?? "en"
   const kvKey = `${site.domainName}__${locale}`
   try {
-    text = await platform?.env?.CALISTO_STUDIO_KV_CACHE.get(kvKey)
+    if (PUBLIC_ENV == "PROD") {
+      // is there a better way?
+      text = await platform?.env?.CALISTO_STUDIO_KV_CACHE.get(kvKey)
+    } else {
+      text = await platform?.env?.TEST_CALISTO_STUDIO_KV_CACHE.get(kvKey)
+    }
   } catch (err) {
     console.log(`ERROR with KV: ${err}`)
   }

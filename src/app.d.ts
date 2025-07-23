@@ -4,7 +4,8 @@ declare global {
   namespace App {
     interface Platform {
       env?: {
-        CALISTO_STUDIO_KV_CACHE: KVNamespace
+        CALISTO_STUDIO_KV_CACHE: KVNamespace,
+        TEST_CALISTO_STUDIO_KV_CACHE: KVNamespace
       },
       cf: CfProperties
       ctx: ExecutionContext
