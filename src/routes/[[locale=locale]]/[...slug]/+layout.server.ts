@@ -7,20 +7,31 @@ import { error } from '@sveltejs/kit';
 
 
 export const load: LayoutServerLoad = async (args) => {
-  const { platform } = args
+  const { platform, params } = args
 
-  const text = await platform?.env?.CALISTO_STUDIO_KV_CACHE.get(site.domainName)
+  let text;
+  const locale = params.locale ?? "en"
+  const kvKey = `${site.domainName}__${locale}`
+  try {
+    text = await platform?.env?.CALISTO_STUDIO_KV_CACHE.get(kvKey)
+  } catch (err) {
+    console.log(`ERROR with KV: ${err}`)
+  }
   let data
 
   if (text) {
     const json = await JSON.parse(text)
     data = {
       nav: json.docs[0].nav,
-      pages: json.docs[0].pages
+      pages: json.docs[0].pages,
+      locale
     }
+    console.log("using KV CACHE")
   } else {
     data = await getDataDirectFromCMS({ site })
+    console.log("Not using KV CACHE")
   }
+  // console.dir({ data: data.pages.docs[0].hero[0].richText }, { depth: 10 })
   return data
 };
 

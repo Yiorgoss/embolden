@@ -5,7 +5,7 @@
 
 	let heroLoaded = $state(page.params.slug == '' ? false : true);
 	const pages = $state(page.data.pages.docs);
-	const { slug: currentSlug } = $derived(page.params);
+	const { slug: currentSlug, locale } = $derived(page.params);
 
 	const currentPage = $derived(
 		pages.find(({ slug }: { slug: string }) => {
@@ -17,7 +17,7 @@
 	);
 </script>
 
-{#key currentSlug}
+{#key [currentSlug, locale]}
 	{#if currentPage}
 		<Meta meta={currentPage.meta} />
 		{#if currentPage && currentPage.hero.length > 0}

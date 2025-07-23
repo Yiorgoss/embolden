@@ -28,7 +28,14 @@ export const htmlConverters: HTMLConvertersFunctionAsync<NodeTypes> = ({ default
     pill: async (args) => {
       const { image, size } = args.node.fields;
 
-      const imageString = await richTextImg({ imgData: image });
+      let imageString;
+      try {
+        imageString = await richTextImg({ imgData: image });
+      }
+      catch (err) {
+        console.log(`ERROR pill image - ${image.id ?? image}: ${err}`)
+        return ""
+      }
       const imageID = typeof image == 'number' ? image : image.id;
 
       const normalSize =

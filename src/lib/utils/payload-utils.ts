@@ -71,15 +71,11 @@ export async function resolveID({
 }
 
 export const richTextImg = async ({ imgData }: { imgData: Asset | number }) => {
-  if (!imgData) return '';
-  let image
-  if (typeof imgData == 'number') {
-    image = await resolveID({ collection: 'assets', data: imgData });
-  }
+  if (!imgData) throw Error("imageData undefined");
+  const image = await resolveID({ collection: 'assets', data: imgData });
 
   if (!image || !image.sizes) {
-    console.log(`sizes does not exist on image: ${image}`)
-    return ''
+    throw Error(`ERROR: sizes does not exist on image: ${image}`)
   }
   //@ts-ignore  if typeof  ^
   const { sizes } = image;

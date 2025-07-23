@@ -6,5 +6,12 @@ export const site = {
   currency: '&euro;',
   domainName: PUBLIC_DOMAIN_NAME
 };
-
 export type SiteConfigType = typeof site
+
+export const supportedLocales = {
+  'en': "English",
+  'el': "Greek"
+} as { [key: string]: string }
+
+export type SupportedLocalesType = typeof supportedLocales
+

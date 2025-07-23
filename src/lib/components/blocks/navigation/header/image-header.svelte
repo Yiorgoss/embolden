@@ -10,14 +10,18 @@
 	import { throttle } from '@/utils';
 	import { page } from '$app/state';
 	import { afterNavigate, beforeNavigate } from '$app/navigation';
+	import LocaleSwitcher from '@/components/common/locale-switcher.svelte';
 
-	const { blockData }: { blockData: IImageHeader } = $props();
+	const { blockData, hasLocaleSwitch }: { blockData: IImageHeader; hasLocaleSwitch: boolean } =
+		$props();
 
 	const { image, nav } = blockData;
 	let open = $state(false);
 	let currentY = $state(0);
 	let previousY = $state(0);
 	let scrollingUp = $state(false);
+
+	let mounted = $state(false);
 
 	const handleScroll = () => {
 		if (currentY > previousY) {
@@ -27,6 +31,8 @@
 		}
 		previousY = currentY;
 	};
+
+	onMount(() => (mounted = true));
 </script>
 
 <svelte:window bind:scrollY={currentY} onscroll={throttle(handleScroll, 100)} />
@@ -46,6 +52,11 @@
 				</div>
 			</a>
 			<Nav.List class="flex items-center justify-center pr-10 ">
+				{#if hasLocaleSwitch && mounted}
+					<Nav.Item class="px-2">
+						<LocaleSwitcher />
+					</Nav.Item>
+				{/if}
 				{#each nav ?? [] as { link }}
 					<Nav.Item class="px-2">
 						<Nav.Link>
