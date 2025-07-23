@@ -15,7 +15,7 @@ const config = {
     adapter: adapter({
       platformProxy: {
         configPath: 'wrangler.jsonc',
-        environment: 'test',
+        environment: 'staging',
         experimentalJsonConfig: true,
         persist: true
       }
