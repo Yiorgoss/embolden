@@ -44,7 +44,12 @@
 					"preview_id": "eee2434facbc4ccba5b882b798cc839a"
 				}
 			],
-			"routes": []
+			"routes": [
+				{
+					"pattern": "staging.calisto.studio",
+					"custom_domain": true
+				}
+			]
 		}
 	},
 	"observability": {
