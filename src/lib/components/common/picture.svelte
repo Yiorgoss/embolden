@@ -21,6 +21,7 @@
 	} = $props();
 
 	// let assetPromise = $state(resolveID({ collection: 'assets', data: data.url }))
+	console.log({ image });
 </script>
 
 {#if image && image.url}

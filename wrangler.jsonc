@@ -16,6 +16,10 @@
 		"PUBLIC_TEST_ASSET_URL": "https://test-assets.calisto.studio",
 		"PUBLIC_DOMAIN_NAME": "calisto.studio"
 	},
+	"assets": {
+		"binding": "ASSETS",
+		"directory": ".svelte-kit/cloudflare"
+	},
 	"kv_namespaces": [
 		{
 			"binding": "CALISTO_STUDIO_KV_CACHE",
@@ -35,16 +39,13 @@
 			},
 			"kv_namespaces": [
 				{
-					"binding": "TEST_CALISTO_STUDIO_KV_CACHE",
+					"binding": "CALISTO_STUDIO_KV_CACHE", // this is TEST_CALISTO_STUDIO_KV_CACHE in the console
 					"id": "3b03184a78a4489db0e9cf35d6b5a411",
 					"preview_id": "eee2434facbc4ccba5b882b798cc839a"
 				}
-			]
+			],
+			"routes": []
 		}
-	},
-	"assets": {
-		"binding": "ASSETS",
-		"directory": ".svelte-kit/cloudflare"
 	},
 	"observability": {
 		"enabled": true

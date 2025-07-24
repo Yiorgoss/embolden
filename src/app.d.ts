@@ -5,7 +5,6 @@ declare global {
     interface Platform {
       env?: {
         CALISTO_STUDIO_KV_CACHE: KVNamespace,
-        TEST_CALISTO_STUDIO_KV_CACHE: KVNamespace
       },
       cf: CfProperties
       ctx: ExecutionContext

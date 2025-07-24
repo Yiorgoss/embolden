@@ -14,12 +14,7 @@ export const load: LayoutServerLoad = async (args) => {
   const locale = params.locale ?? "en"
   const kvKey = `${site.domainName}__${locale}`
   try {
-    if (PUBLIC_ENV == "PROD") {
-      // is there a better way?
-      text = await platform?.env?.CALISTO_STUDIO_KV_CACHE.get(kvKey)
-    } else {
-      text = await platform?.env?.TEST_CALISTO_STUDIO_KV_CACHE.get(kvKey)
-    }
+    text = await platform?.env?.CALISTO_STUDIO_KV_CACHE.get(kvKey)
   } catch (err) {
     console.log(`ERROR with KV: ${err}`)
   }
