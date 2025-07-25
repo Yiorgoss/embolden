@@ -6,18 +6,11 @@
 	import { invalidate, invalidateAll, goto } from '$app/navigation';
 
 	const { locale, slug } = $derived(page.params);
-
-	const navigate = async () => {
-		if (locale == 'el') {
-			goto(`/${slug}`);
-		} else {
-			goto(`/el/${slug}`);
-		}
-	};
+	const targetLocale = $derived(locale == 'el' ? 'en' : 'el');
 </script>
 
 {#key locale}
-	<button onclick={() => navigate()}>
-		{locale == 'el' ? 'en' : 'el'}
-	</button>
+	<a href={`${targetLocale}/${slug}`} lang={targetLocale} hreflang={targetLocale}>
+		{targetLocale}
+	</a>
 {/key}
