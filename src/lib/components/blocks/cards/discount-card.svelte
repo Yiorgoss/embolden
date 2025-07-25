@@ -4,7 +4,7 @@
 	import Switch from '@/components/ui/switch/switch.svelte';
 	import { cn } from '@/utils';
 	import { site } from '@/config';
-	import { Button } from '@/components/ui/button';
+	import Button from '@/components/common/button.svelte';
 	import { onMount } from 'svelte';
 	import { fade } from 'svelte/transition';
 	import { expoOut } from 'svelte/easing';

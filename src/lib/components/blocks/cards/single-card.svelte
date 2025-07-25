@@ -2,7 +2,7 @@
 	import type { ISingleCard } from '@payload-types';
 	import { Card } from '@/components/ui/card';
 	import { RichTextRender } from '../rich-text';
-	import { Button } from '@/components/ui/button';
+	import Button from '@/components/common/button.svelte';
 	import Picture from '@/components/common/picture.svelte';
 
 	const { blockData }: { blockData: ISingleCard } = $props();
