@@ -1,50 +1,29 @@
 <script lang="ts">
-  import {
-    Switch as SwitchPrimitive,
-    type WithoutChildrenOrChild,
-  } from "bits-ui";
-  import { cn } from "@/utils";
+	import { Switch as SwitchPrimitive } from "bits-ui";
+	import { cn, type WithoutChildrenOrChild } from "@/utils";
 
-  let {
-    ref = $bindable(null),
-    class: className,
-    checked = $bindable(false),
-    size = "default",
-    ...restProps
-  }: WithoutChildrenOrChild<
-    SwitchPrimitive.RootProps & { size?: "sm" | "md" | "default" | "lg" | "xl" }
-  > = $props();
-  const customSize =
-    size == "sm"
-      ? ["w-6 h-3","size-2"]
-      : size == "md"
-        ? ["w-8 h-4","size-3"]
-        : size == "default"
-          ? ["w-10 h-5","size-4"]
-          : size == "lg"
-            ? ["w-12 h-6","size-5"]
-            : size == "xl"
-              ? ["w-14 h-7","size-6"]
-              : ["w-16 h-8","size-7"]
+	let {
+		ref = $bindable(null),
+		class: className,
+		checked = $bindable(false),
+		...restProps
+	}: WithoutChildrenOrChild<SwitchPrimitive.RootProps> = $props();
 </script>
 
 <SwitchPrimitive.Root
-  bind:ref
-  bind:checked
-  data-slot="switch"
-  class={cn(
-    "peer inline-flex  shrink-0 cursor-pointer items-center rounded-full px-[3px] transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-foreground focus-visible:ring-offset-2 focus-visible:ring-offset-background disabled:cursor-not-allowed disabled:opacity-50 data-[state=checked]:bg-foreground grayscale-100 data-[state=checked]:grayscale-0 bg-gray-500  data-[state=unchecked]:inset ",
-    customSize[0],
-    className,
-  )}
-  {...restProps}
+	bind:ref
+	bind:checked
+	data-slot="switch"
+	class={cn(
+		"data-[state=checked]:bg-primary data-[state=unchecked]:bg-input focus-visible:border-ring focus-visible:ring-ring/50 dark:data-[state=unchecked]:bg-input/80 shadow-xs peer inline-flex h-[1.15rem] w-8 shrink-0 items-center rounded-full border border-transparent outline-none transition-all focus-visible:ring-[3px] disabled:cursor-not-allowed disabled:opacity-50",
+		className
+	)}
+	{...restProps}
 >
-  <SwitchPrimitive.Thumb
-    data-slot="switch-thumb"
-    class={cn(
-      "pointer-events-none block shrink-0 rounded-full bg-background transition-transform data-[state=checked]:translate-x-[calc(100%+3px)] data-[state=unchecked]:translate-x-[-1px] data-[state=unchecked]:shadow-mini",
-      customSize[1]
-    )}
-  />
+	<SwitchPrimitive.Thumb
+		data-slot="switch-thumb"
+		class={cn(
+			"bg-background dark:data-[state=unchecked]:bg-foreground dark:data-[state=checked]:bg-primary-foreground pointer-events-none block size-4 rounded-full ring-0 transition-transform data-[state=checked]:translate-x-[calc(100%-2px)] data-[state=unchecked]:translate-x-0"
+		)}
+	/>
 </SwitchPrimitive.Root>
-

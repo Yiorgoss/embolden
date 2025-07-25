@@ -32,7 +32,7 @@ blockList.set("mediumHero", MediumHero)
 //special
 blockList.set("stickyContainers", StickyContainers);
 blockList.set("bentoGrid", BentoGrid);
-blockList.set("accordion", Accordion);
+// blockList.set("accordion", Accordion);
 blockList.set("carousel", Carousel)
 
 //cards

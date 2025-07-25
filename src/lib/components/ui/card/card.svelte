@@ -1,22 +1,23 @@
 <script lang="ts">
-	import { cn } from '@/utils';
-	import type { Snippet } from 'svelte';
+	import type { HTMLAttributes } from "svelte/elements";
+	import { cn, type WithElementRef } from "@/utils";
 
-	const {
-		title,
-		content,
-		footer,
-		class: className
-	}: { title?: Snippet; content?: Snippet; footer?: Snippet; class: string } = $props();
+	let {
+		ref = $bindable(null),
+		class: className,
+		children,
+		...restProps
+	}: WithElementRef<HTMLAttributes<HTMLDivElement>> = $props();
 </script>
 
-<section
+<div
+	bind:this={ref}
+	data-slot="card"
 	class={cn(
-		'group card-group-selector bg-card text-card-foreground rounded-theme flex h-full w-full max-w-xl flex-col items-center justify-center p-4',
+		"bg-card text-card-foreground flex flex-col gap-6 rounded-xl border py-6 shadow-sm",
 		className
 	)}
+	{...restProps}
 >
-	{@render title?.()}
-	{@render content?.()}
-	{@render footer?.()}
-</section>
+	{@render children?.()}
+</div>

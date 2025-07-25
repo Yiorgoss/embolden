@@ -1,6 +1,7 @@
 <script lang="ts">
-	import { NavigationMenu as NavigationMenuPrimitive } from 'bits-ui';
-	import { cn } from '@/utils';
+	import { NavigationMenu as NavigationMenuPrimitive } from "bits-ui";
+	import { cn } from "@/utils";
+
 	let {
 		ref = $bindable(null),
 		class: className,
@@ -11,6 +12,6 @@
 <NavigationMenuPrimitive.Item
 	bind:ref
 	data-slot="navigation-menu-item"
-	class={cn('relative', className)}
+	class={cn("relative", className)}
 	{...restProps}
 />

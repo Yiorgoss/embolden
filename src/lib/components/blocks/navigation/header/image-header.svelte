@@ -3,7 +3,7 @@
 	import Icon from '@/components/common/icon.svelte';
 	import Picture from '@/components/common/picture.svelte';
 	import Button from '@/components/common/button.svelte';
-	import Dialog from '@/components/ui/dialog/dialog.svelte';
+	import Dialog from '@/components/old_ui/dialog/dialog.svelte';
 	import { type IImageHeader } from '@payload-types';
 	import { onMount } from 'svelte';
 	import { cn } from '@/utils';
