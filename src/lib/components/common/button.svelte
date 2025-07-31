@@ -1,7 +1,6 @@
 <script lang="ts">
 	import { cn, resolveID } from '@/utils';
 	import { onMount } from 'svelte';
-
 	import { type IButton } from '@payload-types';
 	import { ButtonPrimitive } from '@/components/common/primitives';
 	import { type ButtonProps as DefaultButtonProps } from '@/components/ui/button';
