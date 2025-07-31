@@ -2,7 +2,7 @@
 	import { type Asset, type IImage, type IImageField } from '@payload-types';
 	import { cn, resolveID } from '@/utils';
 	import Icon from '@/components/common/icon.svelte';
-	import PicturePrimitive from './primitives/picture-primitive.svelte';
+	import { PicturePrimitive } from '@/components/common/primitives';
 
 	const {
 		image,

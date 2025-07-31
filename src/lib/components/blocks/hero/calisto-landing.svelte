@@ -10,8 +10,10 @@
 	const { blockData, cb }: { blockData: ICalistoLanding; cb?: () => void } = $props();
 	const { image, richText, ctaOne, ctaTwo } = blockData;
 
-	onMount(() => cb && cb());
-
+	onMount(() => {
+		console.log(`mounted hero`);
+		cb && cb();
+	});
 	let bgLoaded = $state(false);
 </script>
 

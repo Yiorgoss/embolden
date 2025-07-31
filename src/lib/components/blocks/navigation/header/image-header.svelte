@@ -16,6 +16,8 @@
 		$props();
 
 	const { image, nav } = blockData;
+
+	const { locale } = page.params;
 	let open = $state(false);
 	let currentY = $state(0);
 	let previousY = $state(0);
@@ -46,7 +48,7 @@
 				scrollingUp && '-translate-y-2/1'
 			)}
 		>
-			<a href="/" class="">
+			<a href={`/${locale ?? ''}`} class="">
 				<div class="h-(--header-height) lg:p-2 md:p-4 w-auto">
 					<Picture class="object-contain py-2" loading="eager" {image} />
 				</div>

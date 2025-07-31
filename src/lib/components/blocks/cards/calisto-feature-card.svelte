@@ -62,9 +62,9 @@
 								/>
 							</div>
 							<div
-								class="bg-foreground absolute top-0 left-1/6 size-18 -translate-y-1/2 rounded-xl"
+								class="bg-foreground absolute top-0 left-1/6 size-18 -translate-y-1/2 rounded-xs"
 							>
-								<Icon class="text-background h-full w-full rounded-xl bg-gray-800/50 p-3" {icon} />
+								<Icon class="text-background h-full w-full rounded-xs bg-gray-800/50 p-3" {icon} />
 							</div>
 						</div>
 					</div>
