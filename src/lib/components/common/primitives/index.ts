@@ -1,2 +1,4 @@
 import PicturePrimitive from "./picture-primitive.svelte"
-export { PicturePrimitive }
+import ButtonPrimitive from "./button-primitive.svelte"
+
+export { PicturePrimitive, ButtonPrimitive }

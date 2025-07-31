@@ -7,8 +7,9 @@
 		"dev": "NODE_OPTIONS='--inspect=localhost:9222' vite dev ",
 		"dev:remote": "wrangler dev --remote",
 		"build": "vite build",
-		"build:staging": "vite build && wrangler deploy --env=staging",
+		"build:staging": "vite build",
 		"preview": "pnpm run build && wrangler dev",
+		"preview:staging": "pnpm run build && wrangler deploy --env=staging",
 		"prepare": "svelte-kit sync || echo ''",
 		"check": "svelte-kit sync && svelte-check --tsconfig ./tsconfig.json",
 		"check:watch": "svelte-kit sync && svelte-check --tsconfig ./tsconfig.json --watch",
@@ -52,9 +53,7 @@
 		"wrangler": "^4.14.1"
 	},
 	"pnpm": {
-		"onlyBuiltDependencies": [
-			"esbuild"
-		]
+		"onlyBuiltDependencies": ["esbuild"]
 	},
 	"dependencies": {
 		"@payloadcms/richtext-lexical": "^3.35.1",
