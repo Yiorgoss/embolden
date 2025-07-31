@@ -10,7 +10,7 @@
 </script>
 
 {#key locale}
-	<a href={`${targetLocale}/${slug}`} lang={targetLocale} hreflang={targetLocale}>
+	<a href={`/${targetLocale}/${slug}`} lang={targetLocale} hreflang={targetLocale}>
 		{targetLocale}
 	</a>
 {/key}

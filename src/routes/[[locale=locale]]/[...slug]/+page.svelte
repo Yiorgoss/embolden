@@ -9,15 +9,18 @@
 
 	const currentPage = $derived(
 		pages.find(({ slug }: { slug: string }) => {
-			if (slug.charAt(0) == '/') {
-				return slug.slice(1) == currentSlug;
+			locale;
+			if (slug == '' || slug == '/') {
+				// both should want the same page
+				return slug == currentSlug || slug.slice(1) == currentSlug;
 			}
 			return slug == currentSlug;
 		})
 	);
+	$inspect({ locale: page.params.locale, slug: page.params.slug });
 </script>
 
-{#key [currentSlug, locale]}
+{#key [currentSlug, locale, currentPage]}
 	{#if currentPage}
 		<Meta meta={currentPage.meta} />
 		{#if currentPage && currentPage.hero.length > 0}
