@@ -8,9 +8,10 @@ export const site = {
 };
 export type SiteConfigType = typeof site
 
+export const defaultLocale = "en"
 export const supportedLocales = {
   'en': "English",
-  'el': "Greek"
+  'el': "Ελληνικά",
 } as { [key: string]: string }
 
 export type SupportedLocalesType = typeof supportedLocales

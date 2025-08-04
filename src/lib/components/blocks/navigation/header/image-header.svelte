@@ -9,7 +9,6 @@
 	import { cn } from '@/utils';
 	import { throttle } from '@/utils';
 	import { page } from '$app/state';
-	import { afterNavigate, beforeNavigate } from '$app/navigation';
 	import LocaleSwitcher from '@/components/common/locale-switcher.svelte';
 
 	const { blockData, hasLocaleSwitch }: { blockData: IImageHeader; hasLocaleSwitch: boolean } =
@@ -39,7 +38,7 @@
 
 <svelte:window bind:scrollY={currentY} onscroll={throttle(handleScroll, 100)} />
 
-<section class="fixed top-0 z-50 mx-auto h-(--header-height) w-full px-0 md:px-0">
+<section class="fixed top-0 z-30 mx-auto h-(--header-height) w-screen px-0 md:px-0">
 	<div class="w-full h-full">
 		<!-- desktop -->
 		<Nav.Root
@@ -75,6 +74,7 @@
 			<Dialog class="h-full" bind:open>
 				{#snippet trigger()}
 					<div
+						aria-label="navigation menu "
 						class="focus-visible:ring-offset-background mr-4 w-fit p-2 focus-visible:outline-hidden"
 					>
 						<Icon class="size-8" name="menu" />
@@ -98,6 +98,9 @@
 									</Nav.Link>
 								</Nav.Item>
 							{/each}
+							<Nav.Item class="w-full py-4">
+								<LocaleSwitcher />
+							</Nav.Item>
 						</Nav.List>
 					</Nav.Root>
 				{/snippet}

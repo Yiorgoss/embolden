@@ -53,12 +53,7 @@
 			<RenderBlocks blockData={columnOne![0]} />
 		</div>
 		{#if columnTwo && columnTwo.length != 0}
-			<div
-				class={cn(
-					'flex px-0 py-0 md:py-0 md:px-5 justify-center items-center md:has-[#image-block]:order-0 has-[#image-block]:-order-1 ',
-					widthClass[1]
-				)}
-			>
+			<div class={cn('flex px-0 py-0 md:py-0 md:px-5 justify-center items-center ', widthClass[1])}>
 				<RenderBlocks blockData={columnTwo[0]} />
 			</div>
 		{/if}

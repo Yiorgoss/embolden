@@ -17,7 +17,6 @@
 			return slug == currentSlug;
 		})
 	);
-	$inspect({ locale: page.params.locale, slug: page.params.slug });
 </script>
 
 {#key [currentSlug, locale, currentPage]}
