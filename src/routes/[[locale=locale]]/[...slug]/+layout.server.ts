@@ -1,4 +1,3 @@
-import { PUBLIC_ENV } from '$env/static/public';
 import type { LayoutServerLoad } from './$types';
 import { site } from '@/config';
 import { getDataDirectFromCMS } from '@/utils';

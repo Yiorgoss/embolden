@@ -78,7 +78,7 @@
 			<source type={img.mimeType} sizes={imageSizes} media={`(max-width: ${img.width}px)`} />
 		{/each}
 		<img
-			src={asset.url}
+			src={asset?.sizes?.xl?.url ?? ''}
 			alt={image?.alt ?? ''}
 			onload={() => (imageLoaded = true)}
 			{loading}
