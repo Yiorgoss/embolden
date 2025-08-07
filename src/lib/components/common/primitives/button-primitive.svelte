@@ -1,11 +1,16 @@
 <script lang="ts">
-	import { Button } from '@/components/ui/button';
+	import { Button, type ButtonProps as DefaultButtonProps } from '@/components/ui/button';
 	import { type IButton } from '@payload-types';
-	const { variant, text, href }: { variant: string; text: string; href: string } = $props();
+	import type { Snippet } from 'svelte';
 
-	$inspect(variant);
+	type ButtonProps = { text: string | Snippet } & DefaultButtonProps;
+	const { class: className, variant, text, href, ...restProps }: ButtonProps = $props();
 </script>
 
-<Button {variant} {href}>
-	{text}
+<Button class={className} {variant} {href} {...restProps}>
+	{#if typeof text == 'string'}
+		{text}
+	{:else}
+		{@render text?.()}
+	{/if}
 </Button>

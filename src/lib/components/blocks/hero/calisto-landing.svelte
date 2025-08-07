@@ -11,7 +11,6 @@
 	const { image, richText, ctaOne, ctaTwo } = blockData;
 
 	onMount(() => {
-		console.log(`mounted hero`);
 		cb && cb();
 	});
 	let bgLoaded = $state(false);

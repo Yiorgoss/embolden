@@ -33,7 +33,7 @@ export const htmlConverters: HTMLConvertersFunctionAsync<NodeTypes> = ({ default
         imageString = await richTextImg({ imgData: image });
       }
       catch (err) {
-        console.log(`ERROR pill image - ${image.id ?? image}: ${err}`)
+        console.error(`ERROR pill image - ${image.id ?? image}: ${err}`)
         return ""
       }
       const imageID = typeof image == 'number' ? image : image.id;

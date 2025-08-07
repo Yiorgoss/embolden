@@ -20,19 +20,19 @@ export const load: LayoutServerLoad = async (args) => {
   let data
 
   //@ts-ignore
-  if (text || 1 == 0) {
-    //@ts-ignore
-    const json = await JSON.parse(text)
-    data = {
-      nav: json.docs[0].nav,
-      pages: json.docs[0].pages,
-      locale
-    }
-    console.log("using KV CACHE")
-  } else {
-    data = await getDataDirectFromCMS({ site, locale })
-    console.log("Not using KV CACHE")
-  }
+  // if (text || 1 == 0) {
+  //   //@ts-ignore
+  //   const json = await JSON.parse(text)
+  //   data = {
+  //     nav: json.docs[0].nav,
+  //     pages: json.docs[0].pages,
+  //     locale
+  //   }
+  // console.log("using KV CACHE")
+  // } else {
+  data = await getDataDirectFromCMS({ site, locale })
+  // console.log("Not using KV CACHE")
+  // }
   // console.dir({ data: data.pages.docs[0].hero[0].richText }, { depth: 10 })
   return data
 };

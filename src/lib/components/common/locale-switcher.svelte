@@ -10,6 +10,7 @@
 
 	const { locale, slug } = $derived(page.params);
 	const targetLocale = $derived(locale == 'el' ? 'en' : 'el');
+	let disabled = $state(false);
 
 	let currentLang = $derived(supportedLocales[locale] ?? supportedLocales[defaultLocale]);
 
@@ -24,7 +25,11 @@
 					{...props}
 					variant="ghost"
 					class="font-light py-2 px-2 text-xs flex justify-center gap-2 items-center"
+					{disabled}
 				>
+					{#if disabled}
+						<Icon name="loader-circle" class="animate-spin size-3" />
+					{/if}
 					<span class="">{currentLang}</span>
 					<Icon name="chevron-down" class="font-thin stroke-1 size-4" />
 				</Button>
@@ -34,9 +39,15 @@
 			<DropdownMenu.RadioGroup bind:value={currentLang}>
 				{#each Object.entries(supportedLocales) as [key, value]}
 					<DropdownMenu.Item class="rounded-xxs">
-						<a href={`/${key}/${slug}`} lang={key} hreflang={key}>
+						<Button
+							onclick={() => (disabled = true)}
+							href={`/${key}/${slug}`}
+							variant="ghost"
+							lang={key}
+							hreflang={key}
+						>
 							{value}
-						</a>
+						</Button>
 					</DropdownMenu.Item>
 				{/each}
 			</DropdownMenu.RadioGroup>

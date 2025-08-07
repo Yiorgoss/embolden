@@ -3,4 +3,4 @@ import { cn, type WithoutChild, type WithoutChildren, type WithoutChildrenOrChil
 import { throttle } from "./utils"
 
 
-export { throttle, fetchFromCMS, getDataDirectFromCMS, cn, resolveID, richTextImg };
+export { throttle, fetchFromCMS, getDataDirectFromCMS, cn, resolveID, richTextImg, type WithoutChildrenOrChild, type WithElementRef, type WithoutChildren };
