@@ -41,26 +41,20 @@
 	const widthClass = normaliseWidth(layout ?? 'oneColumn');
 </script>
 
-<section
-	id="block-column-layout"
-	style:background={style?.bgColor}
-	class="p-0 md:py-5 group block-col-group-selector"
->
+<section id="block-column-layout" style:background={style?.bgColor} class="p-0 md:py-5">
 	<div
-		class="@container/block-col flex flex-col px-0 py-2 md:py-0 md:px-5 md:flex-row justify-center items-center container mx-auto flex-wrap"
+		class="flex flex-col px-0 py-2 md:py-0 md:px-5 md:flex-row justify-center items-center container mx-auto flex-wrap"
 	>
 		<div class={cn('h-full w-full justify-center items-center', widthClass[0])}>
 			<RenderBlocks blockData={columnOne![0]} />
 		</div>
 		{#if columnTwo && columnTwo.length != 0}
-			<div class={cn('flex px-0 py-0 md:py-0 md:px-5 justify-center items-center ', widthClass[1])}>
+			<div class={cn('flex md:px-5 justify-center items-center ', widthClass[1])}>
 				<RenderBlocks blockData={columnTwo[0]} />
 			</div>
 		{/if}
 		{#if columnThree && columnThree.length != 0}
-			<div
-				class={cn('h-full py-7 md:py-0 px-0 md:px-5 justify-center items-center ', widthClass[2])}
-			>
+			<div class={cn('h-full md:py-0 px-0 md:px-5 justify-center items-center ', widthClass[2])}>
 				<RenderBlocks blockData={columnThree[2]} />
 			</div>
 		{/if}

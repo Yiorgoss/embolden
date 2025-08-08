@@ -2,7 +2,8 @@
 	import { type ICarousel } from '@payload-types';
 	import RenderBlocks from '../render-blocks.svelte';
 	import * as Carousel from '@/components/ui/carousel';
-	import { type CarouselAPI } from '@/components/ui/carousel/context.svelte';
+	import * as Card from '@/components/ui/card';
+	import { type CarouselAPI } from '@/components/ui/carousel/context';
 	import { MediaQuery } from 'svelte/reactivity';
 
 	const { blockData }: { blockData: ICarousel; class?: string } = $props();
@@ -24,18 +25,18 @@
 </script>
 
 <Carousel.Root
-	opts={{ duration: 70, loop: options?.loop, align: 'start', containScroll: false }}
+	opts={{ duration: 70, loop: !!options?.loop, align: 'start', containScroll: false }}
 	setApi={(emblaApi: CarouselAPI | undefined) => (api = emblaApi)}
 >
-	<Carousel.Content class="flex max-w-screen md:max-w-sm lg:max-w-lg ">
+	<Carousel.Content class="flex max-w-screen w-full md:max-w-sm lg:max-w-lg items-stretch ">
 		{#each items ?? [] as item}
-			<Carousel.Item class="max-w-sm [&_img]:max-h-[300px] lg:max-w-lg">
+			<Carousel.Item class="max-w-md [&_img]:h-[300px] self-stretch bg-blue-300 lg:max-w-lg">
 				<RenderBlocks blockData={item} />
 			</Carousel.Item>
 		{/each}
 	</Carousel.Content>
 	<div class="hidden md:block">
-		<Carousel.Previous left={!medium.current} />
+		<Carousel.Previous />
 	</div>
 	<div class="hidden md:block">
 		<Carousel.Next />

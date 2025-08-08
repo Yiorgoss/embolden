@@ -10,7 +10,7 @@
 <div id="image-block" class="p-3 md:p-6">
 	<Picture
 		class={cn(
-			'md:rounded-none h-[300px] object-contain max-h-[500px] rounded-theme md:h-full',
+			'md:rounded-none h-[300px] object-cover max-h-[500px] rounded-theme md:h-full',
 			options?.rounded && 'rounded-theme'
 		)}
 		{image}
