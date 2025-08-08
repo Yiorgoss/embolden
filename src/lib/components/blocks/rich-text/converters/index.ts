@@ -43,10 +43,10 @@ export const htmlConverters: HTMLConvertersFunctionAsync<NodeTypes> = ({ default
           ? 'width:100px;height:50px;'
           : size == 'md'
             ? 'width:150px;height:75px;'
-            : 'width:200px;height:100px';
+            : 'width:180px;height:90px';
 
       const minSize = `
-@media (width <= 650px) {
+@media (width <= 810px) {
   #pill-image-${imageID} {
         ${size == 'sm'
           ? 'width:80px;height:40px;'

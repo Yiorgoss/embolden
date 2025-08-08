@@ -12,7 +12,7 @@
 <section class="flex flex-col">
 	{#each list as { columnOne, columnTwo }}
 		<div class="flex align-start min-h-100" class:border-t={lineSeparation}>
-			<div class="w-1/2 bg-blue-300">
+			<div class="w-1/2">
 				<RichTextRender richText={columnOne} />
 			</div>
 			<div class="w-1/2">

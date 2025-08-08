@@ -61,10 +61,9 @@
 				!hasOneDiscount ? 'hidden' : ''
 			)}
 		>
-			<Switch id="discount-switch" size="xl" bind:checked />
+			<Switch id="discount-switch" bind:checked />
 			<label for="discount-switch">Yearly Discount </label>
 		</div>
-		<!--  <div class="flex flex-col items-stretch h-full justify-center bg-red-500 md:flex-row">  -->
 		<div class="flex justify-center flex-col md:flex-row md:gap-0 gap-10">
 			{#if cards}
 				{#each cards as { richText, price, yearlyDiscount, includeDiscount, link }}

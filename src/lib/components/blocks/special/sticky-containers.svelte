@@ -25,7 +25,6 @@
 					left && 'bg-secondary border-foreground border '
 				)}
 			>
-				<!-- <div class="flex flex-col bg-red-300"> -->
 				{#if title && i == 0}
 					<div class="font-cursive col-span-full w-full px-10 py-6 text-4xl">{title}</div>
 				{/if}
