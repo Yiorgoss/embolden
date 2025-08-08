@@ -4,7 +4,6 @@
 	import Picture from '@/components/common/picture.svelte';
 	import Button from '@/components/common/button.svelte';
 	import * as Sheet from '@/components/ui/sheet';
-	//  import Dialog from '@/components/old_ui/dialog/dialog.svelte';
 	import { type IImageHeader } from '@payload-types';
 	import { onMount } from 'svelte';
 	import { cn } from '@/utils';
