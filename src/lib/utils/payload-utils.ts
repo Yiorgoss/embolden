@@ -1,5 +1,5 @@
 import type { Asset } from '@payload-types';
-import { site, type SiteConfigType } from '@/config';
+import { defaultLocale, site, type SiteConfigType } from '@/config';
 import { error } from '@sveltejs/kit';
 
 export async function fetchFromCMS({
@@ -11,8 +11,9 @@ export async function fetchFromCMS({
   id: number;
   lang?: string | undefined | null;
 }) {
+  if (!id) throw Error(`Need ID to Fetch`)
   const response = fetch(
-    `${site.CMS}/api/${collection}?where[id][equals]=${id}&locale=${lang ?? 'en'}`,
+    `${site.CMS}/api/${collection}?where[id][equals]=${id}&locale=${lang ?? defaultLocale}`,
     {
       headers: {
         'Content-Type': 'application/json'
@@ -22,7 +23,7 @@ export async function fetchFromCMS({
   return response;
 }
 
-export const getDataDirectFromCMS = async ({ site, locale }: { site: SiteConfigType, locale: string }) => {
+export const getTenantByDomain = async ({ site, locale }: { site: SiteConfigType, locale: string }) => {
 
   const response = fetch(`${site.CMS}/api/tenants?[where][domainName][equal]=${site.domainName}&depth=10&locale=${locale}`)
     .then((res) => res.json())

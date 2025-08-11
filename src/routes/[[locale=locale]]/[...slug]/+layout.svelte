@@ -1,15 +1,11 @@
 <script lang="ts">
-	import { onMount, type Snippet } from 'svelte';
+	import { type Snippet } from 'svelte';
 	import RenderBlocks from '@/components/blocks/render-blocks.svelte';
-	import LocaleSwitcher from '@/components/common/locale-switcher.svelte';
 	import type { LayoutData } from './$types';
-	import { page } from '$app/stores';
 	import { type INavigation, type Page } from '@payload-types';
 
 	const { data, children }: { data: LayoutData; children: Snippet } = $props();
-
-	const { nav }: { pages: Page[]; nav: INavigation } = data;
-	let mounted = $state(false);
+	const { nav }: { nav: INavigation } = data.layoutData;
 </script>
 
 {#key data}

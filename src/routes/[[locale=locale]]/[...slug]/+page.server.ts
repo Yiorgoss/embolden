@@ -1,26 +1,26 @@
-// import { site } from '@/config';
-// import type { PageServerLoad } from './$types';
-// import { getDataDirectFromCMS } from '@/utils';
+import { site } from '@/config';
+import type { PageServerLoad } from './$types';
+import { fetchFromCMS, resolveID } from '@/utils';
 
 
-// export const load: PageServerLoad = async (args) => {
-//   const { platform, url, parent } = args
+export const load: PageServerLoad = async (args) => {
+  const { params, parent } = args
+  const { locale, slug: currentSlug } = params
 
-//   const layoutKey = `${site.domainName}__${url.pathname}`
-//   const text = await platform?.env?.CALISTO_STUDIO_KV_CACHE.get(layoutKey)
-//   const { pages } = await parent()
-//   let data;
+  const { layoutData } = await parent()
+  const { pages } = layoutData
 
-//   if (text) {
-//     data = await JSON.parse(text)
-//   } else if (pages) {
-//     //data exists from layout
-//     return pages
-//   } else {
-//     //data does not exist
-//     // note: that if layout data exists but not page data you are making a cms call on every page call
-//     return getDataDirectFromCMS({ site })
-//   }
+  const currentPage = pages.docs.find(({ slug }: { slug: string }) => {
+    if (slug == '' || slug == '/') {
+      // both should want the same page
+      return slug == currentSlug || slug.slice(1) == currentSlug;
+    }
+    return slug == currentSlug;
+  })
 
-//   return data
-// };
+  if (!currentPage || !currentPage.id) return
+
+  const response = await fetchFromCMS({ collection: "pages", id: currentPage.id, lang: locale })
+  const data = await response.json()
+  return { pageData: data }
+};

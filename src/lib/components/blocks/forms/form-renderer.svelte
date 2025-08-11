@@ -63,7 +63,6 @@
 <!--   resetForm: false, -->
 <!--   SPA: true, -->
 <!--   async onUpdate({ form, cancel }) { -->
-<!--     console.log(form); -->
 <!--     if (!form.valid) { -->
 <!--       Object.entries(form.errors).map(([k, v]) => ($errors[`${k}`] = v)); -->
 <!--       cancel(); -->
@@ -219,10 +218,10 @@
 <!--       bind:value={$formData[field.name as keyof z.infer<typeof schema>]} -->
 <!--       placeholder="" -->
 <!--     /> -->
-    <!-- {:else if field.blockType=='message'} -->
-    <!--   {@html fields} -->
-    <!-- {:else if field.blockType=='payment'} -->
-    <!-- {:else if field.blockType=='state'} -->
-    <!-- {:else if field.blockType=='country'} -->
+<!-- {:else if field.blockType=='message'} -->
+<!--   {@html fields} -->
+<!-- {:else if field.blockType=='payment'} -->
+<!-- {:else if field.blockType=='state'} -->
+<!-- {:else if field.blockType=='country'} -->
 <!--   {/if} -->
 <!-- {/snippet} -->

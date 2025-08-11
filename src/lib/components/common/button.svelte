@@ -30,7 +30,6 @@
 	// either the url will exist or the reference will.
 	// url will be null if a reference exists or if its a hardcoded href
 	// reference will not exist if the url is not null
-	//  console.log({ link, reject: !(link?.url || link?.reference) && !restProps['href'] });
 	if (!(link?.url || link?.reference) && !restProps['href']) _href = Promise.reject();
 
 	const variant = _variant != 'default' ? _variant : (display?.variant ?? _variant);
