@@ -14,8 +14,8 @@
 		"check:watch": "svelte-kit sync && svelte-check --tsconfig ./tsconfig.json --watch",
 		"format": "prettier --write .",
 		"lint": "prettier --check . && eslint .",
-		"deploy": "wrangler deploy",
-		"deploy:staging": "vite build && wrangler deploy --env=staging",
+		"deploy": "#wrangler deploy",
+		"deploy:staging": "#vite build && wrangler deploy --env=staging",
 		"cf-typegen": "wrangler types && mv worker-configuration.d.ts src/",
 		"update-kv": "wrangler kv bulk put blobs/data.json --local --binding CALISTO_STUDIO_KV_CACHE --preview"
 	},
