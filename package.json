@@ -15,7 +15,7 @@
 		"format": "prettier --write .",
 		"lint": "prettier --check . && eslint .",
 		"deploy": "#wrangler deploy",
-		"deploy:staging": "#vite build && wrangler deploy --env=staging",
+		"deploy:staging": "DEV_CMS=https://staging-cms.calisto.studio vite build && wrangler deploy --env=staging",
 		"cf-typegen": "wrangler types && mv worker-configuration.d.ts src/",
 		"update-kv": "wrangler kv bulk put blobs/data.json --local --binding CALISTO_STUDIO_KV_CACHE --preview"
 	},
@@ -53,10 +53,12 @@
 		"wrangler": "^4.14.1"
 	},
 	"pnpm": {
-		"onlyBuiltDependencies": ["esbuild"]
+		"onlyBuiltDependencies": [
+			"esbuild"
+		]
 	},
 	"dependencies": {
-		"@payloadcms/richtext-lexical": "^3.35.1",
+		"@payloadcms/richtext-lexical": "^3.55.1",
 		"@tanstack/svelte-form": "^1.9.0",
 		"bits-ui": "^2.8.12",
 		"clsx": "^2.1.1",
