@@ -46,7 +46,7 @@
 			}
 			toast.success(
 				// data.confirmationMessage ?? 'Thank you for contacting us. We will be in touch shortly'
-				'Thank you for contacting us. We will be in touch shortly'
+				"Thank you for reaching out! We've received your message and will be in touch shortly"
 			);
 			form.reset();
 		}
@@ -144,10 +144,10 @@
 						{#if isSubmitting}
 							<div class="flex justify-center items-center gap-2">
 								<Spinner />
-								Submit
+								{data.submitButtonLabel ?? 'Submit'}
 							</div>
 						{:else}
-							Submit
+							{data.submitButtonLabel ?? 'Submit'}
 						{/if}
 					</Button>
 				{/snippet}

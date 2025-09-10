@@ -35,13 +35,13 @@
 				<div class="flex flex-col items-start">
 					<h3 class="font-semibold text-xl">Sitemap</h3>
 					{#each nav ?? [] as { link }}
-						<Button variant="ghost" size="sm" class="p-1" {link} />
+						<Button variant="ghost" size="sm" class="p-0" {link} />
 					{/each}
 				</div>
 				<div class="flex flex-col items-start">
 					<h3 class="font-semibold text-xl">Social Links</h3>
 					{#each socials ?? [] as { link }}
-						<Button variant="ghost" {link} />
+						<Button variant="ghost" class="p-0" {link} />
 					{/each}
 				</div>
 			</div>

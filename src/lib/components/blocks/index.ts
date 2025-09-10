@@ -9,6 +9,7 @@ import Gutter from "./common/gutter.svelte"
 import CalistoFeatureCard from "./cards/calisto-feature-card.svelte"
 import DiscountCard from "./cards/discount-card.svelte"
 import SingleCard from "./cards/single-card.svelte"
+import HoverCard from "./cards/hover-card.svelte"
 
 import BlockColumnLayout from "./layout/block-column-layout.svelte"
 import ContentColLayout from "./layout/content-col-layout.svelte"
@@ -39,6 +40,7 @@ blockList.set("carousel", Carousel)
 blockList.set("calistoFeatureCard", CalistoFeatureCard);
 blockList.set("discountCard", DiscountCard)
 blockList.set("singleCard", SingleCard)
+blockList.set("hoverCard", HoverCard)
 
 //layout
 blockList.set("blockColumnLayout", BlockColumnLayout);
