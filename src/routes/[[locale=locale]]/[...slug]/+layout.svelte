@@ -5,7 +5,7 @@
 	import { type INavigation, type Page } from '@payload-types';
 
 	const { data, children }: { data: LayoutData; children: Snippet } = $props();
-	const { nav }: { nav: INavigation } = data.layoutData;
+	const { nav }: { nav: INavigation } = data;
 </script>
 
 {#key data}

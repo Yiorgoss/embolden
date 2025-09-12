@@ -11,15 +11,18 @@
 	let mobileHover = $state(false);
 </script>
 
-<section id="card-block" class="flex grow items-center h-full justify-center pt-10 md:pt-0">
+<section id="card-block" class="flex grow items-center h-full justify-center w-full pt-10 md:pt-0">
 	<Card.Root
 		ontouchstart={() => (mobileHover = true)}
 		ontouchend={() => (mobileHover = false)}
-		class="h-full w-full group/card min-w-sm min-h-[400px] p-0 overflow-hidden max-w-md"
+		class="relative group/card min-h-[400px] p-0 overflow-hidden max-w-xs  w-full h-full"
 	>
-		<Card.Content class="h-full p-0 ">
+		<Card.Content class="absolute inset-0 p-0 ">
 			<div class="grid h-full grid-cols-1 grid-rows-1">
-				<div class="row-start-1 col-start-1">
+				<div
+					class:scale-120={mobileHover}
+					class="row-start-1 h-full w-full col-start-1 duration-500 transition-transform group-hover/card:scale-120"
+				>
 					{#if image}
 						<Picture loading="eager" {image} />
 					{/if}
@@ -39,7 +42,7 @@
 						</div>
 						<div
 							class={cn(
-								'group-hover/card:opacity-100 opacity-0 text-lg duration-300 transition-opacity',
+								'group-hover/card:opacity-100 h-full flex  text-center justify-center items-center opacity-0 text-lg duration-300 transition-opacity',
 								mobileHover && 'opacity-100'
 							)}
 						>

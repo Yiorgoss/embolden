@@ -2,18 +2,12 @@
 	import { page } from '$app/state';
 	import RenderBlocks from '@/components/blocks/render-blocks.svelte';
 	import Meta from '@/components/blocks/seo/meta.svelte';
-	import { fetchFromCMS } from '@/utils';
-	import { type PageData } from './$types';
-
-	const { data }: { data: PageData } = $props();
-
-	let currentPage = $state(data.pageData.docs[0]);
 
 	let heroLoaded = $state(page.params.slug == '' ? false : true);
-	const pages = $state(page.data.layoutData.pages.docs);
-	const { locale, slug: currentSlug } = $derived(page.params);
+	const pages = $state(page.data.pages.docs);
+	const { slug: currentSlug, locale } = $derived(page.params);
 
-	let unresolvedPage = $derived(
+	const currentPage = $derived(
 		pages.find(({ slug }: { slug: string }) => {
 			locale;
 			if (slug == '' || slug == '/') {
@@ -23,17 +17,9 @@
 			return slug == currentSlug;
 		})
 	);
-
-	$effect(() => {
-		const data = { id: unresolvedPage.id, locale };
-
-		fetchFromCMS({ collection: 'pages', id: data.id, lang: data.locale })
-			.then((res) => res.json())
-			.then((json: any) => (currentPage = json.docs[0]));
-	});
 </script>
 
-{#key [locale, currentPage]}
+{#key [currentSlug, locale, currentPage]}
 	{#if currentPage}
 		<Meta meta={currentPage.meta} />
 		{#if currentPage && currentPage.hero.length > 0}
