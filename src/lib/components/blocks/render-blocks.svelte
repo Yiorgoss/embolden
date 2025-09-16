@@ -7,7 +7,7 @@
 		hasLocaleSwitch
 	}: { blockData: any; cb?: () => void; hasLocaleSwitch?: boolean } = $props();
 
-	const calculatedBlockType = blockList.get(blockData.blockType) ?? undefined;
+	const calculatedBlockType = blockList.get(blockData?.blockType ?? undefined) ?? undefined;
 	const SvelteComponent = $derived(calculatedBlockType);
 </script>
 
