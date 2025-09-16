@@ -1,12 +1,14 @@
 import type { IPill, ICursiveText } from '@payload-types';
 
-import type {
-  DefaultNodeTypes,
-  SerializedBlockNode,
-  SerializedInlineBlockNode
-} from '@payloadcms/richtext-lexical';
+// import {
+//   defaultColors,
+//   NodeFormat,
+//   type DefaultNodeTypes,
+//   type SerializedBlockNode,
+//   type SerializedInlineBlockNode
+// } from '@payloadcms/richtext-lexical';
 
-import { type HTMLConvertersFunctionAsync } from '@payloadcms/richtext-lexical/html-async';
+// import { type HTMLConvertersFunctionAsync } from '@payloadcms/richtext-lexical/html-async';
 
 import { resolveID, richTextImg } from '@/utils';
 
@@ -16,6 +18,25 @@ export type NodeTypes =
   | SerializedBlockNode;
 
 export type htmlConvertersType = typeof htmlConverters
+
+// const textState = {
+//   size: {
+//     'xs': { label: "Extra Small", css: { 'font-size': "var(--text-xs, 4px)" } },
+//     'xl': { label: "Extra Large", css: { 'font-size': "96px" } },
+//   },
+//   fontWeight: {
+//     'Boldest': { label: "Boldest", css: { 'font-weight': '900' } }
+//   },
+//   // type: {
+//   // },
+//   color: {
+//     ...defaultColors.text
+//   },
+//   background: {
+//     ...defaultColors.background
+//   },
+// }
+
 
 export const htmlConverters: HTMLConvertersFunctionAsync<NodeTypes> = ({ defaultConverters }) => ({
   ...defaultConverters,

@@ -45,7 +45,7 @@
 	<div
 		class="flex has-[#card-block]:items-stretch has-[#image-block]:items-start flex-col px-0 py-2 md:py-0 md:px-5 md:flex-row justify-center items-center container mx-auto flex-wrap"
 	>
-		<div class={cn('grow w-full justify-center items-center', widthClass[0])}>
+		<div class={cn('grow w-full px-0 md:px-5 justify-center items-center', widthClass[0])}>
 			<RenderBlocks blockData={columnOne![0]} />
 		</div>
 		{#if columnTwo && columnTwo.length != 0}
