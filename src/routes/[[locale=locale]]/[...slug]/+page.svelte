@@ -7,6 +7,8 @@
 	const pages = $state(page.data.pages.docs);
 	const { slug: currentSlug, locale } = $derived(page.params);
 
+	let wasHome = $derived(currentSlug == '' || currentSlug == '/');
+
 	const currentPage = $derived(
 		pages.find(({ slug }: { slug: string }) => {
 			locale;
@@ -17,9 +19,10 @@
 			return slug == currentSlug;
 		})
 	);
+	$inspect([currentPage, locale, currentPage, wasHome]);
 </script>
 
-{#key [currentSlug, locale, currentPage]}
+{#key [currentSlug, locale, currentPage, wasHome]}
 	{#if currentPage}
 		<Meta meta={currentPage.meta} />
 		{#if currentPage && currentPage.hero.length > 0}
