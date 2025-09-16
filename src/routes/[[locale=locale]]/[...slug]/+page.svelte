@@ -22,7 +22,7 @@
 	$inspect([currentPage, locale, currentPage, wasHome]);
 </script>
 
-{#key [currentSlug, locale, currentPage, wasHome]}
+{#key [page.params.slug, locale, currentPage, wasHome]}
 	{#if currentPage}
 		<Meta meta={currentPage.meta} />
 		{#if currentPage && currentPage.hero.length > 0}
