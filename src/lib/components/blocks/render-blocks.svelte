@@ -3,14 +3,15 @@
 
 	const {
 		blockData,
+		className,
 		cb,
 		hasLocaleSwitch
-	}: { blockData: any; cb?: () => void; hasLocaleSwitch?: boolean } = $props();
+	}: { blockData: any; className?: string; cb?: () => void; hasLocaleSwitch?: boolean } = $props();
 
 	const calculatedBlockType = blockList.get(blockData?.blockType ?? undefined) ?? undefined;
 	const SvelteComponent = $derived(calculatedBlockType);
 </script>
 
 {#if calculatedBlockType}
-	<SvelteComponent {blockData} {cb} {hasLocaleSwitch} />
+	<SvelteComponent {className} {blockData} {cb} {hasLocaleSwitch} />
 {/if}

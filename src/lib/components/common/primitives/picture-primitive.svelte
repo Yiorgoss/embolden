@@ -72,6 +72,7 @@
 		{/if}
 	{/if}
 	<picture
+		style:minimum-height={image?.style?.minHeight}
 		class={cn('z-10 col-start-1 row-start-1 h-full min-h-full w-full min-w-full', pictureClass)}
 	>
 		{#each Object.entries(asset.sizes ?? {}) as [_, img]}

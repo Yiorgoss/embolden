@@ -4,7 +4,13 @@
 	import { cn } from '@/utils';
 
 	const { blockData }: { blockData: IBlockColumnLayout } = $props();
-	const { layout, columnOne, columnTwo, columnThree, style } = blockData;
+	const {
+		layout,
+		columnOne,
+		columnTwo,
+		columnThree,
+		style: { bgColor, justifyContent, alignItems }
+	} = blockData;
 
 	const normaliseWidth = (layout: string) => {
 		const cssList = [];
@@ -41,20 +47,32 @@
 	const widthClass = normaliseWidth(layout ?? 'oneColumn');
 </script>
 
-<section id="block-column-layout" style:background={style?.bgColor} class="p-0 md:py-5">
+<section id="block-column-layout" style:background={bgColor} class="p-0 md:py-5">
 	<div
-		class="flex has-[#card-block]:items-stretch has-[#image-block]:items-start flex-col px-0 py-2 md:py-0 md:px-5 md:flex-row justify-center items-center container mx-auto flex-wrap"
+		class="flex justify-center items-stretch h-full flex-col px-0 py-2 md:py-0 md:px-5 md:flex-row container mx-auto flex-wrap"
 	>
-		<div class={cn('grow w-full px-0 md:px-5 justify-center items-center', widthClass[0])}>
+		<div
+			style:align-items={alignItems}
+			style:justify-content={justifyContent}
+			class={cn('flex px-0 md:px-5 justify-center items-center', widthClass[0])}
+		>
 			<RenderBlocks blockData={columnOne![0]} />
 		</div>
 		{#if columnTwo && columnTwo.length != 0}
-			<div class={cn('flex md:px-5 justify-center items-center ', widthClass[1])}>
+			<div
+				style:align-items={alignItems}
+				style:justify-content={justifyContent}
+				class={cn('flex px-0 md:px-5 justify-center items-center ', widthClass[1])}
+			>
 				<RenderBlocks blockData={columnTwo[0]} />
 			</div>
 		{/if}
 		{#if columnThree && columnThree.length != 0}
-			<div class={cn('h-full md:py-0 px-0 md:px-5 justify-center items-center ', widthClass[2])}>
+			<div
+				style:align-items={alignItems}
+				style:justify-content={justifyContent}
+				class={cn('px-0 md:px-5 flex justify-center items-center ', widthClass[2])}
+			>
 				<RenderBlocks blockData={columnThree[2]} />
 			</div>
 		{/if}
