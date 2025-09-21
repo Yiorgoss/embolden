@@ -122,6 +122,7 @@
 				<div class="px-2 basis-full flex flex-col gap-2">
 					<Label for={field.name}>Message</Label>
 					<Textarea
+						class="min-h-30"
 						placeholder="Message"
 						value={field.state.value}
 						oninput={(e: Event) => {

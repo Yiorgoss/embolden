@@ -27,6 +27,8 @@
 		cb && cb();
 	});
 
+	const { style } = image;
+
 	let imageLoaded = $state(false);
 	let placeholder = asset?.sizes?.['placeholder'];
 	let mobile = asset?.sizes?.['sm'];
@@ -56,7 +58,10 @@
 	{/if}
 </svelte:head>
 <!-- -->
-<div class="grid h-full w-full relative grid-cols-1 grid-rows-1">
+<div
+	style:padding={style?.padding}
+	class="grid h-full w-full relative overflow-hidden grid-cols-1 grid-rows-1"
+>
 	{#if placeholder && placeholder.filename}
 		{#if !imageLoaded}
 			<div class="col-start-1 row-start-1">
@@ -72,7 +77,6 @@
 		{/if}
 	{/if}
 	<picture
-		style:minimum-height={image?.style?.minHeight}
 		class={cn('z-10 col-start-1 row-start-1 h-full min-h-full w-full min-w-full', pictureClass)}
 	>
 		{#each Object.entries(asset.sizes ?? {}) as [_, img]}
@@ -84,6 +88,8 @@
 			onload={() => (imageLoaded = true)}
 			{loading}
 			fetchpriority={loading == 'eager' ? 'high' : 'low'}
+			style:min-height={style?.minHeight}
+			style:border-radius={style?.borderRadius}
 			class:opacity-100={imageLoaded}
 			class={cn(
 				'z-0 transition-all duration-300 opacity-0 col-start-1 row-start-1 h-full w-full object-cover',
@@ -93,7 +99,9 @@
 	</picture>
 	<!-- overlay color -->
 	<div
-		style={`opacity:${image?.style?.opacity ?? '0'}%;background-color:${image?.style?.color ?? '#fff'}`}
+		style:opacity={style?.opacity}
+		style:background={style?.background}
+		style:border-radius={style?.borderRadius}
 		class="z-10 col-start-1 row-start-1 h-full mix-blend-lighten w-full"
 	></div>
 </div>

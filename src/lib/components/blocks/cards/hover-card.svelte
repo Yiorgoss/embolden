@@ -6,7 +6,7 @@
 	import { cn } from '@/utils';
 
 	const { blockData }: { blockData: IHoverCard } = $props();
-	const { image, title, description, colorOverlayy } = blockData;
+	const { image, title, description, style } = blockData;
 
 	let mobileHover = $state(false);
 </script>
@@ -28,7 +28,7 @@
 					{/if}
 				</div>
 				<div
-					style:background={colorOverlayy}
+					style:background={style?.background}
 					class="row-start-1 col-start-1 flex flex-col relative p-8 z-10 mix-blend-harden"
 				>
 					<div class="grow duration-500">

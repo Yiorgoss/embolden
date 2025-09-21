@@ -5,21 +5,18 @@
 	import { cn } from '@/utils';
 
 	const { blockData }: { blockData: IStickyContainers; index?: number } = $props();
-	const { list: maybeList, title, style } = blockData;
+	const { list: maybeList, title } = blockData;
 
 	const list = maybeList ?? []; //typescript
 </script>
 
-<section
-	id="sticky-container-root"
-	style:backgroundColor={style?.bgColor}
-	class="container mx-auto py-5"
->
+<section id="sticky-container-root" class="container mx-auto py-5">
 	<div class="">
-		{#each list as { richText, image }, i}
+		{#each list as { richText, image, style }, i}
 			{@const left = i % 2 == 1}
 			<div
 				style:top={`${90 * i + 5}px`}
+				style:background={style?.background}
 				class={cn(
 					`text-background bg-primary rounded-theme sticky grid grid-cols-1 md:grid-cols-2 `,
 					left && 'bg-secondary border-foreground border '
