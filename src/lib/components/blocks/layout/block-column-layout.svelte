@@ -1,4 +1,5 @@
 <script lang="ts">
+	import { MediaQuery } from 'svelte/reactivity';
 	import { type IBlockColumnLayout } from '@payload-types';
 	import RenderBlocks from '../render-blocks.svelte';
 	import { cn } from '@/utils';
@@ -39,12 +40,19 @@
 	};
 
 	const widthClass = normaliseWidth(layout ?? 'oneColumn');
-	//  const isMobile =
+
+	const mobile = new MediaQuery('max-width: 480px');
 </script>
 
-<section id="block-column-layout" style:background={style?.color} class="p-0 md:py-5">
+<section
+	id="block-column-layout"
+	style:--padding={mobile.current ? mobileStyle?.padding : style?.padding}
+	style:background={style?.color}
+	class="p-0 md:py-5"
+>
 	<div
 		style:padding={style?.padding}
+		style:background="var(--xx)"
 		class="flex justify-center items-stretch h-full flex-col px-0 py-2 md:py-0 md:px-5 md:flex-row container mx-auto flex-wrap"
 	>
 		<div
