@@ -80,7 +80,12 @@
 		class={cn('z-10 col-start-1 row-start-1 h-full min-h-full w-full min-w-full', pictureClass)}
 	>
 		{#each Object.entries(asset.sizes ?? {}) as [_, img]}
-			<source type={img.mimeType} sizes={imageSizes} media={`(max-width: ${img.width}px)`} />
+			<source
+				srcset={img.url}
+				type={img.mimeType}
+				sizes={imageSizes}
+				media={`(max-width: ${img.width}px)`}
+			/>
 		{/each}
 		<img
 			src={asset?.sizes?.xl?.url ?? ''}

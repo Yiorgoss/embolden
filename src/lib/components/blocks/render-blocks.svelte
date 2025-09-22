@@ -1,5 +1,5 @@
 <script lang="ts">
-	import { blockList } from '$lib/components/blocks';
+	//  import { blockList } from '$lib/components/blocks';
 	import { onMount, type ComponentType } from 'svelte';
 
 	const {
