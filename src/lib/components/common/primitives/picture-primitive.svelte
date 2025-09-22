@@ -10,7 +10,7 @@
 		image,
 		pictureClass,
 		loading,
-		class: imageClass = 'object-cover',
+		class: imageClass = '',
 		sizes: imageSizes = '100vw',
 		cb
 	}: {
@@ -32,6 +32,8 @@
 	let imageLoaded = $state(false);
 	let placeholder = asset?.sizes?.['placeholder'];
 	let mobile = asset?.sizes?.['sm'];
+
+	$inspect({ image });
 </script>
 
 <!-- -->
@@ -79,14 +81,17 @@
 	<picture
 		class={cn('z-10 col-start-1 row-start-1 h-full min-h-full w-full min-w-full', pictureClass)}
 	>
-		{#each Object.entries(asset.sizes ?? {}) as [_, img]}
-			<source
-				srcset={img.url}
-				type={img.mimeType}
-				sizes={imageSizes}
-				media={`(max-width: ${img.width}px)`}
-			/>
-		{/each}
+		{#if image?.ignoreSizes != true}
+			{console.log({ name: asset.filename })}
+			{#each Object.entries(asset.sizes ?? {}) as [_, img]}
+				<source
+					srcset={img.url}
+					type={img.mimeType}
+					sizes={imageSizes}
+					media={`(max-width: ${img.width}px)`}
+				/>
+			{/each}
+		{/if}
 		<img
 			src={asset?.sizes?.xl?.url ?? ''}
 			alt={image?.alt ?? ''}
