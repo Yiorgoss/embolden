@@ -77,7 +77,7 @@
 				style:justify-content={style?.alignX}
 				class={cn('px-0 md:px-5 flex justify-center items-center ', widthClass[2])}
 			>
-				<RenderBlocks blockData={columnThree[2]} />
+				<RenderBlocks blockData={columnThree[0]} />
 			</div>
 		{/if}
 	</div>
