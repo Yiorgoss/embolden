@@ -81,7 +81,7 @@
 					<Input
 						id={field.name}
 						type="text"
-						placeholder="Name"
+						placeholder={field.name}
 						value={field.state.value}
 						onblur={() => field.handleBlur()}
 						oninput={(e: Event) => {
@@ -105,7 +105,7 @@
 					<Input
 						id={field.name}
 						type="text"
-						placeholder="Email"
+						placeholder={field.name}
 						value={field.state.value}
 						onblur={() => field.handleBlur()}
 						oninput={(e: Event) => {
@@ -123,7 +123,7 @@
 					<Label for={field.name}>Message</Label>
 					<Textarea
 						class="min-h-30"
-						placeholder="Message"
+						placeholder={field.name}
 						value={field.state.value}
 						oninput={(e: Event) => {
 							const target = e.target as HTMLInputElement;
