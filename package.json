@@ -63,6 +63,6 @@
 		"embla-carousel-svelte": "^8.6.0",
 		"lexical": "^0.31.0",
 		"lucide": "^0.503.0",
-		"payload-richtext-fork": "^3.55.3"
+		"payload-richtext-fork": "^3.55.4"
 	}
 }
