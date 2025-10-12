@@ -1,12 +1,42 @@
 <script lang="ts">
-	import { type Snippet } from 'svelte';
+	import { getContext, onMount, setContext, type Snippet } from 'svelte';
 	import RenderBlocks from '@/components/blocks/render-blocks.svelte';
 	import type { LayoutData } from './$types';
-	import { type INavigation, type Page } from '@payload-types';
+	import { type INavigation, type Page, type Tenant } from '@payload-types';
 	import { page } from '$app/state';
 
-	const { data, children }: { data: LayoutData; children: Snippet } = $props();
-	const { nav }: { nav: INavigation } = $derived(data);
+	import {
+		subscribe as payloadSubscribe,
+		unsubscribe as payloadUnsubscribe,
+		ready
+	} from '@payloadcms/live-preview';
+	import { mergeUpdateData } from '@/utils/payload-utils';
+
+	const { data: propData, children }: { data: LayoutData; children: Snippet } = $props();
+	let data = $state(propData); // need it to be written to for live preview
+	const { nav }: { nav?: INavigation } = $derived(data);
+
+	const isLivePreview = page.url.searchParams.get('livePreview') === 'true';
+	const handleLivePreviewUpdate = (doc: Tenant) => {
+		data = mergeUpdateData({ oldData: data, newData: doc });
+		//  data = doc;
+	};
+
+	onMount(() => {
+		let payloadLivePreview: undefined | any;
+		if (isLivePreview) {
+			const serverURL = 'http://localhost:3000';
+			ready({ serverURL });
+			payloadLivePreview = payloadSubscribe({
+				callback: (doc) => handleLivePreviewUpdate(doc),
+				depth: 10,
+				initialData: data,
+				serverURL
+			});
+		}
+		() => payloadLivePreview && payloadUnsubscribe(payloadLivePreview);
+	});
+	setContext('payload-live-preview', () => data);
 </script>
 
 {#key [data, page.params.locale]}

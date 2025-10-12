@@ -1,7 +1,20 @@
-import type { Asset } from '@payload-types';
+import type { Asset, Page, Tenant } from '@payload-types';
 import { defaultLocale, site, type SiteConfigType } from '@/config';
 import { error } from '@sveltejs/kit';
 
+export function mergeUpdateData({ oldData, newData }: { oldData: any, newData: any }) {
+  let updatedData = oldData
+  if (newData.nav) {
+    //update from Tenant collection
+    updatedData = newData
+  }
+  else if (newData.hero) { // page has a hero section tenant doesnt ... maybe need to add name of collectioon?
+    // update from Pages collection
+    updatedData.pages.docs = [...updatedData.pages.docs.map((page: Page) => page.slug == newData.slug ? newData : page)]
+  }
+
+  return updatedData
+}
 export async function fetchFromCMS({
   collection,
   id,
@@ -27,19 +40,14 @@ export const getTenantByDomain = async ({ site, locale }: { site: SiteConfigType
 
   const response = fetch(`${site.CMS}/api/tenants?[where][domainName][equal]=${site.domainName}&depth=10&locale=${locale}`)
     .then((res) => res.json())
-    .then((json) => ({
-      //@ts-ignore
-      nav: json.docs[0].nav,
-      //@ts-ignore
-      pages: json.docs[0].pages
-    }))
-    .catch((err) => {
+    .then((json: any) => json.docs[0]) //should only ever match one 
+    .catch((err: any) => {
       error(404, {
         message: err
       });
     });
 
-  return response
+  return response as Promise<Tenant>
 }
 
 export async function resolveID({

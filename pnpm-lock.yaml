@@ -8,6 +8,9 @@ importers:
 
   .:
     dependencies:
+      '@payloadcms/live-preview':
+        specifier: ^3.59.1
+        version: 3.59.1
       '@tanstack/svelte-form':
         specifier: ^1.9.0
         version: 1.19.5(svelte@5.38.10)
@@ -1266,6 +1269,9 @@ packages:
     peerDependencies:
       graphql: ^16.8.1
       payload: 3.55.1
+
+  '@payloadcms/live-preview@3.59.1':
+    resolution: {integrity: sha512-/fxPBbp8iXfDct4iwVfb3Sh2MxpYcb7t3gfYiWLpUGfJ8/XRJEYXL15jqLgObmDtIRpzqlcRAnzeNxlqtlWc9Q==}
 
   '@payloadcms/next@3.55.1':
     resolution: {integrity: sha512-jYQ6s6B2bEF3Lb/VV+Pk3PfFmqzVgaRZHY1P8a6a8wqy35uNcZKkcVF7YnfS6FSjJw6eaWgOW9E2J/zKxdDlqA==}
@@ -4434,6 +4440,8 @@ snapshots:
       tsx: 4.19.2
     transitivePeerDependencies:
       - typescript
+
+  '@payloadcms/live-preview@3.59.1': {}
 
   '@payloadcms/next@3.55.1(@types/react@19.1.13)(graphql@16.11.0)(monaco-editor@0.53.0)(next@15.5.3(react-dom@19.1.1(react@19.1.1))(react@19.1.1)(sass@1.77.4))(payload@3.55.1(graphql@16.11.0)(typescript@5.9.2))(react-dom@19.1.1(react@19.1.1))(react@19.1.1)(typescript@5.9.2)':
     dependencies:

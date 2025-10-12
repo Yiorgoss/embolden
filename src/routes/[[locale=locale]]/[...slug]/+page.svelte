@@ -2,15 +2,22 @@
 	import { page } from '$app/state';
 	import RenderBlocks from '@/components/blocks/render-blocks.svelte';
 	import Meta from '@/components/blocks/seo/meta.svelte';
+	import type { Tenant } from '@payload-types';
+	import { getContext } from 'svelte';
 
 	let heroLoaded = $state(page.params.slug == '' ? false : true);
-	const pages = $state(page.data.pages.docs);
+
+	const isLivePreview = page.url.searchParams.get('livePreview') === 'true';
+
+	let livePreviewData = getContext('payload-live-preview') as () => Tenant;
+
+	let getPages = $state(isLivePreview ? livePreviewData : () => page.data);
 	const { slug: currentSlug, locale } = $derived(page.params);
 
 	let wasHome = $derived(currentSlug == '' || currentSlug == '/');
 
 	const currentPage = $derived(
-		pages.find(({ slug }: { slug: string }) => {
+		getPages().pages.docs.find(({ slug }: { slug: string }) => {
 			locale;
 			if (slug == '' || slug == '/') {
 				// both should want the same page
@@ -21,7 +28,8 @@
 	);
 </script>
 
-{#key [page.params.slug, locale, currentPage, wasHome]}
+{#key [page.params.slug, currentPage, wasHome]}
+	{console.log('rerender')}
 	{#if currentPage}
 		<Meta meta={currentPage.meta} />
 		{#if currentPage && currentPage.hero.length > 0}
