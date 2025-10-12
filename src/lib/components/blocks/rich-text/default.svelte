@@ -2,12 +2,7 @@
 	import { cn } from '@/utils';
 	import { getContext, hasContext, onMount } from 'svelte';
 
-	const {
-		html,
-		defaultCSS,
-		overrides,
-		cb
-	}: { html: string; defaultCSS: string; overrides?: string; cb?: () => void } = $props();
+	const { html, overrides, cb }: { html: string; overrides?: string; cb?: () => void } = $props();
 
 	let element: HTMLDivElement;
 
@@ -28,14 +23,6 @@
 	});
 </script>
 
-<div
-	id="default-rich-text"
-	bind:this={element}
-	class={cn(
-		defaultCSS,
-		'prose-h1:text-xl prose-headings:font-semibold prose-p:font-normal',
-		overrides
-	)}
->
+<div id="default-rich-text" bind:this={element} class="not-italic">
 	{@html html}
 </div>
