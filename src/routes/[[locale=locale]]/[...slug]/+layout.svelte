@@ -12,6 +12,7 @@
 		ready
 	} from '@payloadcms/live-preview';
 	import { mergeUpdateData } from '@/utils/payload-utils';
+	import { PUBLIC_ENV } from '$env/static/public';
 
 	const { data: propData, children }: { data: LayoutData; children: Snippet } = $props();
 	let data = $state(propData); // need it to be written to for live preview
@@ -26,7 +27,8 @@
 	onMount(() => {
 		let payloadLivePreview: undefined | any;
 		if (isLivePreview) {
-			const serverURL = site.domainName;
+			const serverURL =
+				PUBLIC_ENV == 'PROD' ? `https://${site.domainName}` : `http://localhost:3000`;
 			ready({ serverURL });
 			payloadLivePreview = payloadSubscribe({
 				callback: (doc) => handleLivePreviewUpdate(doc),
