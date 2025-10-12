@@ -40,7 +40,12 @@
 				{#each Object.entries(supportedLocales) as [key, value]}
 					<DropdownMenu.Item class="rounded-xxs">
 						<Button
-							onclick={() => (disabled = true)}
+							onclick={() => {
+								disabled = true;
+								setTimeout(() => {
+									disabled = false;
+								}, 1000);
+							}}
 							href={`/${key}/${slug}`}
 							variant="ghost"
 							lang={key}
