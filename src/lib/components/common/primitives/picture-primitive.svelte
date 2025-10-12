@@ -32,8 +32,6 @@
 	let imageLoaded = $state(false);
 	let placeholder = asset?.sizes?.['placeholder'];
 	let mobile = asset?.sizes?.['sm'];
-
-	$inspect({ image });
 </script>
 
 <!-- -->
@@ -82,7 +80,6 @@
 		class={cn('z-10 col-start-1 row-start-1 h-full min-h-full w-full min-w-full', pictureClass)}
 	>
 		{#if image?.ignoreSizes != true}
-			{console.log({ name: asset.filename })}
 			{#each Object.entries(asset.sizes ?? {}) as [_, img]}
 				<source
 					srcset={img.url}

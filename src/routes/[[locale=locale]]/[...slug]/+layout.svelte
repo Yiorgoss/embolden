@@ -3,12 +3,13 @@
 	import RenderBlocks from '@/components/blocks/render-blocks.svelte';
 	import type { LayoutData } from './$types';
 	import { type INavigation, type Page } from '@payload-types';
+	import { page } from '$app/state';
 
 	const { data, children }: { data: LayoutData; children: Snippet } = $props();
-	const { nav }: { nav: INavigation } = data;
+	const { nav }: { nav: INavigation } = $derived(data);
 </script>
 
-{#key data}
+{#key [data, page.params.locale]}
 	<div class="min-h-[svh]">
 		<header class="text-foreground bg-background">
 			{#if nav && nav.header && nav.header.length > 0}
