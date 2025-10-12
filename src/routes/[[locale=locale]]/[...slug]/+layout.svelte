@@ -4,6 +4,7 @@
 	import type { LayoutData } from './$types';
 	import { type INavigation, type Page, type Tenant } from '@payload-types';
 	import { page } from '$app/state';
+	import { site } from '@/config';
 
 	import {
 		subscribe as payloadSubscribe,
@@ -25,7 +26,7 @@
 	onMount(() => {
 		let payloadLivePreview: undefined | any;
 		if (isLivePreview) {
-			const serverURL = 'http://localhost:3000';
+			const serverURL = site.domainName;
 			ready({ serverURL });
 			payloadLivePreview = payloadSubscribe({
 				callback: (doc) => handleLivePreviewUpdate(doc),

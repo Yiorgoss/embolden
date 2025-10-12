@@ -29,7 +29,6 @@
 </script>
 
 {#key [page.params.slug, currentPage, wasHome]}
-	{console.log('rerender')}
 	{#if currentPage}
 		<Meta meta={currentPage.meta} />
 		{#if currentPage && currentPage.hero.length > 0}
