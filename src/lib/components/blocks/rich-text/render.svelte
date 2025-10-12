@@ -1,5 +1,4 @@
 <script lang="ts">
-	import CalistoRichText from '@/components/blocks/rich-text/calisto.svelte';
 	import DefaultRichText from '@/components/blocks/rich-text/default.svelte';
 	import { cn } from '@/utils';
 	import { htmlConverters } from './converters';
