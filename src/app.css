@@ -166,14 +166,14 @@
   font-display: swap;
   font-family: 'Noto Serif';
   font-style: italic;
-  src: url('/fonts/NotoSerifDisplay-Italic-VariableFont_wdth,wght.ttf') format('truetype');
+  src: url('/fonts/Noto_Serif_Display/NotoSerifDisplay-Italic-VariableFont_wdth,wght.ttf') format('truetype');
 }
 
 @font-face {
   font-display: swap;
   font-family: 'Noto Serif';
   font-style: normal;
-  src: url('/fonts/NotoSerifDisplay-VariableFont_wdth,wght.ttf') format('truetype');
+  src: url('/fonts/Noto_Serif_Display/NotoSerifDisplay-VariableFont_wdth,wght.ttf') format('truetype');
 }
 
 .debug {

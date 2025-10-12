@@ -20,7 +20,14 @@ const config = {
         persist: true
       }
     }),
-    alias: {
+    kit: {
+      csp: {
+        directives: {
+          'frame-src': ['self', 'admin.calisto.studio', 'self']
+        },
+      },
+    }
+    , alias: {
       '@': "src/lib",
       '@payload-types': '../cms-mt/src/payload-types.ts',
     }
