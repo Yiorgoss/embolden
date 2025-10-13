@@ -18,6 +18,7 @@
 </script>
 
 <div
+	id="gutter"
 	class:container={bgColor?.onlyInContainer ?? false}
 	class:items-start={divider == 'above'}
 	class:items-center={divider == 'center'}

@@ -10,9 +10,13 @@
 	import { createForm } from '@tanstack/svelte-form';
 	import { Button } from '@/components/ui/button';
 	import Spinner from '@/components/common/spinner.svelte';
+	import { convertLexicalToHTML } from 'payload-richtext-fork/html';
+	import DefaultRichText from '@/components/blocks/rich-text/default.svelte';
 
 	const { data } = $props();
 
+	const html = convertLexicalToHTML({ data: data.confirmationMessage });
+	$inspect(data);
 	const form = createForm(() => ({
 		defaultValues: {
 			name: '',
@@ -44,10 +48,11 @@
 				goto(data.redirect);
 				return;
 			}
-			toast.success(
-				// data.confirmationMessage ?? 'Thank you for contacting us. We will be in touch shortly'
-				"Thank you for reaching out! We've received your message and will be in touch shortly"
-			);
+			toast.success(DefaultRichText, {
+				componentProps: {
+					html
+				}
+			});
 			form.reset();
 		}
 	}));
@@ -63,76 +68,42 @@
 		form.handleSubmit();
 	}}
 >
-	<div class="mx-auto flex flex-wrap max-w-3xl gap-y-5 p-10">
-		<form.Field
-			name="name"
-			validators={{
-				onChange: ({ value }) => (value.length < 3 ? 'Not long enough' : undefined),
-				onChangeAsyncDebounceMs: 500,
-				onChangeAsync: async ({ value }) => {
-					await new Promise((resolve) => setTimeout(resolve, 1000));
-					return value.includes('error') && 'No "error" allowed in first name';
-				}
-			}}
-		>
-			{#snippet children(field)}
-				<div class="px-2 basis-1/2 flex flex-col gap-2">
-					<Label for={field.name}>Name</Label>
-					<Input
-						id={field.name}
-						type="text"
-						placeholder={field.name}
-						value={field.state.value}
-						onblur={() => field.handleBlur()}
-						oninput={(e: Event) => {
-							const target = e.target as HTMLInputElement;
-							field.handleChange(target.value);
-						}}
-					/>
-					<FieldInfo {field} />
-				</div>
-			{/snippet}
-		</form.Field>
-		<form.Field
-			name="email"
-			validators={{
-				onChange: ({ value }) => (value.length < 3 ? 'Not long enough' : undefined)
-			}}
-		>
-			{#snippet children(field)}
-				<div class="px-2 basis-1/2 flex flex-col gap-2">
-					<Label for={field.name}>Email</Label>
-					<Input
-						id={field.name}
-						type="text"
-						placeholder={field.name}
-						value={field.state.value}
-						onblur={() => field.handleBlur()}
-						oninput={(e: Event) => {
-							const target = e.target as HTMLInputElement;
-							field.handleChange(target.value);
-						}}
-					/>
-					<FieldInfo {field} />
-				</div>
-			{/snippet}
-		</form.Field>
-		<form.Field name="message">
-			{#snippet children(field)}
-				<div class="px-2 basis-full flex flex-col gap-2">
-					<Label for={field.name}>Message</Label>
-					<Textarea
-						class="min-h-30"
-						placeholder={field.name}
-						value={field.state.value}
-						oninput={(e: Event) => {
-							const target = e.target as HTMLInputElement;
-							field.handleChange(target.value);
-						}}
-					/>
-				</div>
-			{/snippet}
-		</form.Field>
+	<div class=" mx-auto flex flex-wrap max-w-3xl gap-y-5 p-10">
+		{#each data.fields as f}
+			<form.Field name={f.name}>
+				{#snippet children(fieldAPI)}
+					<div style:flex-basis={`${f.width ?? 100}%`} class="px-2 flex flex-col gap-2">
+						<Label for={f.name}>{f.label ?? f.name}</Label>
+						{#if f.blockType == 'textarea'}
+							<Textarea
+								id={f.name}
+								class="h-[130px]"
+								placeholder={f.defaultValue ?? f.blockType}
+								value={fieldAPI.state.value}
+								onblur={() => fieldAPI.handleBlur()}
+								oninput={(e: Event) => {
+									const target = e.target as HTMLInputElement;
+									fieldAPI.handleChange(target.value);
+								}}
+							/>
+						{:else}
+							<Input
+								id={f.name}
+								type={f.blockType}
+								placeholder={f.defaultValue ?? f.blockType}
+								value={fieldAPI.state.value}
+								onblur={() => fieldAPI.handleBlur()}
+								oninput={(e: Event) => {
+									const target = e.target as HTMLInputElement;
+									fieldAPI.handleChange(target.value);
+								}}
+							/>
+						{/if}
+						<FieldInfo field={fieldAPI} />
+					</div>
+				{/snippet}
+			</form.Field>
+		{/each}
 		<div class="basis-full flex">
 			<form.Subscribe
 				selector={(state) => ({

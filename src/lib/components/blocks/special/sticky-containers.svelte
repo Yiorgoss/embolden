@@ -29,7 +29,10 @@
 				<div
 					class:hidden={!(image && image.url)}
 					class:md:order-last={left}
-					class={cn('h-[300px] w-full p-12 md:h-[700px]', left && 'h-[295px] md:h-[695px]')}
+					class={cn(
+						'h-[350px] w-full max-w-md md:max-w-full mx-auto p-12 md:h-[700px]',
+						left && 'h-[345px] md:h-[695px]'
+					)}
 				>
 					{#if image}
 						<Picture class="rounded-2xl " {image} />

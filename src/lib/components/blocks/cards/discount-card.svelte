@@ -57,17 +57,17 @@
 	>
 		<div
 			class={cn(
-				'flex items-center justify-center gap-5 py-5 md:justify-start md:py-8',
+				'flex items-center justify-center px-0 md:px-10 gap-5 py-5 md:justify-start md:py-8',
 				!hasOneDiscount ? 'hidden' : ''
 			)}
 		>
 			<Switch id="discount-switch" bind:checked />
 			<label for="discount-switch">Yearly Discount </label>
 		</div>
-		<div class="flex justify-center flex-col md:flex-row md:gap-0 gap-10">
+		<div class="flex justify-center flex-col md:flex-row flex-wrap md:gap-0 gap-10">
 			{#if cards}
 				{#each cards as { richText, price, yearlyDiscount, includeDiscount, link }}
-					<div class="relative w-full max-w-md mx-auto px-10 py-2">
+					<div class="relative w-full min-w-sm max-w-md mx-auto px-10 py-2">
 						<div class="bg-primary justify-between h-full flex flex-col rounded-3xl p-10">
 							<RichTextRender
 								overrides="prose-headings:text-background prose-headings:font-bold prose-li:text-lg prose-ul:pt-7 prose-li:text-background/70 prose-p:text-background"

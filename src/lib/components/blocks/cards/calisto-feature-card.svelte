@@ -44,7 +44,7 @@
 		id="feature-card"
 		class="container mx-auto"
 	>
-		<div class="flex flex-col md:gap-0 gap-10 md:flex-row">
+		<div class="flex flex-col flex-wrap md:gap-0 gap-10 md:flex-row">
 			{#if cards}
 				{@const length = cards.length}
 				{#each cards as { richText, icon }}
@@ -52,7 +52,7 @@
 						class:md:w-[25%]={length == 4}
 						class:md:w-[33%]={length == 3}
 						class:md:w-[50%]={length == 2}
-						class="px-10 pt-10 w-full max-w-md mx-auto"
+						class="px-10 pt-10 w-full min-w-sm max-w-md mx-auto"
 					>
 						<div class="relative flex-auto h-full">
 							<div class="bg-primary h-full flex flex-col rounded-3xl p-10">

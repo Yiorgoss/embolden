@@ -8,7 +8,7 @@
 	const { image, richText, link } = blockData;
 </script>
 
-<section id="medium-hero" class="grid min-h-[300px] grid-cols-1 md:h-[400px]">
+<section id="medium-hero" class="grid grid-cols-1">
 	<div class=" col-span-full row-span-full h-full w-full overflow-hidden">
 		{#if image}
 			<Picture class="rounded-none" {image} />

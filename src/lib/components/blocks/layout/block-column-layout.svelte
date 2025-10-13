@@ -31,9 +31,9 @@
 				cssList.push('md:w-0');
 				break;
 			case 'threeColumns':
-				cssList.push('md:w-1/3');
-				cssList.push('md:w-1/3');
-				cssList.push('md:w-1/3');
+				cssList.push('max-w-md mx-auto w-full');
+				cssList.push('max-w-md mx-auto w-full');
+				cssList.push('max-w-md mx-auto w-full');
 				break;
 		}
 		return cssList;
@@ -52,8 +52,8 @@
 >
 	<div
 		style:padding={style?.padding}
-		style:background="var(--xx)"
-		class="flex justify-center items-stretch h-full flex-col px-0 py-2 md:py-0 md:px-5 md:flex-row container mx-auto flex-wrap"
+		style:background=""
+		class="flex flex-wrap gap-y-10 overflow-hidden justify-center items-stretch h-full flex-col px-0 py-2 md:py-0 md:px-5 md:flex-row container mx-auto"
 	>
 		<div
 			style:align-items={style?.alignY}
@@ -75,7 +75,7 @@
 			<div
 				style:align-items={style?.alignY}
 				style:justify-content={style?.alignX}
-				class={cn('px-0 md:px-5 flex justify-center items-center ', widthClass[2])}
+				class={cn('flex px-0 md:px-5 justify-center items-center ', widthClass[2])}
 			>
 				<RenderBlocks blockData={columnThree[0]} />
 			</div>
