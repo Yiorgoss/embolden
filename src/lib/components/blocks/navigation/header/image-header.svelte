@@ -63,11 +63,7 @@
 					<Nav.Item class="px-2">
 						<Nav.Link>
 							{#snippet child()}
-								<Button
-									variant="ghost"
-									class="font-serif uppercase h-full text-lg font-semibold "
-									{link}
-								/>
+								<Button variant="ghost" class="font-serif h-full text-lg font-semibold " {link} />
 							{/snippet}
 						</Nav.Link>
 					</Nav.Item>

@@ -9,8 +9,8 @@
   --header-height: 100px;
 
   --sans: 'Inter', ui-sans-serif, system-ui, sans-serif;
-  --serif: 'Instrument', ui-sans-serif, serif;
-  --cursive: 'Luxurious', serif;
+  --serif: 'Instrument', "Noto Serif", ui-sans-serif, serif;
+  --cursive: 'Luxurious', --serif, serif;
   --multi-lingual-serif: "Noto Serif", ui-serif, serif;
   --multi-lingual-sans: "Inter", ui-sans-serif, sans-serif;
 
