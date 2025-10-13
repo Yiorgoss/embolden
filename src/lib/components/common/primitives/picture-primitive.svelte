@@ -82,7 +82,7 @@
 		{#if image?.ignoreSizes != true}
 			{#each Object.entries(asset.sizes ?? {}) as [_, img]}
 				<source
-					srcset={img.url}
+					srcset={encodeURI(img.url ?? '')}
 					type={img.mimeType}
 					sizes={imageSizes}
 					media={`(max-width: ${img.width}px)`}
