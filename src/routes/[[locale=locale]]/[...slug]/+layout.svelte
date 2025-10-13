@@ -29,6 +29,7 @@
 		if (isLivePreview) {
 			const serverURL =
 				PUBLIC_ENV == 'PROD' ? `https://admin.${site.domainName}` : `http://localhost:3000`;
+			console.log(`https://admin.${site.domainName}`);
 			ready({ serverURL });
 			payloadLivePreview = payloadSubscribe({
 				callback: (doc) => handleLivePreviewUpdate(doc),
