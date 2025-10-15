@@ -64,15 +64,14 @@
 			<Switch id="discount-switch" bind:checked />
 			<label for="discount-switch">Yearly Discount </label>
 		</div>
-		<div class="flex justify-center flex-col md:flex-row flex-wrap md:gap-0 gap-10">
+		<div
+			class="flex justify-center items-center md:items-stretch flex-col md:flex-row gap-10 flex-wrap"
+		>
 			{#if cards}
 				{#each cards as { richText, price, yearlyDiscount, includeDiscount, link }}
-					<div class="relative w-full min-w-sm max-w-md mx-auto px-10 py-2">
+					<div class="max-w-xs w-full hover:scale-105 transition-transform duration-300">
 						<div class="bg-primary justify-between h-full flex flex-col rounded-3xl p-10">
-							<RichTextRender
-								overrides="prose-headings:text-background prose-headings:font-bold prose-li:text-lg prose-ul:pt-7 prose-li:text-background/70 prose-p:text-background"
-								{richText}
-							/>
+							<RichTextRender {richText} />
 							<div class="flex flex-col gap-8 px-4">
 								<div class="text-background flex flex-col text-balance font-thin">
 									{#if includeDiscount && checked}

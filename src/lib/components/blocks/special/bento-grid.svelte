@@ -6,7 +6,7 @@
 	const { grid } = blockData;
 </script>
 
-<section id="bento-grid" class="py-5">
+<section id="bento-grid " class="py-5 max-w-lg lg:max-w-xl">
 	<div class="grid grid-cols-1 grid-rows-auto md:grid-rows-6 gap-4 px-4 md:px-0 md:grid-cols-2">
 		<div
 			class="bg-foreground max-w-md md:max-w-full **:text-background! rounded-theme p-8 row-span-1 md:row-span-4 order-3 md:order-1"

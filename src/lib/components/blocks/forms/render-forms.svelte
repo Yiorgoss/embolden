@@ -41,7 +41,7 @@
 				})
 			});
 			if (!submissionResponse.ok) {
-				toast.error('Submission Failed. Please try again or contact us directly.');
+				toast.error('Submission Failed. Please try again or contact us by phone.');
 				return;
 			}
 			if (data.confirmationType == 'redirect') {
@@ -77,7 +77,7 @@
 						{#if f.blockType == 'textarea'}
 							<Textarea
 								id={f.name}
-								class="h-[130px]"
+								class="h-[200px]"
 								placeholder={f.defaultValue ?? f.blockType}
 								value={fieldAPI.state.value}
 								onblur={() => fieldAPI.handleBlur()}

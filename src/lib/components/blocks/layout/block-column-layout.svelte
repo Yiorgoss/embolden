@@ -16,13 +16,13 @@
 				cssList.push('md:w-0');
 				break;
 			case 'halfAndHalf':
-				cssList.push('md:w-1/2');
-				cssList.push('md:w-1/2');
+				cssList.push('grow');
+				cssList.push('grow');
 				cssList.push('md:w-0');
 				break;
 			case 'oneTwoThird':
-				cssList.push('md:w-1/3');
-				cssList.push('md:w-2/3');
+				cssList.push('grow-1');
+				cssList.push('grow-2');
 				cssList.push('md:w-0');
 				break;
 			case 'twoOneThird':
@@ -31,9 +31,9 @@
 				cssList.push('md:w-0');
 				break;
 			case 'threeColumns':
-				cssList.push('max-w-md mx-auto w-full');
-				cssList.push('max-w-md mx-auto w-full');
-				cssList.push('max-w-md mx-auto w-full');
+				cssList.push('max-w-sm w-full');
+				cssList.push('max-w-sm w-full');
+				cssList.push('max-w-sm w-full');
 				break;
 		}
 		return cssList;
@@ -53,12 +53,12 @@
 	<div
 		style:padding={style?.padding}
 		style:background=""
-		class="flex flex-wrap gap-y-10 overflow-hidden justify-center items-stretch h-full flex-col px-0 py-2 md:py-0 md:px-5 md:flex-row container mx-auto"
+		class="flex flex-wrap gap-10 overflow-hidden justify-center items-center md:items-stretch h-full flex-col md:flex-row container mx-auto"
 	>
 		<div
 			style:align-items={style?.alignY}
 			style:justify-content={style?.alignX}
-			class={cn('flex px-0 md:px-5 justify-center items-center', widthClass[0])}
+			class={cn('flex justify-center items-center md:items-stretch', widthClass[0])}
 		>
 			<RenderBlocks blockData={columnOne![0]} />
 		</div>
@@ -66,7 +66,7 @@
 			<div
 				style:align-items={style?.alignY}
 				style:justify-content={style?.alignX}
-				class={cn('flex px-0 md:px-5 justify-center items-center ', widthClass[1])}
+				class={cn('flex justify-center items-center md:items-stretch', widthClass[1])}
 			>
 				<RenderBlocks blockData={columnTwo[0]} />
 			</div>
@@ -75,7 +75,7 @@
 			<div
 				style:align-items={style?.alignY}
 				style:justify-content={style?.alignX}
-				class={cn('flex px-0 md:px-5 justify-center items-center ', widthClass[2])}
+				class={cn('flex justify-center items-center md:items-stretch', widthClass[2])}
 			>
 				<RenderBlocks blockData={columnThree[0]} />
 			</div>

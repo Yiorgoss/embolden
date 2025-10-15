@@ -1,6 +1,5 @@
 <script lang="ts">
 	import { NavigationMenu as Nav } from 'bits-ui';
-	import Icon from '@/components/common/icon.svelte';
 	import Picture from '@/components/common/picture.svelte';
 	import Button from '@/components/common/button.svelte';
 	import * as Sheet from '@/components/ui/sheet';
@@ -10,6 +9,7 @@
 	import { throttle } from '@/utils';
 	import { page } from '$app/state';
 	import LocaleSwitcher from '@/components/common/locale-switcher.svelte';
+	import { Menu } from '@lucide/svelte';
 
 	const { blockData, hasLocaleSwitch }: { blockData: IImageHeader; hasLocaleSwitch: boolean } =
 		$props();
@@ -76,9 +76,9 @@
 				<Sheet.Trigger class="h-full">
 					<div
 						aria-label="navigation menu "
-						class="focus-visible:ring-offset-background mr-4 w-fit p-2 focus-visible:outline-hidden"
+						class="focus-visible:ring-offset-background bg-background border rounded-full mr-4 w-fit p-3 focus-visible:outline-hidden"
 					>
-						<Icon class="size-8" name="menu" />
+						<Menu class="size-8" />
 					</div>
 				</Sheet.Trigger>
 				<Sheet.Content>

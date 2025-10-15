@@ -23,6 +23,6 @@
 	});
 </script>
 
-<div id="default-rich-text" bind:this={element} class="not-italic">
+<div id="default-rich-text" bind:this={element} class={overrides}>
 	{@html html}
 </div>
