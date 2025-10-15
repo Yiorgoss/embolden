@@ -40,7 +40,7 @@
 <svelte:window bind:scrollY={currentY} onscroll={throttle(handleScroll, 100)} />
 
 <section class="fixed top-0 z-30 w-screen mx-auto h-(--header-height) px-0 md:px-0">
-	<div class="w-full h-full pr-(--scrollbar-width)">
+	<div class="w-full h-full pr-0 md:pr-(--scrollbar-width)">
 		<!-- desktop -->
 		<Nav.Root
 			class={cn(
@@ -73,14 +73,21 @@
 		<!-- mobile -->
 		<div class="flex h-full items-center justify-end md:hidden">
 			<Sheet.Root bind:open>
-				<Sheet.Trigger class="h-full">
-					<div
-						aria-label="navigation menu "
-						class="focus-visible:ring-offset-background bg-background border rounded-full mr-4 w-fit p-3 focus-visible:outline-hidden"
-					>
-						<Menu class="size-8" />
-					</div>
-				</Sheet.Trigger>
+				<div
+					class={cn(
+						'bg-background flex justify-end items-center h-full w-full transition-transform ease-out duration-500 ',
+						scrollingUp && '-translate-y-2/1'
+					)}
+				>
+					<Sheet.Trigger class="h-full">
+						<div
+							aria-label="navigation menu "
+							class="focus-visible:ring-offset-background mr-4 w-fit p-2 focus-visible:outline-hidden"
+						>
+							<Menu class="size-8" />
+						</div>
+					</Sheet.Trigger>
+				</div>
 				<Sheet.Content>
 					<Sheet.Header>
 						<Nav.Root class="h-full [&>div]:h-full ">
