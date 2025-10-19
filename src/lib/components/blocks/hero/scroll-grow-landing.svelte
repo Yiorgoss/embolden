@@ -24,7 +24,7 @@
 	//  $inspect(target, container);
 </script>
 
-<section id="scroll-grow-landing-block" class="relative h-svh bg-green-500">
+<section id="scroll-grow-landing-block" class="relative h-svh >
 	<div class="h-full overflow-x-clip">
 		<div
 			bind:this={target}
