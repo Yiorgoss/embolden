@@ -26,7 +26,7 @@
 	//  </li>
 	//  no clue how to style marker based on span style color
 	const defaults =
-		' max-w-full prose marker:text-inherit prose-headings:text-foreground prose-ul:text-foreground prose-li:text-foreground prose-ol:text-foreground prose-p:text-foreground ';
+		'my-auto px-2 wrap-break-word max-w-full prose marker:text-inherit prose-headings:text-foreground prose-ul:text-foreground prose-li:text-foreground prose-ol:text-foreground prose-p:text-foreground ';
 </script>
 
 {#await _html}

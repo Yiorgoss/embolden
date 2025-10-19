@@ -37,7 +37,10 @@
 	onMount(() => (mounted = true));
 </script>
 
-<svelte:window bind:scrollY={currentY} onscroll={throttle(handleScroll, 100)} />
+<svelte:window
+	bind:scrollY={currentY}
+	onscroll={throttle(handleScroll, 200, { leading: true, trailing: false })}
+/>
 
 <section class="fixed top-0 z-30 w-screen mx-auto h-(--header-height) px-0 md:px-0">
 	<div class="w-full h-full pr-0 md:pr-(--scrollbar-width)">
@@ -75,8 +78,7 @@
 			<Sheet.Root bind:open>
 				<div
 					class={cn(
-						'bg-background flex justify-end items-center h-full w-full transition-transform ease-out duration-500 ',
-						scrollingUp && '-translate-y-2/1'
+						'bg-background flex justify-end items-center h-full w-full transition-transform ease-out duration-500 '
 					)}
 				>
 					<Sheet.Trigger class="h-full">

@@ -11,7 +11,7 @@
 </script>
 
 <section id="sticky-container-root" class="container mx-auto py-5">
-	<div class="">
+	<div class="overflow-hidden">
 		{#each list as { richText, image, style }, i}
 			{@const left = i % 2 == 1}
 			<div
@@ -23,7 +23,7 @@
 				)}
 			>
 				{#if title && i == 0}
-					<div class="font-cursive col-span-full w-full px-10 py-6 text-4xl">{title}</div>
+					<div class="font-cursive break-all col-span-full w-full px-10 py-6 text-4xl">{title}</div>
 				{/if}
 
 				<div

@@ -16,7 +16,7 @@
 	let bgLoaded = $state(false);
 </script>
 
-<div id="calisto-landing" class="grid h-lvh grid-cols-3 grid-rows-3 md:min-h-lvh">
+<div id="calisto-landing" class="grid min-h-lvh grid-cols-1 grid-rows-1 md:h-auto md:min-h-lvh">
 	<div class="z-0 col-span-full row-span-full">
 		{#if image}
 			<Picture
@@ -30,15 +30,15 @@
 	</div>
 	<div
 		class:opacity-100={bgLoaded}
-		class="z-10 transition-opacity delay-500 duration-400 opacity-0 col-span-full row-start-2 row-end-4 container px-5"
+		class="z-10 transition-opacity delay-500 duration-400 opacity-0 col-span-full row-span-full pt-(--header-height) py-5 px-5"
 	>
-		<div class="flex h-full max-w-fit flex-col items-start justify-center">
+		<div class="flex h-full w-full lg:w-3/5 flex-col items-start justify-center">
 			{#if richText}
 				<RichTextRender {richText} />
 			{/if}
-			<div class="flex gap-5 self-start pt-10">
-				<Button class="px-5  py-5" link={ctaTwo} />
-				<Button class="px-5  py-5" link={ctaOne} />
+			<div class="flex flex-wrap gap-5 self-start pt-10">
+				<Button class="px-5 py-5" link={ctaTwo} />
+				<Button class="px-5 py-5" link={ctaOne} />
 			</div>
 		</div>
 	</div>

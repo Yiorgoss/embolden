@@ -32,14 +32,14 @@
 	{#if currentPage}
 		<Meta meta={currentPage.meta} />
 		{#if currentPage && currentPage.hero.length > 0}
-			<section id="hero-container" class="[&>#medium-hero]:h-[600px]">
+			<section id="hero-container" class="">
 				<RenderBlocks cb={() => (heroLoaded = true)} blockData={currentPage.hero[0]} />
 			</section>
 		{/if}
 		{#if heroLoaded}
 			<div
 				id="render-block-container"
-				class={`bg-background relative ${currentPage.hero?.[0] ? '' : 'pt-(--header-height)'}`}
+				class={` relative ${currentPage.hero?.[0] ? '' : 'pt-(--header-height)'}`}
 			>
 				{#each currentPage.layout as block}
 					<RenderBlocks blockData={block} />
