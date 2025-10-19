@@ -47,6 +47,14 @@
 				return import('./navigation/footer/rich-text-footer.svelte');
 			case 'contactForm':
 				return import('./forms/contact-form.svelte');
+			case 'scrollGrowLanding':
+				return import('./hero/scroll-grow-landing.svelte');
+			case 'marquee':
+				return import('./special/marquee.svelte');
+			case 'richTextCard':
+				return import('./cards/rich-text-card.svelte');
+			case 'infoBanner':
+				return import('./banners/info-banner.svelte');
 		}
 	};
 

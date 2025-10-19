@@ -1,14 +1,4 @@
+import { throttle } from "lodash-es"
 
-export function throttle(callbackFn: () => void, limit: number) {
-	let wait = false;
-	return function() {
-		if (!wait) {
-			callbackFn();
-			wait = true;
-			setTimeout(function() {
-				wait = false;
-			});
-		}
-	};
-}
+export { throttle }
 
