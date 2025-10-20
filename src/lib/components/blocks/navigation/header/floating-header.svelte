@@ -14,7 +14,8 @@
 	const { blockData, hasLocaleSwitch }: { blockData: IImageHeader; hasLocaleSwitch: boolean } =
 		$props();
 
-	const { image, nav } = blockData;
+	const { image, nav, style } = blockData;
+	const { inset } = style || {};
 
 	const { locale } = page.params;
 
@@ -42,12 +43,15 @@
 	onscroll={throttle(handleScroll, 200, { leading: true, trailing: false })}
 />
 
-<section class="fixed top-0 z-30 w-screen mx-auto h-(--header-height) px-0 md:px-0">
-	<div class="w-full h-full pr-0 md:pr-(--scrollbar-width)">
+<section
+	style:inset
+	class="fixed container top-[10px] z-30 w-full left-0 right-0 mx-auto h-(--header-height) px-0 md:px-0"
+>
+	<div class="w-full h-full">
 		<!-- desktop -->
 		<Nav.Root
 			class={cn(
-				'translate-y-0 shadow-xl px-10 bg-background mr-10 transition-transform ease-out duration-500 hidden w-full items-center justify-between md:flex',
+				'translate-y-0 shadow-xl px-10 bg-background rounded-theme transition-transform ease-out duration-500 hidden w-full items-center justify-between md:flex',
 				scrollingUp && '-translate-y-2/1'
 			)}
 		>
@@ -78,11 +82,11 @@
 			<Sheet.Root bind:open>
 				<div
 					class={cn(
-						'bg-background flex justify-between items-center h-full w-full transition-transform ease-out duration-500 ',
+						'bg-background flex justify-between rounded-theme items-center h-full w-full transition-transform ease-out duration-500 ',
 						scrollingUp && '-translate-y-2/1'
 					)}
 				>
-					<a href={`/${locale ?? ''}`} class="">
+					<a href={`/${locale ?? ''}`} class="px-2">
 						<div class="h-(--header-height) p-2 lg:p-2 md:p-4 w-auto">
 							<Picture class="object-contain py-2" loading="eager" {image} />
 						</div>

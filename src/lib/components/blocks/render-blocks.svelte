@@ -43,6 +43,8 @@
 				return import('./rich-text/block.svelte');
 			case 'imageHeader':
 				return import('./navigation/header/image-header.svelte');
+			case 'floatingHeader':
+				return import('./navigation/header/floating-header.svelte');
 			case 'richTextFooter':
 				return import('./navigation/footer/rich-text-footer.svelte');
 			case 'contactForm':

@@ -4,27 +4,28 @@
 	import { RichTextRender } from '../rich-text';
 
 	const { blockData }: { blockData: IMarquee } = $props();
-	const { richText, image, style, maskEdges } = blockData;
+	const { richText, image, style, options } = blockData;
+	const { nRepeat, maskEdges } = options || {};
 	const { background, height, border, padding, animation } = style || {};
 </script>
 
 <section
-	style:background
 	id="marquee-block"
-	class:mask-none={!true}
+	style:border
+	style:padding
+	style:background
+	class:mask-none={!maskEdges}
 	class="mask-l-from-90% mask-r-from-90% overflow-hidden"
 >
 	<div
-		style:border
-		style:padding
 		style:height
 		style:animation-duration={animation?.duration}
 		data-animated="true"
-		class=" marquee-default flex justify-start gap-10 py-10 w-fit"
+		class=" marquee-default flex items-enter justify-start gap-10 w-fit"
 	>
-		{#each { length: 4 } as _}
-			<div class="w-full min-w-fit">
-				<Picture {image} class="py-2 object-contain" />
+		{#each { length: nRepeat ?? 6 } as _}
+			<div class="h-full w-full min-w-fit">
+				<Picture {image} class=" object-contain" />
 			</div>
 			<RichTextRender overrides="text-nowrap inline-block" {richText} />
 		{/each}
