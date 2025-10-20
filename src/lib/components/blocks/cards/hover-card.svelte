@@ -15,7 +15,7 @@
 	<Card.Root
 		ontouchstart={() => (mobileHover = true)}
 		ontouchend={() => (mobileHover = false)}
-		class="relative group/card h-full p-0 overflow-hidden max-w-sm w-full"
+		class="relative group/card h-full p-0 overflow-hidden max-w-xs md:max-w-sm w-full"
 	>
 		<Card.Content class="px-0 h-full">
 			<div class="grid h-full grid-cols-1 grid-rows-1">

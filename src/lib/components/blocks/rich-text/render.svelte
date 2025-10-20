@@ -7,12 +7,8 @@
 	import Icon from '@/components/common/icon.svelte';
 
 	// there exists both richText overrides and component specific overrides
-	const {
-		richText,
-		overrides,
-		className,
-		cb
-	}: { className?: null; richText: any; overrides?: string; cb?: () => void } = $props();
+	const { richText, overrides, cb }: { richText: any; overrides?: string; cb?: () => void } =
+		$props();
 	const _html =
 		richText && richText.text
 			? convertLexicalToHTMLAsync({ data: richText.text, converters: htmlConverters })

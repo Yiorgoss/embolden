@@ -78,7 +78,8 @@
 			<Sheet.Root bind:open>
 				<div
 					class={cn(
-						'bg-background flex justify-end items-center h-full w-full transition-transform ease-out duration-500 '
+						'bg-background flex justify-end items-center h-full w-full transition-transform ease-out duration-500 ',
+						scrollingUp && '-translate-y-2/1'
 					)}
 				>
 					<Sheet.Trigger class="h-full">

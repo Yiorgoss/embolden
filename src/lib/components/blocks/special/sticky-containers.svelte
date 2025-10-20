@@ -11,7 +11,7 @@
 </script>
 
 <section id="sticky-container-root" class="container mx-auto py-5">
-	<div class="overflow-hidden">
+	<div class="">
 		{#each list as { richText, image, style }, i}
 			{@const left = i % 2 == 1}
 			<div

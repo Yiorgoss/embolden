@@ -34,7 +34,7 @@
 	>
 		<div class="flex h-full w-full lg:w-3/5 flex-col items-start justify-center">
 			{#if richText}
-				<RichTextRender {richText} />
+				<RichTextRender {richText} overrides="my-0" />
 			{/if}
 			<div class="flex flex-wrap gap-5 self-start pt-10">
 				<Button class="px-5 py-5" link={ctaTwo} />

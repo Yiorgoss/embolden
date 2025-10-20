@@ -49,7 +49,9 @@
 		>
 			{#if cards}
 				{#each cards as { richText, icon }}
-					<div class="max-w-sm w-full hover:scale-105 transition-transform duration-300">
+					<div
+						class="max-w-xs md:max-w-sm w-full hover:scale-105 transition-transform duration-300"
+					>
 						<div class="relative flex-auto h-full">
 							<div class="bg-primary h-full flex flex-col rounded-3xl p-10">
 								<RichTextRender
