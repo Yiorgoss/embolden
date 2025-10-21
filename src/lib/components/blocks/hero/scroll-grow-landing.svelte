@@ -58,7 +58,7 @@
 		</div>
 		<div
 			style:height={`calc(${height ?? '100vh'}*1.5)`}
-			style:transform-origin="center 90%"
+			style:transform-origin="center bottom"
 			bind:this={item}
 			class="col-start-1 row-start-1 relative w-full"
 		>

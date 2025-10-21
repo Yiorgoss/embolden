@@ -1,5 +1,6 @@
 <script lang="ts">
 	import { Button, type ButtonProps as DefaultButtonProps } from '@/components/ui/button';
+	import { cn } from '@/utils';
 	import { type IButton } from '@payload-types';
 	import type { Snippet } from 'svelte';
 
@@ -7,7 +8,7 @@
 	const { class: className, variant, text, href, ...restProps }: ButtonProps = $props();
 </script>
 
-<Button class={className} {variant} {href} {...restProps}>
+<Button class={cn('wrap-anywhere mx-2', className)} {variant} {href} {...restProps}>
 	{#if typeof text == 'string'}
 		{text}
 	{:else}

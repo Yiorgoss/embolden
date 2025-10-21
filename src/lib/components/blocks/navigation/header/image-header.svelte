@@ -84,7 +84,7 @@
 				>
 					<a href={`/${locale ?? ''}`} class="">
 						<div class="h-(--header-height) p-2 lg:p-2 md:p-4 w-auto">
-							<Picture class="object-contain py-2" loading="eager" {image} />
+							<Picture class="object-contain py-2 w-full " loading="eager" {image} />
 						</div>
 					</a>
 					<Sheet.Trigger class="h-full">

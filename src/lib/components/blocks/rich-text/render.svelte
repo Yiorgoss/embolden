@@ -24,7 +24,7 @@
 	//  ...
 	//  ...
 	//  think you can set a css variaable and then reference it
-	const defaults = 'my-auto px-2 wrap-break-word max-w-full marker:text-inherit';
+	const defaults = 'my-auto wrap-anywhere break-all px-2 max-w-full marker:text-inherit';
 </script>
 
 {#await _html}

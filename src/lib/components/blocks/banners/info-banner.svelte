@@ -16,9 +16,9 @@
 		style:padding
 		style:height
 		style:justify-content={alignX}
-		class="flex items-center gap-10 py-10 w-full"
+		class="flex items-center gap-10 px-2 py-10 w-full"
 	>
-		<RichTextRender overrides="text-nowrap inline-block" {richText} />
+		<RichTextRender overrides="inline-block" {richText} />
 		<Button {link} />
 	</div>
 </section>

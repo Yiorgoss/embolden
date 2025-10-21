@@ -11,13 +11,10 @@
 
 <div class="inset-shadow-[0_15px_20px_-15px_rgb(0_0_0_/_0.25)] rounded-theme">
 	<div
-		class="container pt-10 md:px-0 px-20 pb-10 mx-auto flex justify-between items-center flex-col gap-4 md:flex-row"
+		class="container pt-10 md:px-0 px-10 pb-10 mx-auto flex justify-between items-center flex-col gap-4 md:flex-row"
 	>
 		<div class="w-full md:px-0 md:w-4/8 grow pt-10 md:pt-0">
-			<RichTextRender
-				overrides="prose-headings:text-6xl sm:prose-headings:text-8xl md:prose-headings:text-9xl prose-headings:text-center md:prose-headings:text-left prose-headings:font-normal"
-				{richText}
-			/>
+			<RichTextRender overrides="" {richText} />
 		</div>
 		<div
 			class="w-full md:w-3/8 flex flex-col text-center justify-start md:justify-around pt-10 md:pt-0"
