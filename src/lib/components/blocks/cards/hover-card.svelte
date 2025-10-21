@@ -34,11 +34,11 @@
 					<div class="grow duration-500">
 						<div
 							class={cn(
-								'font-serif break-all text-blue-400 group-hover/card:opacity-0 transition-opacity duration-300 text-5xl p-2 absolute top-1/2 left-1/2 -translate-1/2',
+								'font-serif break-all group-hover/card:opacity-0 transition-opacity duration-300 text-5xl p-2 absolute top-1/2 left-1/2 -translate-1/2',
 								mobileHover && 'opacity-0'
 							)}
 						>
-							arstarstarstarstasrtarstasrtaasraaaaaaaaaaaaarsatar {title}
+							{title}
 						</div>
 						<div
 							class={cn(
