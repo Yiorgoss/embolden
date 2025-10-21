@@ -48,7 +48,7 @@
 <section id="scroll-grow-landing-block" class="relative">
 	<div class="h-full overflow-x-clip relative grid grid-cols-1 grid-rows-1">
 		<div style:background class="-z-0 col-start-1 row-start-1 h-full w-full">
-			<Picture image={finalImg} class="" />
+			<Picture image={initImg} class="" />
 		</div>
 		<div class="relative flex z-10 justify-center items-center col-start-1 row-start-1">
 			<div bind:this={text} class="relative flex flex-col justify-center items-center">
