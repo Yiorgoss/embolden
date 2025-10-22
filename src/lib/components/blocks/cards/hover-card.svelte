@@ -8,6 +8,8 @@
 	const { blockData }: { blockData: IHoverCard } = $props();
 	const { image, title, description, style } = blockData;
 
+	const { background } = style || {};
+
 	let mobileHover = $state(false);
 </script>
 
@@ -15,7 +17,7 @@
 	<Card.Root
 		ontouchstart={() => (mobileHover = true)}
 		ontouchend={() => (mobileHover = false)}
-		class="relative group/card h-full p-0 overflow-hidden max-w-xs md:max-w-sm w-full"
+		class="relative group/card h-full  p-0 overflow-hidden max-w-xs md:max-w-sm w-full"
 	>
 		<Card.Content class="px-0 h-full">
 			<div class="grid h-full grid-cols-1 grid-rows-1">
@@ -28,7 +30,7 @@
 					{/if}
 				</div>
 				<div
-					style:background={style?.background}
+					style:background
 					class="row-start-1 col-start-1 flex flex-col relative p-8 z-10 mix-blend-harden"
 				>
 					<div class="grow duration-500">

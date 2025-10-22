@@ -59,6 +59,7 @@
 		]
 	},
 	"dependencies": {
+		"@motionone/types": "^10.17.1",
 		"@payloadcms/live-preview": "^3.59.1",
 		"@tanstack/svelte-form": "^1.9.0",
 		"@types/lodash": "^4.17.20",

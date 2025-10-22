@@ -4,7 +4,7 @@
 	import { RichTextRender } from '../rich-text';
 
 	const { blockData }: { blockData: IMarquee } = $props();
-	const { richText, image, style, options } = blockData;
+	const { richText, image, style, options, link } = blockData;
 	const { nRepeat, maskEdges } = options || {};
 	const { background, height, border, padding, animation } = style || {};
 </script>
@@ -24,7 +24,7 @@
 		class=" marquee-default flex items-enter justify-start gap-10 w-fit"
 	>
 		{#each { length: nRepeat ?? 6 } as _}
-			<div class="h-full w-full min-w-fit">
+			<div class="flex justify-center items-center h-full w-full min-w-fit">
 				<Picture {image} class=" object-contain" />
 			</div>
 			<RichTextRender overrides="text-nowrap inline-block" {richText} />

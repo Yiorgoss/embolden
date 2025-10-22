@@ -16,18 +16,18 @@
 				cssList.push('md:w-0');
 				break;
 			case 'halfAndHalf':
-				cssList.push('grow');
-				cssList.push('grow');
+				cssList.push('md:grow-1 md:shrink-1 md:basis-0 md:w-0'); //flex-[1_1_0] w-0
+				cssList.push('md:grow-1 md:shrink-1 md:basis-0 md:w-0');
 				cssList.push('md:w-0');
 				break;
 			case 'oneTwoThird':
-				cssList.push('grow-1');
-				cssList.push('grow-2');
+				cssList.push('md:grow-1 md:shrink-1 md:basis-0 md:w-0'); //flex-[1_1_0] w-0
+				cssList.push('md:grow-2 md:shrink-1 md:basis-0 md:w-0');
 				cssList.push('md:w-0');
 				break;
 			case 'twoOneThird':
-				cssList.push('md:w-2/3');
-				cssList.push('md:w-1/3');
+				cssList.push('md:grow-2 md:shrink-1 md:basis-0 md:w-0'); //flex-[1_1_0] w-0
+				cssList.push('md:grow-1 md:shrink-1 md:basis-0 md:w-0');
 				cssList.push('md:w-0');
 				break;
 			case 'threeColumns':
@@ -52,13 +52,13 @@
 >
 	<div
 		style:padding={style?.padding}
-		style:background=""
-		class="flex flex-wrap gap-10 overflow-hidden justify-center items-center md:items-stretch h-full flex-col md:flex-row container mx-auto"
+		class:flex-wrap={layout == 'threeColumns'}
+		class="flex gap-10 overflow-hidden justify-center items-center md:items-stretch h-full flex-col md:flex-row container mx-auto"
 	>
 		<div
 			style:align-items={style?.alignY}
 			style:justify-content={style?.alignX}
-			class={cn('flex justify-center items-center md:items-stretch', widthClass[0])}
+			class={cn('flex grow-1 justify-center items-center md:items-stretch', widthClass[0])}
 		>
 			<RenderBlocks blockData={columnOne![0]} />
 		</div>
@@ -66,7 +66,7 @@
 			<div
 				style:align-items={style?.alignY}
 				style:justify-content={style?.alignX}
-				class={cn('flex justify-center items-center md:items-stretch', widthClass[1])}
+				class={cn('flex grow-2 justify-center items-center md:items-stretch', widthClass[1])}
 			>
 				<RenderBlocks blockData={columnTwo[0]} />
 			</div>
