@@ -2,6 +2,54 @@ import type { Asset, Page, Tenant } from '@payload-types';
 import { defaultLocale, site, type SiteConfigType } from '@/config';
 import { error } from '@sveltejs/kit';
 
+export function splitRichTextIntoWords(strHTML: string, opts?: { wordPadding: string }) {
+  //must be used after mount
+  const { wordPadding } = opts || { wordPadding: "10px" } //defaults
+
+  let html: string;
+  try {
+    if (!window.DOMParser) throw Error;
+    const parser = new DOMParser();
+    const doc = parser.parseFromString(strHTML, 'text/html');
+    wrapEachTextNode(doc.body.firstChild as Node, wordPadding);
+    html = doc.body.innerHTML;
+  } catch {
+    html = strHTML;
+  }
+
+  return html;
+}
+
+const wrapEachTextNode = (el: Node, wordPadding: string) => {
+  let textNodes = [];
+
+  const walker = document.createTreeWalker(el, NodeFilter.SHOW_TEXT);
+  while (walker.nextNode()) {
+    textNodes.push(walker.currentNode as Element); //gather references
+  }
+
+  // now wrap them in class
+  textNodes.forEach((textNode, i) => {
+    const content = textNode.textContent ?? '';
+    let replaceNode = document.createElement('span');
+    content
+      .trim()
+      .split(' ')
+      .filter((x) => Boolean(x))
+      .forEach((word, i) => {
+        let newNode = document.createElement('span');
+        newNode.setAttribute('class', 'word');
+        newNode.style.display = 'inline-block';
+        newNode.style.overflow = 'hidden';
+        newNode.style.paddingLeft = wordPadding;
+        newNode.appendChild(document.createTextNode(word));
+
+        replaceNode.appendChild(newNode);
+      });
+    textNode.replaceWith(replaceNode);
+  });
+};
+
 export function mergeUpdateData({ oldData, newData }: { oldData: any, newData: any }) {
   let updatedData = oldData
   if (newData.nav) {

@@ -5,15 +5,17 @@
 	//  import { convertLexicalToHTMLAsync } from '@payloadcms/richtext-lexical/html-async';
 	import { convertLexicalToHTMLAsync } from 'payload-richtext-fork/html-async';
 	import Icon from '@/components/common/icon.svelte';
+	import { onMount } from 'svelte';
 
 	// there exists both richText overrides and component specific overrides
 	const { richText, overrides, cb }: { richText: any; overrides?: string; cb?: () => void } =
 		$props();
-	const _html =
+	const _html = $state(
 		richText && richText.text
 			? convertLexicalToHTMLAsync({ data: richText.text, converters: htmlConverters })
-			: '';
-
+			: ''
+	);
+	let { shouldAnimate, animation, style } = richText || {};
 	// will cause issues if marker if not of color foreground, must either be overridden
 	//  paylaod textstate gives
 	//  <li>
@@ -24,13 +26,21 @@
 	//  ...
 	//  ...
 	//  think you can set a css variaable and then reference it
-	const defaults = 'my-auto wrap-anywhere break-all px-2 max-w-full marker:text-inherit';
+	const defaults = 'my-auto wrap-anywhere break-all px-2 w-full max-w-full marker:text-inherit';
+	let animatedRichText = $state();
 </script>
 
 {#await _html}
 	<div class="flex h-full w-full items-center justify-center">
-		<Icon name="loader-circle" class="animate-[spin_2s_linear_infinite] " />
+		<Icon name="loader-circle" class="text-forground/20 animate-[spin_2s_linear_infinite] " />
 	</div>
 {:then html}
-	<DefaultRichText overrides={cn(defaults, overrides)} html={html ?? ''} />
+	{#if shouldAnimate}
+		{#await import('./animated.svelte') then B: any}
+			{@const Block = B.default}
+			<Block overrides={cn(defaults, overrides)} {style} {animation} html={html ?? ''} />
+		{/await}
+	{:else}
+		<DefaultRichText overrides={cn(defaults, overrides)} {style} html={html ?? ''} />
+	{/if}
 {/await}

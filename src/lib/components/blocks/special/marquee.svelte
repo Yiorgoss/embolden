@@ -4,9 +4,9 @@
 	import { RichTextRender } from '../rich-text';
 
 	const { blockData }: { blockData: IMarquee } = $props();
-	const { richText, image, style, options, link } = blockData;
+	const { richText, image, style, options, link, animation } = blockData;
 	const { nRepeat, maskEdges } = options || {};
-	const { background, height, border, padding, animation } = style || {};
+	const { background, height, border, padding } = style || {};
 </script>
 
 <section
