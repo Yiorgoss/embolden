@@ -7,7 +7,7 @@
 	const {
 		image,
 		pictureClass,
-		class: imageClass = 'object-cover',
+		class: imageClass,
 		sizes: imageSizes = '100vw',
 		loading = 'lazy',
 		cb

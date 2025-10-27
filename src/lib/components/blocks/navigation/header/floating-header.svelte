@@ -87,10 +87,10 @@
 					)}
 				>
 					<a href={`/${locale ?? ''}`} class="h-full px-2">
-						<!--  max width needed on picture to prevent wierd img grow on safari  -->
 						<div class="h-full p-2 lg:p-2 md:p-4">
+							<!--  max width needed on picture to prevent wierd img grow on safari  -->
 							<Picture
-								class="object-contain h-full bg-blue-300 max-w-(--header-height)"
+								class="object-contain h-full max-w-(--header-height)"
 								loading="eager"
 								{image}
 							/>
