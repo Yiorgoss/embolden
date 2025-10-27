@@ -42,7 +42,7 @@
 	onscroll={throttle(handleScroll, 200, { leading: true, trailing: false })}
 />
 
-<section class="fixed top-0 z-30 w-screen mx-auto h-(--header-height) px-0 md:px-0">
+<section class="fixed top-0 inset-x-0 z-30 w-screen mx-auto h-(--header-height) px-0 md:px-0">
 	<div class="w-full h-full pr-0 md:pr-(--scrollbar-width)">
 		<!-- desktop -->
 		<Nav.Root
@@ -85,7 +85,7 @@
 					<a href={`/${locale ?? ''}`} class="">
 						<div class="h-(--header-height) p-2 lg:p-2 md:p-4">
 							<!--  max width needed on picture to prevent wierd img grow on safari  -->
-							<Picture class="object-contain max-w-[100px]" loading="eager" {image} />
+							<Picture class="object-contain max-w-(--header-height)" loading="eager" {image} />
 						</div>
 					</a>
 					<Sheet.Trigger class="h-full">

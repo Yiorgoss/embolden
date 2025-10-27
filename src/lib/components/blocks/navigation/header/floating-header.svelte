@@ -45,7 +45,7 @@
 
 <section
 	style:inset
-	class="fixed container top-2 z-30 overflow-hidden mx-auto h-(--header-height) px-2 md:px-0"
+	class="fixed container top-2 inset-x-0 z-30 overflow-hidden mx-auto h-(--header-height) px-2 md:px-0"
 >
 	<div class="w-full h-full">
 		<!-- desktop -->
