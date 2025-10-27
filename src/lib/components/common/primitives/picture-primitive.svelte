@@ -98,7 +98,7 @@
 			style:border-radius={borderRadius}
 			class:opacity-100={imageLoaded}
 			class={cn(
-				'z-0 transition-all duration-300 opacity-0 col-start-1 row-start-1 h-full w-full object-cover',
+				'z-0 transition-all duration-300 opacity-0 col-start-1 row-start-1 h-full w-full object-contain',
 				imageClass
 			)}
 		/>

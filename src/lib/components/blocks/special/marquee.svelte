@@ -15,19 +15,19 @@
 	style:padding
 	style:background
 	class:mask-none={!maskEdges}
-	class="mask-l-from-90% mask-r-from-90% overflow-hidden"
+	class="mask-l-from-90% mask-r-from-90% overflow-clip"
 >
 	<div
 		style:height
 		style:animation-duration={animation?.duration}
 		data-animated="true"
-		class=" marquee-default flex items-enter justify-start gap-10 w-fit"
+		class=" marquee-default flex items-center w-full justify-start gap-10"
 	>
 		{#each { length: nRepeat ?? 6 } as _}
-			<div class="flex justify-center items-center h-full w-full min-w-fit">
+			<div class="flex justify-center items-center min-w-fit h-full w-full">
 				<Picture {image} class=" object-contain" />
 			</div>
-			<RichTextRender overrides="text-nowrap inline-block" {richText} />
+			<RichTextRender overrides="min-w-fit break-keep text-nowrap inline-block" {richText} />
 		{/each}
 	</div>
 </section>

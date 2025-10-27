@@ -45,13 +45,13 @@
 
 <section
 	style:inset
-	class="fixed container top-[10px] z-30 w-full left-0 right-0 mx-auto h-(--header-height) px-0 md:px-0"
+	class="fixed container top-2 z-30 overflow-hidden mx-auto h-(--header-height) px-2 md:px-0"
 >
 	<div class="w-full h-full">
 		<!-- desktop -->
 		<Nav.Root
 			class={cn(
-				'translate-y-0 shadow-xl px-10 bg-background rounded-theme transition-transform ease-out duration-500 hidden w-full items-center justify-between md:flex',
+				'translate-y-0 shadow-xl px-10 bg-background overflow-hidden rounded-theme transition-transform ease-out duration-500 hidden w-full items-center justify-between md:flex',
 				scrollingUp && '-translate-y-2/1'
 			)}
 		>
@@ -82,13 +82,18 @@
 			<Sheet.Root bind:open>
 				<div
 					class={cn(
-						'bg-background flex justify-between rounded-theme items-center h-full w-full transition-transform ease-out duration-500 ',
+						'bg-background flex justify-between rounded-theme items-center h-full w-full transition-transform ease-out duration-500 overflow-hidden',
 						scrollingUp && '-translate-y-2/1'
 					)}
 				>
-					<a href={`/${locale ?? ''}`} class="px-2">
-						<div class="h-(--header-height) p-2 lg:p-2 md:p-4 w-auto">
-							<Picture class="object-contain py-2" loading="eager" {image} />
+					<a href={`/${locale ?? ''}`} class="h-full px-2">
+						<!--  max width needed on picture to prevent wierd img grow on safari  -->
+						<div class="h-full p-2 lg:p-2 md:p-4">
+							<Picture
+								class="object-contain h-full bg-blue-300 max-w-(--header-height)"
+								loading="eager"
+								{image}
+							/>
 						</div>
 					</a>
 					<Sheet.Trigger class="h-full">

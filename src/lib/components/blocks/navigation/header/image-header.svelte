@@ -83,8 +83,9 @@
 					)}
 				>
 					<a href={`/${locale ?? ''}`} class="">
-						<div class="h-(--header-height) p-2 lg:p-2 md:p-4 w-auto">
-							<Picture class="object-contain py-2 w-full " loading="eager" {image} />
+						<div class="h-(--header-height) p-2 lg:p-2 md:p-4">
+							<!--  max width needed on picture to prevent wierd img grow on safari  -->
+							<Picture class="object-contain max-w-[100px]" loading="eager" {image} />
 						</div>
 					</a>
 					<Sheet.Trigger class="h-full">

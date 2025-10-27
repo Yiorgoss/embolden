@@ -26,8 +26,7 @@
 	//  ...
 	//  ...
 	//  think you can set a css variaable and then reference it
-	const defaults = 'my-auto wrap-anywhere break-all px-2 w-full max-w-full marker:text-inherit';
-	let animatedRichText = $state();
+	const defaults = 'my-auto wrap-break-word px-2 w-full max-w-full marker:text-inherit';
 </script>
 
 {#await _html}
