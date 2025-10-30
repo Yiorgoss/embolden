@@ -1,6 +1,7 @@
-import type { Asset, Page, Tenant } from '@payload-types';
+import type { Asset, Page, Tenant, IButton } from '@payload-types';
 import { defaultLocale, site, type SiteConfigType } from '@/config';
 import { error } from '@sveltejs/kit';
+import { buttonVariants } from '@/components/ui/button';
 
 export function splitRichTextIntoWords(strHTML: string, opts?: { wordPadding: string }) {
   //must be used after mount
@@ -25,7 +26,13 @@ const wrapEachTextNode = (el: Node, wordPadding: string) => {
 
   const walker = document.createTreeWalker(el, NodeFilter.SHOW_TEXT);
   while (walker.nextNode()) {
-    textNodes.push(walker.currentNode as Element); //gather references
+    const current = walker.currentNode as Element
+    const parent = current.parentNode
+    if (parent?.nodeName == "STYLE" || parent?.nodeName == "A") {
+      // skip certain nodes
+      continue
+    }
+    textNodes.push(current); //gather references
   }
 
   // now wrap them in class
@@ -146,3 +153,23 @@ export const richTextImg = async ({ imgData }: { imgData: Asset | number }) => {
                 alt=""
           />`
 };
+
+export const richTextBtn = async ({ link }: { link: IButton }) => {
+
+  let { type: urlType, reference, url, display, style: linkStyle } = link || {};
+  // const = linkStyle || {}
+
+  const style = linkStyle && Object.entries(linkStyle)
+    .filter(([_, value]) => Boolean(value))
+    .reduce((acc, [key, value]) => `${acc};${key}:${value}`, "")
+
+  if (!reference?.value && !url) throw Error("Rich text Button needs a valid url")
+
+  const href = urlType == 'reference'
+    ? (await resolveID({ collection: reference!.relationTo, data: reference?.value })).slug
+    : url
+  const { text, variant, size } = display || {}
+
+  const classList = buttonVariants({ variants: variant, size })
+  return `<a class="${classList}" style="${style}" href="${href}">${text}</a>`
+}

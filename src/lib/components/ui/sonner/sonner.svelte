@@ -3,7 +3,6 @@
 	import { mode } from 'mode-watcher';
 
 	let { ...restProps }: SonnerProps = $props();
-	$inspect(restProps);
 </script>
 
 <Sonner

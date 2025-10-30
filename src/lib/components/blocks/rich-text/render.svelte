@@ -17,7 +17,6 @@
 	);
 	let { shouldAnimate, animation, style } = richText || {};
 	const { marker } = style || {};
-	console.log({ marker });
 	// will cause issues if marker if not of color foreground, must either be overridden
 	//  paylaod textstate gives
 	//  <li>

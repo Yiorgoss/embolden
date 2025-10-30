@@ -29,7 +29,6 @@
 	let element = $state() as HTMLElement;
 
 	const html = splitRichTextIntoWords(htmlCMS);
-	console.log({ htmlCMS, html });
 </script>
 
 <div id="animated-rich-text" class={cn('relative overflow-hidden', overrides)}>
