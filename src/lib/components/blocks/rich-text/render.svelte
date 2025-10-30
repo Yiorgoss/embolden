@@ -16,6 +16,8 @@
 			: ''
 	);
 	let { shouldAnimate, animation, style } = richText || {};
+	const { marker } = style || {};
+	console.log({ marker });
 	// will cause issues if marker if not of color foreground, must either be overridden
 	//  paylaod textstate gives
 	//  <li>
@@ -26,7 +28,7 @@
 	//  ...
 	//  ...
 	//  think you can set a css variaable and then reference it
-	const defaults = 'my-auto wrap-break-word px-2 w-full max-w-full marker:text-inherit';
+	const defaults = 'my-auto wrap-break-word px-2 w-full max-w-full ';
 </script>
 
 {#await _html}
@@ -34,12 +36,14 @@
 		<Icon name="loader-circle" class="text-forground/20 animate-[spin_2s_linear_infinite] " />
 	</div>
 {:then html}
-	{#if shouldAnimate}
-		{#await import('./animated.svelte') then B: any}
-			{@const Block = B.default}
-			<Block overrides={cn(defaults, overrides)} {style} {animation} html={html ?? ''} />
-		{/await}
-	{:else}
-		<DefaultRichText overrides={cn(defaults, overrides)} {style} html={html ?? ''} />
-	{/if}
+	<div style:--list-marker-color={marker} class="py-[50lvh]">
+		{#if shouldAnimate}
+			{#await import('./animated.svelte') then B: any}
+				{@const Block = B.default}
+				<Block overrides={cn(defaults, overrides)} {style} {animation} html={html ?? ''} />
+			{/await}
+		{:else}
+			<DefaultRichText overrides={cn(defaults, overrides)} {style} html={html ?? ''} />
+		{/if}
+	</div>
 {/await}

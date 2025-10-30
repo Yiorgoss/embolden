@@ -190,3 +190,15 @@
     transform: translateX(-100%);
   }
 }
+
+.list-bullet {
+  list-style: disc inside;
+}
+
+.list-number {
+  list-style: number inside;
+}
+
+li::marker {
+  color: var(--list-marker-color, var(--foreground, black));
+}

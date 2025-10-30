@@ -42,12 +42,13 @@ export const htmlConverters: HTMLConvertersFunctionAsync<NodeTypes> = ({ default
   ...defaultConverters,
   inlineBlocks: {
     // Each key should match your inline block's slug
-    cursiveText: async (args) => {
-      const { text, style } = args.node.fields;
-      return `<span class='font-cursive font-normal' style='${style}'>${text}</span>`;
+    buttonRT: async (args) => {
+      // console.log({ args })
+      return '<span >xx</span>'
     },
     pill: async (args) => {
-      const { image, size } = args.node.fields;
+      const { image, width, height, vertAlign, phone } = args.node.fields;
+      const { width: phoneWidth, height: phoneHeight } = phone
 
       let imageString;
       try {
@@ -57,44 +58,32 @@ export const htmlConverters: HTMLConvertersFunctionAsync<NodeTypes> = ({ default
         console.error(`ERROR pill image - ${image.id ?? image}: ${err}`)
         return ""
       }
+
       const imageID = typeof image == 'number' ? image : image.id;
 
-      const normalSize =
-        size == 'sm'
-          ? 'width:100px;height:50px;'
-          : size == 'md'
-            ? 'width:150px;height:75px;'
-            : 'width:180px;height:90px';
-
+      const normalSize = `width:${width};height:${height};vertical-align:${vertAlign};`
       const minSize = `
-@media (width <= 810px) {
-  #pill-image-${imageID} {
-        ${size == 'sm'
-          ? 'width:80px;height:40px;'
-          : size == 'md'
-            ? 'width:100px;height:50px;'
-            : 'width:120px;height:60px'
-        } 
-  }
-}
-`;
+      @media(width <= 810px) {
+        width:${phoneWidth ?? width};
+        height:${phoneHeight ?? height};
+        vertical-align:${vertAlign}
+      }`
 
       return `
-<style>
-  #pill-image-${imageID} {
-  margin:0 20px;
-  display:inline-block;
-  border-radius:9999px;
-  overflow:hidden;
-  vertical-align: middle;
-  ${normalSize};
-}
+        <style>
+      #pill-image-${imageID} {
+        margin: 0 20px;
+        display: inline-block;
+        border-radius: 9999px;
+        overflow: hidden;
+  ${normalSize ?? ""}
+      }
 ${minSize}
-</style>
-<span id="pill-image-${imageID}" style="line-height:150px;">
-  ${imageString}
-</span>
-`;
+      </style>
+        <span id="pill-image-${imageID}" style="" >
+          ${imageString}
+      </span>
+        `;
     }
   }
 });

@@ -1,7 +1,7 @@
 import { animate, transform, scroll } from "motion";
 import type { Attachment } from "svelte/attachments";
 
-export function scrollRichText({ preset }: { preset?: string }): Attachment {
+export function scrollRichText({ preset }: { preset?: string | null }): Attachment {
   return (element) => {
     const words = element.querySelectorAll('.word');
     const len = words.length;
