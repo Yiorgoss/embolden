@@ -59,7 +59,10 @@
 	{/if}
 </svelte:head>
 <!-- -->
-<div style:padding class="grid h-full w-full relative overflow-hidden grid-cols-1 grid-rows-1">
+<div
+	style:padding
+	class="grid place-items-center h-full w-full relative overflow-hidden grid-cols-1 grid-rows-1"
+>
 	{#if placeholder && placeholder.filename}
 		{#if !imageLoaded}
 			<div class="col-start-1 row-start-1">

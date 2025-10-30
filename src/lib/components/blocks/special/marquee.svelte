@@ -24,8 +24,8 @@
 		class=" marquee-default flex items-center w-full justify-start gap-10"
 	>
 		{#each { length: nRepeat ?? 6 } as _}
-			<div class="flex justify-center items-center min-w-fit h-full w-full">
-				<Picture {image} class=" object-contain" />
+			<div class="flex justify-end items-end min-w-fit h-fit w-full">
+				<Picture {image} class="object-contain" />
 			</div>
 			<RichTextRender overrides="min-w-fit break-keep text-nowrap inline-block" {richText} />
 		{/each}
