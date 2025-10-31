@@ -35,7 +35,7 @@
 		<Icon name="loader-circle" class="text-forground/20 animate-[spin_2s_linear_infinite] " />
 	</div>
 {:then html}
-	<div style:--list-marker-color={marker} class="py-[50lvh]">
+	<div style:--list-marker-color={marker} class="">
 		{#if shouldAnimate}
 			{#await import('./animated.svelte') then B: any}
 				{@const Block = B.default}
