@@ -23,13 +23,13 @@
 				)}
 			>
 				{#if title && i == 0}
-					<div class="font-cursive break-all col-span-full w-full px-10 py-6 text-4xl">{title}</div>
+					<div class="font-cursive break-all col-span-full w-full p-6 text-4xl">{title}</div>
 				{/if}
 
 				<div
 					class:hidden={!(image && image.url)}
 					class:md:order-last={left}
-					class={cn('w-full max-w-md md:max-w-full mx-auto p-12 ')}
+					class={cn('w-full max-w-md md:max-w-full mx-auto ')}
 				>
 					{#if image}
 						<Picture class="rounded-2xl " {image} />
@@ -37,7 +37,7 @@
 				</div>
 				<div
 					class:col-span-full={!(image && image.url)}
-					class="flex h-full items-center justify-center p-12"
+					class="flex h-full items-center justify-center p-6"
 				>
 					<RichTextRender
 						overrides={cn(
