@@ -3,7 +3,7 @@
 	import Picture from '@/components/common/picture.svelte';
 	import Button from '@/components/common/button.svelte';
 	import * as Sheet from '@/components/ui/sheet';
-	import { type IImageHeader } from '@payload-types';
+	import { type IFloatingHeader } from '@payload-types';
 	import { onMount } from 'svelte';
 	import { cn } from '@/utils';
 	import { throttle } from '@/utils';
@@ -11,7 +11,7 @@
 	import LocaleSwitcher from '@/components/common/locale-switcher.svelte';
 	import { Menu } from '@lucide/svelte';
 
-	const { blockData, hasLocaleSwitch }: { blockData: IImageHeader; hasLocaleSwitch: boolean } =
+	const { blockData, hasLocaleSwitch }: { blockData: IFloatingHeader; hasLocaleSwitch: boolean } =
 		$props();
 
 	const { image, nav, style } = blockData;
@@ -45,13 +45,13 @@
 
 <section
 	style:inset
-	class="fixed container top-2 inset-x-0 z-30 overflow-hidden mx-auto h-(--header-height) px-2 md:px-0"
+	class="fixed container top-2 inset-x-0 z-30 mx-auto h-(--header-height) px-2 md:px-0"
 >
 	<div class="w-full h-full">
 		<!-- desktop -->
 		<Nav.Root
 			class={cn(
-				'translate-y-0 shadow-xl px-10 bg-background overflow-hidden rounded-theme transition-transform ease-out duration-500 hidden w-full items-center justify-between md:flex',
+				'translate-y-0 px-10 bg-background shadow-xl rounded-theme transition-transform ease-out duration-500 hidden w-full items-center justify-between md:flex',
 				scrollingUp && '-translate-y-2/1'
 			)}
 		>
@@ -60,7 +60,7 @@
 					<Picture class="object-contain py-2" loading="eager" {image} />
 				</div>
 			</a>
-			<Nav.List class="flex items-center justify-center pr-10 ">
+			<Nav.List class="flex items-center justify-center pr-10 md:pr-0 ">
 				{#if hasLocaleSwitch && mounted}
 					<Nav.Item class="px-2">
 						<LocaleSwitcher />

@@ -58,7 +58,7 @@
 		<div
 			style:align-items={style?.alignY}
 			style:justify-content={style?.alignX}
-			class={cn('flex grow-1 justify-center items-center md:items-stretch', widthClass[0])}
+			class={cn(' w-full flex grow-1 justify-center items-center md:items-stretch', widthClass[0])}
 		>
 			<RenderBlocks blockData={columnOne![0]} />
 		</div>
@@ -66,7 +66,7 @@
 			<div
 				style:align-items={style?.alignY}
 				style:justify-content={style?.alignX}
-				class={cn('flex grow-2 justify-center items-center md:items-stretch', widthClass[1])}
+				class={cn('w-full flex grow-2 justify-center items-center md:items-stretch', widthClass[1])}
 			>
 				<RenderBlocks blockData={columnTwo[0]} />
 			</div>
@@ -75,7 +75,7 @@
 			<div
 				style:align-items={style?.alignY}
 				style:justify-content={style?.alignX}
-				class={cn('flex justify-center items-center md:items-stretch', widthClass[2])}
+				class={cn('w-full flex justify-center items-center md:items-stretch', widthClass[2])}
 			>
 				<RenderBlocks blockData={columnThree[0]} />
 			</div>

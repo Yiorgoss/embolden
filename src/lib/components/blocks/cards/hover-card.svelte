@@ -8,16 +8,19 @@
 	const { blockData }: { blockData: IHoverCard } = $props();
 	const { image, title, description, style } = blockData;
 
-	const { background } = style || {};
+	const { background, fontSize } = style || {};
 
 	let mobileHover = $state(false);
 </script>
 
-<section id="card-block" class="flex grow items-center h-full justify-center w-full pt-10 md:pt-0">
+<section
+	id="card-block"
+	class="flex grow lg items-center h-full justify-center w-full pt-10 md:pt-0"
+>
 	<Card.Root
 		ontouchstart={() => (mobileHover = true)}
 		ontouchend={() => (mobileHover = false)}
-		class="relative group/card h-full  p-0 overflow-hidden max-w-xs md:max-w-sm w-full"
+		class="relative group/card h-full  border-0 p-0 overflow-hidden max-w-xs md:max-w-sm w-full"
 	>
 		<Card.Content class="px-0 h-full">
 			<div class="grid h-full grid-cols-1 grid-rows-1">
@@ -35,6 +38,7 @@
 				>
 					<div class="grow duration-500">
 						<div
+							style:font-size={fontSize}
 							class={cn(
 								'font-serif break-all group-hover/card:opacity-0 transition-opacity duration-300 text-5xl p-2 absolute top-1/2 left-1/2 w-full text-center -translate-1/2',
 								mobileHover && 'opacity-0'

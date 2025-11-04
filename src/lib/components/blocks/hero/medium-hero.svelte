@@ -8,23 +8,21 @@
 	const { image, richText, link } = blockData;
 </script>
 
-<section id="medium-hero" class="grid grid-cols-1">
-	<div class=" col-span-full row-span-full h-full w-full overflow-hidden">
+<section id="medium-hero" class="relative">
+	<div class="absolute inset-0 z-0">
 		{#if image}
-			<Picture class="rounded-none" {image} />
+			<Picture class="rounded-none " {image} />
 		{/if}
 	</div>
 
 	<div
-		class="z-10 col-span-full row-span-full container mx-auto flex max-h-svh flex-col items-center justify-center pt-(--header-height) pb-10 md:py-0
-"
+		class="z-10 h-full bg-red-300 container mx-auto flex flex-col items-center justify-center pb-10 md:py-0"
 	>
-		<RichTextRender
-			overrides={'prose-headings:text-balance prose-headings:text-xl max-w-full container'}
-			{richText}
-		/>
-		<div class="pt-10">
-			<Button {link} />
+		<div class="h-full w-full">
+			<RichTextRender overrides={'max-w-full container'} {richText} />
+			<div class="pt-10">
+				<Button {link} />
+			</div>
 		</div>
 	</div>
 </section>
