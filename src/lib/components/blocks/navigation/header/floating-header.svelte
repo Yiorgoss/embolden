@@ -117,7 +117,7 @@
 												<Button
 													onclick={() => (open = false)}
 													variant="ghost"
-													class="text-primary w-full py-10 text-xl font-semibold hover:bg-black/20"
+													class="font-serif text-primary w-full py-10 text-xl font-semibold hover:bg-black/20"
 													{link}
 												/>
 											{/snippet}
