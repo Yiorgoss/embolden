@@ -11,7 +11,7 @@
 		overrides,
 		style,
 		cb
-	}: { html: string; overrides?: string; style: IRichTextField['style']; cb?: () => void } =
+	}: { html: string; overrides?: string; style?: IRichTextField['style']; cb?: () => void } =
 		$props();
 
 	const { height, background, minHeight } = style || {};

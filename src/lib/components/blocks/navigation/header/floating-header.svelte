@@ -51,7 +51,7 @@
 		<!-- desktop -->
 		<Nav.Root
 			class={cn(
-				'translate-y-0 px-10 bg-background shadow-xl rounded-theme transition-transform ease-out duration-500 hidden w-full items-center justify-between md:flex',
+				'translate-y-0 px-10 xxxx bg-background shadow-xl rounded-theme transition-transform ease-out duration-500 hidden w-full items-center justify-between md:flex',
 				scrollingUp && '-translate-y-2/1'
 			)}
 		>
@@ -82,7 +82,7 @@
 			<Sheet.Root bind:open>
 				<div
 					class={cn(
-						'bg-background flex justify-between rounded-theme items-center h-full w-full transition-transform ease-out duration-500 overflow-hidden',
+						'bg-background flex justify-between rounded-theme items-center h-full w-full transition-transform ease-out duration-200 shadow-xl',
 						scrollingUp && '-translate-y-2/1'
 					)}
 				>

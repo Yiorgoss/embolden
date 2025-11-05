@@ -15,14 +15,5 @@
 		{/if}
 	</div>
 
-	<div
-		class="z-10 h-full bg-red-300 container mx-auto flex flex-col items-center justify-center pb-10 md:py-0"
-	>
-		<div class="h-full w-full">
-			<RichTextRender overrides={'max-w-full container'} {richText} />
-			<div class="pt-10">
-				<Button {link} />
-			</div>
-		</div>
-	</div>
+	<RichTextRender overrides="flex justify-center items-center max-w-full container" {richText} />
 </section>

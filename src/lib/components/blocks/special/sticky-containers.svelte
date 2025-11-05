@@ -15,15 +15,17 @@
 		{#each list as { richText, image, style }, i}
 			{@const left = i % 2 == 1}
 			<div
-				style:top={`${80 * i + 5}px`}
+				style:top={`${50 * i + 5}px`}
 				style:background={style?.background}
 				class={cn(
-					`text-background bg-primary rounded-theme sticky grid grid-cols-1 md:grid-cols-2 `,
+					`text-background bg-primary rounded-theme sticky flex flex-col md:flex-row `,
 					left && 'bg-secondary border-foreground border '
 				)}
 			>
 				{#if title && i == 0}
-					<div class="font-cursive break-all col-span-full w-full p-6 text-4xl">{title}</div>
+					<div class="px-6 font-serif italic break-all w-full p-2 text-xl">
+						{title}
+					</div>
 				{/if}
 
 				<div
@@ -32,7 +34,7 @@
 					class={cn('w-full max-w-md md:max-w-full mx-auto p-6')}
 				>
 					{#if image}
-						<Picture class="rounded-2xl " {image} />
+						<Picture {image} />
 					{/if}
 				</div>
 				<div

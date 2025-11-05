@@ -13,6 +13,7 @@
   --cursive: 'Luxurious', --serif, serif;
   --multi-lingual-serif: "Noto Serif", ui-serif, serif;
   --multi-lingual-sans: "Inter", ui-sans-serif, sans-serif;
+  --multi-lingual-cursive: var(--cursive), var(--multi-lingual-serif);
 
   --radius: 30px;
 

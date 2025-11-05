@@ -9,12 +9,12 @@
 	import { Button } from '@/components/ui/button';
 
 	const { locale, slug } = $derived(page.params);
-	const targetLocale = $derived(locale == 'el' ? 'en' : 'el');
 	let disabled = $state(false);
 
 	let currentLang = $derived(supportedLocales[locale] ?? supportedLocales[defaultLocale]);
 
 	onMount(() => (document.documentElement.lang = locale ?? defaultLocale));
+	$inspect(page.data);
 </script>
 
 {#key locale}
@@ -40,7 +40,7 @@
 				{#each Object.entries(supportedLocales) as [key, value]}
 					<DropdownMenu.Item class="rounded-xxs">
 						<Button
-							onclick={() => {
+							onclick={async (e) => {
 								disabled = true;
 								setTimeout(() => {
 									disabled = false;

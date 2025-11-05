@@ -20,7 +20,7 @@
 			class="w-full md:w-3/8 flex flex-col text-center justify-start md:justify-around pt-10 md:pt-0"
 		>
 			<div class="">
-				<h3 class="text-6xl text-balance font-serif uppercase">{contact?.q}</h3>
+				<h3 class="text-6xl text-balance font-serif">{contact?.q}</h3>
 				<Button class=" px-0 md:px-4" variant="ghost" href={`mailto:${contact?.email}`}>
 					<div class="flex items-center gap-2">
 						<Icon name="circle-arrow-right" />

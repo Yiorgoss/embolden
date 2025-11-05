@@ -7,6 +7,6 @@
 	const { image } = blockData ?? {};
 </script>
 
-<div id="image-block" class="p-3 md:p-6">
-	<Picture class="rounded-none h-[300px] object-cover max-h-[500px] md:h-full" {image} />
+<div id="image-block" class="h-full w-full p-3 md:p-6">
+	<Picture class="" {image} />
 </div>

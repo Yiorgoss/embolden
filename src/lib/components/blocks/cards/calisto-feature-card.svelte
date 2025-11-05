@@ -45,12 +45,12 @@
 		class="container mx-auto"
 	>
 		<div
-			class="flex flex-col flex-wrap justify-center items-center md:items-stretch gap-y-20 gap-x-10 md:flex-row"
+			class="flex flex-col flex-wrap justify-center items-center md:items-stretch gap-10 md:flex-row"
 		>
 			{#if cards}
 				{#each cards as { richText, icon }}
 					<div
-						class="max-w-xs md:max-w-sm w-full hover:scale-105 transition-transform my-10 duration-300"
+						class="max-w-xs md:max-w-sm w-full hover:scale-105 transition-transform mt-10 duration-300"
 					>
 						<div class="relative flex-auto h-full">
 							<div class="bg-primary h-full flex flex-col rounded-3xl p-10">
