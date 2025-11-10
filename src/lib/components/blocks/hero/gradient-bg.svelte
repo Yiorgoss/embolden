@@ -1,35 +1,78 @@
 <script lang="ts">
-	import { onMount } from 'svelte';
 	import type { IGradientBG } from '@payload-types';
-	import { animate, cancelFrame, frame, type AnimationDefinition } from 'motion';
-	import type { AnimationControls } from '@motionone/types';
-	import { RichTextRender } from '@/components/blocks/rich-text';
-	import { lavalamp } from '@/attachments/animations/lavalamp';
-	import { mouseFollow } from '@/attachments/animations/mouse-follow.svelte';
-	import type { Attachment } from 'svelte/attachments';
+	import { animate, frame } from 'motion';
+	import { onMount } from 'svelte';
 
 	const { blockData }: { blockData: IGradientBG } = $props();
-	const { richText, gradientList, style, mouseColor } = blockData || {};
-	const { background } = style || {};
+	const { gradientList } = blockData || {};
+	let mouseColor = 'aqua';
 
 	let element = $state() as Element;
 	let mouseElem = $state() as HTMLElement;
 
+	const keyframeObj = [
+		{
+			anim: { rotate: [0, -180, 0] },
+			seq: { duration: 30, repeat: Infinity, ease: 'linear' }
+		},
+		{
+			anim: { x: ['-10%', '50%', '0%'], y: ['-50%', '0%', '50%'] },
+			seq: { duration: 30, repeat: Infinity, ease: 'easeInOut' }
+		},
+		{
+			anim: { rotate: [0, 100, 0] },
+			seq: { duration: 20, repeat: Infinity, ease: 'easeInOut' }
+		},
+		{
+			anim: { x: ['50%', '-50%', '50%'], y: ['-50%', '40%', '-50%'] },
+			seq: { duration: 20, repeat: Infinity, ease: 'easeInOut' }
+		},
+		{
+			anim: { y: ['-30%', '50%', '-30%'] },
+			seq: { duration: 20, repeat: Infinity, ease: 'linear' }
+		}
+	];
 	const init = [
 		//from center
 		{ x: '-50%', y: '-20%', origin: 'top right' },
 		{ x: '0px', y: '0px', origin: 'center right' },
 		{ x: '20%', y: '0px', origin: '40% -30%' },
-		{ x: '00px', y: '00px', origin: '20% -30% ' }
+		{ x: '00px', y: '00px', origin: 'center center' },
+		{ x: '400px', y: '0px', origin: 'center center' }
 	];
+
+	$effect(() => {
+		const wrap = keyframeObj.length;
+		element.querySelectorAll('.gradient-id').forEach((word, i) => {
+			const { anim, seq } = keyframeObj[i % wrap];
+			//@ts-ignore // seems to work idk why ts error
+			animate(word, anim, seq);
+		});
+	});
+
+	let mouse = $state({ x: 0, y: 0 });
+	let next = $state({ x: 0, y: 0 });
+
+	function move() {
+		next.x += Math.round((mouse.x - next.x) / 20);
+		next.y += Math.round((mouse.y - next.y) / 20);
+
+		mouseElem.style.transform = `translate(${next.x}px, ${next.y}px)`;
+
+		frame.render(() => move());
+	}
+
+	onMount(() => move());
+
+	function onmousemove(event: MouseEvent) {
+		mouse.x = event.clientX;
+		mouse.y = event.clientY;
+	}
 </script>
 
 <section id="gradient-bg-block ">
 	<!-- svelte-ignore a11y_no_static_element_interactions -->
-	<div
-		style:background
-		class=" overflow-hidden relative h-lvh w-full flex justify-center items-center"
-	>
+	<div class="overflow-hidden relative h-lvh bg-amber-900">
 		<svg class="absolute inset-0 h-full w-full" xmlns="http://www.w3.org/2000/svg">
 			<defs>
 				<filter id="goo">
@@ -45,23 +88,16 @@
 			</defs>
 		</svg>
 		<div
-			{@attach lavalamp('yy')}
-			{@attach mouseFollow(mouseElem)}
+			bind:this={element}
+			{onmousemove}
 			class="h-full w-full"
-			style:filter="url(#goo) blur(20px)"
+			style:filter="url(#goo) blur(40px)"
 		>
-			<div
-				bind:this={mouseElem}
-				style:height="80%"
-				style:width="80%"
-				style:background={`radial-gradient(circle at center, hsl(from ${mouseColor} h s l / 0.8) 0%, transparent 30%)`}
-				class="absolute top-0 left-0 -translate-1/2 mouse-follow"
-			></div>
-			{#each gradientList ?? [] as gradient, _i}
+			{#each gradientList as gradient, _i}
 				{@const i = _i + 1}
 				{@const start = init[i % init.length]}
 				<div
-					style={`--chart-${i}: ${gradient.color}`}
+					style={`--chart-${i}: ${gradient.value}`}
 					id={`grad-${i}`}
 					style:background={`radial-gradient(circle at center, hsl(from var(--chart-${i}) h s l / 0.8) 0%, transparent 50%)`}
 					style:height={gradient.height ?? '80%'}
@@ -70,12 +106,16 @@
 					style:top={`calc(50% + ${start.y})`}
 					style:left={`calc(50% + ${start.x})`}
 					style:transform-origin={start.origin}
-					class="rounded-full gradient-id absolute -translate-1/2"
+					class="gradient-id absolute -translate-1/2"
 				></div>
 			{/each}
-		</div>
-		<div class="">
-			<RichTextRender {richText} overrides="bg-green-400 h-fit w-fit" />
+			<div
+				bind:this={mouseElem}
+				style:height="80%"
+				style:width="80%"
+				style:background={`radial-gradient(circle at center, hsl(from ${mouseColor ?? 'white'} h s l / 0.8) 0%, transparent 50%)`}
+				class="absolute top-0 left-0 -translate-1/2 mouse-follow"
+			></div>
 		</div>
 	</div>
 </section>
