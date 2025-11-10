@@ -28,8 +28,7 @@
 		let payloadLivePreview: undefined | any;
 		if (isLivePreview) {
 			const serverURL =
-				PUBLIC_ENV == 'PROD' ? `https://admin.${site.domainName}` : `http://localhost:3000`;
-			console.log(`https://admin.${site.domainName}`);
+				PUBLIC_ENV == 'PROD' ? `https://admin.${site.domainNameNoSub}` : `http://localhost:3000`;
 			ready({ serverURL });
 			payloadLivePreview = payloadSubscribe({
 				callback: (doc) => handleLivePreviewUpdate(doc),
@@ -50,7 +49,7 @@
 				<RenderBlocks hasLocaleSwitch={true} blockData={nav.header[0]} />
 			{/if}
 		</header>
-		<div class="text-foreground bg-background h-full w-full">
+		<div class="text-foreground bg-red-400 h-full w-full">
 			{@render children()}
 		</div>
 		<footer class="text-foreground bg-background">

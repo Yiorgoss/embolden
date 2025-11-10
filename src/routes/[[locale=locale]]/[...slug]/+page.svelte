@@ -8,7 +8,6 @@
 	let heroLoaded = $state(page.params.slug == '' ? false : true);
 
 	const isLivePreview = page.url.searchParams.get('livePreview') === 'true';
-
 	let livePreviewData = getContext('payload-live-preview') as () => Tenant;
 
 	let getPages = $state(isLivePreview ? livePreviewData : () => page.data);
@@ -31,12 +30,12 @@
 {#key [page.params.slug, currentPage, wasHome]}
 	{#if currentPage}
 		<Meta meta={currentPage.meta} />
-		{#if currentPage && currentPage.hero.length > 0}
+		{#if currentPage?.hero?.length > 0}
 			<section id="hero-container" class="">
 				<RenderBlocks cb={() => (heroLoaded = true)} blockData={currentPage.hero[0]} />
 			</section>
 		{/if}
-		{#if heroLoaded}
+		{#if currentPage.hero.length == 0 || heroLoaded}
 			<div
 				id="render-block-container"
 				class={` relative ${currentPage.hero?.[0] ? '' : 'pt-(--header-height)'}`}

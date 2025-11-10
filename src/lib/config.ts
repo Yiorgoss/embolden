@@ -5,14 +5,15 @@ export const site = {
   // assetsURL: PUBLIC_ENV == 'PROD' ? PUBLIC_ASSET_URL : PUBLIC_TEST_ASSET_URL,
   assetsURL: PUBLIC_ASSET_URL,
   currency: '&euro;',
-  domainName: PUBLIC_DOMAIN_NAME
+  domainName: PUBLIC_DOMAIN_NAME,
+  domainNameNoSub: PUBLIC_DOMAIN_NAME.split(".").slice(-2).join(".")
 };
 export type SiteConfigType = typeof site
 
 export const defaultLocale = "en"
 export const supportedLocales = {
   'en': "English",
-  'el': "Ελληνικά",
+  // 'el': "Ελληνικά",
 } as { [key: string]: string }
 
 export type SupportedLocalesType = typeof supportedLocales
