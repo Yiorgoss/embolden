@@ -49,7 +49,7 @@
 				<RenderBlocks hasLocaleSwitch={true} blockData={nav.header[0]} />
 			{/if}
 		</header>
-		<div class="text-foreground bg-red-400 h-full w-full">
+		<div class="text-foreground h-full w-full">
 			{@render children()}
 		</div>
 		<footer class="text-foreground bg-background">
