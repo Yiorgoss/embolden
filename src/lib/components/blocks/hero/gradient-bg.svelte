@@ -1,11 +1,12 @@
 <script lang="ts">
 	import type { IGradientBG } from '@payload-types';
+	import { RichTextRender } from '@/components/blocks/rich-text';
 	import { animate, frame } from 'motion';
 	import { onMount } from 'svelte';
 
 	const { blockData }: { blockData: IGradientBG } = $props();
-	const { gradientList } = blockData || {};
-	let mouseColor = 'aqua';
+	const { richText, gradientList, style, mouseColor } = blockData || {};
+	const { background } = style || {};
 
 	let element = $state() as Element;
 	let mouseElem = $state() as HTMLElement;
@@ -61,8 +62,10 @@
 
 		frame.render(() => move());
 	}
-
-	onMount(() => move());
+	onMount(() => {
+		if (!mouseColor) return;
+		move();
+	});
 
 	function onmousemove(event: MouseEvent) {
 		mouse.x = event.clientX;
@@ -72,7 +75,7 @@
 
 <section id="gradient-bg-block ">
 	<!-- svelte-ignore a11y_no_static_element_interactions -->
-	<div class="overflow-hidden relative h-lvh bg-amber-900">
+	<div style:background class=" overflow-hidden relative h-lvh">
 		<svg class="absolute inset-0 h-full w-full" xmlns="http://www.w3.org/2000/svg">
 			<defs>
 				<filter id="goo">
@@ -97,7 +100,7 @@
 				{@const i = _i + 1}
 				{@const start = init[i % init.length]}
 				<div
-					style={`--chart-${i}: ${gradient.value}`}
+					style={`--chart-${i}: ${gradient.color}`}
 					id={`grad-${i}`}
 					style:background={`radial-gradient(circle at center, hsl(from var(--chart-${i}) h s l / 0.8) 0%, transparent 50%)`}
 					style:height={gradient.height ?? '80%'}
@@ -109,13 +112,18 @@
 					class="gradient-id absolute -translate-1/2"
 				></div>
 			{/each}
-			<div
-				bind:this={mouseElem}
-				style:height="80%"
-				style:width="80%"
-				style:background={`radial-gradient(circle at center, hsl(from ${mouseColor ?? 'white'} h s l / 0.8) 0%, transparent 50%)`}
-				class="absolute top-0 left-0 -translate-1/2 mouse-follow"
-			></div>
+			{#if mouseColor}
+				<div
+					bind:this={mouseElem}
+					style:height="80%"
+					style:width="80%"
+					style:background={`radial-gradient(circle at center, hsl(from ${mouseColor} h s l / 0.8) 0%, transparent 50%)`}
+					class="absolute top-0 left-0 -translate-1/2 mouse-follow"
+				></div>
+			{/if}
+		</div>
+		<div class="h-full w-full absolute isolate inset-0 flex justify-center items-center">
+			<RichTextRender {richText} />
 		</div>
 	</div>
 </section>
