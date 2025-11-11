@@ -1,9 +1,13 @@
-import { animate, transform, scroll, steps } from "motion";
+import { animate, transform, scroll } from "motion";
+import type { Attachment } from "svelte/attachments";
+import { prefersReducedMotion } from "svelte/motion";
 
-export function fadeInEachWord(element: Element) {
-  // might be able to speed this up using delay - stagger
-  // and splitword utility - https://github.com/lukePeavey/SplitType
-  const words = element.querySelectorAll('.animate-word');
+export function scrollRichText({ preset }: { preset?: string | null }): Attachment {
+  return (element) => {
+    if (prefersReducedMotion.current) return
+    const words = element.querySelectorAll('.word');
+    const len = words.length;
+    const cleanup: (() => void)[] = [];
 
   const len = words.length;
   const cleanup: (() => void)[] = [];

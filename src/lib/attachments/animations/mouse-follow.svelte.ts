@@ -1,5 +1,7 @@
 import { cancelFrame, frame } from "motion";
+import { untrack } from "svelte";
 import type { Attachment } from "svelte/attachments";
+import { prefersReducedMotion } from "svelte/motion";
 
 let mouse = $state({ x: 0, y: 0 });
 let next = $state({ x: 0, y: 0 });
@@ -14,12 +16,15 @@ function move(element: HTMLElement) {
 }
 export function mouseFollow(child: HTMLElement): Attachment {
   return (element) => {
+    if (prefersReducedMotion.current || !child) return
     (element as HTMLElement).onmousemove = (event) => {
       mouse.x = event.clientX;
       mouse.y = event.clientY;
     };
 
-    $effect(() => move(child as HTMLElement));
-    return cancelFrame(() => move(element as HTMLElement));
+    $effect(() => {
+      untrack(() => move(child as HTMLElement))
+      return cancelFrame(() => move(element as HTMLElement));
+    });
   };
 }

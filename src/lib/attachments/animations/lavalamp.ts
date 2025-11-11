@@ -1,6 +1,7 @@
 import type { Attachment } from "svelte/attachments";
 import type { AnimationControls } from '@motionone/types';
 import { animate } from "motion"
+import { prefersReducedMotion } from "svelte/motion";
 
 const keyframeObj = [
   {
@@ -27,6 +28,7 @@ const keyframeObj = [
 
 export function lavalamp(str: string): Attachment {
   return (element) => {
+    if (prefersReducedMotion.current) return
     const wrap = keyframeObj.length;
     const animations: AnimationControls[] = [];
     element.querySelectorAll('.gradient-id').forEach((word, i) => {

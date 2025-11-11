@@ -1,7 +1,6 @@
 import type { Attachment } from 'svelte/attachments';
-import { scroll as motionScroll, animate, type AnimationOptions, type ObjectTarget } from 'motion';
-import { fadeInEachWord } from './scroll-richtext';
-import type { IAnimation } from '@payload-types';
+import { scroll as scrollMotion, animate, type AnimationOptions, type ObjectTarget } from 'motion';
+import { prefersReducedMotion } from 'svelte/motion';
 
 export const scrollPreset = {
   "growScrollScale": [{
@@ -102,26 +101,21 @@ export type PresetKeys = keyof typeof scrollPreset;
 
 // this will return an attachment that will iterate over a preset of motion animations
 // fix types once you figure out how api will look!!!
-// export function animateScroll(presetList: PresetKeys[] | undefined | null,
-//   { prepare, transforms, options, offset, waitFor }:
-//     {
-//       prepare?: (element: Element) => void,
-//       transforms?: any,
-//       options?: any,
-//       offset?: any,
-//       waitFor?: boolean
-//     } = {}): Attachment {
-//   return (element) => {
-export function animateScroll(element: Element, { animation }: { animation: IAnimation }) {
-  const {
-    scroll
-    // prepare,
-    // transforms,
-    // options,
-    // offset,
-  } = animation
-  if (!scroll || scroll.length <= 0) return
-  const preset = scroll[0] // cbf to add this prematurely. It does work however
+export function scroll(preset: string): Attachment {
+  return (element) => {
+    if (prefersReducedMotion.current) return
+    const { transformArr, offset } = scrollPreset[preset]
+    const cancel = scrollMotion(
+      animate(
+        element,
+        transformArr as any, //temp fix 22/10/25 lol
+        { ease: ['linear'] }
+      ),
+      {
+        target: element,
+        offset: offset as any // No ScrollOptions
+      }
+    );
 
   const cancelList: (() => void)[] = []
 
