@@ -41,36 +41,7 @@
 		{ x: '00px', y: '00px', origin: 'center center' },
 		{ x: '400px', y: '0px', origin: 'center center' }
 	];
-
-	$effect(() => {
-		const wrap = keyframeObj.length;
-		element.querySelectorAll('.gradient-id').forEach((word, i) => {
-			const { anim, seq } = keyframeObj[i % wrap];
-			//@ts-ignore // seems to work idk why ts error
-			animate(word, anim, seq);
-		});
-	});
-
-	let mouse = $state({ x: 0, y: 0 });
-	let next = $state({ x: 0, y: 0 });
-
-	function move() {
-		next.x += Math.round((mouse.x - next.x) / 20);
-		next.y += Math.round((mouse.y - next.y) / 20);
-
-		mouseElem.style.transform = `translate(${next.x}px, ${next.y}px)`;
-
-		frame.render(() => move());
-	}
-	onMount(() => {
-		if (!mouseColor) return;
-		move();
-	});
-
-	function onmousemove(event: MouseEvent) {
-		mouse.x = event.clientX;
-		mouse.y = event.clientY;
-	}
+	$inspect(richText);
 </script>
 
 <section id="gradient-bg-block ">
