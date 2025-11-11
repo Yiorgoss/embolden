@@ -22,6 +22,7 @@
 		{ x: '20%', y: '0px', origin: '40% -30%' },
 		{ x: '00px', y: '00px', origin: '20% -30% ' }
 	];
+	$inspect(richText);
 </script>
 
 <section id="gradient-bg-block ">

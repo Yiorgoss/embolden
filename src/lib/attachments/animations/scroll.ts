@@ -1,5 +1,6 @@
 import type { Attachment } from 'svelte/attachments';
 import { scroll as scrollMotion, animate, type AnimationOptions, type ObjectTarget } from 'motion';
+import { prefersReducedMotion } from 'svelte/motion';
 
 const scrollPreset = {
   "grow-scroll-scale": {
@@ -18,6 +19,7 @@ type PresetKeys = keyof typeof scrollPreset;
 // fix types once you figure out how api will look!!!
 export function scroll(preset: string): Attachment {
   return (element) => {
+    if (prefersReducedMotion.current) return
     const { transformArr, offset } = scrollPreset[preset]
     const cancel = scrollMotion(
       animate(

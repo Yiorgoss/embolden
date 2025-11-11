@@ -1,8 +1,10 @@
 import { animate, transform, scroll } from "motion";
 import type { Attachment } from "svelte/attachments";
+import { prefersReducedMotion } from "svelte/motion";
 
 export function scrollRichText({ preset }: { preset?: string | null }): Attachment {
   return (element) => {
+    if (prefersReducedMotion.current) return
     const words = element.querySelectorAll('.word');
     const len = words.length;
     const cleanup: (() => void)[] = [];
