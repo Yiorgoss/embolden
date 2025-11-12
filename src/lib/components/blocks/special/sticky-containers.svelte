@@ -17,8 +17,9 @@
 			<div
 				style:top={`${50 * i + 5}px`}
 				style:background={style?.background}
+				style:height={`calc(100lvh - ${50 * 1 + 5}px)`}
 				class={cn(
-					`text-background bg-primary rounded-theme sticky flex flex-col md:flex-row `,
+					`text-background h-full bg-primary rounded-theme sticky flex flex-wrap justify-center items-center md:flex-row `,
 					left && 'bg-secondary border-foreground border '
 				)}
 			>
@@ -30,16 +31,20 @@
 
 				<div
 					class:hidden={!(image && image.url)}
-					class:md:order-last={left}
-					class={cn('w-full max-w-md md:max-w-full mx-auto p-6')}
+					class:md:order-first={left}
+					class={cn('max-w-lg p-6 shrink h-fit md:h-full w-full')}
 				>
 					{#if image}
-						<Picture {image} />
+						<Picture
+							{image}
+							pictureClass="flex justify-center items-center "
+							class="object-cover h-full w-full"
+						/>
 					{/if}
 				</div>
 				<div
 					class:col-span-full={!(image && image.url)}
-					class="flex h-full items-center justify-center p-6"
+					class="flex max-w-md grow items-start justify-center p-6"
 				>
 					<RichTextRender
 						overrides={cn(

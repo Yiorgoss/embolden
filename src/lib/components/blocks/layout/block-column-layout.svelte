@@ -21,12 +21,12 @@
 				cssList.push('md:w-0');
 				break;
 			case 'oneTwoThird':
-				cssList.push('md:grow-1 md:shrink-1 md:basis-0 md:w-0'); //flex-[1_1_0] w-0
+				cssList.push('md:grow-1 md:shrink-1 md:basis-0 md:w-0');
 				cssList.push('md:grow-2 md:shrink-1 md:basis-0 md:w-0');
 				cssList.push('md:w-0');
 				break;
 			case 'twoOneThird':
-				cssList.push('md:grow-2 md:shrink-1 md:basis-0 md:w-0'); //flex-[1_1_0] w-0
+				cssList.push('md:grow-2 md:shrink-1 md:basis-0 md:w-0');
 				cssList.push('md:grow-1 md:shrink-1 md:basis-0 md:w-0');
 				cssList.push('md:w-0');
 				break;
