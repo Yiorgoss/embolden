@@ -7,8 +7,40 @@
 	import { site } from '@/config';
 	import { getPayloadState } from '@/state/payload.svelte';
 
-	const { children, data: tenant }: LayoutProps = $props();
-	const payload = getPayloadState();
+	import {
+		subscribe as payloadSubscribe,
+		unsubscribe as payloadUnsubscribe,
+		ready
+	} from '@payloadcms/live-preview';
+	import { mergeUpdateData } from '@/utils/payload-utils';
+	import { PUBLIC_ENV } from '$env/static/public';
+
+	const { children }: { children: Snippet } = $props();
+	let data = $derived(page.data); // need it to be written to for live preview
+	const nav = $derived(page.data.nav);
+
+	const isLivePreview = page.url.searchParams.get('livePreview') === 'true';
+	const handleLivePreviewUpdate = (doc: Tenant) => {
+		data = mergeUpdateData({ oldData: data, newData: doc });
+	};
+
+	onMount(() => {
+		let payloadLivePreview: undefined | any;
+		if (isLivePreview) {
+			const serverURL =
+				PUBLIC_ENV == 'PROD' ? `https://admin.${site.domainName}` : `http://localhost:3000`;
+			ready({ serverURL });
+			payloadLivePreview = payloadSubscribe({
+				callback: (doc) => handleLivePreviewUpdate(doc),
+				depth: 10,
+				initialData: data,
+				serverURL
+			});
+		}
+		() => payloadLivePreview && payloadUnsubscribe(payloadLivePreview);
+	});
+
+	setContext('payload-live-preview', () => data);
 </script>
 
 <div class="text-base">
