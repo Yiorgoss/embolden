@@ -124,7 +124,7 @@ export async function fetchFromCMS({
 
 export const getTenantByDomain = async ({ site, locale }: { site: SiteConfigType, locale: string }) => {
 
-  const response = fetch(`${site.CMS}/api/tenants?[where][domainName][equal]=${site.domainName}&depth=10&locale=${locale}`)
+  const response = fetch(`${site.CMS}/api/tenants?where[domain][equals]=${site.domainName}&depth=2&locale=${locale}`)
     .then((res) => res.json())
     .then((json: any) => json.docs[0]) //should only ever match one 
     .catch((err: any) => {
