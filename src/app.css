@@ -193,11 +193,13 @@
 }
 
 .list-bullet {
-  list-style: disc inside;
+  list-style: disc outside;
+  padding-left: 10px;
 }
 
 .list-number {
-  list-style: number inside;
+  list-style: number outside;
+  padding-left: 10px;
 }
 
 li::marker {

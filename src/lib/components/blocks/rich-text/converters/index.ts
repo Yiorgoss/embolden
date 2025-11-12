@@ -49,7 +49,6 @@ export const htmlConverters: HTMLConvertersFunctionAsync<NodeTypes> = ({ default
 
       const { link } = args.node.fields
       const buttonHTML = await richTextBtn({ link });
-      console.log({ buttonHTML })
       return `<span class="word">${buttonHTML}</span>`
       // } catch (err) {
       //   console.error(`err`)

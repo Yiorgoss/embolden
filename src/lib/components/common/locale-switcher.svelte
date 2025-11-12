@@ -14,7 +14,6 @@
 	let currentLang = $derived(supportedLocales[locale] ?? supportedLocales[defaultLocale]);
 
 	onMount(() => (document.documentElement.lang = locale ?? defaultLocale));
-	$inspect(page.data);
 </script>
 
 {#key locale}

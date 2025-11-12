@@ -16,7 +16,6 @@
 	const { data } = $props();
 
 	const html = convertLexicalToHTML({ data: data.confirmationMessage });
-	$inspect(data);
 	const form = createForm(() => ({
 		defaultValues: {
 			name: '',

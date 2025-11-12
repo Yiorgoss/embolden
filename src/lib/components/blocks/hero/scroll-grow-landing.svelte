@@ -31,7 +31,7 @@
 			style:height={`calc(${height ?? '100vh'}*1.5)`}
 			style:transform-origin="center bottom"
 			{@attach scroll('grow-scroll-scale')}
-			class="col-start-1 row-start-1 relative w-full"
+			class="col-start-1 row-start-1 relative scale-50 w-full"
 		>
 			<Picture image={finalImg} class="w-full " />
 		</div>

@@ -4,13 +4,13 @@ import { prefersReducedMotion } from 'svelte/motion';
 
 const scrollPreset = {
   "grow-scroll-scale": {
-    transformArr: { scale: [0.5, 1, 3] },
+    transformArr: { scale: [0.7, 0.9, 3] },
     offset: ['start start', 'end end', 'end start'],
   },
   'grow-scroll-translate': {
     transformArr: { transform: ['none', 'translateY(30vh)'] },
     offset: ['start 0.7', 'start 0.2'],
-  }
+  },
 } as { [key: string]: any }
 
 type PresetKeys = keyof typeof scrollPreset;

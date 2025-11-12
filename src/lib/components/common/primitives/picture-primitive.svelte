@@ -28,7 +28,7 @@
 	});
 
 	const { style } = image;
-	const { background, padding, borderRadius, opacity, minHeight, height } = style || {};
+	const { background, padding, borderRadius, opacity, minHeight, height, sizes } = style || {};
 
 	let imageLoaded = $state(false);
 	let placeholder = asset?.sizes?.['placeholder'];
@@ -69,7 +69,7 @@
 				<img
 					out:fade={{ duration: 300 }}
 					src={placeholder.url}
-					sizes={imageSizes}
+					sizes={sizes ?? imageSizes}
 					{loading}
 					class={cn('blur-3xl -z-10 h-full w-full', pictureClass, imageClass)}
 					alt=""
