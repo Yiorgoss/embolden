@@ -16,12 +16,11 @@
 
 	const { children }: { children: Snippet } = $props();
 	let data = $derived(page.data); // need it to be written to for live preview
-	const { nav }: { nav?: INavigation } = $derived(data);
+	const nav = $derived(page.data.nav);
 
 	const isLivePreview = page.url.searchParams.get('livePreview') === 'true';
 	const handleLivePreviewUpdate = (doc: Tenant) => {
 		data = mergeUpdateData({ oldData: data, newData: doc });
-		//  data = doc;
 	};
 
 	onMount(() => {
@@ -39,6 +38,7 @@
 		}
 		() => payloadLivePreview && payloadUnsubscribe(payloadLivePreview);
 	});
+
 	setContext('payload-live-preview', () => data);
 </script>
 
