@@ -59,10 +59,11 @@ const wrapEachTextNode = (el: Node, wordPadding: string) => {
   while (walker.nextNode()) {
     const current = walker.currentNode as Element
     const parent = current.parentNode
-    if (parent?.nodeName == "STYLE" || parent?.nodeName == "A") {
+    if (["STYLE", "A", "OBJECT", "svg"].includes(parent?.nodeName ?? "")) {
       // skip certain nodes
       continue
     }
+    // console.log({ lineheight: parent.style['line-height'] })
     textNodes.push(current); //gather references
   }
 
@@ -78,7 +79,7 @@ const wrapEachTextNode = (el: Node, wordPadding: string) => {
         let newNode = document.createElement('span');
         newNode.setAttribute('class', 'word');
         newNode.style.display = 'inline-block';
-        newNode.style.overflow = 'hidden';
+        // newNode.style.overflow = 'hidden';
         newNode.style.paddingLeft = wordPadding;
         newNode.appendChild(document.createTextNode(word));
 

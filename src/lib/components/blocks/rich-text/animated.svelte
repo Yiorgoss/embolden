@@ -2,7 +2,7 @@
 	import { cn, splitRichTextIntoWords } from '@/utils';
 	import { scrollRichText } from '@/attachments/animations/scroll-richtext';
 	import { scroll, animate, stagger, transform, motionValue } from 'motion';
-	import { onMount } from 'svelte';
+	import { onMount, untrack } from 'svelte';
 	import type { Attachment } from 'svelte/attachments';
 	import type { IRichTextField } from '@payload-types';
 
@@ -29,13 +29,19 @@
 	let element = $state() as HTMLElement;
 
 	const html = splitRichTextIntoWords(htmlCMS);
+
+	let elem = $state() as Element;
+	$effect(() => {
+		const path = elem.querySelectorAll('#animate-svg > path');
+		untrack(() => animate(path, { pathLength: [0, 1] }, { duration: 2, delay: 0.5 }));
+	});
 </script>
 
 <div id="animated-rich-text" class={cn('relative overflow-hidden', overrides)}>
 	<div
-		style:height
+		bind:this={elem}
+		style:height={height ?? minHeight ?? '100lvh'}
 		style:background
-		style:min-height={minHeight}
 		class="grid grid-cols-1 grid-rows-1 justify-center items-center"
 	>
 		<div class:hidden={!traceText} class=" col-start-1 row-start-1 opacity-20">
