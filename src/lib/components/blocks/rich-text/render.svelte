@@ -10,7 +10,7 @@
 	// there exists both richText overrides and component specific overrides
 	const { richText, overrides, cb }: { richText: any; overrides?: string; cb?: () => void } =
 		$props();
-	const _html = $state(
+	const _html = $derived(
 		richText && richText.text
 			? convertLexicalToHTMLAsync({ data: richText.text, converters: htmlConverters })
 			: ''
@@ -27,12 +27,15 @@
 	//  ...
 	//  ...
 	//  think you can set a css variaable and then reference it
+	$inspect({
+		_html: convertLexicalToHTMLAsync({ data: richText.text, converters: htmlConverters })
+	});
 	const defaults = 'my-auto wrap-break-word px-2 w-full max-w-full ';
 </script>
 
 {#await _html}
 	<div class="flex h-full w-full items-center justify-center">
-		<Icon name="loader-circle" class="text-forground/20 animate-[spin_2s_linear_infinite] " />
+		<Icon name="loader-circle" class="text-foreground/20 animate-[spin_2s_linear_infinite] " />
 	</div>
 {:then html}
 	<div style:--list-marker-color={marker} class="">
