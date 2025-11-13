@@ -41,7 +41,6 @@
 		{ x: '00px', y: '00px', origin: 'center center' },
 		{ x: '400px', y: '0px', origin: 'center center' }
 	];
-	$inspect(richText);
 </script>
 
 <section id="gradient-bg-block ">
@@ -95,6 +94,9 @@
 		</div>
 		<div class="h-full w-full absolute isolate inset-0 flex justify-center items-center">
 			<RichTextRender {richText} />
+		</div>
+		<div class="">
+			<RichTextRender {richText} overrides="bg-green-400 h-fit w-fit" />
 		</div>
 	</div>
 </section>
