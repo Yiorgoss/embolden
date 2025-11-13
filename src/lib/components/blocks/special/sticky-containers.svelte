@@ -17,9 +17,8 @@
 			<div
 				style:top={`${50 * i + 5}px`}
 				style:background={style?.background}
-				style:height={`calc(100lvh - ${50 * 1 + 5}px)`}
 				class={cn(
-					`text-background h-full bg-primary rounded-theme sticky flex flex-wrap justify-center items-center md:flex-row `,
+					`text-background bg-primary rounded-theme sticky  `,
 					left && 'bg-secondary border-foreground border '
 				)}
 			>
@@ -29,30 +28,25 @@
 					</div>
 				{/if}
 
-				<div
-					class:hidden={!(image && image.url)}
-					class:md:order-first={left}
-					class={cn('max-w-lg p-6 shrink h-fit md:h-full w-full')}
-				>
-					{#if image}
-						<Picture
-							{image}
-							pictureClass="flex justify-center items-center "
-							class="object-cover h-full w-full"
+				<div class="flex flex-col h-full justify-center items-center md:flex-row">
+					<div
+						class:hidden={!(image && image.url)}
+						class:md:order-last={left}
+						class={cn('w-full max-w-md md:max-w-full mx-auto p-6')}
+					>
+						{#if image}
+							<Picture {image} />
+						{/if}
+					</div>
+					<div class="flex h-full items-center justify-center p-6">
+						<RichTextRender
+							overrides={cn(
+								'prose-p:text-background prose-headings:text-background',
+								left && 'prose-p:text-foreground prose-headings:text-foreground'
+							)}
+							{richText}
 						/>
-					{/if}
-				</div>
-				<div
-					class:col-span-full={!(image && image.url)}
-					class="flex max-w-md grow items-start justify-center p-6"
-				>
-					<RichTextRender
-						overrides={cn(
-							'prose-p:text-background prose-headings:text-background',
-							left && 'prose-p:text-foreground prose-headings:text-foreground'
-						)}
-						{richText}
-					/>
+					</div>
 				</div>
 				<!-- </div> -->
 			</div>
