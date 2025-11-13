@@ -13,42 +13,36 @@
 	// there exists both richText overrides and component specific overrides
 	const { richText, overrides, cb }: { richText: any; overrides?: string; cb?: () => void } =
 		$props();
-	let html = $state<string | undefined>();
-
-	//  let payload = getPayloadState()
-	//  let livePreviewDynamicAnimations = $derived(payload.isLivePreview && richText.animation.type)
-
-	let loading = $state(false);
-	$effect(() => {
-		untrack(() => (loading = true));
-		if (richText && richText.text) {
-			const data = $state.snapshot(richText.text);
-			convertLexicalToHTMLAsync({
-				data,
-				converters: htmlConverters,
-				populate: getRestPopulateFn({
-					apiURL: `${site.CMS}/api`,
-					locale: page.params.locale ?? 'en'
-				})
-			})
-				.then((res) => {
-					html = res;
-					loading = false;
-				})
-				.catch((err) => console.log(`error loading ${err}`));
-		}
+	const _html = $derived(
+		richText && richText.text
+			? convertLexicalToHTMLAsync({ data: richText.text, converters: htmlConverters })
+			: ''
+	);
+	let { shouldAnimate, animation, style } = richText || {};
+	const { marker } = style || {};
+	// will cause issues if marker if not of color foreground, must either be overridden
+	//  paylaod textstate gives
+	//  <li>
+	//    ::marker
+	//    <span style+"...">...</span>
+	//  </li>
+	//  no clue how to style marker based on span style color
+	//  ...
+	//  ...
+	//  think you can set a css variaable and then reference it
+	$inspect({
+		_html: convertLexicalToHTMLAsync({ data: richText.text, converters: htmlConverters })
 	});
-	const defaults = 'container my-auto wrap-break-word w-full max-w-full ';
+	const defaults = 'my-auto wrap-break-word px-2 w-full max-w-full ';
 </script>
 
-{#if richText}
-	<!--  when switching languages richText becomes undefined  -->
-	<div
-		style:padding={richText.style?.padding}
-		style:--list-marker-color={richText.style?.marker}
-		class=""
-	>
-		{#if richText.animation.type}
+{#await _html}
+	<div class="flex h-full w-full items-center justify-center">
+		<Icon name="loader-circle" class="text-foreground/20 animate-[spin_2s_linear_infinite] " />
+	</div>
+{:then html}
+	<div style:--list-marker-color={marker} class="">
+		{#if shouldAnimate}
 			{#await import('./animated.svelte') then B: any}
 				{@const Block = B.default}
 				<Block

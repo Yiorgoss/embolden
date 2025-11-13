@@ -22,7 +22,6 @@
 		{ x: '20%', y: '0px', origin: '40% -30%' },
 		{ x: '00px', y: '00px', origin: '20% -30% ' }
 	];
-	$inspect(richText);
 </script>
 
 <section id="gradient-bg-block ">
@@ -75,6 +74,8 @@
 				></div>
 			{/each}
 		</div>
-		<RichTextRender {richText} overrides="mx-auto my-auto absolute inset-0 isolate h-fit w-fit" />
+		<div class="">
+			<RichTextRender {richText} overrides="bg-green-400 h-fit w-fit" />
+		</div>
 	</div>
 </section>
