@@ -3,16 +3,19 @@
 	import RichTextRender from '@/components/blocks/rich-text/render.svelte';
 	import Picture from '@/components/common/picture.svelte';
 	import { cn } from '@/utils';
+	import { MediaQuery } from 'svelte/reactivity';
+
+	const mobile = new MediaQuery('max-width: 480px');
 
 	const { blockData }: { blockData: IStickyContainers; index?: number } = $props();
-	const { list: maybeList, title } = blockData;
+	const { list, title } = blockData;
 
-	const list = maybeList ?? []; //typescript
+	//  const height = mobile.current ? mobileStyle?.height : style?.height;
 </script>
 
 <section id="sticky-container-root" class="container mx-auto">
 	<div class="">
-		{#each list as { richText, image, style }, i}
+		{#each list ?? [] as { richText, image, style }, i}
 			{@const left = i % 2 == 1}
 			<div
 				style:top={`${50 * i + 5}px`}
