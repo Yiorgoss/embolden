@@ -8,14 +8,14 @@
 	const mobile = new MediaQuery('max-width: 480px');
 
 	const { blockData }: { blockData: IStickyContainers; index?: number } = $props();
-	const { list, title } = blockData;
+	const { list, title, style } = blockData;
 
 	//  const height = mobile.current ? mobileStyle?.height : style?.height;
 </script>
 
 <section id="sticky-container-root" class="container mx-auto">
 	<div class="">
-		{#each list ?? [] as { richText, image, style }, i}
+		{#each list ?? [] as { richText, image }, i}
 			{@const left = i % 2 == 1}
 			<div
 				style:top={`${50 * i + 5}px`}
@@ -31,17 +31,17 @@
 					</div>
 				{/if}
 
-				<div class="flex flex-col h-full justify-center items-center md:flex-row">
+				<div class="flex flex-col justify-center items-center md:flex-row">
 					<div
 						class:hidden={!(image && image.url)}
 						class:md:order-last={left}
 						class={cn('w-full max-w-md md:max-w-full mx-auto p-6')}
 					>
 						{#if image}
-							<Picture {image} />
+							<Picture {image} pictureClass="flex justify-center items-center" class="" />
 						{/if}
 					</div>
-					<div class="flex h-full items-center justify-center p-6">
+					<div class="flex grow-1 pb-10 items-center justify-center p-6">
 						<RichTextRender
 							overrides={cn(
 								'prose-p:text-background prose-headings:text-background',
