@@ -1,6 +1,7 @@
 node_modules
 
 *.sql
+*.bak
 # Output
 .output
 .vercel

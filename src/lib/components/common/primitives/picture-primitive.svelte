@@ -61,6 +61,7 @@
 <!-- -->
 <div
 	style:padding
+	style:height
 	class="grid place-items-center h-full w-full relative overflow-hidden grid-cols-1 grid-rows-1"
 >
 	{#if placeholder && placeholder.filename}

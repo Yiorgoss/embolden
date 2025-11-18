@@ -14,14 +14,15 @@
 </script>
 
 <section id="sticky-container-root" class="container mx-auto">
-	<div class="">
+	<div class="relative">
 		{#each list ?? [] as { richText, image }, i}
 			{@const left = i % 2 == 1}
+
 			<div
 				style:top={`${50 * i + 5}px`}
 				style:background={style?.background}
 				class={cn(
-					`text-background bg-primary rounded-theme sticky  `,
+					` text-background bg-primary rounded-theme sticky`,
 					left && 'bg-secondary border-foreground border '
 				)}
 			>
@@ -30,18 +31,20 @@
 						{title}
 					</div>
 				{/if}
-
-				<div class="flex flex-col justify-center items-center md:flex-row">
+				<div class="flex flex-col md:flex-row justify-start items-center">
 					<div
-						class:hidden={!(image && image.url)}
 						class:md:order-last={left}
-						class={cn('w-full max-w-md md:max-w-full mx-auto p-6')}
+						class="h-[300px] md:h-auto w-full md:w-1/2 px-4 py-10 md:px-10"
 					>
 						{#if image}
-							<Picture {image} pictureClass="flex justify-center items-center" class="" />
+							<Picture
+								{image}
+								pictureClass="min-h-0 h-full w-full flex justify-center items-center"
+								class=""
+							/>
 						{/if}
 					</div>
-					<div class="flex grow-1 pb-10 items-center justify-center p-6">
+					<div class:md:pl-10={left} class="h-full grow-2 shrink-0 flex-2 py-10 px-2">
 						<RichTextRender
 							overrides={cn(
 								'prose-p:text-background prose-headings:text-background',
@@ -51,7 +54,6 @@
 						/>
 					</div>
 				</div>
-				<!-- </div> -->
 			</div>
 		{/each}
 	</div>
