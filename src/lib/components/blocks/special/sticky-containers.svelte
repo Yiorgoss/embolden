@@ -34,7 +34,7 @@
 				<div class="flex flex-col md:flex-row justify-start items-center">
 					<div
 						class:md:order-last={left}
-						class="h-[300px] md:h-auto w-full md:w-1/2 px-4 py-10 md:px-10"
+						class="h-[300px] overflow-hidden md:h-auto w-full md:w-1/2 px-4 py-10 md:px-10"
 					>
 						{#if image}
 							<Picture
