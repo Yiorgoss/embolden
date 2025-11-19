@@ -27,10 +27,7 @@
 	//  ...
 	//  ...
 	//  think you can set a css variaable and then reference it
-	$inspect({
-		_html: convertLexicalToHTMLAsync({ data: richText.text, converters: htmlConverters })
-	});
-	const defaults = 'my-auto wrap-break-word px-2 w-full max-w-full ';
+	const defaults = 'text-balance container my-auto wrap-break-word px-2 w-full max-w-full ';
 </script>
 
 {#await _html}
