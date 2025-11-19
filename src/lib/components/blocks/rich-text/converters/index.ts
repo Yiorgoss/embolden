@@ -1,19 +1,17 @@
 import type { IPill, ICursiveText } from '@payload-types';
 import { objToCSS } from './text-state';
-import { customText } from "./text"
-import { resolveID, richTextImg } from '@/utils';
-import { richTextBtn } from '@/utils/payload-utils';
+import { TextHTMLConverterAsync } from "./text"
 
 
-// import {
-//   defaultColors,
-//   NodeFormat,
-//   type DefaultNodeTypes,
-//   type SerializedBlockNode,
-//   type SerializedInlineBlockNode
-// } from '@payloadcms/richtext-lexical';
+import {
+  defaultColors,
+  NodeFormat,
+  type DefaultNodeTypes,
+  type SerializedBlockNode,
+  type SerializedInlineBlockNode
+} from '@payloadcms/richtext-lexical';
 
-// import { type HTMLConvertersFunctionAsync } from '@payloadcms/richtext-lexical/html-async';
+import { type HTMLConvertersFunctionAsync } from '@payloadcms/richtext-lexical/html-async';
 
 // import { animate, motionValue, svgEffect } from 'motion';
 
@@ -24,9 +22,10 @@ import { richTextBtn } from '@/utils/payload-utils';
 
 // export type htmlConvertersType = typeof htmlConverters
 
-export const htmlConverters: any = ({ defaultConverters }) => ({
+const customTextNode = TextHTMLConverterAsync.text
+export const htmlConverters: HTMLConvertersFunctionAsync<NodeTypes> = ({ defaultConverters }) => ({
   ...defaultConverters,
-  text: customText,
+  customTextNode,
   inlineBlocks: {
     // Each key should match your inline block's slug
     svgText: async (args: any) => {

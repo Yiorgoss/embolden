@@ -3,9 +3,7 @@
 	import { cn, fetchFromCMS, getRestPopulateFn } from '@/utils';
 	import { htmlConverters } from './converters';
 	import { convertLexicalToHTMLAsync } from '@payloadcms/richtext-lexical/html-async';
-	import { site } from '@/config';
-	import { page } from '$app/state';
-
+	//  import { convertLexicalToHTMLAsync } from 'payload-richtext-fork/html-async';
 	import Icon from '@/components/common/icon.svelte';
 	import { onMount, untrack } from 'svelte';
 	import { getPayloadState } from '@/state/payload.svelte';

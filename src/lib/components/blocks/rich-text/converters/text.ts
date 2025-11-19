@@ -1,37 +1,9 @@
-import { defaultColors } from "./colors"
+// import type { SerializedTextNode } from '../../../../../nodeTypes.js'
+// import type { HTMLConvertersAsync } from '../types.js'
 
-const NodeFormat = {
-  DOM_ELEMENT_TYPE: 1,
-  DOM_TEXT_TYPE: 3,
-  // Reconciling
-  NO_DIRTY_NODES: 0,
-  HAS_DIRTY_NODES: 1,
-  FULL_RECONCILE: 2,
-  // Text node modes
-  IS_NORMAL: 0,
-  IS_TOKEN: 1,
-  IS_SEGMENTED: 2,
-  IS_INERT: 3,
-  // Text node formatting
-  IS_BOLD: 1,
-  IS_ITALIC: 1 << 1,
-  IS_STRIKETHROUGH: 1 << 2,
-  IS_UNDERLINE: 1 << 3,
-  IS_CODE: 1 << 4,
-  IS_SUBSCRIPT: 1 << 5,
-  IS_SUPERSCRIPT: 1 << 6,
-  IS_HIGHLIGHT: 1 << 7,
-  // Text node details
-  IS_DIRECTIONLESS: 1,
-  IS_UNMERGEABLE: 1 << 1,
-  // Element node formatting
-  IS_ALIGN_LEFT: 1,
-  IS_ALIGN_CENTER: 2,
-  IS_ALIGN_RIGHT: 3,
-  IS_ALIGN_JUSTIFY: 4,
-  IS_ALIGN_START: 5,
-  IS_ALIGN_END: 6,
-} as const
+// import { NodeFormat } from '../../../../../lexical/utils/nodeFormat.js'
+// import { defaultColors } from '../../../../textState/defaultColors.js'
+import { defaultColors, NodeFormat, type SerializedTextNode } from "@payloadcms/richtext-lexical";
 
 const textState = {
   type: {
@@ -155,70 +127,61 @@ const textState = {
     background: { css: { color: 'var(--background, #3a383b)' }, label: 'background' },
     foreground: { css: { color: 'var(--foreground, #bbb5bd)' }, label: 'foreground' },
     primary: { css: { color: 'var(--primary, #531970)' }, label: 'primary' },
-    'secondary': { css: { color: 'var(--secondary, #6155cf )' }, label: 'secondary' },
-    'chart-1': { label: 'chart-1 ', css: { color: 'var(--chart-1, #f54a00 )' } },
-    'chart-2': { label: 'chart-2 ', css: { color: 'var(--chart-2, #009689)' } },
-    'chart-3': { label: 'chart-3 ', css: { color: 'var(--chart-3, #104e64)' } },
-    'chart-4': { label: 'chart-4 ', css: { color: 'var(--chart-4, #ffba00)' } },
-    'chart-5': { label: 'chart-5 ', css: { color: 'var(--chart-5, #009528)' } },
+    'secondary ': { css: { color: 'var(--secondary, #6155cf )' }, label: 'secondary ' },
   },
 }
 
-// export type StateValues = { [stateValue: string]: { css: string; label: string } }
+export type StateValues = { [stateValue: string]: { css: string; label: string } }
 
-// type ExtractAllColorKeys<T> = {
-//   [P in keyof T]: T[P] extends StateValues ? keyof T[P] : never
-// }[keyof T]
+type ExtractAllColorKeys<T> = {
+  [P in keyof T]: T[P] extends StateValues ? keyof T[P] : never
+}[keyof T]
 
-// type TextStateKeys = ExtractAllColorKeys<typeof textState>
+type TextStateKeys = ExtractAllColorKeys<typeof textState>
 
-//FIX types
-export const customText = ({ node }) => {
-  let text = node.text
+export const TextHTMLConverterAsync: HTMLConvertersAsync<SerializedTextNode> = {
+  text: ({ node }) => {
+    let text = node.text
 
-  const style = {}
-  if (node.$) {
-    Object.entries(textState).forEach(([stateKey, stateValues]) => {
-      const stateValue = node.$ && (node.$[stateKey] as TextStateKeys)
-      if (stateValue && stateValues[stateValue]) {
-        //@ts-ignore
-        Object.assign(style, stateValues[stateValue].css)
-      }
-    })
-  }
-  let providedCSSString = ''
-  for (const key of Object.keys(style)) {
-    providedCSSString += `${key}: ${style[key]};`
-  }
+    const style = {}
+    if (node.$) {
+      Object.entries(textState).forEach(([stateKey, stateValues]) => {
+        const stateValue = node.$ && (node.$[stateKey] as TextStateKeys)
+        if (stateValue && stateValues[stateValue]) {
+          //@ts-ignore
+          Object.assign(style, stateValues[stateValue].css)
+        }
+      })
+    }
+    let providedCSSString = ''
+    for (const key of Object.keys(style)) {
+      providedCSSString += `${key}: ${style[key]};`
+    }
 
-  // split each sentence into words
-  // is this wasteful?
-  text = node.text.split(" ").reduce((acc, word) => acc + `<span class="animate-word"> ${word}</span>`, "")
+    text = `<span style="${providedCSSString}">${text}</span>`
 
+    if (node.format & NodeFormat.IS_BOLD) {
+      text = `<strong >${text}</strong>`
+    }
+    if (node.format & NodeFormat.IS_ITALIC) {
+      text = `<em >${text}</em>`
+    }
+    if (node.format & NodeFormat.IS_STRIKETHROUGH) {
+      text = `<span style="text-decoration: line-through;">${text}</span>`
+    }
+    if (node.format & NodeFormat.IS_UNDERLINE) {
+      text = `<span style="text-decoration: underline;">${text}</span>`
+    }
+    if (node.format & NodeFormat.IS_CODE) {
+      text = `<code >${text}</code>`
+    }
+    if (node.format & NodeFormat.IS_SUBSCRIPT) {
+      text = `<sub >${text}</sub>`
+    }
+    if (node.format & NodeFormat.IS_SUPERSCRIPT) {
+      text = `<sup >${text}</sup>`
+    }
 
-  text = `<span class="" style="${providedCSSString}">${text}</span>`
-
-  if (node.format & NodeFormat.IS_BOLD) {
-    text = `<strong >${text}</strong>`
-  }
-  if (node.format & NodeFormat.IS_ITALIC) {
-    text = `<em >${text}</em>`
-  }
-  if (node.format & NodeFormat.IS_STRIKETHROUGH) {
-    text = `<span style="text-decoration: line-through;">${text}</span>`
-  }
-  if (node.format & NodeFormat.IS_UNDERLINE) {
-    text = `<span style="text-decoration: underline;">${text}</span>`
-  }
-  if (node.format & NodeFormat.IS_CODE) {
-    text = `<code >${text}</code>`
-  }
-  if (node.format & NodeFormat.IS_SUBSCRIPT) {
-    text = `<sub >${text}</sub>`
-  }
-  if (node.format & NodeFormat.IS_SUPERSCRIPT) {
-    text = `<sup >${text}</sup>`
-  }
-
-  return text
+    return text
+  },
 }
