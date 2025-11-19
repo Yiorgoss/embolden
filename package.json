@@ -55,7 +55,9 @@
 		"wrangler": "^4.46.0"
 	},
 	"pnpm": {
-		"onlyBuiltDependencies": ["esbuild"]
+		"onlyBuiltDependencies": [
+			"esbuild"
+		]
 	},
 	"dependencies": {
 		"@motionone/types": "^10.17.1",

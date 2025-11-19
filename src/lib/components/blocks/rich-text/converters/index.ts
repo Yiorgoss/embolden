@@ -5,15 +5,16 @@ import { resolveID, richTextImg } from '@/utils';
 import { richTextBtn } from '@/utils/payload-utils';
 
 
-// import {
-//   defaultColors,
-//   NodeFormat,
-//   type DefaultNodeTypes,
-//   type SerializedBlockNode,
-//   type SerializedInlineBlockNode
-// } from '@payloadcms/richtext-lexical';
 
-// import { type HTMLConvertersFunctionAsync } from '@payloadcms/richtext-lexical/html-async';
+import {
+  defaultColors,
+  NodeFormat,
+  type DefaultNodeTypes,
+  type SerializedBlockNode,
+  type SerializedInlineBlockNode
+} from '@payloadcms/richtext-lexical';
+
+import { type HTMLConvertersFunctionAsync } from '@payloadcms/richtext-lexical/html-async';
 
 // import { animate, motionValue, svgEffect } from 'motion';
 
