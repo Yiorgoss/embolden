@@ -270,9 +270,3 @@ iconify-icon {
     transform: rotate(360deg);
   }
 }
-
-@keyframes marquee {
-  100% {
-    transform: translateX(-50%);
-  }
-}
