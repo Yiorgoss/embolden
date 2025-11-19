@@ -1,15 +1,17 @@
 import type { IPill, ICursiveText } from '@payload-types';
 import { objToCSS } from './text-state';
+import { TextHTMLConverterAsync } from "./text"
 
-// import {
-//   defaultColors,
-//   NodeFormat,
-//   type DefaultNodeTypes,
-//   type SerializedBlockNode,
-//   type SerializedInlineBlockNode
-// } from '@payloadcms/richtext-lexical';
 
-// import { type HTMLConvertersFunctionAsync } from '@payloadcms/richtext-lexical/html-async';
+import {
+  defaultColors,
+  NodeFormat,
+  type DefaultNodeTypes,
+  type SerializedBlockNode,
+  type SerializedInlineBlockNode
+} from '@payloadcms/richtext-lexical';
+
+import { type HTMLConvertersFunctionAsync } from '@payloadcms/richtext-lexical/html-async';
 
 import { resolveID, richTextImg } from '@/utils';
 import { richTextBtn } from '@/utils/payload-utils';
@@ -22,27 +24,10 @@ export type NodeTypes =
 
 export type htmlConvertersType = typeof htmlConverters
 
-// const textState = {
-//   size: {
-//     'xs': { label: "Extra Small", css: { 'font-size': "var(--text-xs, 4px)" } },
-//     'xl': { label: "Extra Large", css: { 'font-size': "96px" } },
-//   },
-//   fontWeight: {
-//     'Boldest': { label: "Boldest", css: { 'font-weight': '900' } }
-//   },
-//   // type: {
-//   // },
-//   color: {
-//     ...defaultColors.text
-//   },
-//   background: {
-//     ...defaultColors.background
-//   },
-// }
-
-
+const customTextNode = TextHTMLConverterAsync.text
 export const htmlConverters: HTMLConvertersFunctionAsync<NodeTypes> = ({ defaultConverters }) => ({
   ...defaultConverters,
+  customTextNode,
   inlineBlocks: {
     // Each key should match your inline block's slug
     svgText: async (args) => {

@@ -54,12 +54,15 @@
 		"wrangler": "^4.46.0"
 	},
 	"pnpm": {
-		"onlyBuiltDependencies": ["esbuild"]
+		"onlyBuiltDependencies": [
+			"esbuild"
+		]
 	},
 	"dependencies": {
 		"@motionone/types": "^10.17.1",
-		"@payloadcms/live-preview": "^3.63.0",
-		"@tanstack/svelte-form": "^1.23.8",
+		"@payloadcms/live-preview": "^3.64.0",
+		"@payloadcms/richtext-lexical": "^3.64.0",
+		"@tanstack/svelte-form": "^1.9.0",
 		"@types/lodash": "^4.17.20",
 		"bits-ui": "^2.14.2",
 		"clsx": "^2.1.1",
@@ -68,7 +71,6 @@
 		"lexical": "^0.31.2",
 		"lodash-es": "^4.17.21",
 		"lucide": "^0.503.0",
-		"motion": "^12.23.24",
-		"payload-richtext-fork": "^3.55.4"
+		"motion": "^12.23.24"
 	}
 }

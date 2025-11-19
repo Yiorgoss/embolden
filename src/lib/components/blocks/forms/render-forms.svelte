@@ -10,7 +10,8 @@
 	import { createForm } from '@tanstack/svelte-form';
 	import { Button } from '@/components/ui/button';
 	import Spinner from '@/components/common/spinner.svelte';
-	import { convertLexicalToHTML } from 'payload-richtext-fork/html';
+	//  import { convertLexicalToHTML } from 'payload-richtext-fork/html';
+	import { convertLexicalToHTML } from '@payloadcms/richtext-lexical/html';
 	import DefaultRichText from '@/components/blocks/rich-text/default.svelte';
 
 	const { data } = $props();
