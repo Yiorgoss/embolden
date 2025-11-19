@@ -90,8 +90,8 @@ export const htmlConverters: HTMLConvertersFunctionAsync<NodeTypes> = ({ default
 
       //can expand too any svg by using api to reflect external svg
       const elem = `
-      <span class="word" style="display:inline-block; position:relative;">
-        <span style="position:absolute;  top:0; left:0; right:0; bottom:0;" >
+      <span class="" style="display:inline-block; position:relative;">
+        <span class="word" style="position:absolute;  top:0; left:0; right:0; bottom:0;" >
           <svg id="animate-svg" width="100%" height="100%" preserveAspectRatio="none" viewBox="0 0 181 68" fill="none" xmlns="http://www.w3.org/2000/svg">
             <path d="M117.637 2.86134C55.6369 -2.63843 -18.8594 8.36133 6.63897 38.8615C41.6403 75.8615 103.472 64.9534 122.64 61.8615C138.14 59.3615 181.613 49.6723 178.64 28.8615C175.14 4.36128 107.642 6.36118 81.1424 14.3648" stroke="${color ?? "var(--foreground)"}" stroke-width="3" stroke-linecap="round"/>
           </svg>
