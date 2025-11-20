@@ -2,8 +2,9 @@
 	import DefaultRichText from '@/components/blocks/rich-text/default.svelte';
 	import { cn, fetchFromCMS, getRestPopulateFn } from '@/utils';
 	import { htmlConverters } from './converters';
+	//  import { convertLexicalToHTMLAsync } from '@payloadcms/richtext-lexical';
 	import { convertLexicalToHTMLAsync } from '@payloadcms/richtext-lexical/html-async';
-	//  import { convertLexicalToHTMLAsync } from 'payload-richtext-fork/html-async';
+
 	import Icon from '@/components/common/icon.svelte';
 	import { onMount, untrack } from 'svelte';
 	import { getPayloadState } from '@/state/payload.svelte';
@@ -11,11 +12,13 @@
 	// there exists both richText overrides and component specific overrides
 	const { richText, overrides, cb }: { richText: any; overrides?: string; cb?: () => void } =
 		$props();
-	const _html = $derived(
-		richText && richText.text
-			? convertLexicalToHTMLAsync({ data: richText.text, converters: htmlConverters })
-			: ''
-	);
+	let _html = $state();
+	onMount(() => {
+		_html =
+			richText && richText.text
+				? convertLexicalToHTMLAsync({ data: richText.text, converters: htmlConverters })
+				: '';
+	});
 	let { shouldAnimate, animation, style } = richText || {};
 	const { marker } = style || {};
 	// will cause issues if marker if not of color foreground, must either be overridden
