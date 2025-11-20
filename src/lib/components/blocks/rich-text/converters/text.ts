@@ -1,9 +1,37 @@
-// import type { SerializedTextNode } from '../../../../../nodeTypes.js'
-// import type { HTMLConvertersAsync } from '../types.js'
+import { defaultColors } from "./colors"
 
-// import { NodeFormat } from '../../../../../lexical/utils/nodeFormat.js'
-// import { defaultColors } from '../../../../textState/defaultColors.js'
-import { defaultColors, NodeFormat, type SerializedTextNode } from "@payloadcms/richtext-lexical";
+const NodeFormat = {
+  DOM_ELEMENT_TYPE: 1,
+  DOM_TEXT_TYPE: 3,
+  // Reconciling
+  NO_DIRTY_NODES: 0,
+  HAS_DIRTY_NODES: 1,
+  FULL_RECONCILE: 2,
+  // Text node modes
+  IS_NORMAL: 0,
+  IS_TOKEN: 1,
+  IS_SEGMENTED: 2,
+  IS_INERT: 3,
+  // Text node formatting
+  IS_BOLD: 1,
+  IS_ITALIC: 1 << 1,
+  IS_STRIKETHROUGH: 1 << 2,
+  IS_UNDERLINE: 1 << 3,
+  IS_CODE: 1 << 4,
+  IS_SUBSCRIPT: 1 << 5,
+  IS_SUPERSCRIPT: 1 << 6,
+  IS_HIGHLIGHT: 1 << 7,
+  // Text node details
+  IS_DIRECTIONLESS: 1,
+  IS_UNMERGEABLE: 1 << 1,
+  // Element node formatting
+  IS_ALIGN_LEFT: 1,
+  IS_ALIGN_CENTER: 2,
+  IS_ALIGN_RIGHT: 3,
+  IS_ALIGN_JUSTIFY: 4,
+  IS_ALIGN_START: 5,
+  IS_ALIGN_END: 6,
+} as const
 
 const textState = {
   type: {
@@ -131,57 +159,55 @@ const textState = {
   },
 }
 
-export type StateValues = { [stateValue: string]: { css: string; label: string } }
+// export type StateValues = { [stateValue: string]: { css: string; label: string } }
 
-type ExtractAllColorKeys<T> = {
-  [P in keyof T]: T[P] extends StateValues ? keyof T[P] : never
-}[keyof T]
+// type ExtractAllColorKeys<T> = {
+//   [P in keyof T]: T[P] extends StateValues ? keyof T[P] : never
+// }[keyof T]
 
-type TextStateKeys = ExtractAllColorKeys<typeof textState>
+// type TextStateKeys = ExtractAllColorKeys<typeof textState>
 
-export const TextHTMLConverterAsync: HTMLConvertersAsync<SerializedTextNode> = {
-  text: ({ node }) => {
-    let text = node.text
+export const customText = ({ node }) => {
+  let text = node.text
 
-    const style = {}
-    if (node.$) {
-      Object.entries(textState).forEach(([stateKey, stateValues]) => {
-        const stateValue = node.$ && (node.$[stateKey] as TextStateKeys)
-        if (stateValue && stateValues[stateValue]) {
-          //@ts-ignore
-          Object.assign(style, stateValues[stateValue].css)
-        }
-      })
-    }
-    let providedCSSString = ''
-    for (const key of Object.keys(style)) {
-      providedCSSString += `${key}: ${style[key]};`
-    }
+  const style = {}
+  if (node.$) {
+    Object.entries(textState).forEach(([stateKey, stateValues]) => {
+      const stateValue = node.$ && (node.$[stateKey] as TextStateKeys)
+      if (stateValue && stateValues[stateValue]) {
+        //@ts-ignore
+        Object.assign(style, stateValues[stateValue].css)
+      }
+    })
+  }
+  let providedCSSString = ''
+  for (const key of Object.keys(style)) {
+    providedCSSString += `${key}: ${style[key]};`
+  }
 
-    text = `<span style="${providedCSSString}">${text}</span>`
+  text = `<span style="${providedCSSString}">${text}</span>`
 
-    if (node.format & NodeFormat.IS_BOLD) {
-      text = `<strong >${text}</strong>`
-    }
-    if (node.format & NodeFormat.IS_ITALIC) {
-      text = `<em >${text}</em>`
-    }
-    if (node.format & NodeFormat.IS_STRIKETHROUGH) {
-      text = `<span style="text-decoration: line-through;">${text}</span>`
-    }
-    if (node.format & NodeFormat.IS_UNDERLINE) {
-      text = `<span style="text-decoration: underline;">${text}</span>`
-    }
-    if (node.format & NodeFormat.IS_CODE) {
-      text = `<code >${text}</code>`
-    }
-    if (node.format & NodeFormat.IS_SUBSCRIPT) {
-      text = `<sub >${text}</sub>`
-    }
-    if (node.format & NodeFormat.IS_SUPERSCRIPT) {
-      text = `<sup >${text}</sup>`
-    }
+  if (node.format & NodeFormat.IS_BOLD) {
+    text = `<strong >${text}</strong>`
+  }
+  if (node.format & NodeFormat.IS_ITALIC) {
+    text = `<em >${text}</em>`
+  }
+  if (node.format & NodeFormat.IS_STRIKETHROUGH) {
+    text = `<span style="text-decoration: line-through;">${text}</span>`
+  }
+  if (node.format & NodeFormat.IS_UNDERLINE) {
+    text = `<span style="text-decoration: underline;">${text}</span>`
+  }
+  if (node.format & NodeFormat.IS_CODE) {
+    text = `<code >${text}</code>`
+  }
+  if (node.format & NodeFormat.IS_SUBSCRIPT) {
+    text = `<sub >${text}</sub>`
+  }
+  if (node.format & NodeFormat.IS_SUPERSCRIPT) {
+    text = `<sup >${text}</sup>`
+  }
 
-    return text
-  },
+  return text
 }
