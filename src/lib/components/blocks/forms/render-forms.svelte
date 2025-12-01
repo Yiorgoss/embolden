@@ -18,11 +18,6 @@
 
 	const html = convertLexicalToHTML({ data: data.confirmationMessage });
 	const form = createForm(() => ({
-		defaultValues: {
-			name: '',
-			email: '',
-			message: ''
-		},
 		onSubmit: async (args) => {
 			const { value } = args;
 			let submissionData = Object.entries(value).map(([name, value]) => ({
@@ -40,6 +35,7 @@
 					submissionData
 				})
 			});
+			const text = await submissionResponse.text();
 			if (!submissionResponse.ok) {
 				toast.error('Submission Failed. Please try again or contact us by phone.');
 				return;
