@@ -7,45 +7,15 @@
 	import { site } from '@/config';
 	import { getPayloadState } from '@/state/payload.svelte';
 
-	import {
-		subscribe as payloadSubscribe,
-		unsubscribe as payloadUnsubscribe,
-		ready
-	} from '@payloadcms/live-preview';
-	import { mergeUpdateData } from '@/utils/payload-utils';
-	import { PUBLIC_ENV } from '$env/static/public';
+	const { children, data: tenant }: LayoutProps = $props();
+	const payload = getPayloadState();
 
-	const { children }: { children: Snippet } = $props();
-	let data = $derived(page.data); // need it to be written to for live preview
-	const nav = $derived(page.data.nav);
-
-	const isLivePreview = page.url.searchParams.get('livePreview') === 'true';
-	const handleLivePreviewUpdate = (doc: Tenant) => {
-		data = mergeUpdateData({ oldData: data, newData: doc });
-	};
-
-	onMount(() => {
-		let payloadLivePreview: undefined | any;
-		if (isLivePreview) {
-			const serverURL =
-				PUBLIC_ENV == 'PROD' ? `https://admin.${site.domainName}` : `http://localhost:3000`;
-			ready({ serverURL });
-			payloadLivePreview = payloadSubscribe({
-				callback: (doc) => handleLivePreviewUpdate(doc),
-				depth: 10,
-				initialData: data,
-				serverURL
-			});
-		}
-		() => payloadLivePreview && payloadUnsubscribe(payloadLivePreview);
-	});
-
-	setContext('payload-live-preview', () => data);
+	onMount(() => payload.setupListener());
 </script>
 
-<div class="text-base">
+<div class="min-h-[svh]">
 	<header class="text-foreground bg-background">
-		<RenderBlocks hasLocaleSwitch={true} blockData={payload.get('header')} />
+		<RenderBlocks hasLocaleSwitch={true} blockData={payload._state.get('header')} />
 	</header>
 	<div class="text-foreground bg-background h-full w-full">
 		{@render children()}

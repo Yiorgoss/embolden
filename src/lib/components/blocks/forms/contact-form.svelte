@@ -26,8 +26,10 @@
 	});
 </script>
 
-{#if loading || !data}
-	<Spinner />
-{:else}
+{#await formData}
+	<div class="w-full h-full flex justify-center items-center">
+		<div class="loader opacity-70 w-20 h-20"></div>
+	</div>
+{:then data}
 	<RenderForms {data} />
 {/if}

@@ -3,17 +3,14 @@
 	import { site } from '@/config';
 	import { page } from '$app/state';
 	import { resolveID } from '@/utils';
-	import { getPayloadState } from '@/state/payload.svelte';
 
 	const { meta }: { meta: ISEO } = $props();
 
-	let payload = getPayloadState();
-
 	let image = $state<Asset | undefined>();
 	$effect(() => {
-		payload
-			.resolveID({ collection: 'assets', data: meta, lang: page.params.locale })
-			.then((img) => (image = img));
+		resolveID({ collection: 'assets', data: meta, lang: page.params.locale }).then(
+			(img) => (image = img)
+		);
 	});
 </script>
 

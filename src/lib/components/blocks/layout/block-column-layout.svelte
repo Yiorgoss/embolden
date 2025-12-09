@@ -6,8 +6,7 @@
 	import { animate } from '@/attachments/animations/animate.svelte';
 
 	const { blockData }: { blockData: IBlockColumnLayout } = $props();
-	const { layout, columnOne, columnTwo, columnThree, style, mobileStyle, animation } =
-		$derived(blockData);
+	const { layout, columnOne, columnTwo, columnThree, style, mobileStyle } = $derived(blockData);
 
 	const normaliseWidth = (layout: string) => {
 		const cssList = [];
@@ -65,7 +64,7 @@
 				style:align-items={style?.alignY}
 				style:justify-content={style?.alignX}
 				class={cn(
-					'animate-child w-full flex grow-1 justify-center items-center md:items-stretch',
+					' w-full flex grow-1 justify-center items-center md:items-stretch',
 					widthClass[0]
 				)}
 			>

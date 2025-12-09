@@ -5,7 +5,33 @@
 	import { animate } from '@/attachments/animations/animate.svelte';
 
 	const { blockData }: { blockData: ICalistoFeatureCard } = $props();
-	const { cards, animation, style } = $derived(blockData);
+	const { cards } = $derived(blockData);
+
+	let observer: IntersectionObserver | undefined = $state();
+	let startAnimation = $state(false);
+	let el: HTMLElement | undefined = $state();
+
+	onMount(() => {
+		observer = new IntersectionObserver(
+			(entries) => {
+				if (entries[0].isIntersecting) {
+					startAnimation = true;
+				}
+			},
+			{ rootMargin: '-30%' }
+		);
+		if (!el) return;
+		observer.observe(el);
+		() => {
+			if (el) observer!.unobserve(el);
+		};
+	});
+
+	$effect(() => {
+		if (startAnimation && el && observer) {
+			observer.unobserve(el);
+		}
+	});
 </script>
 
 <section id="feature-card" class="container mx-auto">

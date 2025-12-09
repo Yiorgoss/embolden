@@ -4,25 +4,22 @@
 	import { RichTextRender } from '../rich-text';
 	import { resolveID } from '@/utils';
 	import { page } from '$app/state';
-	import { getPayloadState } from '@/state/payload.svelte';
-	import { prefersReducedMotion } from 'svelte/motion';
 
 	const { blockData }: { blockData: IMarquee } = $props();
 	const {
-		items,
-		style: { font, background, color, height, border, padding, gap } = {},
-		options,
-		link: _link
-		//  animation
+		richText,
+		image,
+		style: { background, height, border, padding } = {},
+		options: { nRepeat, maskEdges } = {},
+		link: _link,
+		animation
 	} = $derived(blockData);
 	//  const { nRepeat, maskEdges } = $derived(options || {});
 	//  const { background, height, border, padding } = $derived(style || {});
 
-	let payload = getPayloadState();
 	let link = $state<string>();
 	$effect(() => {
-		payload
-			.resolveID({ collection: 'pages', data: _link, lang: page.params.locale })
+		resolveID({ collection: 'pages', data: _link, lang: page.params.locale })
 			.then((page) => (link = page.slug))
 			.catch(() => 'javascript:void(0);');
 	});
@@ -37,19 +34,18 @@
 	class:mask-none={!options?.maskEdges}
 	class="mask-l-from-90% mask-r-from-90% overflow-clip"
 >
-	<a href={link} aria-hidden={!link}>
+	<a href={link}>
 		<div
 			style:height
-			style:gap
-			style:animation-duration={options?.duration}
-			class:flex-wrap={prefersReducedMotion.current}
-			class="marquee-default w-max flex justify-center items-center gap-x-10"
+			style:animation-duration={animation?.duration}
+			data-animated="true"
+			class=" marquee-default flex items-center w-full justify-start gap-10"
 		>
-			{#each [...items, ...items] as { image, text }, i}
-				<div aria-hidden={i > items.length} class="">
+			{#each { length: nRepeat ?? 6 } as _}
+				<div class="flex justify-end items-end min-w-fit h-fit w-full">
 					<Picture {image} class="object-contain" />
 				</div>
-				<div style:font aria-hidden={i > items.length} class="text-nowrap">{text}</div>
+				<RichTextRender overrides="min-w-fit break-keep text-nowrap inline-block" {richText} />
 			{/each}
 		</div>
 	</a>

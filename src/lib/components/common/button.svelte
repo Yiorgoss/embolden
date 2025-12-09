@@ -25,8 +25,6 @@
 	let _href = $state<Partial<Page> | undefined | null>(undefined);
 	let variant = $derived(display?.variant ?? _variant);
 
-	let payload = getPayloadState();
-
 	let href = $derived.by(() => {
 		if (restProps['href']) return restProps['href']; // hardcoded
 		// must be IButton
@@ -41,12 +39,11 @@
 	$effect(() => {
 		if (!link) return;
 		if (urlType == 'reference' && reference) {
-			payload
-				.resolveID({
-					collection: reference.relationTo,
-					data: reference.value,
-					lang: page.params.locale
-				})
+			resolveID({
+				collection: reference.relationTo,
+				data: reference.value,
+				lang: page.params.locale
+			})
 				.then((page) => {
 					_href = { slug: page.slug };
 				})
@@ -55,12 +52,19 @@
 	});
 </script>
 
-{#if display?.text}
-	<Button class={cn('wrap-anywhere mx-2', className)} {variant} {href} {...restProps}>
-		{#if display?.text}
-			{display.text}
-		{:else}
-			{@render children?.()}
-		{/if}
-	</Button>
-{/if}
+<Button class={cn('wrap-anywhere mx-2', className)} {variant} {href} {...restProps}>
+	{#if display?.text}
+		{display.text}
+	{:else}
+		{@render children?.()}
+	{/if}
+</Button>
+
+<!--  {#await _href}
+	<div></div>
+{:then href}
+	{@const slug = locale ? `/${locale ?? ''}/${href.slug}` : `/${href.slug}`}  -->
+<!--  <ButtonPrimitive class={className} {variant} href={slug} text={text ?? href.title} {...restProps} />  -->
+<!--  {:catch error}
+	<div>{error}</div>
+{/await}  -->

@@ -9,7 +9,34 @@
 
 	const { blockData }: { blockData: IDiscountCard } = $props();
 	const { cards } = $derived(blockData);
-	const hasOneDiscount = $derived(
+
+	let observer: IntersectionObserver;
+	let startAnimation = $state(false);
+	let el: HTMLElement | undefined = $state();
+
+	onMount(() => {
+		observer = new IntersectionObserver(
+			(entries) => {
+				if (entries[0].isIntersecting) {
+					startAnimation = true;
+				}
+			},
+			{ rootMargin: '-40%' }
+		);
+		if (!el) return;
+		observer.observe(el);
+		() => {
+			if (el) observer!.unobserve(el);
+		};
+	});
+
+	$effect(() => {
+		if (startAnimation && observer && el) {
+			observer.unobserve(el);
+		}
+	});
+
+	const hasOneDiscount =
 		cards &&
 			cards.reduce((acc: boolean, { includeDiscount }) => {
 				return (acc = includeDiscount || acc);

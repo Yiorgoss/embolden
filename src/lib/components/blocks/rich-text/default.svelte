@@ -37,10 +37,8 @@
 	class={cn('relative overflow-hidden', overrides)}
 >
 	{#if loading}
-		<Spinner class="size-12" />
+		<div class="h-20 w-full loader"></div>
 	{:else}
-		<div class="">
-			{@html html}
-		</div>
+		{@html html}
 	{/if}
 </div>

@@ -9,12 +9,14 @@
 	import { animate } from '@/attachments/animations/animate.svelte';
 	import { createAnimationObject } from '@/utils/ui-utils';
 
-	const { blockData, cb }: { blockData: IScrollGrowLanding; cb?: () => void } = $props();
-	const { initImg, finalImg, richText, style: { background, height } = {} } = $derived(blockData);
-
-	$effect(() => cb && cb());
-
-	let animation = createAnimationObject({ type: 'scroll', preset: ['growScrollScale'] });
+	const { blockData }: { blockData: IScrollGrowLanding } = $props();
+	const {
+		initImg,
+		finalImg,
+		richText,
+		link,
+		style: { background, height } = {}
+	} = $derived(blockData);
 </script>
 
 <section

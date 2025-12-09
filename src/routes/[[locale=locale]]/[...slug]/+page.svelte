@@ -8,24 +8,8 @@
 
 	let payload = getPayloadState();
 
-	const isLivePreview = page.url.searchParams.get('livePreview') === 'true';
-	let livePreviewData = getContext('payload-live-preview') as () => Tenant;
-
-	let getPages = $state(isLivePreview ? livePreviewData : () => page.data);
-	const { slug: currentSlug, locale } = $derived(page.params);
-
-	let wasHome = $derived(currentSlug == '' || currentSlug == '/');
-
-	const currentPage = $derived(
-		getPages().pages.docs.find(({ slug }: { slug: string }) => {
-			locale;
-			if (slug == '' || slug == '/') {
-				// both should want the same page
-				return slug == currentSlug || slug.slice(1) == currentSlug;
-			}
-			return slug == currentSlug;
-		})
-	);
+	let currentPage = $derived(payload.get(page.params.slug));
+	let heroLoaded = $state(page.params.slug == '' ? false : true);
 </script>
 
 {#key page.params.slug}
