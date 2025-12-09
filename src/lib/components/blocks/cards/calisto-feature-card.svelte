@@ -7,7 +7,7 @@
 	import { expoOut } from 'svelte/easing';
 
 	const { blockData }: { blockData: ICalistoFeatureCard } = $props();
-	const { cards } = blockData;
+	const { cards } = $derived(blockData);
 
 	let observer: IntersectionObserver | undefined = $state();
 	let startAnimation = $state(false);

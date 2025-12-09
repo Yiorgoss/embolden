@@ -1,9 +1,9 @@
 <script lang="ts">
 	import { cn, resolveID } from '@/utils';
 	import { onMount } from 'svelte';
-	import { type IButton } from '@payload-types';
+	import { type IButton, type Page } from '@payload-types';
 	import { ButtonPrimitive } from '@/components/common/primitives';
-	import { type ButtonProps as DefaultButtonProps } from '@/components/ui/button';
+	import { Button, type ButtonProps as DefaultButtonProps } from '@/components/ui/button';
 	import { page } from '$app/state';
 
 	type ButtonProps = { link?: IButton } & DefaultButtonProps;
@@ -18,37 +18,52 @@
 		...restProps
 	}: ButtonProps = $props();
 
-	const { locale } = page.params;
-	let { type: urlType, reference, url, display } = { ...link };
+	const { locale } = $derived(page.params);
+	let { type: urlType, reference, url, display } = $derived(link || {});
 
-	let _href = $state(
-		link && urlType == 'reference' && reference
-			? resolveID({ collection: reference!.relationTo, data: reference?.value })
-			: Promise.resolve({ slug: link?.url })
-	);
+	let _href = $state<Partial<Page> | undefined | null>(undefined);
+	let variant = $derived(display?.variant ?? _variant);
 
-	// either the url will exist or the reference will.
-	// url will be null if a reference exists or if its a hardcoded href
-	// reference will not exist if the url is not null
-	if (!(link?.url || link?.reference) && !restProps['href']) _href = Promise.reject();
+	let href = $derived.by(() => {
+		if (restProps['href']) return restProps['href']; // hardcoded
+		// must be IButton
+		if (urlType == 'custom' && url) return url; // custom url
+		// _href has not resolved or resolved undefined
+		if (!_href) return 'javascript:void(0);';
+		//if reached href must be resolved and must be of type reference
+		const { slug } = _href;
+		return locale ? `/${locale}/${slug}` : `/${slug}`;
+	});
 
-	const variant = _variant != 'default' ? _variant : (display?.variant ?? _variant);
-	const text = display?.text ?? children;
-
-	if (restProps['href']) _href = Promise.resolve({ slug: restProps['href'] });
+	$effect(() => {
+		if (!link) return;
+		if (urlType == 'reference' && reference) {
+			resolveID({
+				collection: reference.relationTo,
+				data: reference.value,
+				lang: page.params.locale
+			})
+				.then((page) => {
+					_href = { slug: page.slug };
+				})
+				.catch(() => (_href = null));
+		}
+	});
 </script>
 
-{#await _href}
+<Button class={cn('wrap-anywhere mx-2', className)} {variant} {href} {...restProps}>
+	{#if display?.text}
+		{display.text}
+	{:else}
+		{@render children?.()}
+	{/if}
+</Button>
+
+<!--  {#await _href}
 	<div></div>
 {:then href}
-	{@const slug = locale ? `/${locale ?? ''}/${href.slug}` : `/${href.slug}`}
-	<ButtonPrimitive
-		class={className}
-		{variant}
-		href={slug}
-		text={text ?? href.title}
-		{...restProps}
-	/>
-{:catch error}
+	{@const slug = locale ? `/${locale ?? ''}/${href.slug}` : `/${href.slug}`}  -->
+<!--  <ButtonPrimitive class={className} {variant} href={slug} text={text ?? href.title} {...restProps} />  -->
+<!--  {:catch error}
 	<div>{error}</div>
-{/await}
+{/await}  -->

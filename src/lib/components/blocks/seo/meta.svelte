@@ -1,13 +1,17 @@
 <script lang="ts">
-	import type { ISEO } from '@payload-types';
+	import type { Asset, ISEO } from '@payload-types';
 	import { site } from '@/config';
+	import { page } from '$app/state';
+	import { resolveID } from '@/utils';
 
 	const { meta }: { meta: ISEO } = $props();
 
-	const image =
-		typeof meta.image == 'number'
-			? { sizes: { sm: { url: 'this should never happen' } } }
-			: meta.image;
+	let image = $state<Asset | undefined>();
+	$effect(() => {
+		resolveID({ collection: 'assets', data: meta, lang: page.params.locale }).then(
+			(img) => (image = img)
+		);
+	});
 </script>
 
 <svelte:head>
@@ -16,6 +20,6 @@
 		<meta name="description" content={meta.description} />
 	{/if}
 	{#if meta.image}
-		<meta property="og:image" content={image?.sizes?.sm?.url} />
+		<meta property="og:image" content={image?.url} />
 	{/if}
 </svelte:head>

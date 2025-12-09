@@ -10,7 +10,7 @@
 	import { expoOut } from 'svelte/easing';
 
 	const { blockData }: { blockData: IDiscountCard } = $props();
-	const { cards } = blockData;
+	const { cards } = $derived(blockData);
 
 	let observer: IntersectionObserver;
 	let startAnimation = $state(false);

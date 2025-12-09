@@ -5,15 +5,20 @@
 	import Button from '@/components/common/button.svelte';
 
 	const { blockData }: { blockData: IMediumHero } = $props();
-	const { image, richText, link } = blockData;
+	//  const { image, richText } = $derived(blockData);
 </script>
 
 <section id="medium-hero" class="relative">
 	<div class="absolute inset-0 z-0">
-		{#if image}
-			<Picture class="rounded-none " {image} />
+		{#if blockData.image}
+			<Picture class="rounded-none " image={blockData.image} />
 		{/if}
 	</div>
 
-	<RichTextRender overrides="flex justify-center items-center max-w-full container" {richText} />
+	{#if blockData.richText}
+		<RichTextRender
+			overrides="flex justify-center items-center max-w-full container"
+			richText={blockData.richText}
+		/>
+	{/if}
 </section>

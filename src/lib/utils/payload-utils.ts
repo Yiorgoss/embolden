@@ -97,7 +97,9 @@ export function mergeUpdateData({ oldData, newData }: { oldData: any, newData: a
   }
   else if (newData.hero) { // page has a hero section tenant doesnt ... maybe need to add name of collectioon?
     // update from Pages collection
-    updatedData.pages.docs = [...updatedData.pages.docs.map((page: Page) => page.slug == newData.slug ? newData : page)]
+    // updatedData.pages.docs = [...updatedData.pages.docs.map((page: Page) => page.id == newData.id ? newData : page)]
+    const idx = updatedData.pages.docs.findIndex((doc) => doc.id == newData.id)
+    updatedData.pages.docs[idx] = newData;
   }
 
   return updatedData

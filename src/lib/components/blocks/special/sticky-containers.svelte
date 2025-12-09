@@ -8,7 +8,7 @@
 	const mobile = new MediaQuery('max-width: 480px');
 
 	const { blockData }: { blockData: IStickyContainers; index?: number } = $props();
-	const { list, title, style } = blockData;
+	const { list, title, style } = $derived(blockData);
 
 	//  const height = mobile.current ? mobileStyle?.height : style?.height;
 </script>

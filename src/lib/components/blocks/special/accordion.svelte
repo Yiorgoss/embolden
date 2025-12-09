@@ -7,13 +7,13 @@
 
 	const { blockData }: { blockData: IAccordion } = $props();
 
-	const { list: maybeNoList, link, icon } = blockData;
-	const list = maybeNoList ?? [];
+	const { list, link, icon } = $derived(blockData);
+	//TODO: accordion trigger doesnt have child prop??
 </script>
 
 <section class="w-full px-2 md:px-4 lg:px-10">
 	<Accordion.Root class="w-full max-w-screen" type="multiple">
-		{#each list as item, i}
+		{#each list || [] as item, i}
 			<Accordion.Item value={`acc-item-${i}`} class="group border-dark-10 border-b px-1.5 w-full ">
 				<Accordion.Trigger
 					class="flex font-serif text-3xl w-full items-center justify-between py-5 transition-all duration-200 select-none [&[data-state=open]>span>svg]:rotate-180"
@@ -42,7 +42,9 @@
 			</Accordion.Item>
 		{/each}
 	</Accordion.Root>
-	<div class="py-5 md:pt-10">
-		<Button size="lg" {link} />
-	</div>
+	{#if link}
+		<div class="py-5 md:pt-10">
+			<Button size="lg" {link} />
+		</div>
+	{/if}
 </section>

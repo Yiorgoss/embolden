@@ -9,8 +9,13 @@
 	import { scroll } from '@/attachments/animations/scroll';
 
 	const { blockData }: { blockData: IScrollGrowLanding } = $props();
-	const { initImg, finalImg, richText, link, style } = blockData;
-	const { background, minHeight, height } = style || {};
+	const {
+		initImg,
+		finalImg,
+		richText,
+		link,
+		style: { background, height } = {}
+	} = $derived(blockData);
 </script>
 
 <section id="scroll-grow-landing-block" class="relative">

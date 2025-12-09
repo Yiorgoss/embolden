@@ -57,7 +57,7 @@
 <Toaster position="top-right" richColors closeButton />
 
 <form
-	id="form"
+	id={`form-${data.id}`}
 	onsubmit={(e) => {
 		e.preventDefault();
 		e.stopPropagation();

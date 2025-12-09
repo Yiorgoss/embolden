@@ -8,12 +8,14 @@
 
 	const {
 		html: htmlCMS,
+		loading = false,
 		overrides,
 		style,
 		animation,
 		cb
 	}: {
 		html: string;
+		loading?: boolean;
 		overrides?: string;
 		style: IRichTextField['style'];
 		animation: IRichTextField['animation'];
@@ -24,11 +26,10 @@
 		cb && cb();
 	});
 
-	const { height, background, minHeight } = style || {};
-	const { rtScrollPresets: preset, traceText } = animation || {};
-	//  let element = $state() as HTMLElement;
+	const { height, background, minHeight, textWrap } = $derived(style || {});
+	const { rtScrollPresets: preset, traceText } = $derived(animation || {});
 
-	const html = splitRichTextIntoWords(htmlCMS);
+	const html = $derived(splitRichTextIntoWords(htmlCMS));
 
 	let elem = $state() as Element;
 	$effect(() => {
@@ -48,14 +49,16 @@
 	<div
 		bind:this={elem}
 		style:height={height ?? minHeight ?? '100lvh'}
+		style:text-wrap={textWrap}
 		style:background
 		class="grid grid-cols-1 grid-rows-1 justify-center items-center"
 	>
-		<!--  <div class:hidden={!traceText} class=" col-start-1 row-start-1 opacity-20">
-			{@html html}
-		</div>  -->
-		<div {@attach scrollRichText({ preset })} class="col-start-1 row-start-1">
-			{@html html}
-		</div>
+		{#if loading}
+			<div class="loader bg-primary/40"></div>
+		{:else}
+			<div {@attach scrollRichText({ preset })} class="col-start-1 row-start-1">
+				{@html html}
+			</div>
+		{/if}
 	</div>
 </div>

@@ -8,13 +8,19 @@
 
 	const {
 		html,
+		loading = false,
 		overrides,
 		style,
 		cb
-	}: { html: string; overrides?: string; style?: IRichTextField['style']; cb?: () => void } =
-		$props();
+	}: {
+		html: string;
+		loading?: boolean;
+		overrides?: string;
+		style?: IRichTextField['style'];
+		cb?: () => void;
+	} = $props();
 
-	const { height, background, minHeight } = style || {};
+	const { height, background, minHeight, textWrap } = $derived(style || {});
 
 	onMount(() => {
 		cb && cb();
@@ -25,8 +31,13 @@
 	id="default-rich-text"
 	style:height
 	style:background
+	style:text-wrap={textWrap}
 	style:min-height={minHeight}
 	class={cn('relative overflow-hidden', overrides)}
 >
-	{@html html}
+	{#if loading}
+		<div class="h-20 w-full loader"></div>
+	{:else}
+		{@html html}
+	{/if}
 </div>

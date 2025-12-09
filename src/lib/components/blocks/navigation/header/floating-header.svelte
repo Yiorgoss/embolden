@@ -14,8 +14,7 @@
 	const { blockData, hasLocaleSwitch }: { blockData: IFloatingHeader; hasLocaleSwitch: boolean } =
 		$props();
 
-	const { image, nav, style } = blockData;
-	const { inset } = style || {};
+	const { image, nav, style } = $derived(blockData);
 
 	const { locale } = page.params;
 
@@ -44,14 +43,14 @@
 />
 
 <section
-	style:inset
-	class="fixed container top-2 inset-x-0 z-30 mx-auto h-(--header-height) px-2 md:px-0"
+	style:inset={style?.inset}
+	class="fixed top-2 flex justify-center w-screen z-30 h-(--header-height) px-2 md:px-0"
 >
-	<div class="w-full h-full">
+	<div class="container w-full h-full">
 		<!-- desktop -->
 		<Nav.Root
 			class={cn(
-				'translate-y-0 px-10 xxxx bg-background shadow-xl rounded-theme transition-transform ease-out duration-500 hidden w-full items-center justify-between md:flex',
+				'translate-y-0 px-10 bg-background shadow-xl rounded-theme transition-transform ease-out duration-500 hidden w-full items-center justify-between md:flex',
 				scrollingUp && '-translate-y-2/1'
 			)}
 		>
