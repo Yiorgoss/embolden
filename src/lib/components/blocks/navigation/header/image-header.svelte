@@ -14,9 +14,8 @@
 	const { blockData, hasLocaleSwitch }: { blockData: IImageHeader; hasLocaleSwitch: boolean } =
 		$props();
 
-	const { image, nav } = blockData;
-
-	const { locale } = page.params;
+	const { image, nav } = $derived(blockData);
+	const { locale } = $derived(page.params);
 
 	let open = $state(false);
 	let currentY = $state(0);

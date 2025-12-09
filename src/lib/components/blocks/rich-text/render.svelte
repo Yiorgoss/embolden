@@ -6,46 +6,52 @@
 	import { convertLexicalToHTMLAsync } from '@payloadcms/richtext-lexical/html-async';
 
 	import Icon from '@/components/common/icon.svelte';
-	import { onMount } from 'svelte';
+	import { onMount, untrack } from 'svelte';
 
 	// there exists both richText overrides and component specific overrides
 	const { richText, overrides, cb }: { richText: any; overrides?: string; cb?: () => void } =
 		$props();
-	let _html = $state();
-	onMount(() => {
-		_html =
-			richText && richText.text
-				? convertLexicalToHTMLAsync({ data: richText.text, converters: htmlConverters })
-				: '';
+	let html = $state<string | undefined>();
+
+	let loading = $state(false);
+	$effect(() => {
+		untrack(() => (loading = true));
+		if (richText && richText.text) {
+			convertLexicalToHTMLAsync({ data: richText.text, converters: htmlConverters })
+				.then((data) => (html = data))
+				.then((page) => (loading = false))
+				.catch((err) => console.log('error loading'));
+		}
 	});
-	let { shouldAnimate, animation, style } = richText || {};
-	const { marker } = style || {};
-	// will cause issues if marker if not of color foreground, must either be overridden
-	//  paylaod textstate gives
-	//  <li>
-	//    ::marker
-	//    <span style+"...">...</span>
-	//  </li>
-	//  no clue how to style marker based on span style color
-	//  ...
-	//  ...
-	//  think you can set a css variaable and then reference it
-	const defaults = 'text-balance container my-auto wrap-break-word px-2 w-full max-w-full ';
+
+	const defaults = 'container my-auto wrap-break-word px-2 md:px-0 w-full max-w-full ';
 </script>
 
-{#await _html}
-	<div class="flex h-full w-full items-center justify-center">
-		<Icon name="loader-circle" class="text-foreground/20 animate-[spin_2s_linear_infinite] " />
-	</div>
-{:then html}
-	<div style:--list-marker-color={marker} class="">
-		{#if shouldAnimate}
+{#if richText}
+	<!--  when switching languages richText becomes undefined  -->
+	<div
+		style:padding={richText.style?.padding}
+		style:--list-marker-color={richText.style?.marker}
+		class=""
+	>
+		{#if richText.shouldAnimate}
 			{#await import('./animated.svelte') then B: any}
 				{@const Block = B.default}
-				<Block overrides={cn(defaults, overrides)} {style} {animation} html={html ?? ''} />
+				<Block
+					{loading}
+					overrides={cn(defaults, overrides)}
+					style={richText.style}
+					animation={richText.animation}
+					html={html ?? ''}
+				/>
 			{/await}
 		{:else}
-			<DefaultRichText overrides={cn(defaults, overrides)} {style} html={html ?? ''} />
+			<DefaultRichText
+				{loading}
+				overrides={cn(defaults, overrides)}
+				style={richText.style}
+				html={html ?? ''}
+			/>
 		{/if}
 	</div>
-{/await}
+{/if}

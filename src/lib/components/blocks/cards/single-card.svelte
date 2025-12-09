@@ -6,8 +6,7 @@
 	import Picture from '@/components/common/picture.svelte';
 
 	const { blockData }: { blockData: ISingleCard } = $props();
-	const { content } = blockData;
-	const { richText, link, image } = content ?? {};
+	const { content: { richText, link, image } = {} } = $derived(blockData);
 </script>
 
 <Card.Root class="h-full w-full">

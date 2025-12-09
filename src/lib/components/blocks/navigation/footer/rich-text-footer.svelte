@@ -4,9 +4,10 @@
 	import { RichTextRender } from '../../rich-text';
 	import Icon from '@/components/common/icon.svelte';
 	import Button from '@/components/common/button.svelte';
+	import { page } from '$app/state';
 
 	const { blockData }: { blockData: IRichTextFooter } = $props();
-	const { image, richText, contact, nav, socials } = blockData;
+	const { image, richText, contact, nav, socials } = $derived(blockData);
 </script>
 
 <div class="inset-shadow-[0_15px_20px_-15px_rgb(0_0_0_/_0.25)] rounded-theme">
@@ -21,7 +22,7 @@
 		>
 			<div class="">
 				<h3 class="text-6xl text-balance font-serif">{contact?.q}</h3>
-				<Button class=" px-0 md:px-4" variant="ghost" href={`mailto:${contact?.email}`}>
+				<Button class="px-4" variant="ghost" href={`mailto:${contact?.email}`}>
 					<div class="flex items-center gap-2">
 						<Icon name="circle-arrow-right" />
 						<span class="">{contact?.email}</span>
@@ -32,13 +33,13 @@
 				<div class="flex flex-col items-start">
 					<h3 class="font-semibold text-xl">Sitemap</h3>
 					{#each nav ?? [] as { link }}
-						<Button variant="ghost" size="sm" class="p-0" {link} />
+						<Button variant="ghost" size="sm" class="" {link} />
 					{/each}
 				</div>
 				<div class="flex flex-col items-start">
 					<h3 class="font-semibold text-xl">Social Links</h3>
 					{#each socials ?? [] as { link }}
-						<Button variant="ghost" class="p-0" {link} />
+						<Button variant="ghost" size="sm" {link} />
 					{/each}
 				</div>
 			</div>

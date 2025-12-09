@@ -6,9 +6,9 @@
 	import { cn } from '@/utils';
 
 	const { blockData }: { blockData: IHoverCard } = $props();
-	const { image, title, description, style } = blockData;
+	const { image, title, description, style } = $derived(blockData);
 
-	const { background, fontSize } = style || {};
+	const { background, fontSize } = $derived(style || {});
 
 	let mobileHover = $state(false);
 </script>

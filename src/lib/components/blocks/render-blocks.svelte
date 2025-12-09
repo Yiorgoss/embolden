@@ -33,8 +33,8 @@
 				return import('./cards/hover-card.svelte');
 			case 'blockColumnLayout':
 				return import('./layout/block-column-layout.svelte');
-			case 'contentColLayout':
-				return import('./layout/content-col-layout.svelte');
+			//  case 'contentColLayout':
+			//  	return import('./layout/content-col-layout.svelte');
 			case 'image':
 				return import('./common/image.svelte');
 			case 'gutter':
@@ -62,19 +62,23 @@
 		}
 	};
 
-	let calculatedBlockType = $state();
-	onMount(async () => {
+	let calculatedBlockType = $state<any>();
+	$effect(() => {
 		const blockName = blockData?.blockType ?? undefined;
-		calculatedBlockType = await dynamicResolveBlock({ blockName });
+		dynamicResolveBlock({ blockName }).then((block) => (calculatedBlockType = block));
 	});
+
+	//  $effect(() => {
+	//  	blockData;
+	//  	if (blockData?.blockType == 'richTextFooter') console.log({ renderBlock: blockData.contact.q });
+	//  });
+	//  $inspect(blockData);
 
 	//  const calculatedBlockType = blockList.get(blockData?.blockType ?? undefined) ?? undefined;
 	//  const SvelteComponent = $derived(calculatedBlockType.default);
 </script>
 
-{#if calculatedBlockType}
-	{#await calculatedBlockType then B}
-		{@const Block = B.default}
-		<Block {className} {blockData} {cb} {hasLocaleSwitch} />
-	{/await}
+{#if calculatedBlockType && calculatedBlockType.default}
+	{@const Block = calculatedBlockType.default}
+	<Block {className} {blockData} {cb} {hasLocaleSwitch} />
 {/if}

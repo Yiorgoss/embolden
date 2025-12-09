@@ -7,18 +7,17 @@
 	import { MediaQuery } from 'svelte/reactivity';
 
 	const { blockData }: { blockData: ICarousel; class?: string } = $props();
-	const { items, options } = blockData;
+	const { items, options } = $derived(blockData);
 
 	let api = $state<CarouselAPI>();
 	let current = $state(0);
 
 	$effect(() => {
-		if (api) {
-			current = api.selectedScrollSnap();
-			api.on('select', () => {
-				current = api!.selectedScrollSnap();
-			});
-		}
+		if (!api) return;
+		current = api.selectedScrollSnap();
+		api.on('select', () => {
+			current = api!.selectedScrollSnap();
+		});
 	});
 
 	const medium = new MediaQuery('(min-width: 640px) and (max-width: 1024px)');

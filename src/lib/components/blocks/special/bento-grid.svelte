@@ -3,7 +3,7 @@
 	import RenderBlocks from '../render-blocks.svelte';
 
 	const { blockData }: { blockData: BentoGrid } = $props();
-	const { grid } = blockData;
+	const { grid } = $derived(blockData);
 </script>
 
 <section id="bento-grid " class="py-5 max-w-lg lg:max-w-xl">

@@ -5,8 +5,11 @@
 	import Button from '@/components/common/button.svelte';
 
 	const { blockData }: { blockData: IInfoBanner } = $props();
-	const { richText, link, style } = blockData;
-	const { background, height, border, padding, alignX } = style || {};
+	const {
+		richText,
+		link,
+		style: { background, height, border, padding, alignX } = {}
+	} = $derived(blockData);
 </script>
 
 <section id="info-banner-block" class="w-full py-[200px]">

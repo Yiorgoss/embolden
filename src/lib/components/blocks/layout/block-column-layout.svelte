@@ -5,7 +5,7 @@
 	import { cn } from '@/utils';
 
 	const { blockData }: { blockData: IBlockColumnLayout } = $props();
-	const { layout, columnOne, columnTwo, columnThree, style, mobileStyle } = blockData;
+	const { layout, columnOne, columnTwo, columnThree, style, mobileStyle } = $derived(blockData);
 
 	const normaliseWidth = (layout: string) => {
 		const cssList = [];
@@ -39,7 +39,7 @@
 		return cssList;
 	};
 
-	const widthClass = normaliseWidth(layout ?? 'oneColumn');
+	const widthClass = $derived(normaliseWidth(layout ?? 'oneColumn'));
 
 	const mobile = new MediaQuery('max-width: 480px');
 </script>
@@ -55,13 +55,18 @@
 		class:flex-wrap={layout == 'threeColumns'}
 		class="flex gap-10 overflow-hidden justify-center items-center md:items-stretch h-full flex-col md:flex-row container mx-auto"
 	>
-		<div
-			style:align-items={style?.alignY}
-			style:justify-content={style?.alignX}
-			class={cn(' w-full flex grow-1 justify-center items-center md:items-stretch', widthClass[0])}
-		>
-			<RenderBlocks blockData={columnOne![0]} />
-		</div>
+		{#if columnOne && columnOne.length != 0}
+			<div
+				style:align-items={style?.alignY}
+				style:justify-content={style?.alignX}
+				class={cn(
+					' w-full flex grow-1 justify-center items-center md:items-stretch',
+					widthClass[0]
+				)}
+			>
+				<RenderBlocks blockData={columnOne[0]} />
+			</div>
+		{/if}
 		{#if columnTwo && columnTwo.length != 0}
 			<div
 				style:align-items={style?.alignY}

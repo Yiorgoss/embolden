@@ -4,8 +4,7 @@
 	import * as Card from '@/components/ui/card';
 
 	const { blockData }: { blockData: IRichTextCard } = $props();
-	const { richText, style } = blockData;
-	const { background, alignX, alignY } = style || {};
+	const { richText, style: { background, alignX, alignY } = {} } = $derived(blockData);
 </script>
 
 <section id="rich-text-card-block" class="flex items-center justify-center h-full w-full py-8">
