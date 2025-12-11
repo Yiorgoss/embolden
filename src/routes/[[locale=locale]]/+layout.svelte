@@ -10,7 +10,7 @@
 	const { children, data: tenant }: LayoutProps = $props();
 	const payload = getPayloadState();
 
-	onMount(() => payload.setupListener());
+	//  onMount(() => payload.setupListener());
 </script>
 
 <div class="min-h-[svh]">

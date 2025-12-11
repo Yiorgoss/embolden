@@ -28,8 +28,9 @@
 		cb && cb();
 	});
 
-	const { animation, style: { background, padding, borderRadius, opacity, height, sizes } = {} } =
-		$derived(image || {});
+	const { style: { background, padding, borderRadius, opacity, height, sizes } = {} } = $derived(
+		image || {}
+	);
 	//  const { background, padding, borderRadius, opacity, minHeight, height, sizes } = style || {};
 
 	let imageLoaded = $state(false);
