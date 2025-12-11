@@ -14,9 +14,9 @@
 	import { convertLexicalToHTML } from '@payloadcms/richtext-lexical/html';
 	import DefaultRichText from '@/components/blocks/rich-text/default.svelte';
 
-	const { data } = $props();
+	let { data } = $props();
 
-	const html = convertLexicalToHTML({ data: data.confirmationMessage });
+	const html = $derived(convertLexicalToHTML({ data: data.confirmationMessage }));
 	const form = createForm(() => ({
 		onSubmit: async (args) => {
 			const { value } = args;

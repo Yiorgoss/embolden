@@ -1,5 +1,6 @@
 <script lang="ts">
 	import { supportedLocales, defaultLocale } from '@/config';
+	import ChevronDownIcon from '@lucide/svelte/icons/chevron-down';
 	import * as NavigationMenu from '@/components/ui/navigation-menu';
 	import { page } from '$app/state';
 	import { onMount } from 'svelte';
@@ -7,13 +8,16 @@
 	import * as DropdownMenu from '$lib/components/ui/dropdown-menu/index.js';
 	import Icon from './icon.svelte';
 	import { Button } from '@/components/ui/button';
+	import Spinner from './spinner.svelte';
 
 	const { locale, slug } = $derived(page.params);
 	let disabled = $state(false);
 
 	let currentLang = $derived(supportedLocales[locale] ?? supportedLocales[defaultLocale]);
 
-	onMount(() => (document.documentElement.lang = locale ?? defaultLocale));
+	$effect(() => {
+		document.documentElement.lang = locale ?? defaultLocale;
+	});
 </script>
 
 {#key locale}
@@ -26,11 +30,12 @@
 					class="font-light py-2 px-2 text-xs flex justify-center gap-2 items-center"
 					{disabled}
 				>
-					{#if disabled}
-						<Icon name="loader-circle" class="animate-spin size-3" />
-					{/if}
 					<span class="">{currentLang}</span>
-					<Icon name="chevron-down" class="font-thin stroke-1 size-4" />
+					{#if disabled}
+						<Spinner class="size-4" />
+					{:else}
+						<ChevronDownIcon class="font-thin stroke-1 size-4" />
+					{/if}
 				</Button>
 			{/snippet}
 		</DropdownMenu.Trigger>

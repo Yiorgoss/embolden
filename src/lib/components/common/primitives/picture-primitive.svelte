@@ -27,12 +27,14 @@
 		cb && cb();
 	});
 
-	const { style } = image;
-	const { background, padding, borderRadius, opacity, minHeight, height, sizes } = style || {};
+	const { style: { background, padding, borderRadius, opacity, height, sizes } = {} } = $derived(
+		image || {}
+	);
+	//  const { background, padding, borderRadius, opacity, minHeight, height, sizes } = style || {};
 
 	let imageLoaded = $state(false);
-	let placeholder = asset?.sizes?.['placeholder'];
-	let mobile = asset?.sizes?.['sm'];
+	let placeholder = $derived(asset?.sizes?.['placeholder']);
+	let mobile = $derived(asset?.sizes?.['sm']);
 </script>
 
 <!-- -->
@@ -98,7 +100,6 @@
 			{loading}
 			fetchpriority={loading == 'eager' ? 'high' : 'low'}
 			style:height
-			style:min-height={minHeight}
 			style:border-radius={borderRadius}
 			class:opacity-100={imageLoaded}
 			class={cn(

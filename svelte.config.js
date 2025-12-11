@@ -31,7 +31,8 @@ const config = {
       // },
     alias: {
       '@': "src/lib",
-      '@payload-types': '../cms-mt/src/payload-types.ts',
+      // '@payload-types': '../cms-mt/src/payload-types.ts',
+      '@payload-types':'./src/payload-types.ts'
     }
   }
 };
