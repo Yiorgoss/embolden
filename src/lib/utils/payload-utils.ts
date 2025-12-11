@@ -3,6 +3,92 @@ import { defaultLocale, site, type SiteConfigType } from '@/config';
 import { error } from '@sveltejs/kit';
 import { buttonVariants } from '@/components/ui/button';
 
+export function splitRichTextIntoWords(strHTML: string, opts?: { wordPadding: string }) {
+  //must be used after mount
+  const { wordPadding } = opts || { wordPadding: "10px" } //defaults
+
+  let html: string;
+  try {
+    if (!window.DOMParser) throw Error;
+    const parser = new DOMParser();
+    const doc = parser.parseFromString(strHTML, 'text/html');
+    wrapEachTextNode(doc.body.firstChild as Node, wordPadding);
+    html = doc.body.innerHTML;
+  } catch {
+    html = strHTML;
+  }
+
+  return html;
+}
+// export function splitRichTextIntoLines(strHTML: string, opts?: { wordPadding: string }) {
+//   //must be used after mount
+//   const { wordPadding } = opts || { wordPadding: "10px" } //defaults
+
+//   let html: string;
+//   try {
+//     if (!window.DOMParser) throw Error;
+//     const parser = new DOMParser();
+//     const doc = parser.parseFromString(strHTML, 'text/html');
+//     wrapEachLine(doc.body.firstChild as Node,)
+//     // wrapEachTextNode(doc.body.firstChild as Node, wordPadding);
+//     html = doc.body.innerHTML;
+//   } catch {
+//     html = strHTML;
+//   }
+
+//   return html;
+// }
+
+// const wrapEachLine = (el: Node, wordPadding: string) => {
+//   let textNodes = [];
+
+//   const walker = document.createTreeWalker(el, NodeFilter.SHOW_TEXT);
+//   while (walker.nextNode()) {
+//     const current = walker.currentNode as Element
+//     // if (current.textContent = "\n") {
+//     console.log("xxx", current.textContent)
+//     // }
+//   }
+
+// }
+
+const wrapEachTextNode = (el: Node, wordPadding: string) => {
+  let textNodes = [];
+
+  const walker = document.createTreeWalker(el, NodeFilter.SHOW_TEXT);
+  while (walker.nextNode()) {
+    const current = walker.currentNode as Element
+    const parent = current.parentNode
+    if (["STYLE", "A", "OBJECT", "svg"].includes(parent?.nodeName ?? "")) {
+      // skip certain nodes
+      continue
+    }
+    // console.log({ lineheight: parent.style['line-height'] })
+    textNodes.push(current); //gather references
+  }
+
+  // now wrap them in class
+  textNodes.forEach((textNode, i) => {
+    const content = textNode.textContent ?? '';
+    let replaceNode = document.createElement('span');
+    content
+      .trim()
+      .split(' ')
+      .filter((x) => Boolean(x))
+      .forEach((word, i) => {
+        let newNode = document.createElement('span');
+        newNode.setAttribute('class', 'word');
+        newNode.style.display = 'inline-block';
+        // newNode.style.overflow = 'hidden';
+        newNode.style.paddingLeft = wordPadding;
+        newNode.appendChild(document.createTextNode(word));
+
+        replaceNode.appendChild(newNode);
+      });
+    textNode.replaceWith(replaceNode);
+  });
+};
+
 export function mergeUpdateData({ oldData, newData }: { oldData: any, newData: any }) {
   let updatedData = oldData
   if (newData.nav) {
@@ -19,12 +105,7 @@ export function mergeUpdateData({ oldData, newData }: { oldData: any, newData: a
   return updatedData
 }
 
-export function getRestPopulateFn({ apiURL, locale }: { apiURL: string, locale: string }) {
-  return async ({ id, collection }: { id: number, collection: string }) => {
-    return await fetch(`${apiURL}/${collection}/${id}?locale=${locale}&depth=1`).then(res => res.json())
-  }
-}
-
+// FIX deprecated
 export async function fetchFromCMS({
   collection,
   id,

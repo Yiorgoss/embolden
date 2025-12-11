@@ -25,6 +25,8 @@
 	let _href = $state<Partial<Page> | undefined | null>(undefined);
 	let variant = $derived(display?.variant ?? _variant);
 
+	let payload = getPayloadState();
+
 	let href = $derived.by(() => {
 		if (restProps['href']) return restProps['href']; // hardcoded
 		// must be IButton
@@ -39,11 +41,12 @@
 	$effect(() => {
 		if (!link) return;
 		if (urlType == 'reference' && reference) {
-			resolveID({
-				collection: reference.relationTo,
-				data: reference.value,
-				lang: page.params.locale
-			})
+			payload
+				.resolveID({
+					collection: reference.relationTo,
+					data: reference.value,
+					lang: page.params.locale
+				})
 				.then((page) => {
 					_href = { slug: page.slug };
 				})

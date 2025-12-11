@@ -4,6 +4,7 @@
 	import { RichTextRender } from '../rich-text';
 	import { resolveID } from '@/utils';
 	import { page } from '$app/state';
+	import { getPayloadState } from '@/state/payload.svelte';
 
 	const { blockData }: { blockData: IMarquee } = $props();
 	const {
@@ -17,9 +18,11 @@
 	//  const { nRepeat, maskEdges } = $derived(options || {});
 	//  const { background, height, border, padding } = $derived(style || {});
 
+	let payload = getPayloadState();
 	let link = $state<string>();
 	$effect(() => {
-		resolveID({ collection: 'pages', data: _link, lang: page.params.locale })
+		payload
+			.resolveID({ collection: 'pages', data: _link, lang: page.params.locale })
 			.then((page) => (link = page.slug))
 			.catch(() => 'javascript:void(0);');
 	});
