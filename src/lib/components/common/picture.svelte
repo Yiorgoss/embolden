@@ -3,6 +3,7 @@
 	import { cn, resolveID } from '@/utils';
 	import Icon from '@/components/common/icon.svelte';
 	import { PicturePrimitive } from '@/components/common/primitives';
+	import { getPayloadState } from '@/state/payload.svelte';
 
 	const {
 		image,
@@ -21,6 +22,7 @@
 	} = $props();
 
 	// let assetPromise = $state(resolveID({ collection: 'assets', data: data.url }))
+	//  FIX needs rewrite
 </script>
 
 {#if image && image.url}

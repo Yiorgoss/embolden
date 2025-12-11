@@ -13,7 +13,7 @@
 	//  onMount(() => payload.setupListener());
 </script>
 
-<div class="min-h-[svh]">
+<div class="">
 	<header class="text-foreground bg-background">
 		<RenderBlocks hasLocaleSwitch={true} blockData={payload._state.get('header')} />
 	</header>
