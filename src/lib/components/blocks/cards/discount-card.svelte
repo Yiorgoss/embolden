@@ -38,12 +38,12 @@
 		}
 	});
 
-	const hasOneDiscount =
+	const hasOneDiscount = $derived(
 		cards &&
-		cards.reduce((acc: boolean, { includeDiscount }) => {
-			return (acc = includeDiscount || acc);
-		}, false);
-
+			cards.reduce((acc: boolean, { includeDiscount }) => {
+				return (acc = includeDiscount || acc);
+			}, false)
+	);
 	let checked = $state(false);
 </script>
 

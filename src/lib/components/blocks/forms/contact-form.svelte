@@ -5,18 +5,26 @@
 	import RenderForms from './render-forms.svelte';
 	import Spinner from '@/components/common/spinner.svelte';
 	import { page } from '$app/state';
+	import { untrack } from 'svelte';
 
 	const { blockData }: { blockData: IContactFormBlock } = $props();
 	const { form: _formData } = $derived(blockData);
 	const { locale } = page.params;
 
-	const formData: Promise<Form> = resolveID({ collection: 'forms', data: _formData, lang: locale });
+	let loading = $state(false);
+	let data = $state();
+
+	$effect(() => {
+		console.log('x');
+		untrack(() => (loading = true));
+		resolveID({ collection: 'forms', data: _formData, lang: locale })
+			.then((form) => (data = form))
+			.then(() => (loading = false));
+	});
 </script>
 
-{#await formData}
-	<div class="w-full h-full flex justify-center items-center">
-		<div class="loader opacity-70 w-20 h-20"></div>
-	</div>
-{:then data}
+{#if loading || !data}
+	<Spinner />
+{:else}
 	<RenderForms {data} />
-{/await}
+{/if}
