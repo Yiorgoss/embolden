@@ -39,18 +39,18 @@ export function splitRichTextIntoWords(strHTML: string, opts?: { wordPadding: st
 //   return html;
 // }
 
-const wrapEachLine = (el: Node, wordPadding: string) => {
-  let textNodes = [];
+// const wrapEachLine = (el: Node, wordPadding: string) => {
+//   let textNodes = [];
 
-  const walker = document.createTreeWalker(el, NodeFilter.SHOW_TEXT);
-  while (walker.nextNode()) {
-    const current = walker.currentNode as Element
-    // if (current.textContent = "\n") {
-    console.log("xxx", current.textContent)
-    // }
-  }
+//   const walker = document.createTreeWalker(el, NodeFilter.SHOW_TEXT);
+//   while (walker.nextNode()) {
+//     const current = walker.currentNode as Element
+//     // if (current.textContent = "\n") {
+//     console.log("xxx", current.textContent)
+//     // }
+//   }
 
-}
+// }
 
 const wrapEachTextNode = (el: Node, wordPadding: string) => {
   let textNodes = [];
@@ -104,6 +104,8 @@ export function mergeUpdateData({ oldData, newData }: { oldData: any, newData: a
 
   return updatedData
 }
+
+// FIX deprecated
 export async function fetchFromCMS({
   collection,
   id,
@@ -139,6 +141,7 @@ export const getTenantByDomain = async ({ site, locale }: { site: SiteConfigType
   return response as Promise<Tenant>
 }
 
+// FIX deprecated
 export async function resolveID({
   collection,
   data,

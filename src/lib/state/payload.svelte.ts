@@ -1,7 +1,6 @@
 import { getContext, onDestroy, setContext, untrack } from 'svelte';
 import { SvelteMap, SvelteURL } from "svelte/reactivity";
 import { type Page, type Tenant } from "@payload-types"
-import { resolveID } from "@/utils";
 import { page } from '$app/state';
 import { throttle } from "@/utils"
 import {
@@ -9,10 +8,16 @@ import {
   unsubscribe as payloadUnsubscribe,
   ready
 } from '@payloadcms/live-preview';
-import { site } from '@/config';
+import { defaultLocale, site } from '@/config';
 import { debounce } from 'lodash-es';
 
 export class PayloadState {
+
+  // TODO expand datastructure to hold state closer instead of deriving from state
+  //      - ie stop using a map, not enough entries to jutsify
+  //      - think maybe array state would be better. that way you could have deep reactivity
+  //      - which would allow a better livepreview experience.
+  //      - however before tht the json processing must be removed from the main thread
 
   _state = new SvelteMap<string, any>()
   isLivePreview = $derived(page.url.searchParams.get('livePreview') === 'true');
@@ -34,6 +39,7 @@ export class PayloadState {
       return () => this.cleanup()
     })
   }
+
 
   setTenant({ tenant }: { tenant?: Tenant }) {
     console.log("tenant setup")
@@ -86,14 +92,69 @@ export class PayloadState {
     this._state = new SvelteMap<string, any>()
   }
 
-  // live preview stuffs  
+  // fetching frmo payload
+  //
+  //
+  async fetchFromCMS({
+    collection,
+    id,
+    lang = 'en'
+  }: {
+    collection: string;
+    id: number;
+    lang?: string | undefined | null;
+  }) {
+    if (!id) throw Error(`Need ID to Fetch`)
+    const response = fetch(
+      `${site.CMS}/api/${collection}?where[id][equals]=${id}&locale=${lang ?? defaultLocale}`,
+      {
+        headers: {
+          'Content-Type': 'application/json'
+        }
+      }
+    );
+    return response;
+  }
 
+  async resolveID({
+    collection,
+    data,
+    lang
+  }: {
+    collection: string;
+    data: number | any;
+    lang?: string;
+  }) {
+    if (this.isLivePreview) return Promise.resolve(data) //dont resolveIDs in livepreview mode
+    if (!data) return Promise.reject("Data undefined");
+    if (typeof data === 'number') {
+      try {
+        const response = await this.fetchFromCMS({ collection, id: data, lang });
+        if (!response.ok) {
+          throw new Error(`Response status: ${response.status}`);
+        }
+        const json: any = await response.json();
+
+        if (!json && !json.docs && json.docs.length > 0) {
+          throw new Error(`No data returned: CMS returned nothing`);
+        }
+        return json.docs[0];
+      } catch (err) {
+        return Promise.reject(`Resolving ID failed: ${err}`);
+      }
+    }
+    return Promise.resolve(data);
+  }
+
+  // live preview stuffs  
   #mergeLivePreviewData(data: any) {
     // currently there is a bug
     // basically whenever data is changed, it causes all the
     // unpopulated fields to call enmass to server
     // FIX - look at sergically changing data?
     //     - maybe switch off populating fields when in livepreview
+    //         - defaultPopulate all unpopulated stuffs
+    //         - maybe 
     // 
     // console.log("merging data")
     // if (data.nav) {

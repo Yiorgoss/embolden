@@ -9,6 +9,7 @@
 		hasLocaleSwitch
 	}: { blockData: any; className?: string; cb?: () => void; hasLocaleSwitch?: boolean } = $props();
 
+	// FIX figure out a glob match this will become unmnageable at some point
 	const dynamicResolveBlock = async ({ blockName }: { blockName: string }) => {
 		switch (blockName) {
 			case 'calistoLanding':
@@ -63,6 +64,7 @@
 	let calculatedBlockType = $state<any>();
 	$effect(() => {
 		const blockName = blockData?.blockType ?? undefined;
+
 		dynamicResolveBlock({ blockName }).then((block) => (calculatedBlockType = block));
 	});
 
