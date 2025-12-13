@@ -2,42 +2,16 @@
 	import { type ICalistoFeatureCard } from '@payload-types';
 	import RichTextRender from '@/components/blocks/rich-text/render.svelte';
 	import Icon from '@/components/common/icon.svelte';
-	import { animate } from '@/attachments/animations/animate.svelte';
+	import { animateViewport } from '@/attachments/animations/viewport';
 
 	const { blockData }: { blockData: ICalistoFeatureCard } = $props();
-	const { cards } = $derived(blockData);
-
-	let observer: IntersectionObserver | undefined = $state();
-	let startAnimation = $state(false);
-	let el: HTMLElement | undefined = $state();
-
-	onMount(() => {
-		observer = new IntersectionObserver(
-			(entries) => {
-				if (entries[0].isIntersecting) {
-					startAnimation = true;
-				}
-			},
-			{ rootMargin: '-30%' }
-		);
-		if (!el) return;
-		observer.observe(el);
-		() => {
-			if (el) observer!.unobserve(el);
-		};
-	});
-
-	$effect(() => {
-		if (startAnimation && el && observer) {
-			observer.unobserve(el);
-		}
-	});
+	const { cards, animation, styles } = $derived(blockData);
 </script>
 
 <section id="feature-card" class="container mx-auto">
 	<div
-		{@attach animate({ animation })}
-		style:padding={style?.padding}
+		{@attach animateViewport(animation.viewportPreset, { amount: animation?.amount })}
+		style:padding={styles?.padding}
 		class="flex flex-col flex-wrap justify-center items-center md:items-stretch gap-10 md:flex-row"
 	>
 		{#if cards}
@@ -47,8 +21,8 @@
 				>
 					<div class="relative flex-auto h-full">
 						<div
-							style:background={style?.background}
-							style:min-height={style?.minHeight}
+							style:background={styles?.background}
+							style:min-height={styles?.minHeight}
 							class="bg-primary h-full flex flex-col rounded-3xl p-10"
 						>
 							<RichTextRender

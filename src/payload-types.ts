@@ -204,7 +204,7 @@ export interface IRichTextField {
   };
   shouldAnimate?: boolean | null;
   animation?: {
-    rtScrollPresets?: 'wordFadeIn' | null;
+    scrollPresets?: ('custom' | 'scale' | 'translateUp' | 'translateDown') | null;
     traceText?: boolean | null;
   };
 }
@@ -327,6 +327,9 @@ export interface IImageField {
     padding?: string | null;
     borderRadius?: string | null;
     sizes?: string | null;
+  };
+  animation?: {
+    scrollPresets?: ('custom' | 'scale' | 'translateUp' | 'translateDown') | null;
   };
 }
 /**
@@ -706,6 +709,7 @@ export interface IBlockColumnLayout {
       )[]
     | null;
   style?: {
+    overflow?: string | null;
     padding?: string | null;
     color?: string | null;
     alignX?: ('start' | 'center' | 'end' | 'space-around' | 'space-evenly') | null;
@@ -713,6 +717,12 @@ export interface IBlockColumnLayout {
   };
   mobileStyle?: {
     padding?: string | null;
+  };
+  animation?: {
+    /**
+     * Animations that trigger when the area enter the page
+     */
+    viewportPreset?: 'slideUpFadeIn' | null;
   };
   id?: string | null;
   blockName?: string | null;
@@ -914,6 +924,21 @@ export interface ICalistoFeatureCard {
         id?: string | null;
       }[]
     | null;
+  style?: {
+    padding?: string | null;
+    minHeight?: string | null;
+    background?: string | null;
+  };
+  animation?: {
+    /**
+     * Animations that trigger when the area enter the page
+     */
+    viewportPreset?: 'slideUpFadeIn' | null;
+    /**
+     * What % of the element must be visible before starting. Range - [0, 1]
+     */
+    amount?: number | null;
+  };
   id?: string | null;
   blockName?: string | null;
   blockType: 'calistoFeatureCard';

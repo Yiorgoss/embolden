@@ -1,41 +1,14 @@
 <script lang="ts">
 	import { type IDiscountCard } from '@payload-types';
+	import { animateViewport } from '@/attachments/animations/viewport';
 	import { RichTextRender } from '@/components/blocks/rich-text';
 	import Switch from '@/components/ui/switch/switch.svelte';
 	import { cn } from '@/utils';
 	import { site } from '@/config';
 	import Button from '@/components/common/button.svelte';
-	import { animate } from '@/attachments/animations/animate.svelte';
 
 	const { blockData }: { blockData: IDiscountCard } = $props();
 	const { cards } = $derived(blockData);
-
-	let observer: IntersectionObserver;
-	let startAnimation = $state(false);
-	let el: HTMLElement | undefined = $state();
-
-	onMount(() => {
-		observer = new IntersectionObserver(
-			(entries) => {
-				if (entries[0].isIntersecting) {
-					startAnimation = true;
-				}
-			},
-			{ rootMargin: '-40%' }
-		);
-		if (!el) return;
-		observer.observe(el);
-		() => {
-			if (el) observer!.unobserve(el);
-		};
-	});
-
-	$effect(() => {
-		if (startAnimation && observer && el) {
-			observer.unobserve(el);
-		}
-	});
-
 	const hasOneDiscount = $derived(
 		cards &&
 			cards.reduce((acc: boolean, { includeDiscount }) => {
@@ -45,7 +18,11 @@
 	let checked = $state(false);
 </script>
 
-<section id="discount-card" class="container mx-auto py-5">
+<section
+	{@attach animateViewport('slideUpFadeIn')}
+	id="discount-card"
+	class="container mx-auto py-5"
+>
 	<div
 		class={cn(
 			'flex items-center justify-center px-0 md:px-10 gap-5 py-5 md:justify-start md:py-8',

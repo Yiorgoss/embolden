@@ -2,7 +2,7 @@
 	import { cn } from '@/utils';
 	import Icon from './icon.svelte';
 
-	let { class: className, name }: { class: string; name?: string } = $props();
+	let { class: className, name }: { class?: string; name?: string } = $props();
 </script>
 
 <div class="flex h-full w-full items-center justify-center">

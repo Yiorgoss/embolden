@@ -3,10 +3,11 @@
 	import { type IBlockColumnLayout } from '@payload-types';
 	import RenderBlocks from '../render-blocks.svelte';
 	import { cn } from '@/utils';
-	import { animate } from '@/attachments/animations/animate.svelte';
+	import { animateViewport } from '@/attachments/animations/viewport';
 
 	const { blockData }: { blockData: IBlockColumnLayout } = $props();
-	const { layout, columnOne, columnTwo, columnThree, style, mobileStyle } = $derived(blockData);
+	const { layout, columnOne, columnTwo, columnThree, style, mobileStyle, animation } =
+		$derived(blockData);
 
 	const normaliseWidth = (layout: string) => {
 		const cssList = [];
@@ -54,17 +55,16 @@
 	<div
 		style:padding={style?.padding}
 		style:overflow={style?.overflow}
-		style:gap={style?.gap}
 		class:flex-wrap={layout == 'threeColumns'}
-		class="flex gap-0 md:gap-10 justify-center items-center md:items-stretch h-full flex-col md:flex-row container mx-auto"
-		{@attach animate({ animation })}
+		class="flex gap-10 justify-center items-center md:items-stretch h-full flex-col md:flex-row container mx-auto"
+		{@attach animateViewport(animation.viewportPreset, { amount: animation?.amount })}
 	>
 		{#if columnOne && columnOne.length != 0}
 			<div
 				style:align-items={style?.alignY}
 				style:justify-content={style?.alignX}
 				class={cn(
-					' w-full flex grow-1 justify-center items-center md:items-stretch',
+					'animate-child w-full flex grow-1 justify-center items-center md:items-stretch',
 					widthClass[0]
 				)}
 			>
