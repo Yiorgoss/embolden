@@ -58,12 +58,3 @@
 		{@render children?.()}
 	{/if}
 </Button>
-
-<!--  {#await _href}
-	<div></div>
-{:then href}
-	{@const slug = locale ? `/${locale ?? ''}/${href.slug}` : `/${href.slug}`}  -->
-<!--  <ButtonPrimitive class={className} {variant} href={slug} text={text ?? href.title} {...restProps} />  -->
-<!--  {:catch error}
-	<div>{error}</div>
-{/await}  -->

@@ -2,72 +2,46 @@
 	import { type ICalistoFeatureCard } from '@payload-types';
 	import RichTextRender from '@/components/blocks/rich-text/render.svelte';
 	import Icon from '@/components/common/icon.svelte';
-	import { onMount } from 'svelte';
-	import { fade } from 'svelte/transition';
-	import { expoOut } from 'svelte/easing';
+	import { animateViewport } from '@/attachments/animations/viewport';
 
 	const { blockData }: { blockData: ICalistoFeatureCard } = $props();
-	const { cards } = $derived(blockData);
-
-	let observer: IntersectionObserver | undefined = $state();
-	let startAnimation = $state(false);
-	let el: HTMLElement | undefined = $state();
-
-	onMount(() => {
-		observer = new IntersectionObserver(
-			(entries) => {
-				if (entries[0].isIntersecting) {
-					startAnimation = true;
-				}
-			},
-			{ rootMargin: '-30%' }
-		);
-		if (!el) return;
-		observer.observe(el);
-		() => {
-			if (el) observer!.unobserve(el);
-		};
-	});
-
-	$effect(() => {
-		if (startAnimation && el && observer) {
-			observer.unobserve(el);
-		}
-	});
+	const { cards, animation, styles } = $derived(blockData);
 </script>
 
-{#key startAnimation}
-	<section
-		class:invisible={!startAnimation}
-		in:fade={{ duration: 2000, delay: 0, easing: expoOut }}
-		bind:this={el}
-		id="feature-card"
-		class="container mx-auto"
+<section id="feature-card" class="container mx-auto">
+	<div
+		{@attach animateViewport(animation.viewportPreset, { amount: animation?.amount })}
+		style:padding={styles?.padding}
+		class="flex flex-col flex-wrap justify-center items-center md:items-stretch gap-10 md:flex-row"
 	>
-		<div
-			class="flex flex-col flex-wrap justify-center items-center md:items-stretch gap-10 md:flex-row"
-		>
-			{#if cards}
-				{#each cards as { richText, icon }}
-					<div
-						class="max-w-xs md:max-w-sm w-full hover:scale-105 transition-transform mt-10 duration-300"
-					>
-						<div class="relative flex-auto h-full">
-							<div class="bg-primary h-full flex flex-col rounded-3xl p-10">
-								<RichTextRender
-									overrides="prose-headings:text-background prose-p:text-background"
-									{richText}
-								/>
-							</div>
-							<div
-								class="bg-foreground absolute top-0 left-1/6 size-18 -translate-y-1/2 rounded-xs"
-							>
-								<Icon class="text-background h-full w-full rounded-xs bg-gray-800/50 p-3" {icon} />
+		{#if cards}
+			{#each cards as { richText, icon }}
+				<div
+					class="animate-child max-w-xs md:max-w-sm w-full hover:scale-105 transition-transform mt-10 duration-300"
+				>
+					<div class="relative flex-auto h-full">
+						<div
+							style:background={styles?.background}
+							style:min-height={styles?.minHeight}
+							class="bg-primary h-full flex flex-col rounded-3xl p-10"
+						>
+							<RichTextRender
+								overrides="prose-headings:text-background prose-p:text-background"
+								{richText}
+							/>
+						</div>
+						<div
+							class="bg-primary absolute top-0 left-1/6 size-18 overflow-hidden -translate-y-1/2 rounded-xs"
+						>
+							<div class="flex bg-gray-800/50 justify-center h-full w-full items-center">
+								<div class="size-12">
+									<Icon class=" text-background" {icon} />
+								</div>
 							</div>
 						</div>
 					</div>
-				{/each}
-			{/if}
-		</div>
-	</section>
-{/key}
+				</div>
+			{/each}
+		{/if}
+	</div>
+</section>

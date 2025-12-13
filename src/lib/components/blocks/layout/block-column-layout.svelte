@@ -3,9 +3,11 @@
 	import { type IBlockColumnLayout } from '@payload-types';
 	import RenderBlocks from '../render-blocks.svelte';
 	import { cn } from '@/utils';
+	import { animateViewport } from '@/attachments/animations/viewport';
 
 	const { blockData }: { blockData: IBlockColumnLayout } = $props();
-	const { layout, columnOne, columnTwo, columnThree, style, mobileStyle } = $derived(blockData);
+	const { layout, columnOne, columnTwo, columnThree, style, mobileStyle, animation } =
+		$derived(blockData);
 
 	const normaliseWidth = (layout: string) => {
 		const cssList = [];
@@ -52,15 +54,17 @@
 >
 	<div
 		style:padding={style?.padding}
+		style:overflow={style?.overflow}
 		class:flex-wrap={layout == 'threeColumns'}
-		class="flex gap-10 overflow-hidden justify-center items-center md:items-stretch h-full flex-col md:flex-row container mx-auto"
+		class="flex gap-10 justify-center items-center md:items-stretch h-full flex-col md:flex-row container mx-auto"
+		{@attach animateViewport(animation.viewportPreset, { amount: animation?.amount })}
 	>
 		{#if columnOne && columnOne.length != 0}
 			<div
 				style:align-items={style?.alignY}
 				style:justify-content={style?.alignX}
 				class={cn(
-					' w-full flex grow-1 justify-center items-center md:items-stretch',
+					'animate-child w-full flex grow-1 justify-center items-center md:items-stretch',
 					widthClass[0]
 				)}
 			>
@@ -71,7 +75,10 @@
 			<div
 				style:align-items={style?.alignY}
 				style:justify-content={style?.alignX}
-				class={cn('w-full flex grow-2 justify-center items-center md:items-stretch', widthClass[1])}
+				class={cn(
+					'animate-child w-full flex grow-2 justify-center items-center md:items-stretch',
+					widthClass[1]
+				)}
 			>
 				<RenderBlocks blockData={columnTwo[0]} />
 			</div>
@@ -80,7 +87,10 @@
 			<div
 				style:align-items={style?.alignY}
 				style:justify-content={style?.alignX}
-				class={cn('w-full flex justify-center items-center md:items-stretch', widthClass[2])}
+				class={cn(
+					'animate-child w-full flex justify-center items-center md:items-stretch',
+					widthClass[2]
+				)}
 			>
 				<RenderBlocks blockData={columnThree[0]} />
 			</div>

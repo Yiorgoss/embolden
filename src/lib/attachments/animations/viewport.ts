@@ -13,23 +13,25 @@ const animationList = {
       transforms: { opacity: [1, 0], y: [-100, 0] },
       options: { duration: 0.3, ease: 'easeOut', delay: stagger(0.1) }
     }
-  }
+  },
 }
 
 type animationListKeys = keyof typeof animationList;
 
 export function animateViewport(
-  preset: animationListKeys,
-  { child = "#animate-child", amount = 0.5 }:
-    { child?: string, amount?: number } = {})
+  preset: animationListKeys | undefined,
+  { child = ".animate-child", amount = 'some' }:
+    { child?: string, amount?: number | 'some' | 'all' } = {})
   : Attachment {
 
   // FIX - animation options doesnt have the right types and I CBF to deal with this shit right now right now
   //     - find a better way to deal with intial state of css for animations
   //         - this is because the cleanup function has not run yet, so state = 0 
-
-  const { entry, exit } = animationList[preset]
   return (element) => {
+
+    if (!preset) return
+    const { entry, exit } = animationList[preset]
+
     element.setAttribute("style", entry.initialCSS)
     const cleanup = inViewMotion(
       element,

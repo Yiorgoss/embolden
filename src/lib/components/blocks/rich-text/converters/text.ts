@@ -167,6 +167,7 @@ const textState = {
 
 // type TextStateKeys = ExtractAllColorKeys<typeof textState>
 
+//FIX types
 export const customText = ({ node }) => {
   let text = node.text
 
@@ -185,7 +186,12 @@ export const customText = ({ node }) => {
     providedCSSString += `${key}: ${style[key]};`
   }
 
-  text = `<span style="${providedCSSString}">${text}</span>`
+  // split each sentence into words
+  // is this wasteful?
+  text = node.text.split(" ").reduce((acc, word) => acc + `<span class="animate-word"> ${word}</span>`, "")
+
+
+  text = `<span class="" style="${providedCSSString}">${text}</span>`
 
   if (node.format & NodeFormat.IS_BOLD) {
     text = `<strong >${text}</strong>`
