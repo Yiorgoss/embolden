@@ -75,8 +75,8 @@ export const htmlConverters: any = ({ defaultConverters }) => ({
       //can expand too any svg by using api to reflect external svg
       const elem = `
       <span class="" style="display:inline-block; position:relative;">
-        <span class="word" style="position:absolute;  top:0; left:0; right:0; bottom:0;" >
-          <svg id="animate-svg" width="100%" height="100%" preserveAspectRatio="none" viewBox="0 0 181 68" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <span class="animate-word" style="position:absolute;  top:0; left:0; right:0; bottom:0;" >
+          <svg class="animate-svg" width="100%" height="100%" preserveAspectRatio="none" viewBox="0 0 181 68" fill="none" xmlns="http://www.w3.org/2000/svg">
             <path d="M117.637 2.86134C55.6369 -2.63843 -18.8594 8.36133 6.63897 38.8615C41.6403 75.8615 103.472 64.9534 122.64 61.8615C138.14 59.3615 181.613 49.6723 178.64 28.8615C175.14 4.36128 107.642 6.36118 81.1424 14.3648" stroke="${color ?? "var(--foreground)"}" stroke-width="3" stroke-linecap="round"/>
           </svg>
         </span>
@@ -84,7 +84,7 @@ export const htmlConverters: any = ({ defaultConverters }) => ({
       </span>`
       const span = document.createElement("span")
       span.innerHTML = elem
-      const e = span.querySelectorAll("#animate-circle-object")
+      // const e = span.querySelectorAll("#animate-circle-object")
 
       // animate(e, { pathLength: [0, 1] }, { repeat: Infinity })
       return span.innerHTML
@@ -97,7 +97,7 @@ export const htmlConverters: any = ({ defaultConverters }) => ({
 
       const { link } = args.node.fields
       const buttonHTML = await richTextBtn({ link });
-      return `<span class="word">${buttonHTML}</span>`
+      return `<span class="animate-word">${buttonHTML}</span>`
       // } catch (err) {
       //   console.error(`err`)
       // }
@@ -141,7 +141,7 @@ export const htmlConverters: any = ({ defaultConverters }) => ({
       }
       ${minSize}
       </style>
-        <span id="pill-image-${imageID}" class="word" style="" >
+        <span id="pill-image-${imageID}" class="animate-word" style="" >
           ${imageString}
       </span>
         `;

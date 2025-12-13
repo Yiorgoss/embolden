@@ -1,10 +1,10 @@
 <script lang="ts">
 	import { cn, splitRichTextIntoWords } from '@/utils';
-	import { scrollRichText } from '@/attachments/animations/scroll-richtext';
 	import { scroll, animate, stagger, transform, motionValue } from 'motion';
 	import { onMount } from 'svelte';
 	import type { Attachment } from 'svelte/attachments';
 	import type { IRichTextField } from '@payload-types';
+	import Spinner from '@/components/common/spinner.svelte';
 
 	const {
 		html,
@@ -36,7 +36,7 @@
 	class={cn('relative overflow-hidden', overrides)}
 >
 	{#if loading}
-		<div class="h-20 w-full loader"></div>
+		<Spinner class="size-12" />
 	{:else}
 		{@html html}
 	{/if}
