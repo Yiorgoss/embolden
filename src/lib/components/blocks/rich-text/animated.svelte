@@ -28,7 +28,9 @@
 	});
 
 	const { height, background, minHeight, textWrap } = $derived(style || {});
-	const { scrollPresets: preset, traceText } = $derived(animation || {});
+	const { sap: preset } = $derived(animation || {});
+
+	$inspect({ preset });
 </script>
 
 <div

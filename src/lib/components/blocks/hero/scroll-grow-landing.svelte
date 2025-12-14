@@ -29,14 +29,17 @@
 			<Picture image={initImg} class="" />
 		</div>
 		<div
-			{@attach animateScroll('growScrollTranslate')}
+			{@attach animateScroll(['growScrollTranslate'])}
 			class="relative flex z-10 justify-center items-center col-start-1 row-start-1"
 		>
 			<div class="relative flex flex-col justify-center items-center">
 				<RichTextRender {richText} />
 			</div>
 		</div>
-		<div {@attach animateScroll('growScrollScale')} class="col-start-1 row-start-1 relative w-full">
+		<div
+			{@attach animateScroll(['growScrollScale'])}
+			class="col-start-1 row-start-1 relative w-full"
+		>
 			<Picture image={finalImg} class="w-full " />
 		</div>
 	</div>

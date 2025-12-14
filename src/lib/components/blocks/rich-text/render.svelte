@@ -34,7 +34,7 @@
 		style:--list-marker-color={richText.style?.marker}
 		class=""
 	>
-		{#if richText.shouldAnimate}
+		{#if richText.animation.sap.length > 0}
 			{#await import('./animated.svelte') then B: any}
 				{@const Block = B.default}
 				<Block
