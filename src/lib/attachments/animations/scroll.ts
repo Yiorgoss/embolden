@@ -14,7 +14,7 @@ const scrollPreset = {
     offset: ['start start', 'end center'],
   }],
   'drawSVG': [{
-    prepare: (element: Element) => element.querySelectorAll(".animate-svg > path"),
+    prepare: (element: Element) => element.querySelectorAll(".animate-svg path"),
     transforms: { pathLength: [0, 1] },
     options: { ease: "linear" },
     offset: ['start 0.7', 'start 0.3'],
@@ -56,11 +56,12 @@ type PresetKeys = keyof typeof scrollPreset;
 
 // this will return an attachment that will iterate over a preset of motion animations
 // fix types once you figure out how api will look!!!
-export function animateScroll(preset: PresetKeys | undefined | null,
+export function animateScroll(presetList: PresetKeys[] | undefined | null,
   { prepare, transforms, options, offset }:
     { prepare?: (element: Element) => void, transforms?: any, options?: any, offset?: any } = {}): Attachment {
   return (element) => {
-    if (!preset) return
+    if (!presetList || presetList.length <= 0) return
+    const preset = presetList[0] // cbf to add this prematurely. It does work however
 
     const cancelList: (() => void)[] = []
 
