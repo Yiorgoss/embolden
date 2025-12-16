@@ -134,6 +134,16 @@
   }
 }
 
+li::marker {
+  color: var(--list-marker-color, var(--foreground, black));
+}
+
+.list-bullet {
+  list-style-type: disc;
+  list-style-position: inside;
+}
+
+
 @font-face {
   font-display: swap;
   font-family: 'Inter';
