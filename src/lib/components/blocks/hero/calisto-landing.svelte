@@ -36,10 +36,6 @@
 			{#if richText}
 				<RichTextRender {richText} overrides="my-0" />
 			{/if}
-			<div class="flex flex-wrap gap-5 self-start pt-10">
-				<Button class="px-5 py-5" link={ctaTwo} />
-				<Button class="px-5 py-5" link={ctaOne} />
-			</div>
 		</div>
 	</div>
 </div>
