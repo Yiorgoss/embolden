@@ -18,7 +18,6 @@
 	let data = $state();
 
 	$effect(() => {
-		console.log('x');
 		untrack(() => (loading = true));
 		payload
 			.resolveID({ collection: 'forms', data: _formData, lang: locale })
