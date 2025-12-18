@@ -203,7 +203,6 @@ li::marker {
 .list-bullet {
   list-style-type: disc;
   list-style-position: outside;
-  padding-left: 20px;
 }
 
 

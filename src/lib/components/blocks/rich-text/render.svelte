@@ -2,8 +2,9 @@
 	import DefaultRichText from '@/components/blocks/rich-text/default.svelte';
 	import { cn, fetchFromCMS, getRestPopulateFn } from '@/utils';
 	import { htmlConverters } from './converters';
-	//  import { convertLexicalToHTMLAsync } from '@payloadcms/richtext-lexical';
 	import { convertLexicalToHTMLAsync } from '@payloadcms/richtext-lexical/html-async';
+	import { site } from '@/config';
+	import { page } from '$app/state';
 
 	import Icon from '@/components/common/icon.svelte';
 	import { onMount, untrack } from 'svelte';
@@ -17,10 +18,18 @@
 	$effect(() => {
 		untrack(() => (loading = true));
 		if (richText && richText.text) {
-			convertLexicalToHTMLAsync({ data: richText.text, converters: htmlConverters })
-				.then((data) => (html = data))
-				.then((page) => (loading = false))
-				.catch((err) => console.log('error loading'));
+			const data = $state.snapshot(richText.text);
+			convertLexicalToHTMLAsync({
+				data,
+				converters: htmlConverters,
+				//@ts-ignore the payload version doesnt seem to work
+				populate: getRestPopulateFn({ apiSlug: site.CMS, locale: page.params.locale ?? 'en' })
+			})
+				.then((res) => {
+					html = res;
+					loading = false;
+				})
+				.catch((err) => console.log(`error loading ${err}`));
 		}
 	});
 

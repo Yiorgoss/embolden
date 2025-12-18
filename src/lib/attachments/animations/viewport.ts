@@ -32,7 +32,9 @@ export function animateViewport(
   return (element) => {
 
     if (!preset) return
-    const { entry, exit } = animationList[preset]
+    const { entry, exit } = animationList[preset] || {}
+
+    if (!entry && !exit) return
 
     element.setAttribute("style", entry.initialCSS)
     const cleanup = inViewMotion(

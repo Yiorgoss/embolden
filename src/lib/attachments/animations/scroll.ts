@@ -4,12 +4,12 @@ import { fadeInEachWord } from './scroll-richtext';
 
 const scrollPreset = {
   "growScrollScale": [{
-    transforms: { scale: [0.7, 1.05, 1.05], y: ['40vh', '30vh', '50vh'] },
+    transforms: { scale: [0.7, 1], y: ['30vh', '50vh'] },
     options: { ease: 'linear' },
     offset: ['start start', 'end center'],
   }],
   'growScrollTranslate': [{
-    transforms: { y: [0, '55vh'] },
+    transforms: { y: [0, '50vh'] },
     options: { ease: "linear" },
     offset: ['start start', 'end center'],
   }],
