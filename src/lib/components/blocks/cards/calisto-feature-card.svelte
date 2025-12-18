@@ -10,7 +10,7 @@
 
 <section id="feature-card" class="container mx-auto">
 	<div
-		{@attach animateViewport(animation.viewportPreset, { amount: animation?.amount })}
+		{@attach animateViewport(animation?.vap)}
 		style:padding={styles?.padding}
 		class="flex flex-col flex-wrap justify-center items-center md:items-stretch gap-10 md:flex-row"
 	>

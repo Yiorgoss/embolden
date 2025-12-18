@@ -3,92 +3,6 @@ import { defaultLocale, site, type SiteConfigType } from '@/config';
 import { error } from '@sveltejs/kit';
 import { buttonVariants } from '@/components/ui/button';
 
-export function splitRichTextIntoWords(strHTML: string, opts?: { wordPadding: string }) {
-  //must be used after mount
-  const { wordPadding } = opts || { wordPadding: "10px" } //defaults
-
-  let html: string;
-  try {
-    if (!window.DOMParser) throw Error;
-    const parser = new DOMParser();
-    const doc = parser.parseFromString(strHTML, 'text/html');
-    wrapEachTextNode(doc.body.firstChild as Node, wordPadding);
-    html = doc.body.innerHTML;
-  } catch {
-    html = strHTML;
-  }
-
-  return html;
-}
-// export function splitRichTextIntoLines(strHTML: string, opts?: { wordPadding: string }) {
-//   //must be used after mount
-//   const { wordPadding } = opts || { wordPadding: "10px" } //defaults
-
-//   let html: string;
-//   try {
-//     if (!window.DOMParser) throw Error;
-//     const parser = new DOMParser();
-//     const doc = parser.parseFromString(strHTML, 'text/html');
-//     wrapEachLine(doc.body.firstChild as Node,)
-//     // wrapEachTextNode(doc.body.firstChild as Node, wordPadding);
-//     html = doc.body.innerHTML;
-//   } catch {
-//     html = strHTML;
-//   }
-
-//   return html;
-// }
-
-// const wrapEachLine = (el: Node, wordPadding: string) => {
-//   let textNodes = [];
-
-//   const walker = document.createTreeWalker(el, NodeFilter.SHOW_TEXT);
-//   while (walker.nextNode()) {
-//     const current = walker.currentNode as Element
-//     // if (current.textContent = "\n") {
-//     console.log("xxx", current.textContent)
-//     // }
-//   }
-
-// }
-
-const wrapEachTextNode = (el: Node, wordPadding: string) => {
-  let textNodes = [];
-
-  const walker = document.createTreeWalker(el, NodeFilter.SHOW_TEXT);
-  while (walker.nextNode()) {
-    const current = walker.currentNode as Element
-    const parent = current.parentNode
-    if (["STYLE", "A", "OBJECT", "svg"].includes(parent?.nodeName ?? "")) {
-      // skip certain nodes
-      continue
-    }
-    // console.log({ lineheight: parent.style['line-height'] })
-    textNodes.push(current); //gather references
-  }
-
-  // now wrap them in class
-  textNodes.forEach((textNode, i) => {
-    const content = textNode.textContent ?? '';
-    let replaceNode = document.createElement('span');
-    content
-      .trim()
-      .split(' ')
-      .filter((x) => Boolean(x))
-      .forEach((word, i) => {
-        let newNode = document.createElement('span');
-        newNode.setAttribute('class', 'word');
-        newNode.style.display = 'inline-block';
-        // newNode.style.overflow = 'hidden';
-        newNode.style.paddingLeft = wordPadding;
-        newNode.appendChild(document.createTextNode(word));
-
-        replaceNode.appendChild(newNode);
-      });
-    textNode.replaceWith(replaceNode);
-  });
-};
-
 export function mergeUpdateData({ oldData, newData }: { oldData: any, newData: any }) {
   let updatedData = oldData
   if (newData.nav) {
@@ -105,19 +19,25 @@ export function mergeUpdateData({ oldData, newData }: { oldData: any, newData: a
   return updatedData
 }
 
-// FIX deprecated
+export function getRestPopulateFn({ apiURL, locale }: { apiURL: string, locale: string }) {
+  return async ({ id, collection }: { id: number, collection: string }) => {
+    await fetchFromCMS({ collection, id, locale })
+  }
+}
+
 export async function fetchFromCMS({
   collection,
   id,
-  lang = 'en'
+  locale = 'en'
 }: {
   collection: string;
   id: number;
-  lang?: string | undefined | null;
+  locale?: string | undefined | null;
 }) {
+  if (!id) return "xxxx"
   if (!id) throw Error(`Need ID to Fetch`)
   const response = fetch(
-    `${site.CMS}/api/${collection}?where[id][equals]=${id}&locale=${lang ?? defaultLocale}`,
+    `${site.CMS}/api/${collection}?where[id][equals]=${id}&locale=${locale ?? defaultLocale}`,
     {
       headers: {
         'Content-Type': 'application/json'
@@ -154,26 +74,32 @@ export async function resolveID({
   if (!data) return Promise.reject("Data undefined");
   if (typeof data === 'number') {
     try {
-      const response = await fetchFromCMS({ collection, id: data, lang });
-      if (!response.ok) {
-        throw new Error(`Response status: ${response.status}`);
-      }
-      const json: any = await response.json();
-
-      if (!json && !json.docs && json.docs.length > 0) {
-        throw new Error(`No data returned: CMS returned nothing`);
-      }
-      return json.docs[0];
+      return fetchFromCMS({ collection, id: data, locale: lang })
+        .then((response) => {
+          if (!response.ok) {
+            throw new Error(`Response status: ${response.status}`);
+          }
+          return response.json()
+        })
+        .then((json: any) => {
+          if (!json && !json.docs && json.docs.length > 0) {
+            throw new Error(`No data returned: CMS returned nothing`);
+          }
+          return json.docs[0]
+        })
+        .catch((err) => {
+          console.log(`some dumb shit ${err}`)
+          throw new Error(`ERROR: ${err}`);
+        })
     } catch (err) {
+      console.log({ err2: err })
       return Promise.reject(`Resolving ID failed: ${err}`);
     }
   }
   return Promise.resolve(data);
 }
 
-export const richTextImg = async ({ imgData }: { imgData: Asset | number }) => {
-  if (!imgData) throw Error("imageData undefined");
-  const image = await resolveID({ collection: 'assets', data: imgData });
+export const richTextImg = ({ image }: { image: Asset }) => {
 
   if (!image || !image.sizes) {
     throw Error(`ERROR: sizes does not exist on image: ${image}`)
@@ -186,27 +112,21 @@ export const richTextImg = async ({ imgData }: { imgData: Asset | number }) => {
                       height:inherit;
                       width:inherit;
                       margin:0px;"
-                src="${sizes.sm.url}"
+                src="${sizes!.sm!.url}"
                 alt=""
           />`
 };
 
-export const richTextBtn = async ({ link }: { link: IButton }) => {
+export const richTextBtn = ({ href, link }: { href: string, link: IButton }) => {
 
   let { type: urlType, reference, url, display, style: linkStyle } = link || {};
-  // const = linkStyle || {}
 
   const style = linkStyle && Object.entries(linkStyle)
     .filter(([_, value]) => Boolean(value))
     .reduce((acc, [key, value]) => `${acc};${key}:${value}`, "")
 
-  if (!reference?.value && !url) throw Error("Rich text Button needs a valid url")
-
-  const href = urlType == 'reference'
-    ? (await resolveID({ collection: reference!.relationTo, data: reference?.value })).slug
-    : url
   const { text, variant, size } = display || {}
 
-  const classList = buttonVariants({ variants: variant, size })
+  const classList = buttonVariants({ variant, size })
   return `<a class="${classList}" style="${style}" href="${href}">${text}</a>`
 }

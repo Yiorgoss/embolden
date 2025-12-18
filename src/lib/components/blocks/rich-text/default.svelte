@@ -1,5 +1,5 @@
 <script lang="ts">
-	import { cn, splitRichTextIntoWords } from '@/utils';
+	import { cn } from '@/utils';
 	import { scroll, animate, stagger, transform, motionValue } from 'motion';
 	import { onMount } from 'svelte';
 	import type { Attachment } from 'svelte/attachments';

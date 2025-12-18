@@ -92,28 +92,31 @@ export const htmlConverters: any = ({ defaultConverters }) => ({
 
     },
     // word class is used for rich text animations be careful with removing it
-    buttonRT: async (args) => {
-      // try {
-
+    buttonRT: async (args: any) => {
       const { link } = args.node.fields
-      const buttonHTML = await richTextBtn({ link });
-      return `<span class="animate-word">${buttonHTML}</span>`
-      // } catch (err) {
-      //   console.error(`err`)
-      // }
+      const { reference: { value, relationTo } = {} } = link
+
+      if (!link || !(link.reference || link.url)) return
+
+      try {
+        const href = link.type == 'reference'
+          ? args.populate({ id: value, collection: relationTo })
+            .then((data: any) => data.slug)
+            .catch((err: any) => console.error(`Error populating link  ${err}`, { link }))
+          : link.url
+        const buttonHTML = richTextBtn({ href, link });
+        return `<span class="animate-word">${buttonHTML}</span>`
+      } catch (err) {
+        console.error(`Error converting buttonRT: ${err}`)
+      }
     },
-    pill: async (args) => {
+    pill: async (args: any) => {
       const { image, width, height, vertAlign, phone } = args.node.fields;
       const { width: phoneWidth, height: phoneHeight } = phone
 
-      let imageString;
-      try {
-        imageString = await richTextImg({ imgData: image });
-      }
-      catch (err) {
-        console.error(`ERROR pill image - ${image.id ?? image}: ${err}`)
-        return ""
-      }
+      const src = image.sizes.sm ?? await args.populate({ collection: "assets", id: image.id })
+
+      const imageString = richTextImg({ image });
 
       const imageID = typeof image == 'number' ? image : image.id;
 
