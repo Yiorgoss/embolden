@@ -1,5 +1,5 @@
 <script lang="ts">
-	import { cn, splitRichTextIntoWords } from '@/utils';
+	import { cn } from '@/utils';
 	import { animateScroll } from '@/attachments/animations/scroll';
 	import { scroll, animate, stagger, transform, motionValue, inView } from 'motion';
 	import { onMount, untrack } from 'svelte';
@@ -30,7 +30,7 @@
 	const { height, background, minHeight, textWrap } = $derived(style || {});
 	const { sap: preset } = $derived(animation || {});
 
-	$inspect({ preset });
+	//  $inspect({ preset });
 </script>
 
 <div

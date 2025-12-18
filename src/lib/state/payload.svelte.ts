@@ -93,7 +93,7 @@ export class PayloadState {
   }
 
   clear() {
-    this._state = new SvelteMap<string, any>()
+    this._state = {}
   }
 
   // fetching frmo payload

@@ -57,7 +57,7 @@
 		style:overflow={style?.overflow}
 		class:flex-wrap={layout == 'threeColumns'}
 		class="flex gap-10 justify-center items-center md:items-stretch h-full flex-col md:flex-row container mx-auto"
-		{@attach animateViewport(animation.viewportPreset, { amount: animation?.amount })}
+		{@attach animateViewport(animation?.vap)}
 	>
 		{#if columnOne && columnOne.length != 0}
 			<div
