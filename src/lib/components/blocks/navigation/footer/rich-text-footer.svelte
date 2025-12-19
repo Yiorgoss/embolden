@@ -29,17 +29,17 @@
 					</div>
 				</Button>
 			</div>
-			<div class="flex justify-around pt-10">
+			<div class="flex justify-center gap-10 pt-10">
 				<div class="flex flex-col items-start">
 					<h3 class="font-semibold text-xl">Sitemap</h3>
 					{#each nav ?? [] as { link }}
-						<Button variant="ghost" size="sm" class="" {link} />
+						<Button class="p-0 m-0" variant="link" {link} />
 					{/each}
 				</div>
 				<div class="flex flex-col items-start">
 					<h3 class="font-semibold text-xl">Social Links</h3>
 					{#each socials ?? [] as { link }}
-						<Button variant="ghost" size="sm" {link} />
+						<Button class="p-0 m-0" variant="link" {link} />
 					{/each}
 				</div>
 			</div>
