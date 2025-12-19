@@ -55,8 +55,9 @@
 	<div
 		style:padding={style?.padding}
 		style:overflow={style?.overflow}
+		style:gap={style?.gap}
 		class:flex-wrap={layout == 'threeColumns'}
-		class="flex gap-10 justify-center items-center md:items-stretch h-full flex-col md:flex-row container mx-auto"
+		class="flex gap-0 md:gap-10 justify-center items-center md:items-stretch h-full flex-col md:flex-row container mx-auto"
 		{@attach animateViewport(animation?.vap)}
 	>
 		{#if columnOne && columnOne.length != 0}
