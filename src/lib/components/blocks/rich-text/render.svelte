@@ -3,6 +3,7 @@
 	import { cn, fetchFromCMS, getRestPopulateFn } from '@/utils';
 	import { htmlConverters } from './converters';
 	import { convertLexicalToHTMLAsync } from '@payloadcms/richtext-lexical/html-async';
+	import { animate } from '@/attachments/animations/animate';
 	import { site } from '@/config';
 	import { page } from '$app/state';
 
@@ -43,7 +44,7 @@
 		style:--list-marker-color={richText.style?.marker}
 		class=""
 	>
-		{#if richText.animation.sap.length > 0}
+		{#if richText.animation.type}
 			{#await import('./animated.svelte') then B: any}
 				{@const Block = B.default}
 				<Block

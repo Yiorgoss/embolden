@@ -1,6 +1,8 @@
 import { animate, transform, scroll, steps } from "motion";
 
 export function fadeInEachWord(element: Element) {
+  // might be able to speed this up using delay - stagger
+  // and splitword utility - https://github.com/lukePeavey/SplitType
   const words = element.querySelectorAll('.animate-word');
 
   const len = words.length;

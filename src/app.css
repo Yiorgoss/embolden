@@ -138,6 +138,10 @@ li::marker {
   color: var(--list-marker-color, var(--foreground, black));
 }
 
+.animate-child {
+  display: inline-block;
+}
+
 .list-bullet {
   list-style-type: disc;
   list-style-position: outside;

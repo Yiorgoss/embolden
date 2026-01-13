@@ -7,39 +7,27 @@
 	import { RichTextRender } from '../rich-text';
 	import Button from '@/components/common/button.svelte';
 	import { animateScroll } from '@/attachments/animations/scroll';
+	import { animate } from '@/attachments/animations/animate';
+	import { createAnimationObject } from '@/utils/ui-utils';
 
 	const { blockData }: { blockData: IScrollGrowLanding } = $props();
-	const {
-		initImg,
-		finalImg,
-		richText,
-		link,
-		style: { background, height } = {}
-	} = $derived(blockData);
+	const { initImg, finalImg, richText, style: { background, height } = {} } = $derived(blockData);
+
+	let animation = createAnimationObject({ type: 'scroll', preset: ['growScrollScale'] });
 </script>
 
-<section
-	style:background
-	id="scroll-grow-landing-block"
-	style:height="150lvh"
-	class="overflow-hidden relative"
->
+<section style:background id="scroll-grow-landing-block" style:height="150lvh" class="relative">
 	<div class="h-lvh overflow-x-clip relative grid grid-cols-1 grid-rows-1">
 		<div class="-z-0 col-start-1 row-start-1 h-full w-full">
 			<Picture image={initImg} class="" />
 		</div>
-		<div
-			{@attach animateScroll(['growScrollTranslate'])}
-			class="relative flex z-10 justify-center items-center col-start-1 row-start-1"
-		>
-			<div class="relative flex flex-col justify-center items-center">
+		<!--  {@attach animate({type:"scroll", scroll:["growScrollTra"]})}  -->
+		<div class="flex z-10 justify-center items-center col-start-1 row-start-1">
+			<div class=" sticky top-1/2 -translate-y-1/2">
 				<RichTextRender {richText} />
 			</div>
 		</div>
-		<div
-			{@attach animateScroll(['growScrollScale'])}
-			class="col-start-1 row-start-1 relative w-full"
-		>
+		<div {@attach animate({ animation })} class="col-start-1 row-start-1 relative w-full">
 			<Picture image={finalImg} class="w-full " />
 		</div>
 	</div>

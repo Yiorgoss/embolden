@@ -5,6 +5,7 @@
 	import type { Attachment } from 'svelte/attachments';
 	import type { IRichTextField } from '@payload-types';
 	import Spinner from '@/components/common/spinner.svelte';
+	import { animateScroll } from '@/attachments/animations/scroll';
 
 	const {
 		html,
@@ -38,6 +39,8 @@
 	{#if loading}
 		<Spinner class="size-12" />
 	{:else}
-		{@html html}
+		<div class="">
+			{@html html}
+		</div>
 	{/if}
 </div>
