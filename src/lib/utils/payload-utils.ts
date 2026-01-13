@@ -21,7 +21,7 @@ export function mergeUpdateData({ oldData, newData }: { oldData: any, newData: a
 
 export function getRestPopulateFn({ apiURL, locale }: { apiURL: string, locale: string }) {
   return async ({ id, collection }: { id: number, collection: string }) => {
-    await fetchFromCMS({ collection, id, locale })
+    return await fetchFromCMS({ collection, id, locale })
   }
 }
 

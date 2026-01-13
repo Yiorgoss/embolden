@@ -3,7 +3,7 @@
 	import { type IBlockColumnLayout } from '@payload-types';
 	import RenderBlocks from '../render-blocks.svelte';
 	import { cn } from '@/utils';
-	import { animateViewport } from '@/attachments/animations/viewport';
+	import { animate } from '@/attachments/animations/animate';
 
 	const { blockData }: { blockData: IBlockColumnLayout } = $props();
 	const { layout, columnOne, columnTwo, columnThree, style, mobileStyle, animation } =
@@ -58,7 +58,7 @@
 		style:gap={style?.gap}
 		class:flex-wrap={layout == 'threeColumns'}
 		class="flex gap-0 md:gap-10 justify-center items-center md:items-stretch h-full flex-col md:flex-row container mx-auto"
-		{@attach animateViewport(animation?.vap)}
+		{@attach animate({ animation })}
 	>
 		{#if columnOne && columnOne.length != 0}
 			<div

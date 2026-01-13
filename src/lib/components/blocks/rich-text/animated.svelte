@@ -1,7 +1,6 @@
 <script lang="ts">
 	import { cn } from '@/utils';
-	import { animateScroll } from '@/attachments/animations/scroll';
-	import { scroll, animate, stagger, transform, motionValue, inView } from 'motion';
+	import { animate } from '@/attachments/animations/animate';
 	import { onMount, untrack } from 'svelte';
 	import type { Attachment } from 'svelte/attachments';
 	import type { IRichTextField } from '@payload-types';
@@ -28,14 +27,13 @@
 	});
 
 	const { height, background, minHeight, textWrap } = $derived(style || {});
-	const { sap: preset } = $derived(animation || {});
 
 	//  $inspect({ preset });
 </script>
 
 <div
 	id="animated-rich-text"
-	{@attach animateScroll(preset)}
+	{@attach animate({ animation })}
 	class={cn('relative overflow-hidden', overrides)}
 >
 	<div

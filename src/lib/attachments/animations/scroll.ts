@@ -1,8 +1,9 @@
 import type { Attachment } from 'svelte/attachments';
-import { scroll, animate, type AnimationOptions, type ObjectTarget } from 'motion';
+import { scroll as motionScroll, animate, type AnimationOptions, type ObjectTarget } from 'motion';
 import { fadeInEachWord } from './scroll-richtext';
+import type { IAnimation } from '@payload-types';
 
-const scrollPreset = {
+export const scrollPreset = {
   "growScrollScale": [{
     transforms: { scale: [0.7, 1], y: ['30vh', '50vh'] },
     options: { ease: 'linear' },
@@ -21,17 +22,62 @@ const scrollPreset = {
   }],
   'translateUp': [
     {
-      transforms: { y: ["5vh", '-5vh'] },
+      transforms: { y: [100, 0] },
       options: { ease: 'linear' },
-      offset: ['start start', 'end end']
+      offset: ['start end', 'start center']
     }
   ],
   'translateDown': [
     {
-      transforms: { y: ["-5vh", '5vh'] },
+      transforms: { y: [100, 0] },
       options: { ease: 'linear' },
-      offset: ['start start', 'end end']
+      offset: ['start end', 'start center']
     }
+  ],
+  'fadeIn': [
+    {
+      transforms: { opacity: [0, 1] },
+      options: { ease: 'easeIn' },
+      offset: ['start end', 'start center']
+    }
+  ],
+  'lineFlip': [
+    {
+      prepare: (el: HTMLElement) => {
+        let children = el.querySelectorAll(".payload-richtext > *")
+
+        children.forEach((child) => {
+          const wrapper = document.createElement("div")
+          child.parentNode?.insertBefore(wrapper, child);
+          wrapper.appendChild(child);
+
+          const cloned = child.cloneNode(true) as HTMLElement
+          child.after(cloned)
+
+          wrapper.style.position = 'relative'
+          wrapper.style.overflow = 'hidden'
+          cloned.style.position = 'absolute'
+          cloned.style.inset = "0"
+          cloned.style.lineHeight = "1.2"
+          child.classList.add("child")
+          child.style.lineHeight = "1.2"
+          cloned.classList.add("cloned")
+        })
+      },
+    },
+    {
+      prepare: (el: HTMLElement) => el.querySelectorAll(".payload-richtext .child"),
+      transforms: { y: [0, "120%"] },
+      options: { ease: 'easeIn' },
+      offset: ['start 0.4', 'start 0.5']
+    },
+    {
+      prepare: (el: HTMLElement) => el.querySelectorAll(".payload-richtext .cloned"),
+      transforms: { y: ["-120%", 0] },
+      options: { ease: 'easeOut' },
+      offset: ['start 0.4', 'start 0.5']
+    }
+
   ],
   'parallax': [
     // parallax-{background/foreground} class
@@ -51,56 +97,84 @@ const scrollPreset = {
   ],
 } as { [key: string]: any }
 
-type PresetKeys = keyof typeof scrollPreset;
+export type PresetKeys = keyof typeof scrollPreset;
 
 
 // this will return an attachment that will iterate over a preset of motion animations
 // fix types once you figure out how api will look!!!
-export function animateScroll(presetList: PresetKeys[] | undefined | null,
-  { prepare, transforms, options, offset }:
-    { prepare?: (element: Element) => void, transforms?: any, options?: any, offset?: any } = {}): Attachment {
-  return (element) => {
-    if (!presetList || presetList.length <= 0) return
-    const preset = presetList[0] // cbf to add this prematurely. It does work however
+// export function animateScroll(presetList: PresetKeys[] | undefined | null,
+//   { prepare, transforms, options, offset, waitFor }:
+//     {
+//       prepare?: (element: Element) => void,
+//       transforms?: any,
+//       options?: any,
+//       offset?: any,
+//       waitFor?: boolean
+//     } = {}): Attachment {
+//   return (element) => {
+export function animateScroll(element: Element, { animation }: { animation: IAnimation }) {
+  const {
+    scroll
+    // prepare,
+    // transforms,
+    // options,
+    // offset,
+  } = animation
+  if (!scroll || scroll.length <= 0) return
+  const preset = scroll[0] // cbf to add this prematurely. It does work however
 
-    const cancelList: (() => void)[] = []
+  const cancelList: (() => void)[] = []
 
-    let animationList = {}
-    if (preset == 'custom') {
-      animationList = [
-        {
-          prepare,
-          transforms,
-          options,
-          offset
-        }
-      ]
-    } else if (preset == 'fadeInEachWord') {
-      // special cases
-      return fadeInEachWord(element)
-    } else {
-      animationList = scrollPreset[preset]
-    }
-
-    //@ts-ignore FIX types
-    animationList.forEach((animation) => {
-      const { transforms, options, offset, prepare } = animation
-
-      let elementList = [element]
-      if (prepare) elementList = prepare(element)
-      const cancel = scroll(
-        animate(
-          elementList,
-          transforms, //temp fix 22/10/25 lol
-          options
-        ),
-        {
-          target: element, // parent
-          offset: offset as any // No ScrollOptions
-        }
-      );
-      cancelList.push(cancel)
-    })
-    return () => cancelList.forEach((cancel) => cancel())
+  let animationList = {}
+  if (preset == 'custom') {
+    //TODO IMPLEMENT custom animaation from CMS
+    // animationList = [
+    //   {
+    //     prepare,
+    //     transforms,
+    //     options,
+    //     offset
+    //   }
+    // ]
+  } else if (preset == 'fadeInEachWord') {
+    // special cases
+    return fadeInEachWord(element)
+  } else {
+    animationList = scrollPreset[preset]
   }
+
+  //@ts-ignore FIX types
+  animationList.forEach((animation) => {
+    const { transforms, options, offset, prepare } = animation || {}
+
+    if (prepare && !transforms && !options && !offset) {
+      prepare(element)
+    } else {
+      let elementList = [element] //what is this for? should be commented
+      if (prepare) elementList = prepare(element)
+      // seems to be a race condition when animating text that asyncs in
+      // so rerun effect when loads
+      try {
+        const cancel = motionScroll(
+          animate(
+            elementList,
+            transforms,
+            options
+          ),
+          {
+            target: element, // parent
+            offset: offset as any // No ScrollOptions
+          }
+        );
+        cancelList.push(cancel)
+      }
+      catch (err) {
+        // just fail quietly. if the animation target is not found what are you gonna do? cry about it?
+        // log it on debug if logging was enabled
+        return
+      }
+    }
+  })
+  return () => cancelList.forEach((cancel) => cancel())
+  // }
 };

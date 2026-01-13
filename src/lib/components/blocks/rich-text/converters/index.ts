@@ -80,7 +80,7 @@ export const htmlConverters: any = ({ defaultConverters }) => ({
             <path d="M117.637 2.86134C55.6369 -2.63843 -18.8594 8.36133 6.63897 38.8615C41.6403 75.8615 103.472 64.9534 122.64 61.8615C138.14 59.3615 181.613 49.6723 178.64 28.8615C175.14 4.36128 107.642 6.36118 81.1424 14.3648" stroke="${color ?? "var(--foreground)"}" stroke-width="3" stroke-linecap="round"/>
           </svg>
         </span>
-        <span style="${wordStyles}">${text}</span>
+        <span class="animate-word" style="${wordStyles}">${text}</span>
       </span>`
       const span = document.createElement("span")
       span.innerHTML = elem
@@ -101,7 +101,7 @@ export const htmlConverters: any = ({ defaultConverters }) => ({
       try {
         const href = link.type == 'reference'
           ? args.populate({ id: value, collection: relationTo })
-            .then((data: any) => data.slug)
+            .then((data: any) => { return data.slug })
             .catch((err: any) => console.error(`Error populating link  ${err}`, { link }))
           : link.url
         const buttonHTML = richTextBtn({ href, link });
