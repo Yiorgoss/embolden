@@ -10,20 +10,26 @@
 	import { animate } from '@/attachments/animations/animate';
 	import { createAnimationObject } from '@/utils/ui-utils';
 
-	const { blockData }: { blockData: IScrollGrowLanding } = $props();
+	const { blockData, cb }: { blockData: IScrollGrowLanding; cb?: () => void } = $props();
 	const { initImg, finalImg, richText, style: { background, height } = {} } = $derived(blockData);
+
+	$effect(() => cb && cb());
 
 	let animation = createAnimationObject({ type: 'scroll', preset: ['growScrollScale'] });
 </script>
 
-<section style:background id="scroll-grow-landing-block" style:height="150lvh" class="relative">
-	<div class="h-lvh overflow-x-clip relative grid grid-cols-1 grid-rows-1">
+<section
+	style:background
+	id="scroll-grow-landing-block"
+	style:height="150lvh"
+	class="overflow-clip relative"
+>
+	<div class="h-full grid grid-cols-1 grid-rows-1">
 		<div class="-z-0 col-start-1 row-start-1 h-full w-full">
 			<Picture image={initImg} class="" />
 		</div>
-		<!--  {@attach animate({type:"scroll", scroll:["growScrollTra"]})}  -->
 		<div class="flex z-10 justify-center items-center col-start-1 row-start-1">
-			<div class=" sticky top-1/2 -translate-y-1/2">
+			<div class="sticky top-1/2 -translate-y-1/2">
 				<RichTextRender {richText} />
 			</div>
 		</div>
