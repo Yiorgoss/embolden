@@ -63,7 +63,7 @@ type animationListKeys = keyof typeof animationList;
 export function animateViewport(element: Element, { animation }: { animation: IAnimation }) {
 
   const amount = "all"
-  const { viewport } = animation
+  const { viewport, stagger } = animation
   if (!viewport || viewport.length <= 0) return
   const preset = viewport[0] // cbf to add this prematurely. It does work however on the cms think it will need to merge them
 
@@ -75,6 +75,10 @@ export function animateViewport(element: Element, { animation }: { animation: IA
   if (!entry) return
 
   if (entry.prepare) entry.prepare(element)
+  if (!stagger) {
+    entry.options.delay = 0;
+    if (exit) entry.options.delay = 0;
+  }
   // there should never be reason for an exit preparation step
   // if (exit && exit.prepare) exit.prepare(element)
 
