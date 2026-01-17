@@ -4,7 +4,7 @@
 	import { getContext, hasContext, onMount } from 'svelte';
 	import { MediaQuery } from 'svelte/reactivity';
 	import { fade, fly } from 'svelte/transition';
-	import { animate } from '@/attachments/animations/animate';
+	import { animate } from '@/attachments/animations/animate.svelte';
 
 	const {
 		asset,

@@ -2,7 +2,7 @@
 	import { type ICalistoFeatureCard } from '@payload-types';
 	import RichTextRender from '@/components/blocks/rich-text/render.svelte';
 	import Icon from '@/components/common/icon.svelte';
-	import { animate } from '@/attachments/animations/animate';
+	import { animate } from '@/attachments/animations/animate.svelte';
 
 	const { blockData }: { blockData: ICalistoFeatureCard } = $props();
 	const { cards, animation, style } = $derived(blockData);
