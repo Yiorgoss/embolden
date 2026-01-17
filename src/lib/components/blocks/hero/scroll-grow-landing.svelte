@@ -6,8 +6,7 @@
 	import type { IScrollGrowLanding } from '@payload-types';
 	import { RichTextRender } from '../rich-text';
 	import Button from '@/components/common/button.svelte';
-	import { animateScroll } from '@/attachments/animations/scroll';
-	import { animate } from '@/attachments/animations/animate';
+	import { animate } from '@/attachments/animations/animate.svelte';
 	import { createAnimationObject } from '@/utils/ui-utils';
 
 	const { blockData, cb }: { blockData: IScrollGrowLanding; cb?: () => void } = $props();

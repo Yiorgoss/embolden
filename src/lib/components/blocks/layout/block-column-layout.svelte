@@ -3,7 +3,7 @@
 	import { type IBlockColumnLayout } from '@payload-types';
 	import RenderBlocks from '../render-blocks.svelte';
 	import { cn } from '@/utils';
-	import { animate } from '@/attachments/animations/animate';
+	import { animate } from '@/attachments/animations/animate.svelte';
 
 	const { blockData }: { blockData: IBlockColumnLayout } = $props();
 	const { layout, columnOne, columnTwo, columnThree, style, mobileStyle, animation } =

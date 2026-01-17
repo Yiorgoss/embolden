@@ -1,6 +1,6 @@
 <script lang="ts">
 	import { cn } from '@/utils';
-	import { animate } from '@/attachments/animations/animate';
+	import { animate } from '@/attachments/animations/animate.svelte';
 	import { onMount, untrack } from 'svelte';
 	import type { Attachment } from 'svelte/attachments';
 	import type { IRichTextField } from '@payload-types';
@@ -31,10 +31,12 @@
 	//  $inspect({ preset });
 </script>
 
+<!--  is needed so that animations can be toggled on/off during livepreview
+			This should never change during runtime -->
 <div
 	id="animated-rich-text"
 	{@attach animate({ animation })}
-	class={cn('relative overflow-hidden', overrides)}
+	class={cn('relative overflow-clip', overrides)}
 >
 	<div
 		style:height
