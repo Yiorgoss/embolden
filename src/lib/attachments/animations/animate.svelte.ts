@@ -4,6 +4,7 @@ import { animateViewport } from "./viewport"
 import type { IAnimation } from '@payload-types';
 
 export function animate({ animation }: { animation: IAnimation | undefined }): Attachment {
+  console.log("animation rerurn")
   if (!animation) return () => { }
   switch (animation.type) {
     case 'scroll':
