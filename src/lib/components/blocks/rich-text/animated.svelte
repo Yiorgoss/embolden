@@ -27,18 +27,11 @@
 	});
 
 	const { height, background, minHeight, textWrap } = $derived(style || {});
-
-	//  $inspect({ preset });
 </script>
 
-<!--  is needed so that animations can be toggled on/off during livepreview
-			This should never change during runtime -->
-<div
-	id="animated-rich-text"
-	{@attach animate({ animation })}
-	class={cn('relative overflow-clip', overrides)}
->
+<div id="animated-rich-text" class={cn('relative overflow-clip', overrides)}>
 	<div
+		{@attach animate({ animation })}
 		style:height
 		style:min-height={minHeight}
 		style:text-wrap={textWrap}
@@ -46,7 +39,7 @@
 		class="grid grid-cols-1 grid-rows-1 justify-center items-center"
 	>
 		{#if loading}
-			<Spinner class="size-12" />
+			<Spinner class="size-12 col-start-1 row-start-1" />
 		{:else}
 			<div class="col-start-1 row-start-1">
 				{@html html}
