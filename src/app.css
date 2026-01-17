@@ -134,13 +134,23 @@
   }
 }
 
-li::marker {
-  color: var(--list-marker-color, var(--foreground, black));
+/* animate word/child are unique global classes that are required for more complex animations.
+    animate-child is mainly used for dynamically inserted children of animations -> things like wrap each letterr
+    animate-word is the class used to wrap each word. this is set inside payload and is used mainly for selecting within rich text */
+.animate-word:has(.animate-child) {
+  text-wrap: nowrap;
+  /* otherwise text wrap breaks all words */
 }
 
 .animate-child {
   display: inline-block;
+  /* otherwise animation have nothin to latch onto*/
 }
+
+li::marker {
+  color: var(--list-marker-color, var(--foreground, black));
+}
+
 
 .list-bullet {
   list-style-type: disc;
