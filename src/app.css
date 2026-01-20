@@ -32,10 +32,11 @@
   /* Primary colors for <Button /> */
   --primary: oklch(0.26 0.1184 279.72);
   --primary-foreground: oklch(96.89% 0.0215 95.28);
+  ;
 
   /* Secondary colors for <Button /> */
-  --secondary: oklch(96.89% 0.0215 95.28);
-  --secondary-foreground: oklch(34.93% 0.147 281.02);
+  --secondary: oklch(0.8789 0.0683 2.54);
+  --secondary-foreground: oklch(0.1295 0.0521 2.54);
 
   /* Muted backgrounds such as <TabsList />, <Skeleton /> and <Switch /> */
   --muted: oklch(97% 0.0068 247.9);
@@ -56,7 +57,7 @@
   --input: oklch(0.8268 0.0538 279.72);
 
   /* Used for focus ring */
-  --ring: oklch(34.93% 0.147 281.02);
+  --ring: oklch(0.8789 0.0683 2.54);
 
   /* Chart Colors */
   --chart-1: oklch(0.646 0.222 41.116);
