@@ -42,7 +42,7 @@
 			</Accordion.Item>
 		{/each}
 	</Accordion.Root>
-	{#if link?.url}
+	{#if link}
 		<div class="py-5 md:pt-10">
 			<Button size="lg" {link} />
 		</div>
