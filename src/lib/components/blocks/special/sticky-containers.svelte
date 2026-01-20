@@ -22,8 +22,8 @@
 				style:top={`${50 * i + 5}px`}
 				style:background={style?.background}
 				class={cn(
-					` text-background bg-primary rounded-theme sticky`,
-					left && 'bg-secondary border-foreground border '
+					` text-background bg-foreground rounded-theme sticky`,
+					left && 'bg-background border-foreground border '
 				)}
 			>
 				{#if title && i == 0}
