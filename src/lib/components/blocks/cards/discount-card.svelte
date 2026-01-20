@@ -1,5 +1,6 @@
 <script lang="ts">
 	import { type IDiscountCard } from '@payload-types';
+	import { animateViewport } from '@/attachments/animations/viewport';
 	import { RichTextRender } from '@/components/blocks/rich-text';
 	import Switch from '@/components/ui/switch/switch.svelte';
 	import { cn } from '@/utils';
