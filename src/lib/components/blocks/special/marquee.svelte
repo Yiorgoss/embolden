@@ -5,15 +5,15 @@
 	import { resolveID } from '@/utils';
 	import { page } from '$app/state';
 	import { getPayloadState } from '@/state/payload.svelte';
+	import { prefersReducedMotion } from 'svelte/motion';
 
 	const { blockData }: { blockData: IMarquee } = $props();
 	const {
-		richText,
-		image,
-		style: { background, height, border, padding } = {},
-		options: { nRepeat, maskEdges } = {},
-		link: _link,
-		animation
+		items,
+		style: { background, color, height, border, padding, gap } = {},
+		options,
+		link: _link
+		//  animation
 	} = $derived(blockData);
 	//  const { nRepeat, maskEdges } = $derived(options || {});
 	//  const { background, height, border, padding } = $derived(style || {});
@@ -33,21 +33,23 @@
 	style:border
 	style:padding
 	style:background
-	class:mask-none={!maskEdges}
+	style:color
+	class:mask-none={!options?.maskEdges}
 	class="mask-l-from-90% mask-r-from-90% overflow-clip"
 >
-	<a href={link}>
+	<a href={link} aria-hidden={!link}>
 		<div
 			style:height
-			style:animation-duration={animation?.duration}
-			data-animated="true"
-			class=" marquee-default flex items-center w-full justify-start gap-10"
+			style:gap
+			style:animation-duration={options?.duration}
+			class:flex-wrap={prefersReducedMotion.current}
+			class="marquee-default w-max flex justify-center items-center gap-x-10"
 		>
-			{#each { length: nRepeat ?? 6 } as _}
-				<div class="flex justify-end items-end min-w-fit h-fit w-full">
+			{#each [...items, ...items] as { image, text }, i}
+				<div aria-hidden={i > items.length} class="">
 					<Picture {image} class="object-contain" />
 				</div>
-				<RichTextRender overrides="min-w-fit break-keep text-nowrap inline-block" {richText} />
+				<div aria-hidden={i > items.length} class="text-nowrap">{text}</div>
 			{/each}
 		</div>
 	</a>
@@ -55,6 +57,6 @@
 
 <style>
 	.marquee-default {
-		animation: marquee 80s linear infinite;
+		animation: marquee 40s linear infinite;
 	}
 </style>
