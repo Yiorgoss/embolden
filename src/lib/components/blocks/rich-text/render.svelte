@@ -2,7 +2,6 @@
 	import DefaultRichText from '@/components/blocks/rich-text/default.svelte';
 	import { cn, fetchFromCMS, getRestPopulateFn } from '@/utils';
 	import { htmlConverters } from './converters';
-	//  import { convertLexicalToHTMLAsync } from '@payloadcms/richtext-lexical';
 	import { convertLexicalToHTMLAsync } from '@payloadcms/richtext-lexical/html-async';
 	import { site } from '@/config';
 	import { page } from '$app/state';
