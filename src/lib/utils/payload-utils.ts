@@ -34,6 +34,7 @@ export async function fetchFromCMS({
   id: number;
   locale?: string | undefined | null;
 }) {
+  if (!id) return "xxxx"
   if (!id) throw Error(`Need ID to Fetch`)
   if (!collection) throw Error(`Need Collection to Fetch`)
   const response = fetch(
