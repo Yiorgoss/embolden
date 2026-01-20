@@ -42,7 +42,7 @@ importers:
         specifier: ^3.0.2
         version: 3.0.2
       lexical:
-        specifier: ^0.31.2
+        specifier: ^0.31.0
         version: 0.31.2
       lodash-es:
         specifier: ^4.17.21
