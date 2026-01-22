@@ -11,8 +11,6 @@
 	let currentPage = $derived(payload.get(page.params.slug));
 	let heroLoaded = $state(false);
 
-	$inspect(currentPage);
-
 	page.data.heroLoaded = false;
 </script>
 
