@@ -21,7 +21,7 @@ export function mergeUpdateData({ oldData, newData }: { oldData: any, newData: a
 
 export function getRestPopulateFn({ apiURL, locale }: { apiURL: string, locale: string }) {
   return async ({ id, collection }: { id: number, collection: string }) => {
-    return await fetchFromCMS({ collection, id, locale })
+    return await fetchFromCMS({ collection, id, locale }).then((data) => data.json())
   }
 }
 
@@ -35,6 +35,7 @@ export async function fetchFromCMS({
   locale?: string | undefined | null;
 }) {
   if (!id) throw Error(`Need ID to Fetch`)
+  if (!collection) throw Error(`Need Collection to Fetch`)
   const response = fetch(
     `${site.CMS}/api/${collection}?where[id][equals]=${id}&locale=${locale ?? defaultLocale}`,
     {
@@ -87,7 +88,6 @@ export async function resolveID({
           return json.docs[0]
         })
         .catch((err) => {
-          console.log(`some dumb shit ${err}`)
           throw new Error(`ERROR: ${err}`);
         })
     } catch (err) {
@@ -98,20 +98,21 @@ export async function resolveID({
   return Promise.resolve(data);
 }
 
-export const richTextImg = ({ image }: { image: Asset }) => {
+// export const richTextImg = ({ image }: { image: Asset }) => {
+export const richTextImg = (src: string) => {
 
-  if (!image || !image.sizes) {
-    throw Error(`ERROR: sizes does not exist on image: ${image}`)
-  }
-  //@ts-ignore  if typeof  ^
-  const { sizes } = image;
+  // if (!image || !image.sizes) {
+  //   throw Error(`ERROR: sizes does not exist on image: ${image}`)
+  // }
+  // //@ts-ignore  if typeof  ^
+  // const { sizes } = image;
 
   // for now just default to the smallest one
   return `<img style="object-fit:cover;
                       height:inherit;
                       width:inherit;
                       margin:0px;"
-                src="${sizes!.sm!.url}"
+                src="${src}"
                 alt=""
           />`
 };
