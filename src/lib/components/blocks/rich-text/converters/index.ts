@@ -29,7 +29,7 @@ export const htmlConverters: any = ({ defaultConverters }) => ({
   text: customText,
   inlineBlocks: {
     // Each key should match your inline block's slug
-    svgText: async (args) => {
+    svgText: async (args: any) => {
       const { childIndex, node, parent } = args
       const siblings = parent.children
       const { text, shouldAnimate, style, image: _image } = node.fields || {}
@@ -79,8 +79,8 @@ export const htmlConverters: any = ({ defaultConverters }) => ({
         const href = link.type == 'reference'
           ? await args.populate({ id: value, collection: relationTo })
             .then((data: any) => { return data.slug })
-          : link.url
             .catch((err: any) => console.error(`Error populating link  ${err}`, { link }))
+          : link.url
         const buttonHTML = richTextBtn({ href, link });
         return `<span class="animate-word">${buttonHTML}</span>`
       } catch (err) {
