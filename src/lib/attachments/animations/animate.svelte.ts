@@ -3,7 +3,7 @@ import { animateScroll } from "./scroll"
 import { animateViewport } from "./viewport"
 import type { IAnimation } from '@payload-types';
 import { prefersReducedMotion } from 'svelte/motion';
-import { animatePreset } from './preset';
+// import { animatePreset } from './preset';
 
 export function animate({ animation }: { animation: IAnimation & { preset?: string } | undefined }): Attachment {
 
