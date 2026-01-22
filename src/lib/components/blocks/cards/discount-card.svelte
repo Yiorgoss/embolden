@@ -5,7 +5,7 @@
 	import { cn } from '@/utils';
 	import { site } from '@/config';
 	import Button from '@/components/common/button.svelte';
-	import { animate } from '@/attachments/animations/animate';
+	import { animate } from '@/attachments/animations/animate.svelte';
 
 	const { blockData }: { blockData: IDiscountCard } = $props();
 	const { cards } = $derived(blockData);
