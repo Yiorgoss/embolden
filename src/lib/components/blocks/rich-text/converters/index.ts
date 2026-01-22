@@ -48,29 +48,6 @@ export const htmlConverters: any = ({ defaultConverters }) => ({
           wordStyles += objToCSS(siblings[childIndex + 1])
         }
       }
-      // const elem = `
-      // <span class="word" style="display:inline-grid;place-items:center;">
-      //   <object
-      //       class="animate-circle-object"
-      //       id="xxyxx"
-      //       type="image/svg+xml"
-      //       data="${image.url}"
-      //       onload="console.log("x")"
-      //       style="color:red; scale:1.2; grid-area:1 / 1"></object>
-
-      //   <span style="grid-area:1 / 1;${wordStyles}">${text}</span>
-      // </span>`
-      // const elem = `
-      // <span class="word" style="display:inline-grid;place-items:center;grid-template:"1";>
-      //   <object
-      //       class="animate-circle-object"
-      //       type="image/svg+xml"
-      //       data="${image.url}"
-      //       onload="this.parentNode.replaceChild(this.contentDocument.documentElement, this);"
-      //       style="color:red; scale:1.2; grid-area:1 / 1"></object>
-
-      //   <span style="grid-area:1 / 1;${wordStyles}">${text}</span>
-      // </span>`
 
       //can expand too any svg by using api to reflect external svg
       const elem = `
@@ -100,10 +77,10 @@ export const htmlConverters: any = ({ defaultConverters }) => ({
 
       try {
         const href = link.type == 'reference'
-          ? args.populate({ id: value, collection: relationTo })
+          ? await args.populate({ id: value, collection: relationTo })
             .then((data: any) => { return data.slug })
-            .catch((err: any) => console.error(`Error populating link  ${err}`, { link }))
           : link.url
+            .catch((err: any) => console.error(`Error populating link  ${err}`, { link }))
         const buttonHTML = richTextBtn({ href, link });
         return `<span class="animate-word">${buttonHTML}</span>`
       } catch (err) {
@@ -114,11 +91,11 @@ export const htmlConverters: any = ({ defaultConverters }) => ({
       const { image, width, height, vertAlign, phone } = args.node.fields;
       const { width: phoneWidth, height: phoneHeight } = phone
 
-      const src = image.sizes.sm ?? await args.populate({ collection: "assets", id: image.id })
+      const id = typeof image == 'number' ? image : image.id
+      const src = await args.populate({ collection: "assets", id })
+        .then((data: any) => data.docs[0].sizes.sm.url)
 
-      const imageString = richTextImg({ image });
-
-      const imageID = typeof image == 'number' ? image : image.id;
+      const imageString = richTextImg(src);
 
       const normalSize = `
       width:${width};
@@ -135,7 +112,7 @@ export const htmlConverters: any = ({ defaultConverters }) => ({
       // word class is used for rich text animations be careful with removing it
       return `
         <style>
-      #pill-image-${imageID} {
+      #pill-image-${id} {
         margin: 0 20px;
         display: inline-block;
         border-radius: 9999px;
@@ -144,7 +121,7 @@ export const htmlConverters: any = ({ defaultConverters }) => ({
       }
       ${minSize}
       </style>
-        <span id="pill-image-${imageID}" class="animate-word" style="" >
+        <span id="pill-image-${id}" class="animate-word" style="" >
           ${imageString}
       </span>
         `;
