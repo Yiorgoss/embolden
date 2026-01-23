@@ -21,7 +21,7 @@ export function mergeUpdateData({ oldData, newData }: { oldData: any, newData: a
 
 export function getRestPopulateFn({ apiURL, locale }: { apiURL: string, locale: string }) {
   return async ({ id, collection }: { id: number, collection: string }) => {
-    return await fetchFromCMS({ collection, id, locale }).then((data) => data.json())
+    return await fetch(`${apiURL}/${collection}/${id}?locale=${locale}&depth=1`).then(res => res.json())
   }
 }
 
@@ -119,7 +119,7 @@ export const richTextImg = (src: string) => {
 
 export const richTextBtn = ({ href, link }: { href: string, link: IButton }) => {
 
-  let { type: urlType, reference, url, display, style: linkStyle } = link || {};
+  let { display, style: linkStyle } = link || {};
 
   const style = linkStyle && Object.entries(linkStyle)
     .filter(([_, value]) => Boolean(value))

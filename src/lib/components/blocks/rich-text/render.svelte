@@ -26,8 +26,10 @@
 			convertLexicalToHTMLAsync({
 				data,
 				converters: htmlConverters,
-				//@ts-ignore the payload version doesnt seem to work
-				populate: getRestPopulateFn({ apiSlug: site.CMS, locale: page.params.locale ?? 'en' })
+				populate: getRestPopulateFn({
+					apiURL: `${site.CMS}/api`,
+					locale: page.params.locale ?? 'en'
+				})
 			})
 				.then((res) => {
 					html = res;

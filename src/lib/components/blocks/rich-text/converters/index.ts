@@ -71,14 +71,13 @@ export const htmlConverters: any = ({ defaultConverters }) => ({
     // word class is used for rich text animations be careful with removing it
     buttonRT: async (args: any) => {
       const { link } = args.node.fields
-      const { reference: { value, relationTo } = {} } = link
 
       if (!link || !(link.reference || link.url)) return
 
       try {
         const href = link.type == 'reference'
-          ? await args.populate({ id: value, collection: relationTo })
-            .then((data: any) => { return data.slug })
+          ? await args.populate({ id: link.reference.value, collection: link.reference.relationTo })
+            .then((data: any) => data.slug)
             .catch((err: any) => console.error(`Error populating link  ${err}`, { link }))
           : link.url
         const buttonHTML = richTextBtn({ href, link });
@@ -92,8 +91,8 @@ export const htmlConverters: any = ({ defaultConverters }) => ({
       const { width: phoneWidth, height: phoneHeight } = phone
 
       const id = typeof image == 'number' ? image : image.id
-      const src = await args.populate({ collection: "assets", id })
-        .then((data: any) => data.docs[0].sizes.sm.url)
+      const doc = await args.populate({ collection: "assets", id })
+      const src = doc.sizes.sm.url
 
       const imageString = richTextImg(src);
 
