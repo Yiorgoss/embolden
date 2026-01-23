@@ -75,6 +75,42 @@
   --sidebar-accent-foreground: oklch(0.21 0.006 285.885);
   --sidebar-border: oklch(0.92 0.004 286.32);
   --sidebar-ring: oklch(0.705 0.015 286.067);
+
+  --text-xs: 0.75rem;
+  --text-sm: 0.875rem;
+  --text-base: 1rem;
+  --text-lg: 1.125rem;
+  --text-xl: 1.25rem;
+  --text-2xl: 1.5rem;
+  --text-3xl: 1.875rem;
+  --text-4xl: 2.25rem;
+  --text-5xl: 3rem;
+  --text-6xl: 3.75rem;
+  --text-7xl: 4.5rem;
+  --text-8xl: 6rem;
+  --text-9xl: 8rem;
+}
+
+@media(max-width:858px) {
+  html {
+    font-size: 120%;
+  }
+
+  /* :root { */
+  /* --text-xs: 0.75rem; */
+  /* --text-sm: 0.875rem; */
+  /* --text-base: 1rem; */
+  /* --text-lg: 1.125rem; */
+  /* --text-xl: 1.25rem; */
+  /* --text-2xl: 1.5rem; */
+  /* --text-3xl: 1.875rem; */
+  /* --text-4xl: 2.25rem; */
+  /* --text-5xl: 3rem; */
+  /* --text-6xl: 3.75rem; */
+  /* --text-7xl: 4.5rem; */
+  /* --text-8xl: 6rem; */
+  /* --text-9xl: 8rem; */
+  /* } */
 }
 
 @theme inline {

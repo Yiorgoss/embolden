@@ -28,12 +28,9 @@
 			/>
 		{/if}
 	</div>
-	<div
-		class:opacity-100={bgLoaded}
-		class="z-10 transition-opacity delay-500 duration-400 opacity-0 col-span-full row-span-full pt-(--header-height) py-5 px-5"
-	>
+	<div class="z-10 col-span-full row-span-full pt-(--header-height) py-5 px-5">
 		<div class="flex h-full w-full lg:w-3/5 flex-col items-start justify-center">
-			{#if richText}
+			{#if richText && bgLoaded}
 				<RichTextRender {richText} overrides="my-0" />
 			{/if}
 		</div>
