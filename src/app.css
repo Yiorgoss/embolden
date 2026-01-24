@@ -92,8 +92,20 @@
 }
 
 @media(max-width:858px) {
-  html {
-    font-size: 120%;
+  :root {
+    --text-xs: 0.65rem;
+    --text-sm: 0.775rem;
+    --text-base: 0.9rem;
+    --text-lg: 1rem;
+    --text-xl: 1.125rem;
+    --text-2xl: 1.375rem;
+    --text-3xl: 1.750rem;
+    --text-4xl: 2.125rem;
+    --text-5xl: 2.75rem;
+    --text-6xl: 3.5rem;
+    --text-7xl: 4.25rem;
+    --text-8xl: 5.5rem;
+    --text-9xl: 7rem;
   }
 
   /* :root { */
