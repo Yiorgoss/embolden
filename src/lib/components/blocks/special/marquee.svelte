@@ -10,7 +10,7 @@
 	const { blockData }: { blockData: IMarquee } = $props();
 	const {
 		items,
-		style: { background, color, height, border, padding, gap } = {},
+		style: { font, background, color, height, border, padding, gap } = {},
 		options,
 		link: _link
 		//  animation
@@ -49,7 +49,7 @@
 				<div aria-hidden={i > items.length} class="">
 					<Picture {image} class="object-contain" />
 				</div>
-				<div aria-hidden={i > items.length} class="text-nowrap">{text}</div>
+				<div style:font aria-hidden={i > items.length} class="text-nowrap">{text}</div>
 			{/each}
 		</div>
 	</a>
