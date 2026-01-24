@@ -11,7 +11,7 @@
 	const payload = getPayloadState();
 </script>
 
-<div class="">
+<div class="text-base">
 	<header class="text-foreground bg-background">
 		<RenderBlocks hasLocaleSwitch={true} blockData={payload.get('header')} />
 	</header>

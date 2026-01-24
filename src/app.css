@@ -32,7 +32,6 @@
   /* Primary colors for <Button /> */
   --primary: oklch(0.26 0.1184 279.72);
   --primary-foreground: oklch(96.89% 0.0215 95.28);
-  ;
 
   /* Secondary colors for <Button /> */
   --secondary: oklch(96.89% 0.0215 95.28);
