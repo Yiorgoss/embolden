@@ -19,28 +19,10 @@
 	const { locale } = page.params;
 
 	let open = $state(false);
-	let currentY = $state(0);
-	let previousY = $state(0);
-	let scrollingUp = $state(false);
-
 	let mounted = $state(false);
-
-	const handleScroll = () => {
-		if (currentY > previousY) {
-			scrollingUp = true;
-		} else {
-			scrollingUp = false;
-		}
-		previousY = currentY;
-	};
 
 	onMount(() => (mounted = true));
 </script>
-
-<svelte:window
-	bind:scrollY={currentY}
-	onscroll={throttle(handleScroll, 200, { leading: true, trailing: false })}
-/>
 
 <section
 	style:inset={style?.inset}
@@ -50,8 +32,7 @@
 		<!-- desktop -->
 		<Nav.Root
 			class={cn(
-				'translate-y-0 px-10 bg-background shadow-xl rounded-theme transition-transform ease-out duration-500 hidden w-full items-center justify-between md:flex',
-				scrollingUp && '-translate-y-2/1'
+				'translate-y-0 px-10 bg-background shadow-xl rounded-theme transition-transform ease-out duration-500 hidden w-full items-center justify-between md:flex'
 			)}
 		>
 			<a href={`/${locale ?? ''}`} class="">
@@ -81,8 +62,7 @@
 			<Sheet.Root bind:open>
 				<div
 					class={cn(
-						'bg-background flex justify-between rounded-theme items-center h-full w-full transition-transform ease-out duration-200 shadow-xl',
-						scrollingUp && '-translate-y-2/1'
+						'bg-background flex justify-between rounded-theme items-center h-full w-full transition-transform ease-out duration-200 shadow-xl'
 					)}
 				>
 					<a href={`/${locale ?? ''}`} class="h-full px-2">
