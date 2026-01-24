@@ -31,7 +31,6 @@
 
 <div id="animated-rich-text" class={cn('relative overflow-clip', overrides)}>
 	<div
-		{@attach animate({ animation })}
 		style:height
 		style:min-height={minHeight}
 		style:text-wrap={textWrap}
@@ -41,7 +40,7 @@
 		{#if loading}
 			<Spinner class="size-12 col-start-1 row-start-1" />
 		{:else}
-			<div class="col-start-1 row-start-1">
+			<div {@attach animate({ animation })} class=" col-start-1 row-start-1">
 				{@html html}
 			</div>
 		{/if}
