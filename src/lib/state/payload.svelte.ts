@@ -26,7 +26,6 @@ export class PayloadState {
 
   constructor() {
     // console.log("constructor")
-
     if (this.isLivePreview && !this.payloadListener) {
       // console.log("setup listener")
       this.setupListener()
