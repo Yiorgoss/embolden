@@ -24,8 +24,7 @@ export class PayloadState {
   payloadListener: ((event: MessageEvent<any>) => void) | undefined = $state()
 
   constructor() {
-    console.log("constructor")
-
+    // console.log("constructor")
     if (this.isLivePreview && !this.payloadListener) {
       console.log("setup listener")
       this.setupListener()

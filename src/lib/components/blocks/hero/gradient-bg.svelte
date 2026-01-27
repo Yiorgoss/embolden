@@ -5,8 +5,8 @@
 	import { onMount } from 'svelte';
 
 	const { blockData }: { blockData: IGradientBG } = $props();
-	const { richText, gradientList, style, mouseColor } = blockData || {};
-	const { background } = style || {};
+	const { richText, gradientList, style, mouseColor } = $derived(blockData || {});
+	const { background } = $derived(style || {});
 
 	let element = $state() as Element;
 	let mouseElem = $state() as HTMLElement;

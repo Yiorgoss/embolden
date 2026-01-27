@@ -60,6 +60,8 @@
 				return import('./banners/info-banner.svelte');
 			case 'gradientBG':
 				return import('./hero/gradient-bg.svelte');
+			case 'emboldenEpubConverter':
+				return import('./unique/embolden/epub-converter.svelte');
 		}
 	};
 
