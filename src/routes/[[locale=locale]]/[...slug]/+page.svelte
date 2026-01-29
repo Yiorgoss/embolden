@@ -22,7 +22,7 @@
 					<RenderBlocks cb={() => (heroLoaded = true)} blockData={currentPage.hero[0]} />
 				</section>
 			{/if}
-			{#if heroLoaded}
+			{#if heroLoaded || currentPage.hero.length <= 0}
 				<div
 					id="render-block-container"
 					class={` relative ${currentPage.hero?.[0] ? '' : 'pt-(--header-height)'}`}

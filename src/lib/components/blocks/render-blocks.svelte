@@ -61,7 +61,6 @@
 			case 'gradientBG':
 				return import('./hero/gradient-bg.svelte');
 			case 'emboldenEpubConverter':
-				console.log('hit');
 				return import('./unique/embolden/epub-converter.svelte');
 		}
 	};
