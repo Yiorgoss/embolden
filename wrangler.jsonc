@@ -4,7 +4,7 @@
  */
 {
 	"$schema": "node_modules/wrangler/config-schema.json",
-	"name": "calisto-studio",
+	"name": "embolden",
 	"main": ".svelte-kit/cloudflare/_worker.js",
 	"compatibility_date": "2025-04-30",
 	"compatibility_flags": ["nodejs_compat"],
@@ -14,7 +14,7 @@
 		"PUBLIC_PROD_CMS": "https://admin.calisto.studio",
 		"PUBLIC_ASSET_URL": "https://assets.calisto.studio",
 		"PUBLIC_TEST_ASSET_URL": "https://test-assets.calisto.studio",
-		"PUBLIC_DOMAIN_NAME": "calisto.studio"
+		"PUBLIC_DOMAIN_NAME": "embolden.calisto.studio"
 	},
 	"assets": {
 		"binding": "ASSETS",
@@ -34,7 +34,7 @@
 				"PUBLIC_DEV_CMS": "https://staging-cms.calisto.studio",
 				"PUBLIC_PROD_CMS": "https://admin.calisto.studio",
 				"PUBLIC_ASSET_URL": "https://assets.calisto.studio",
-				"PUBLIC_DOMAIN_NAME": "calisto.studio",
+				"PUBLIC_DOMAIN_NAME": "embolden.calisto.studio",
 				"PUBLIC_TEST_ASSET_URL": "https://test-assets.calisto.studio"
 			},
 			"kv_namespaces": [
@@ -57,11 +57,7 @@
 	},
 	"routes": [
 		{
-			"pattern": "calisto.studio",
-			"custom_domain": true
-		},
-		{
-			"pattern": "www.calisto.studio",
+			"pattern": "embolden.calisto.studio",
 			"custom_domain": true
 		}
 	]
