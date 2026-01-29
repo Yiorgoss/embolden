@@ -25,10 +25,8 @@ export class PayloadState {
   payloadListener: ((event: MessageEvent<any>) => void) | undefined = $state()
 
   constructor() {
-    // console.log("constructor")
 
     if (this.isLivePreview && !this.payloadListener) {
-      // console.log("setup listener")
       this.setupListener()
     }
 
@@ -43,7 +41,6 @@ export class PayloadState {
 
 
   setTenant({ tenant }: { tenant?: Tenant }) {
-    // console.log("tenant setup")
     if (!tenant) return
     // this._state.clear()
     this.setNav(tenant)
@@ -59,7 +56,6 @@ export class PayloadState {
 
   setPage(page: Page) {
     //worth noting that its possible for page to be a number, ie not populated
-    // console.log("page set")
     if (typeof page.slug === 'string' && page.slug?.trim().length == 0) {
       this.set('home', page)
     }
@@ -157,7 +153,6 @@ export class PayloadState {
     //     - maybe switch off populating fields when in livepreview
     //         - defaultPopulate all unpopulated stuffs
     //         - maybe 
-    // console.log("merging data")
     if (data.nav) {
       this.setNav(data)
     } else if (data.hero) {
@@ -168,7 +163,6 @@ export class PayloadState {
 
   setupListener() {
 
-    // console.log("listening for payload")
     ready({ serverURL: site.CMS })
     this.payloadListener = payloadSubscribe({
       // callback: (doc) => debounce((doc) => this.#mergeLivePreviewData(doc), 200, { leading: false, trailing: true }),
@@ -180,7 +174,6 @@ export class PayloadState {
   }
 
   cleanup() {
-    // console.log("cleaned up")
     if (this.payloadListener) payloadUnsubscribe(this.payloadListener)
   }
 }

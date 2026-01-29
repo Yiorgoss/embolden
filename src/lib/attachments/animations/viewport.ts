@@ -113,7 +113,6 @@ export function animateViewport(element: Element, { animation }: { animation: IA
       // const children = el.querySelectorAll(".animate-child");
       // const elementList = children.length > 0 ? children : el
       // let elementList = [el]
-      console.log({ elementList })
       // let elementList = ".animate-child"
       const stopEntry = animate(
         elementList,

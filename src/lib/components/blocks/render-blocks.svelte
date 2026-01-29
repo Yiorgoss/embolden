@@ -67,15 +67,6 @@
 
 		dynamicResolveBlock({ blockName }).then((block) => (calculatedBlockType = block));
 	});
-
-	//  $effect(() => {
-	//  	blockData;
-	//  	if (blockData?.blockType == 'richTextFooter') console.log({ renderBlock: blockData.contact.q });
-	//  });
-	//  $inspect(blockData);
-
-	//  const calculatedBlockType = blockList.get(blockData?.blockType ?? undefined) ?? undefined;
-	//  const SvelteComponent = $derived(calculatedBlockType.default);
 </script>
 
 {#if calculatedBlockType && calculatedBlockType.default}
