@@ -61,6 +61,7 @@
 			case 'gradientBG':
 				return import('./hero/gradient-bg.svelte');
 			case 'emboldenEpubConverter':
+				console.log('hit');
 				return import('./unique/embolden/epub-converter.svelte');
 		}
 	};
@@ -68,6 +69,8 @@
 	let calculatedBlockType = $state<any>();
 	$effect(() => {
 		const blockName = blockData?.blockType ?? undefined;
+
+		//  console.log({ block: $state.snapshot(blockData) });
 
 		dynamicResolveBlock({ blockName }).then((block) => (calculatedBlockType = block));
 	});

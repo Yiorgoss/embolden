@@ -5,6 +5,7 @@
 	import type { Page, Tenant } from '@payload-types';
 	import { getPayloadState } from '@/state/payload.svelte';
 	import { goto } from '$app/navigation';
+	import { onMount } from 'svelte';
 
 	let payload = getPayloadState();
 
