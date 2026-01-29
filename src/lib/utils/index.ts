@@ -12,6 +12,8 @@ export {
   cn,
   resolveID,
   richTextImg,
+  createAnimationObject,
+  wrapLetters,
   type WithoutChild,
   type WithoutChildrenOrChild,
   type WithElementRef,

@@ -2,7 +2,6 @@
 	import type { Snippet } from 'svelte';
 	import '../app.css';
 	import { setPayloadState } from '@/state/payload.svelte';
-	import { page } from '$app/state';
 
 	const { children }: { children: Snippet } = $props();
 

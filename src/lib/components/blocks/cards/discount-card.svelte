@@ -6,6 +6,7 @@
 	import { cn } from '@/utils';
 	import { site } from '@/config';
 	import Button from '@/components/common/button.svelte';
+	import { animate } from '@/attachments/animations/animate.svelte';
 
 	const { blockData }: { blockData: IDiscountCard } = $props();
 	const { cards } = $derived(blockData);
@@ -18,11 +19,7 @@
 	let checked = $state(false);
 </script>
 
-<section
-	{@attach animateViewport('slideUpFadeIn')}
-	id="discount-card"
-	class="container mx-auto py-5"
->
+<section id="discount-card" class="container mx-auto py-5">
 	<div
 		class={cn(
 			'flex items-center justify-center px-0 md:px-10 gap-5 py-5 md:justify-start md:py-8',

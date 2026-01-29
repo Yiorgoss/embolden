@@ -8,7 +8,7 @@
 	import { onMount, setContext } from 'svelte';
 
 	const { blockData, cb }: { blockData: ICalistoLanding; cb?: () => void } = $props();
-	const { image, richText, ctaOne, ctaTwo } = $derived(blockData);
+	const { image, richText } = $derived(blockData);
 
 	onMount(() => {
 		cb && cb();

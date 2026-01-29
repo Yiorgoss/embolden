@@ -4,7 +4,7 @@
 	import { getContext, hasContext, onMount } from 'svelte';
 	import { MediaQuery } from 'svelte/reactivity';
 	import { fade, fly } from 'svelte/transition';
-	import { animateScroll } from '@/attachments/animations/scroll';
+	import { animate } from '@/attachments/animations/animate.svelte';
 
 	const {
 		asset,
@@ -82,7 +82,7 @@
 	{/if}
 	<picture
 		class={cn('z-10 col-start-1 row-start-1 h-full min-h-full w-full min-w-full', pictureClass)}
-		{@attach animateScroll(animation?.scrollPresets)}
+		{@attach animate({ animation })}
 	>
 		{#if image?.ignoreSizes != true}
 			{#each Object.entries(asset.sizes ?? {}) as [_, img]}

@@ -22,8 +22,8 @@
 				style:top={`${50 * i + 5}px`}
 				style:background={style?.background}
 				class={cn(
-					` text-background bg-primary rounded-theme sticky`,
-					left && 'bg-secondary border-foreground border '
+					` text-background bg-foreground rounded-theme sticky`,
+					left && 'bg-background border-foreground border '
 				)}
 			>
 				{#if title && i == 0}
@@ -34,7 +34,7 @@
 				<div class="flex flex-col md:flex-row justify-start items-center">
 					<div
 						class:md:order-last={left}
-						class="h-[300px] md:h-auto w-full md:w-1/2 px-4 py-10 md:px-10"
+						class="h-[300px] overflow-hidden md:h-auto w-full md:w-1/2 px-4 py-10 md:px-10"
 					>
 						{#if image}
 							<Picture

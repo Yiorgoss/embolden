@@ -202,11 +202,22 @@ export interface IRichTextField {
     marker?: string | null;
     textWrap?: string | null;
   };
-  shouldAnimate?: boolean | null;
-  animation?: {
-    scrollPresets?: ('custom' | 'scale' | 'translateUp' | 'translateDown') | null;
-    traceText?: boolean | null;
-  };
+  animation?: IAnimation;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "IAnimation".
+ */
+export interface IAnimation {
+  type?: ('viewport' | 'scroll') | null;
+  /**
+   * Animations that trigger when they enter the page
+   */
+  viewport?: 'slideUpFadeIn'[] | null;
+  /**
+   * Animations that play as you scroll
+   */
+  scroll?: ('custom' | 'scale' | 'translateUp' | 'translateDown' | 'drawSVG' | 'fadeInEachWord')[] | null;
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
@@ -237,7 +248,6 @@ export interface Page {
   tenant?: (number | null) | Tenant;
   title?: string | null;
   slug?: string | null;
-  'page-tenant'?: (number | null) | Tenant;
   'tenant-domain'?: string | null;
   hero?: (IGradientBG | IMediumHero | ICalistoLanding | IScrollGrowLanding)[] | null;
   layout?:
@@ -328,9 +338,7 @@ export interface IImageField {
     borderRadius?: string | null;
     sizes?: string | null;
   };
-  animation?: {
-    scrollPresets?: ('custom' | 'scale' | 'translateUp' | 'translateDown') | null;
-  };
+  animation?: IAnimation;
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
@@ -481,8 +489,6 @@ export interface IMediumHero {
 export interface ICalistoLanding {
   image?: IImageField;
   richText?: IRichTextField;
-  ctaOne?: IButton;
-  ctaTwo?: IButton;
   id?: string | null;
   blockName?: string | null;
   blockType: 'calistoLanding';
@@ -495,7 +501,6 @@ export interface IScrollGrowLanding {
   initImg?: IImageField;
   finalImg?: IImageField;
   richText?: IRichTextField;
-  link?: IButton;
   style?: {
     background?: string | null;
     height?: string | null;
@@ -714,16 +719,12 @@ export interface IBlockColumnLayout {
     color?: string | null;
     alignX?: ('start' | 'center' | 'end' | 'space-around' | 'space-evenly') | null;
     alignY?: ('start' | 'center' | 'end' | 'stretch') | null;
+    gap?: string | null;
   };
   mobileStyle?: {
     padding?: string | null;
   };
-  animation?: {
-    /**
-     * Animations that trigger when the area enter the page
-     */
-    viewportPreset?: 'slideUpFadeIn' | null;
-  };
+  animation?: IAnimation;
   id?: string | null;
   blockName?: string | null;
   blockType: 'blockColumnLayout';
@@ -929,16 +930,7 @@ export interface ICalistoFeatureCard {
     minHeight?: string | null;
     background?: string | null;
   };
-  animation?: {
-    /**
-     * Animations that trigger when the area enter the page
-     */
-    viewportPreset?: 'slideUpFadeIn' | null;
-    /**
-     * What % of the element must be visible before starting. Range - [0, 1]
-     */
-    amount?: number | null;
-  };
+  animation?: IAnimation;
   id?: string | null;
   blockName?: string | null;
   blockType: 'calistoFeatureCard';
@@ -954,7 +946,6 @@ export interface IDiscountCard {
         includeDiscount?: boolean | null;
         price?: number | null;
         yearlyDiscount?: number | null;
-        link?: IButton;
         id?: string | null;
       }[]
     | null;
@@ -980,9 +971,7 @@ export interface IMarquee {
     padding?: string | null;
     border?: string | null;
   };
-  animation?: {
-    duration?: string | null;
-  };
+  animation?: IAnimation;
   id?: string | null;
   blockName?: string | null;
   blockType: 'marquee';
@@ -1290,7 +1279,6 @@ export interface PagesSelect<T extends boolean = true> {
   tenant?: T;
   title?: T;
   slug?: T;
-  'page-tenant'?: T;
   'tenant-domain'?: T;
   hero?: T | {};
   layout?: T | {};

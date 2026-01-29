@@ -203,6 +203,7 @@ li::marker {
 .list-bullet {
   list-style-type: disc;
   list-style-position: outside;
+  padding-left: 20px;
 }
 
 
@@ -271,12 +272,8 @@ iconify-icon {
 }
 
 @keyframes marquee {
-  0% {
-    transform: translateX(0%);
-  }
-
   100% {
-    transform: translateX(-100%);
+    transform: translateX(-50%);
   }
 }
 

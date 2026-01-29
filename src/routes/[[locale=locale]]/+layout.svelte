@@ -9,13 +9,11 @@
 
 	const { children, data: tenant }: LayoutProps = $props();
 	const payload = getPayloadState();
-
-	//  onMount(() => payload.setupListener());
 </script>
 
-<div class="">
+<div class="text-base">
 	<header class="text-foreground bg-background">
-		<RenderBlocks hasLocaleSwitch={true} blockData={payload._state.get('header')} />
+		<RenderBlocks hasLocaleSwitch={true} blockData={payload.get('header')} />
 	</header>
 	<div class="text-foreground bg-background h-full w-full">
 		{@render children()}

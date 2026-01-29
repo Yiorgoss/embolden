@@ -1,7 +1,6 @@
 <script lang="ts">
 	import { cn } from '@/utils';
-	import { animateScroll } from '@/attachments/animations/scroll';
-	import { scroll, animate, stagger, transform, motionValue, inView } from 'motion';
+	import { animate } from '@/attachments/animations/animate.svelte';
 	import { onMount, untrack } from 'svelte';
 	import type { Attachment } from 'svelte/attachments';
 	import type { IRichTextField } from '@payload-types';
@@ -28,16 +27,9 @@
 	});
 
 	const { height, background, minHeight, textWrap } = $derived(style || {});
-	const { sap: preset } = $derived(animation || {});
-
-	//  $inspect({ preset });
 </script>
 
-<div
-	id="animated-rich-text"
-	{@attach animateScroll(preset)}
-	class={cn('relative overflow-hidden', overrides)}
->
+<div id="animated-rich-text" class={cn('relative overflow-clip', overrides)}>
 	<div
 		style:height
 		style:min-height={minHeight}
@@ -46,9 +38,9 @@
 		class="grid grid-cols-1 grid-rows-1 justify-center items-center"
 	>
 		{#if loading}
-			<Spinner class="size-12" />
+			<Spinner class="size-12 col-start-1 row-start-1" />
 		{:else}
-			<div class="col-start-1 row-start-1">
+			<div {@attach animate({ animation })} class=" col-start-1 row-start-1">
 				{@html html}
 			</div>
 		{/if}

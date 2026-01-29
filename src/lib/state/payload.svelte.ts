@@ -19,14 +19,15 @@ export class PayloadState {
   //      - which would allow a better livepreview experience.
   //      - however before tht the json processing must be removed from the main thread
 
-  _state = new SvelteMap<string, any>()
+  // _state = new SvelteMap<string, any>()
+  _state = $state<Record<string, any>>({})
   isLivePreview = $derived(page.url.searchParams.get('livePreview') === 'true');
   payloadListener: ((event: MessageEvent<any>) => void) | undefined = $state()
 
   constructor() {
     // console.log("constructor")
     if (this.isLivePreview && !this.payloadListener) {
-      console.log("setup listener")
+      // console.log("setup listener")
       this.setupListener()
     }
 
@@ -41,7 +42,7 @@ export class PayloadState {
 
 
   setTenant({ tenant }: { tenant?: Tenant }) {
-    console.log("tenant setup")
+    // console.log("tenant setup")
     if (!tenant) return
     // this._state.clear()
     this.setNav(tenant)
@@ -51,20 +52,20 @@ export class PayloadState {
   }
 
   setNav(tenant: Tenant) {
-    this._state.set('header', tenant?.nav?.header?.[0]); /// we wand undefined header since it shoudl be present
-    this._state.set('footer', tenant?.nav?.footer?.[0]);
+    this.set('header', tenant?.nav?.header?.[0]); /// we wand undefined header since it shoudl be present
+    this.set('footer', tenant?.nav?.footer?.[0]);
   }
 
   setPage(page: Page) {
     //worth noting that its possible for page to be a number, ie not populated
-    console.log("page set")
+    // console.log("page set")
     if (typeof page.slug === 'string' && page.slug?.trim().length == 0) {
-      this._state.set('home', page)
+      this.set('home', page)
     }
     else if (!page.slug) {
-      this._state.set('404', page)
+      this.set('404', page)
     } else {
-      this._state.set(page.slug, page)
+      this.set(page.slug, page)
     }
   }
 
@@ -80,19 +81,15 @@ export class PayloadState {
     } catch (err) {
       return undefined
     }
-
-    if (!key) return undefined;
-
-    return this._state.get(key)
   }
 
   set(key: string, data: any) {
     // const old = this.state.get(key)
-    this._state.set(key, data)
+    this._state[key] = data
   }
 
   has(key: string) {
-    return this._state.has(key)
+    return !!this._state[key]
   }
 
   clear() {
@@ -100,8 +97,6 @@ export class PayloadState {
   }
 
   // fetching frmo payload
-  //
-  //
   async fetchFromCMS({
     collection,
     id,
@@ -162,30 +157,30 @@ export class PayloadState {
     //     - maybe switch off populating fields when in livepreview
     //         - defaultPopulate all unpopulated stuffs
     //         - maybe 
-    // 
     // console.log("merging data")
-    // if (data.nav) {
-    //   this.setNav(data)
-    // } else if (data.hero) {
-    //   this.setPage(data)
-    // }
+    if (data.nav) {
+      this.setNav(data)
+    } else if (data.hero) {
+      this.setPage(data)
+    }
   }
 
 
   setupListener() {
 
-    console.log("listening for payload")
+    // console.log("listening for payload")
     ready({ serverURL: site.CMS })
     this.payloadListener = payloadSubscribe({
-      // callback: (doc) => debounce((doc) => this.#mergeLivePreviewData(doc), 200, { leading: true, trailing: false }),
+      // callback: (doc) => debounce((doc) => this.#mergeLivePreviewData(doc), 200, { leading: false, trailing: true }),
       callback: (doc) => this.#mergeLivePreviewData(doc),
-      depth: 0,
+      depth: 1,
       initialData: page.data ?? {},
       serverURL: site.CMS
     })
   }
 
   cleanup() {
+    // console.log("cleaned up")
     if (this.payloadListener) payloadUnsubscribe(this.payloadListener)
   }
 }

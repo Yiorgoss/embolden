@@ -2,16 +2,16 @@
 	import { type ICalistoFeatureCard } from '@payload-types';
 	import RichTextRender from '@/components/blocks/rich-text/render.svelte';
 	import Icon from '@/components/common/icon.svelte';
-	import { animateViewport } from '@/attachments/animations/viewport';
+	import { animate } from '@/attachments/animations/animate.svelte';
 
 	const { blockData }: { blockData: ICalistoFeatureCard } = $props();
-	const { cards, animation, styles } = $derived(blockData);
+	const { cards, animation, style } = $derived(blockData);
 </script>
 
 <section id="feature-card" class="container mx-auto">
 	<div
-		{@attach animateViewport(animation?.vap)}
-		style:padding={styles?.padding}
+		{@attach animate({ animation })}
+		style:padding={style?.padding}
 		class="flex flex-col flex-wrap justify-center items-center md:items-stretch gap-10 md:flex-row"
 	>
 		{#if cards}
@@ -21,8 +21,8 @@
 				>
 					<div class="relative flex-auto h-full">
 						<div
-							style:background={styles?.background}
-							style:min-height={styles?.minHeight}
+							style:background={style?.background}
+							style:min-height={style?.minHeight}
 							class="bg-primary h-full flex flex-col rounded-3xl p-10"
 						>
 							<RichTextRender

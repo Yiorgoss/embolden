@@ -4,7 +4,8 @@
 	import Picture from '@/components/common/picture.svelte';
 	import Button from '@/components/common/button.svelte';
 
-	const { blockData }: { blockData: IMediumHero } = $props();
+	const { blockData, cb }: { blockData: IMediumHero; cb?: () => void } = $props();
+	$effect(() => cb && cb());
 	//  const { image, richText } = $derived(blockData);
 </script>
 

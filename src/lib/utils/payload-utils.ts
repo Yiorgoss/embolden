@@ -21,7 +21,7 @@ export function mergeUpdateData({ oldData, newData }: { oldData: any, newData: a
 
 export function getRestPopulateFn({ apiURL, locale }: { apiURL: string, locale: string }) {
   return async ({ id, collection }: { id: number, collection: string }) => {
-    await fetchFromCMS({ collection, id, locale })
+    return await fetch(`${apiURL}/${collection}/${id}?locale=${locale}&depth=1`).then(res => res.json())
   }
 }
 
@@ -89,7 +89,6 @@ export async function resolveID({
           return json.docs[0]
         })
         .catch((err) => {
-          console.log(`some dumb shit ${err}`)
           throw new Error(`ERROR: ${err}`);
         })
     } catch (err) {
@@ -100,7 +99,8 @@ export async function resolveID({
   return Promise.resolve(data);
 }
 
-export const richTextImg = ({ image }: { image: Asset }) => {
+// export const richTextImg = ({ image }: { image: Asset }) => {
+export const richTextImg = (src: string) => {
 
   // if (!image || !image.sizes) {
   //   throw Error(`ERROR: sizes does not exist on image: ${image}`)
@@ -113,14 +113,14 @@ export const richTextImg = ({ image }: { image: Asset }) => {
                       height:inherit;
                       width:inherit;
                       margin:0px;"
-                src="${sizes!.sm!.url}"
+                src="${src}"
                 alt=""
           />`
 };
 
 export const richTextBtn = ({ href, link }: { href: string, link: IButton }) => {
 
-  let { type: urlType, reference, url, display, style: linkStyle } = link || {};
+  let { display, style: linkStyle } = link || {};
 
   const style = linkStyle && Object.entries(linkStyle)
     .filter(([_, value]) => Boolean(value))

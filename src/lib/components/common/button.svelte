@@ -55,10 +55,12 @@
 	});
 </script>
 
-<Button class={cn('wrap-anywhere mx-2', className)} {variant} {href} {...restProps}>
-	{#if display?.text}
-		{display.text}
-	{:else}
-		{@render children?.()}
-	{/if}
-</Button>
+{#if display?.text}
+	<Button class={cn('wrap-anywhere mx-2', className)} {variant} {href} {...restProps}>
+		{#if display?.text}
+			{display.text}
+		{:else}
+			{@render children?.()}
+		{/if}
+	</Button>
+{/if}

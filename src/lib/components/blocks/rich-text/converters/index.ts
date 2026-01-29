@@ -53,7 +53,7 @@ export const htmlConverters: any = ({ defaultConverters }) => ({
       //can expand too any svg by using api to reflect external svg
       const elem = `
       <span class="" style="display:inline-block; position:relative;">
-        <span class="animate-word" style="position:absolute;  top:0; left:0; right:0; bottom:0;" >
+        <span class="animate-word " style="position:absolute; top:0; left:0; right:0; bottom:0;" >
           <svg class="animate-svg" width="100%" height="100%" preserveAspectRatio="none" viewBox="0 0 181 68" fill="none" xmlns="http://www.w3.org/2000/svg">
             <path d="M117.637 2.86134C55.6369 -2.63843 -18.8594 8.36133 6.63897 38.8615C41.6403 75.8615 103.472 64.9534 122.64 61.8615C138.14 59.3615 181.613 49.6723 178.64 28.8615C175.14 4.36128 107.642 6.36118 81.1424 14.3648" stroke="${color ?? "var(--foreground)"}" stroke-width="3" stroke-linecap="round"/>
           </svg>
@@ -72,13 +72,12 @@ export const htmlConverters: any = ({ defaultConverters }) => ({
     // word class is used for rich text animations be careful with removing it
     buttonRT: async (args: any) => {
       const { link } = args.node.fields
-      const { reference: { value, relationTo } = {} } = link
 
       if (!link || !(link.reference || link.url)) return
 
       try {
         const href = link.type == 'reference'
-          ? args.populate({ id: value, collection: relationTo })
+          ? await args.populate({ id: link.reference.value, collection: link.reference.relationTo })
             .then((data: any) => data.slug)
             .catch((err: any) => console.error(`Error populating link  ${err}`, { link }))
           : link.url
@@ -92,9 +91,9 @@ export const htmlConverters: any = ({ defaultConverters }) => ({
       const { image, width, height, vertAlign, phone } = args.node.fields;
       const { width: phoneWidth, height: phoneHeight } = phone
 
-      const src = image.sizes.sm ?? await args.populate({ collection: "assets", id: image.id })
-
-      const imageString = richTextImg({ image });
+      const id = typeof image == 'number' ? image : image.id
+      const doc = await args.populate({ collection: "assets", id })
+      const src = doc.sizes.sm.url
 
       const imageString = richTextImg(src);
 
@@ -122,7 +121,7 @@ export const htmlConverters: any = ({ defaultConverters }) => ({
       }
       ${minSize}
       </style>
-        <span id="pill-image-${imageID}" class="animate-word" style="" >
+        <span id="pill-image-${id}" class="animate-word" style="" >
           ${imageString}
       </span>
         `;
