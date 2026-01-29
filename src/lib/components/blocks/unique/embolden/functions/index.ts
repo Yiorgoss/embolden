@@ -1,7 +1,7 @@
 import type { Font } from "./types";
-import montserratRegular from "$lib/assets/fonts/Montserrat/Montserrat-Regular.ttf";
-import notoSansMono from "$lib/assets/fonts/NotoSansMono/NotoSansMono.ttf";
-import dyslexicRegular from "$lib/assets/fonts/OpenDyslexic/OpenDyslexic-Regular.otf";
+import montserratRegular from "@/assets/fonts/Montserrat/Montserrat-Regular.ttf";
+import notoSansMono from "@/assets/fonts/NotoSansMono/NotoSansMono.ttf";
+import dyslexicRegular from "@/assets/fonts/OpenDyslexic/OpenDyslexic-Regular.otf";
 
 export const mergeUint8Arr = (arr1: Uint8Array, arr2: Uint8Array) => {
   let mergedArray = new Uint8Array(arr1.length + arr2.length);

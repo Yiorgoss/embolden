@@ -2,6 +2,7 @@ node_modules
 .well-known
 
 transfer
+converter/test_ebooks
 
 *.sql
 *.bak

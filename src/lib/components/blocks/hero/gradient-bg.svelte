@@ -60,13 +60,8 @@
 				</filter>
 			</defs>
 		</svg>
-		<div
-			bind:this={element}
-			{onmousemove}
-			class="h-full w-full"
-			style:filter="url(#goo) blur(40px)"
-		>
-			{#each gradientList as gradient, _i}
+		<div bind:this={element} class="h-full w-full" style:filter="url(#goo) blur(40px)">
+			{#each gradientList ?? [] as gradient, _i}
 				{@const i = _i + 1}
 				{@const start = init[i % init.length]}
 				<div
