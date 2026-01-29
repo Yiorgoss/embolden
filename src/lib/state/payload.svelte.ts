@@ -33,7 +33,7 @@ export class PayloadState {
     $effect.root(() => {
       $effect(() => {
         page.params.locale;
-        untrack(() => this.setTenant({ tenant: page.data as Tenant }))
+        untrack(() => { this.setTenant({ tenant: page.data as Tenant }) })
       })
       return () => this.cleanup()
     })
@@ -69,8 +69,16 @@ export class PayloadState {
   }
 
   get(key: string | undefined) {
-    if (typeof key === 'string' && key.length === 0) {
-      return this._state.get('home')
+    // if (key == 'appx') debugger
+    try {
+      if (typeof key === 'string' && key.length === 0) {
+        return this._state.home
+      }
+      if (!key) return undefined;
+
+      return this._state[key]
+    } catch (err) {
+      return undefined
     }
 
     if (!key) return undefined;

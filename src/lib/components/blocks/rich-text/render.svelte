@@ -19,6 +19,7 @@
 		untrack(() => (loading = true));
 		if (richText && richText.text) {
 			const data = $state.snapshot(richText.text);
+			html = data;
 			convertLexicalToHTMLAsync({
 				data,
 				converters: htmlConverters,

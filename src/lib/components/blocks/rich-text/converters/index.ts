@@ -6,15 +6,15 @@ import { richTextBtn } from '@/utils/payload-utils';
 
 
 
-import {
-  defaultColors,
-  NodeFormat,
-  type DefaultNodeTypes,
-  type SerializedBlockNode,
-  type SerializedInlineBlockNode
-} from '@payloadcms/richtext-lexical';
+// import {
+//   // defaultColors,
+//   // NodeFormat,
+//   type DefaultNodeTypes,
+//   type SerializedBlockNode,
+//   type SerializedInlineBlockNode
+// } from '@payloadcms/richtext-lexical';
 
-import { type HTMLConvertersFunctionAsync } from '@payloadcms/richtext-lexical/html-async';
+// import { type HTMLConvertersFunctionAsync } from '@payloadcms/richtext-lexical/html-async';
 
 // import { animate, motionValue, svgEffect } from 'motion';
 
