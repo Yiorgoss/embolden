@@ -14,7 +14,7 @@
 		"check:watch": "svelte-kit sync && svelte-check --tsconfig ./tsconfig.json --watch",
 		"format": "prettier --write .",
 		"lint": "prettier --check . && eslint .",
-		"deploy": "pnpm payload-typegen && git push origin main",
+		"deploy": "pnpm payload-typegen && sh add_domain_wrangler.sh && vite build && wrangler deploy",
 		"deploy:staging": "PUBLIC_DEV_CMS=https://staging-cms.calisto.studio vite build && wrangler deploy --env=staging",
 		"payload-typegen": "cp ../cms-mt/src/payload-types.ts ./src/payload-types.ts",
 		"cf-typegen": "wrangler types && mv worker-configuration.d.ts src/",
