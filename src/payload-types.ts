@@ -93,6 +93,7 @@ export interface Config {
     imageRT: IImageRTBlock;
     svgText: ISVGText;
     contactForm: IContactFormBlock;
+    emboldenEpubConverter: EmboldenEpubConverterI;
   };
   collections: {
     users: User;
@@ -213,11 +214,27 @@ export interface IAnimation {
   /**
    * Animations that trigger when they enter the page
    */
-  viewport?: 'slideUpFadeIn'[] | null;
+  viewport?:
+    | ('slideFadeFast' | 'slideFadeSlow' | 'slideLetters' | 'bubbleLetters' | 'drawSVG' | 'slideUpFadeIn')[]
+    | null;
+  /**
+   * Stagger animations as they enter
+   */
+  stagger?: boolean | null;
+  /**
+   * Only play animations on enter
+   */
+  onlyEnter?: boolean | null;
+  /**
+   * How much of the element must be viewable before starting animation? 0-1
+   */
+  amount?: string | null;
   /**
    * Animations that play as you scroll
    */
-  scroll?: ('custom' | 'scale' | 'translateUp' | 'translateDown' | 'drawSVG' | 'fadeInEachWord')[] | null;
+  scroll?:
+    | ('custom' | 'scale' | 'fadeIn' | 'translateUp' | 'translateDown' | 'drawSVG' | 'lineFlip' | 'fadeInEachWord')[]
+    | null;
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
@@ -270,6 +287,7 @@ export interface Page {
         | IScrollGrowLanding
         | IContactFormBlock
         | IMarquee
+        | EmboldenEpubConverterI
       )[]
     | null;
   meta?: ISEO;
@@ -683,6 +701,7 @@ export interface IBlockColumnLayout {
         | BentoGrid
         | IContactFormBlock
         | ICarousel
+        | EmboldenEpubConverterI
       )[]
     | null;
   columnTwo?:
@@ -697,6 +716,7 @@ export interface IBlockColumnLayout {
         | BentoGrid
         | IContactFormBlock
         | ICarousel
+        | EmboldenEpubConverterI
       )[]
     | null;
   columnThree?:
@@ -711,6 +731,7 @@ export interface IBlockColumnLayout {
         | BentoGrid
         | IContactFormBlock
         | ICarousel
+        | EmboldenEpubConverterI
       )[]
     | null;
   style?: {
@@ -915,6 +936,15 @@ export interface Form {
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "EmboldenEpubConverterI".
+ */
+export interface EmboldenEpubConverterI {
+  id?: string | null;
+  blockName?: string | null;
+  blockType: 'emboldenEpubConverter';
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
  * via the `definition` "ICalistoFeatureCard".
  */
 export interface ICalistoFeatureCard {
@@ -958,20 +988,27 @@ export interface IDiscountCard {
  * via the `definition` "IMarquee".
  */
 export interface IMarquee {
-  image?: IImageField;
-  richText?: IRichTextField;
+  items?:
+    | {
+        text?: string | null;
+        image?: IImageField;
+        id?: string | null;
+      }[]
+    | null;
   link?: (number | null) | Page;
   options?: {
     maskEdges?: boolean | null;
-    nRepeat?: number | null;
+    duration?: string | null;
   };
   style?: {
+    gap?: string | null;
+    font?: string | null;
+    color?: string | null;
     background?: string | null;
     height?: string | null;
     padding?: string | null;
     border?: string | null;
   };
-  animation?: IAnimation;
   id?: string | null;
   blockName?: string | null;
   blockType: 'marquee';
