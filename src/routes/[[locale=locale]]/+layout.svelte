@@ -15,9 +15,9 @@
 	<header class="text-foreground bg-background">
 		<RenderBlocks hasLocaleSwitch={true} blockData={payload.get('header')} />
 	</header>
-	<div class="text-foreground bg-background h-full w-full">
+	<main class="text-foreground bg-background h-full w-full">
 		{@render children()}
-	</div>
+	</main>
 	<footer class="text-foreground bg-background">
 		<RenderBlocks blockData={payload.get('footer')} />
 	</footer>

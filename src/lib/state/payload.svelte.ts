@@ -187,3 +187,5 @@ export function setPayloadState() {
 export function getPayloadState() {
   return getContext<ReturnType<typeof setPayloadState>>(PAYLOAD_KEY)
 }
+
+export type PayloadStateType = typeof PayloadState
