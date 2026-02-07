@@ -58,6 +58,10 @@
 				return import('./cards/rich-text-card.svelte');
 			case 'infoBanner':
 				return import('./banners/info-banner.svelte');
+			case 'gradientBG':
+				return import('./hero/gradient-bg.svelte');
+			case 'emboldenEpubConverter':
+				return import('./unique/embolden/epub-converter.svelte');
 		}
 	};
 
