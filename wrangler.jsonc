@@ -14,7 +14,7 @@
 		"PUBLIC_PROD_CMS": "https://admin.calisto.studio",
 		"PUBLIC_ASSET_URL": "https://assets.calisto.studio",
 		"PUBLIC_TEST_ASSET_URL": "https://test-assets.calisto.studio",
-		"PUBLIC_DOMAIN_NAME": "%domainName%"
+		"PUBLIC_DOMAIN_NAME": "calisto.studio"
 	},
 	"assets": {
 		"binding": "ASSETS",
@@ -34,7 +34,7 @@
 				"PUBLIC_DEV_CMS": "https://staging-cms.calisto.studio",
 				"PUBLIC_PROD_CMS": "https://admin.calisto.studio",
 				"PUBLIC_ASSET_URL": "https://assets.calisto.studio",
-				"PUBLIC_DOMAIN_NAME": "%domainName%",
+				"PUBLIC_DOMAIN_NAME": "calisto.studio",
 				"PUBLIC_TEST_ASSET_URL": "https://test-assets.calisto.studio"
 			},
 			"kv_namespaces": [
@@ -57,11 +57,11 @@
 	},
 	"routes": [
 		{
-			"pattern": "%domainName%",
+			"pattern": "calisto.studio",
 			"custom_domain": true
 		},
 		{
-			"pattern": "www.%domainName%",
+			"pattern": "www.calisto.studio",
 			"custom_domain": true
 		}
 	]

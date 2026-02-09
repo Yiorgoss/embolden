@@ -24,7 +24,7 @@
 		"@cloudflare/workers-types": "^4.20250430.0",
 		"@eslint/compat": "^1.2.5",
 		"@eslint/js": "^9.18.0",
-		"@internationalized/date": "^3.8.2",
+		"@internationalized/date": "^3.10.0",
 		"@lucide/svelte": "^0.515.0",
 		"@sveltejs/adapter-auto": "^6.1.1",
 		"@sveltejs/adapter-cloudflare": "^7.2.4",
@@ -34,6 +34,7 @@
 		"@tailwindcss/typography": "^0.5.15",
 		"@tailwindcss/vite": "^4.0.0",
 		"@types/lodash-es": "^4.17.12",
+		"bits-ui": "^2.14.4",
 		"eslint": "^9.18.0",
 		"eslint-config-prettier": "^10.0.1",
 		"eslint-plugin-svelte": "^3.0.0",
@@ -55,7 +56,9 @@
 		"wrangler": "^4.14.1"
 	},
 	"pnpm": {
-		"onlyBuiltDependencies": ["esbuild"]
+		"onlyBuiltDependencies": [
+			"esbuild"
+		]
 	},
 	"dependencies": {
 		"@motionone/types": "^10.17.1",
@@ -64,10 +67,10 @@
 		"@payloadcms/richtext-lexical": "^3.72.0",
 		"@tanstack/svelte-form": "^1.9.0",
 		"@types/lodash": "^4.17.20",
-		"bits-ui": "^2.8.12",
 		"clsx": "^2.1.1",
 		"embla-carousel-fade": "^8.6.0",
 		"embla-carousel-svelte": "^8.6.0",
+		"fflate": "^0.8.2",
 		"iconify-icon": "^3.0.2",
 		"lexical": "^0.31.0",
 		"lodash-es": "^4.17.21",
