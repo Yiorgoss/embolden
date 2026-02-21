@@ -50,7 +50,7 @@
 				scrollingUp && '-translate-y-2/1'
 			)}
 		>
-			<a href={`/${locale ?? ''}`} class="">
+			<a href={`/${locale ?? ''}`} aria-label="link to home page" class="">
 				<div class="h-(--header-height) lg:p-2 md:p-4 w-auto">
 					<Picture class="object-contain py-2" loading="eager" {image} />
 				</div>

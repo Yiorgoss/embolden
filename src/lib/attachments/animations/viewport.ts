@@ -87,21 +87,34 @@ export function animateViewport(element: Element, { animation }: { animation: IA
   const entry = animationArr[0]
   const exit = animationArr[1]
 
-
   if (!entry) return
 
   let elementList = element
   if (entry.prepare) {
     elementList = entry.prepare(element)
-    if (exit) animate(elementList, exit.transforms, exit.options)
+    try {
+
+      if (exit) animate(elementList, exit.transforms, exit.options)
+    } catch (err) {
+      console.log({ err, element, elementList })
+    }
   }
 
   if (!stagger) {
     entry.options.delay = 0;
     exit.options.delay = 0;
   }
-  if (customAmount && customAmount <= 1 && customAmount >= 0) {
-    amount = customAmount
+
+  let parsed
+
+  try {
+    parsed = parseFloat(customAmount!)
+  } catch (_) {
+    parsed = -1
+  }
+
+  if (customAmount && parsed <= 1 && parsed >= 0) {
+    amount = parsed
   }
   // there should never be reason for an exit preparation step
   // if (exit && exit.prepare) exit.prepare(element)

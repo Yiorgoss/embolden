@@ -9,7 +9,7 @@
 
 	const { blockData }: { blockData: IMarquee } = $props();
 	const {
-		items,
+		items = [],
 		style: { font, background, color, height, border, padding, gap } = {},
 		options,
 		link: _link
@@ -45,11 +45,11 @@
 			class:flex-wrap={prefersReducedMotion.current}
 			class="marquee-default w-max flex justify-center items-center gap-x-10"
 		>
-			{#each [...items, ...items] as { image, text }, i}
-				<div aria-hidden={i > items.length} class="">
+			{#each [...items!, ...items!] as { image, text }, i}
+				<div aria-hidden={i > items!.length} class="">
 					<Picture {image} class="object-contain" />
 				</div>
-				<div style:font aria-hidden={i > items.length} class="text-nowrap">{text}</div>
+				<div style:font aria-hidden={i > items!.length} class="text-nowrap">{text}</div>
 			{/each}
 		</div>
 	</a>
