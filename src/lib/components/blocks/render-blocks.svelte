@@ -68,7 +68,6 @@
 	let calculatedBlockType = $state<any>();
 	$effect(() => {
 		const blockName = blockData?.blockType ?? undefined;
-
 		dynamicResolveBlock({ blockName }).then((block) => (calculatedBlockType = block));
 	});
 </script>

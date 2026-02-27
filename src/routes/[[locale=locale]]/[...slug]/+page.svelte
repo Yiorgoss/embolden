@@ -5,32 +5,31 @@
 	import type { Page, Tenant } from '@payload-types';
 	import { getPayloadState } from '@/state/payload.svelte';
 	import { goto } from '$app/navigation';
+	import type { PageProps } from './$types';
 
-	let payload = getPayloadState();
+	const { data }: PageProps = $props();
 
-	let currentPage = $derived(payload.get(page.params.slug));
+	// let currentPage = $derived(payload.get(page.params.slug));
 	let heroLoaded = $state(false);
 </script>
 
-{#key page.params.slug}
-	{#if currentPage}
-		<Meta meta={currentPage.meta} />
-		<div class="min-h-lvh">
-			{#if currentPage && currentPage.hero.length > 0}
-				<section id="hero-container" class="">
-					<RenderBlocks cb={() => (heroLoaded = true)} blockData={currentPage.hero[0]} />
-				</section>
-			{/if}
-			{#if heroLoaded}
-				<div
-					id="render-block-container"
-					class={` relative ${currentPage.hero?.[0] ? '' : 'pt-(--header-height)'}`}
-				>
-					{#each currentPage.layout as block}
-						<RenderBlocks blockData={block} />
-					{/each}
-				</div>
-			{/if}
-		</div>
-	{/if}
-{/key}
+{#if page}
+	<Meta meta={data.meta} />
+	<div class="min-h-lvh">
+		{#if data.hero.length > 0}
+			<section id="hero-container" class="">
+				<RenderBlocks cb={() => (heroLoaded = true)} blockData={data.hero[0]} />
+			</section>
+		{/if}
+		{#if heroLoaded}
+			<div
+				id="render-block-container"
+				class={` relative ${data.hero?.[0] ? '' : 'pt-(--header-height)'}`}
+			>
+				{#each data.layout as block}
+					<RenderBlocks blockData={block} />
+				{/each}
+			</div>
+		{/if}
+	</div>
+{/if}

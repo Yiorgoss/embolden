@@ -11,8 +11,7 @@
 	import LocaleSwitcher from '@/components/common/locale-switcher.svelte';
 	import { Menu } from '@lucide/svelte';
 
-	const { blockData, hasLocaleSwitch }: { blockData: IFloatingHeader; hasLocaleSwitch: boolean } =
-		$props();
+	const { blockData }: { blockData: IFloatingHeader } = $props();
 
 	const { image, nav, style } = $derived(blockData);
 
@@ -20,6 +19,7 @@
 
 	let open = $state(false);
 	let mounted = $state(false);
+	$inspect(blockData);
 
 	onMount(() => (mounted = true));
 </script>
@@ -41,7 +41,7 @@
 				</div>
 			</a>
 			<Nav.List class="flex items-center justify-center pr-10 md:pr-0 ">
-				{#if hasLocaleSwitch && mounted}
+				{#if mounted}
 					<Nav.Item class="px-2">
 						<LocaleSwitcher />
 					</Nav.Item>

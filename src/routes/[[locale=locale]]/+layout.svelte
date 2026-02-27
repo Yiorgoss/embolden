@@ -7,18 +7,17 @@
 	import { site } from '@/config';
 	import { getPayloadState } from '@/state/payload.svelte';
 
-	const { children, data: tenant }: LayoutProps = $props();
-	const payload = getPayloadState();
+	const { children, data: nav }: LayoutProps = $props();
 </script>
 
 <div class="text-base">
-	<header class="text-foreground bg-background">
-		<RenderBlocks hasLocaleSwitch={true} blockData={payload.get('header')} />
+	<header class="text-foreground bgg-background">
+		<RenderBlocks blockData={nav.header?.[0]} />
 	</header>
 	<main class="text-foreground bg-background h-full w-full">
 		{@render children()}
 	</main>
 	<footer class="text-foreground bg-background">
-		<RenderBlocks blockData={payload.get('footer')} />
+		<RenderBlocks blockData={nav.footer?.[0]} />
 	</footer>
 </div>
