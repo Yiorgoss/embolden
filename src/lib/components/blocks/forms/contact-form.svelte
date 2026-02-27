@@ -8,23 +8,8 @@
 	import { untrack } from 'svelte';
 
 	const { blockData }: { blockData: IContactFormBlock } = $props();
-	const { form: _formData } = $derived(blockData);
+	const { form } = $derived(blockData);
 	const { locale } = page.params;
-
-	let loading = $state(false);
-	let data = $state();
-
-	// $effect(() => {
-	// 	untrack(() => (loading = true));
-	// 	payload
-	// 		.resolveID({ collection: 'forms', data: _formData, lang: locale })
-	// 		.then((form) => (data = form))
-	// 		.then(() => (loading = false));
-	// });
 </script>
 
-{#if loading || !data}
-	<Spinner />
-{:else}
-	<RenderForms {data} />
-{/if}
+<RenderForms data={form} />
