@@ -3,7 +3,6 @@
 	import { cn, resolveID } from '@/utils';
 	import Icon from '@/components/common/icon.svelte';
 	import { PicturePrimitive } from '@/components/common/primitives';
-	import { getPayloadState } from '@/state/payload.svelte';
 
 	const {
 		image,

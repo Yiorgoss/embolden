@@ -75,11 +75,14 @@ export const htmlConverters: any = ({ defaultConverters }) => ({
       if (!link || !(link.reference || link.url)) return
 
       try {
-        const href = link.type == 'reference'
-          ? await args.populate({ id: link.reference.value, collection: link.reference.relationTo })
-            .then((data: any) => data.slug)
-            .catch((err: any) => console.error(`Error populating link  ${err}`, { link }))
-          : link.url
+        let href = link.url
+        if (link.type == 'reference') {
+          // in theory whenever value is not a number it will have a slug
+          href = typeof link.reference.value == 'number'
+            ? await args.populate({ id: link.reference.value, collection: link.reference.relationTo })
+            : link.reference.value.slug
+        }
+
         const buttonHTML = richTextBtn({ href, link });
         return `<span class="animate-word">${buttonHTML}</span>`
       } catch (err) {

@@ -21,16 +21,19 @@ export class PayloadState {
 
   // _state = new SvelteMap<string, any>()
   _state = $state<Record<string, any>>({})
-  isLivePreview = $derived(page.url.searchParams.get('livePreview') === 'true');
+  isLivePreview = $state(false);
   payloadListener: ((event: MessageEvent<any>) => void) | undefined = $state()
 
   constructor() {
 
-    if (this.isLivePreview && !this.payloadListener) {
-      this.setupListener()
-    }
+
 
     $effect.root(() => {
+      if (
+        page.url.searchParams.get('livePreview') === 'true'
+        && !this.payloadListener) {
+        this.setupListener()
+      }
       $effect(() => {
         page.params.locale;
         untrack(() => this.setTenant({ tenant: page.data as Tenant }))

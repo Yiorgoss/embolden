@@ -19,7 +19,6 @@
 
 	let open = $state(false);
 	let mounted = $state(false);
-	$inspect(blockData);
 
 	onMount(() => (mounted = true));
 </script>

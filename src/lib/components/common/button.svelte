@@ -5,7 +5,6 @@
 	import { ButtonPrimitive } from '@/components/common/primitives';
 	import { Button, type ButtonProps as DefaultButtonProps } from '@/components/ui/button';
 	import { page } from '$app/state';
-	import { getPayloadState } from '@/state/payload.svelte';
 
 	type ButtonProps = { link?: IButton } & DefaultButtonProps;
 	let {
@@ -25,33 +24,20 @@
 	let _href = $state<Partial<Page> | undefined | null>(undefined);
 	let variant = $derived(display?.variant ?? _variant);
 
-	let payload = getPayloadState();
-
 	let href = $derived.by(() => {
 		if (restProps['href']) return restProps['href']; // hardcoded
 		// must be IButton
 		if (urlType == 'custom' && url) return url; // custom url
+		if (urlType == 'reference' && reference) {
+			//@ts-ignore
+			const slug = reference.value.slug; //slug is present if depth > 0 because of defaultPopulate
+			return locale ? `/${locale}/${slug}` : `/${slug}`;
+		}
 		// _href has not resolved or resolved undefined
 		if (!_href) return 'javascript:void(0);';
 		//if reached href must be resolved and must be of type reference
 		const { slug } = _href;
 		return locale ? `/${locale}/${slug}` : `/${slug}`;
-	});
-
-	$effect(() => {
-		if (!link) return;
-		if (urlType == 'reference' && reference) {
-			payload
-				.resolveID({
-					collection: reference.relationTo,
-					data: reference.value,
-					lang: page.params.locale
-				})
-				.then((page) => {
-					_href = { slug: page.slug };
-				})
-				.catch(() => (_href = null));
-		}
 	});
 </script>
 

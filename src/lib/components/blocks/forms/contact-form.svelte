@@ -6,24 +6,21 @@
 	import Spinner from '@/components/common/spinner.svelte';
 	import { page } from '$app/state';
 	import { untrack } from 'svelte';
-	import { getPayloadState } from '@/state/payload.svelte';
 
 	const { blockData }: { blockData: IContactFormBlock } = $props();
 	const { form: _formData } = $derived(blockData);
 	const { locale } = page.params;
 
-	let payload = getPayloadState();
-
 	let loading = $state(false);
 	let data = $state();
 
-	$effect(() => {
-		untrack(() => (loading = true));
-		payload
-			.resolveID({ collection: 'forms', data: _formData, lang: locale })
-			.then((form) => (data = form))
-			.then(() => (loading = false));
-	});
+	// $effect(() => {
+	// 	untrack(() => (loading = true));
+	// 	payload
+	// 		.resolveID({ collection: 'forms', data: _formData, lang: locale })
+	// 		.then((form) => (data = form))
+	// 		.then(() => (loading = false));
+	// });
 </script>
 
 {#if loading || !data}

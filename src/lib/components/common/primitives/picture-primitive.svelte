@@ -5,6 +5,7 @@
 	import { MediaQuery } from 'svelte/reactivity';
 	import { fade, fly } from 'svelte/transition';
 	import { animate } from '@/attachments/animations/animate.svelte';
+	import { site } from '@/config';
 
 	const {
 		asset,
@@ -45,7 +46,7 @@
 				rel="preload"
 				as="image"
 				fetchpriority="high"
-				href={placeholder.url}
+				href={`${site.storage}/${placeholder.filename}`}
 				media={`(max-width: ${placeholder.width}px)`}
 			/>
 		{/if}
@@ -54,7 +55,7 @@
 				rel="preload"
 				fetchpriority="high"
 				as="image"
-				href={mobile.url}
+				href={`${site.storage}/${mobile.filename}`}
 				media={`(max-width: ${mobile.width}px)`}
 			/>
 		{/if}
@@ -71,7 +72,7 @@
 			<div class="col-start-1 row-start-1">
 				<img
 					out:fade={{ duration: 300 }}
-					src={placeholder.url}
+					src={`${site.storage}/${placeholder.filename}`}
 					sizes={sizes ?? imageSizes}
 					{loading}
 					class={cn('blur-3xl -z-10 h-full w-full', pictureClass, imageClass)}
@@ -87,7 +88,7 @@
 		{#if image?.ignoreSizes != true}
 			{#each Object.entries(asset.sizes ?? {}) as [_, img]}
 				<source
-					srcset={encodeURI(img.url ?? '')}
+					srcset={`${site.storage}/${encodeURI(img.filename ?? '')}`}
 					type={img.mimeType}
 					sizes={imageSizes}
 					media={`(max-width: ${img.width}px)`}
@@ -95,7 +96,7 @@
 			{/each}
 		{/if}
 		<img
-			src={asset?.sizes?.xl?.url ?? ''}
+			src={`${site.storage}/${asset?.sizes?.xl?.filename ?? ''}`}
 			alt={image?.alt ?? ''}
 			onload={() => (imageLoaded = true)}
 			{loading}

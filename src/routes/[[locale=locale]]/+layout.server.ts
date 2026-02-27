@@ -12,11 +12,13 @@ export const load: LayoutServerLoad = async (args) => {
 
   const locale = params.locale ?? defaultLocale
 
-  const response = await fetch(`${site.CMS}/api/tenants?where[domain][equals]=${site.domainName}&select[nav]=true&depth=0&locale=${locale}`)
+  const response = await fetch(`${site.CMS}/api/tenants?where[domain][equals]=${site.domainName}&select[nav]=true&depth=1&locale=${locale}`)
     .then((res: any) => res.json())
     .then((json: any) => json.docs[0])
     .catch((err: any) => error(404, { message: err }))
 
-  return response.nav as Tenant['nav']
+  return {
+    nav: response.nav as Tenant['nav']
+  }
 };
 

@@ -8,15 +8,11 @@
 
 	import Icon from '@/components/common/icon.svelte';
 	import { onMount, untrack } from 'svelte';
-	import { getPayloadState } from '@/state/payload.svelte';
 
 	// there exists both richText overrides and component specific overrides
 	const { richText, overrides, cb }: { richText: any; overrides?: string; cb?: () => void } =
 		$props();
 	let html = $state<string | undefined>();
-
-	//  let payload = getPayloadState()
-	//  let livePreviewDynamicAnimations = $derived(payload.isLivePreview && richText.animation.type)
 
 	let loading = $state(false);
 	$effect(() => {
@@ -26,6 +22,7 @@
 			convertLexicalToHTMLAsync({
 				data,
 				converters: htmlConverters,
+				//@ts-ignore
 				populate: getRestPopulateFn({
 					apiURL: `${site.CMS}/api`,
 					locale: page.params.locale ?? 'en'
