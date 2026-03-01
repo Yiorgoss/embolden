@@ -3,6 +3,7 @@ import { objToCSS } from './text-state';
 import { customText } from "./text"
 import { resolveID, richTextImg } from '@/utils';
 import { richTextBtn } from '@/utils/payload-utils';
+import { site } from '@/config';
 
 
 // import {
@@ -93,9 +94,13 @@ export const htmlConverters: any = ({ defaultConverters }) => ({
       const { image, width, height, vertAlign, phone } = args.node.fields;
       const { width: phoneWidth, height: phoneHeight } = phone
 
-      const id = typeof image == 'number' ? image : image.id
-      const doc = await args.populate({ collection: "assets", id })
-      const src = doc.sizes.sm.url
+      // const id = typeof image == 'number' ? image : image.id
+      //     if (typeof link.reference.value === "number") console.log({ xx: link.reference })
+      const doc = typeof image == 'number' ? await args.populate({ collection: "assets", id: image }) : image
+      // const src = doc.sizes.sm.url
+      const id = image.id
+      const src = `${site.storage}/${image.sizes.sm.filename}`
+      // console.log({ image, src })
 
       const imageString = richTextImg(src);
 
