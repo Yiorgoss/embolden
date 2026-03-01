@@ -81,7 +81,7 @@
 						scrollingUp && '-translate-y-2/1'
 					)}
 				>
-					<a href={`/${locale ?? ''}`} class="">
+					<a href={`/${locale ?? ''}`} aria-label="home page" class="">
 						<div class="h-(--header-height) p-2 lg:p-2 md:p-4">
 							<!--  max width needed on picture to prevent wierd img grow on safari  -->
 							<Picture class="object-contain max-w-(--header-height)" loading="eager" {image} />

@@ -25,27 +25,6 @@
 			})
 		})
 	);
-	// let loading = $state(false);
-	// $effect(() => {
-	// 	untrack(() => (loading = true));
-	// 	if (richText && richText.text) {
-	// 		const data = $state.snapshot(richText.text);
-	// 		convertLexicalToHTMLAsync({
-	// 			data,
-	// 			converters: htmlConverters,
-	// 			//@ts-ignore
-	// 			populate: getRestPopulateFn({
-	// 				apiURL: `${site.CMS}/api`,
-	// 				locale: page.params.locale ?? 'en'
-	// 			})
-	// 		})
-	// 			.then((res) => {
-	// 				html = res;
-	// 				loading = false;
-	// 			})
-	// 			.catch((err) => console.log(`error loading ${err}`));
-	// 	}
-	// });
 	const defaults = 'container my-auto wrap-break-word w-full max-w-full ';
 </script>
 

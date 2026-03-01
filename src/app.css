@@ -206,50 +206,6 @@ li::marker {
   padding-left: 20px;
 }
 
-
-@font-face {
-  font-display: swap;
-  font-family: 'Inter';
-  font-style: normal;
-  src: url('/fonts/Inter/Inter-VariableFont_opsz,wght.ttf') format('truetype');
-}
-
-@font-face {
-  font-display: swap;
-  font-family: 'Inter';
-  font-style: italic;
-  src: url('/fonts/Inter/Inter-Italic-VariableFont_opsz,wght.ttf') format('truetype');
-}
-
-
-@font-face {
-  font-display: swap;
-  font-family: 'Instrument';
-  font-style: normal;
-  src: url('/fonts/Instrument_Serif/InstrumentSerif-Regular.ttf') format('truetype');
-}
-
-@font-face {
-  font-display: swap;
-  font-family: 'Luxurious';
-  font-style: normal;
-  src: url('/fonts/Luxurious_Script/LuxuriousScript-Regular.ttf') format('truetype');
-}
-
-@font-face {
-  font-display: swap;
-  font-family: 'Noto Serif';
-  font-style: italic;
-  src: url('/fonts/Noto_Serif_Display/NotoSerifDisplay-Italic-VariableFont_wdth,wght.ttf') format('truetype');
-}
-
-@font-face {
-  font-display: swap;
-  font-family: 'Noto Serif';
-  font-style: normal;
-  src: url('/fonts/Noto_Serif_Display/NotoSerifDisplay-VariableFont_wdth,wght.ttf') format('truetype');
-}
-
 .debug {
   border: darkred;
   border-width: 3px;

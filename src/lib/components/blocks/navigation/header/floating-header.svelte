@@ -62,7 +62,7 @@
 						'bg-background flex justify-between rounded-theme items-center h-full w-full transition-transform ease-out duration-200 shadow-xl'
 					)}
 				>
-					<a href={`/${locale ?? ''}`} class="h-full px-2">
+					<a href={`/${locale ?? ''}`} aria-label="home page" class="h-full px-2">
 						<div class="h-full p-2 lg:p-2 md:p-4">
 							<!--  max width needed on picture to prevent wierd img grow on safari  -->
 							<Picture

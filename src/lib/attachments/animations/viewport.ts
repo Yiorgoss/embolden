@@ -96,7 +96,7 @@ export function animateViewport(element: Element, { animation }: { animation: IA
 
       if (exit) animate(elementList, exit.transforms, exit.options)
     } catch (err) {
-      console.log({ err, element, elementList })
+      // console.log({ err, element, elementList })
     }
   }
 
