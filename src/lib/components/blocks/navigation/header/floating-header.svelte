@@ -9,8 +9,8 @@
 	import { throttle } from '@/utils';
 	import { page } from '$app/state';
 	import LocaleSwitcher from '@/components/common/locale-switcher.svelte';
-	import { Menu } from '@lucide/svelte';
 	import { supportedLocales } from '@/config';
+	import Icon from '@/components/common/icon.svelte';
 
 	const { blockData }: { blockData: IFloatingHeader } = $props();
 
@@ -77,7 +77,7 @@
 							aria-label="navigation menu "
 							class="focus-visible:ring-offset-background mr-4 w-fit p-2 focus-visible:outline-hidden"
 						>
-							<Menu class="size-8" />
+							<Icon name="lucide:menu" class="size-8" />
 						</div>
 					</Sheet.Trigger>
 				</div>
