@@ -35,6 +35,7 @@
 		});
 	});
 
+	let isHeroLoaded = $state(false);
 	let currentPage = $derived(
 		page?.data?.pages?.find((pg: Page) => {
 			return pg && pg.slug == page.params.slug;
@@ -47,16 +48,18 @@
 	<div class="min-h-lvh">
 		{#if currentPage.hero.length > 0}
 			<section id="hero-container" class="">
-				<RenderBlocks blockData={currentPage.hero[0]} />
+				<RenderBlocks cb={() => (isHeroLoaded = true)} blockData={currentPage.hero[0]} />
 			</section>
 		{/if}
-		<div
-			id="render-block-container"
-			class={` relative ${currentPage.hero?.[0] ? '' : 'pt-(--header-height)'}`}
-		>
-			{#each currentPage.layout as block}
-				<RenderBlocks blockData={block} />
-			{/each}
-		</div>
+		{#if isHeroLoaded}
+			<div
+				id="render-block-container"
+				class={` relative ${currentPage.hero?.[0] ? '' : 'pt-(--header-height)'}`}
+			>
+				{#each currentPage.layout as block}
+					<RenderBlocks blockData={block} />
+				{/each}
+			</div>
+		{/if}
 	</div>
 {/if}

@@ -90,7 +90,7 @@
 					<Sheet.Trigger class="h-full">
 						<div
 							aria-label="navigation menu "
-							class="focus-visible:ring-offset-background mr-4 w-fit p-2 focus-visible:outline-hidden"
+							class="focus-visible:ring-offset-background size-8 justify-center items-center flex mr-4 p-2 focus-visible:outline-hidden"
 						>
 							<Icon name="lucide:menu" class="size-8" />
 						</div>
