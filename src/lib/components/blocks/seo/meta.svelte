@@ -10,11 +10,9 @@
 </script>
 
 <svelte:head>
-	<title>{meta.title ?? site.domainName ?? ''}</title>
-	{#if meta.description}
+	{#if meta}
+		<title>{meta.title ?? site.domainName ?? ''}</title>
 		<meta name="description" content={meta.description} />
-	{/if}
-	{#if meta.image}
 		<meta property="og:image" content={image?.url} />
 	{/if}
 </svelte:head>

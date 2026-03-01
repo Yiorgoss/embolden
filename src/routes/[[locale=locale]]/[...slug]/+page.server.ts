@@ -17,9 +17,7 @@ export const load: PageServerLoad = async (args) => {
     .catch((err: any) => error(404, { message: err }))
 
   return {
-    pages: {
-      data
-    }
+    pages: [data]
   }
 }
 
@@ -28,12 +26,14 @@ export const entries: EntryGenerator = async () => {
   return await fetch(`${site.CMS}/api/tenants?where[domain][equals]=${site.domainName}`)
     .then(data => data.json())
     .then((json: any) => {
-      return Object.entries(supportedLocales).reduce((acc, [key, _]) => {
+      const paths = Object.entries({ ...supportedLocales, "": "include_missing_locale" }).reduce((acc, [key, _]) => {
         json.docs[0].pages.docs.forEach((page: Page) => {
           acc.push({ locale: key, slug: page.slug })
         })
         return acc
       }, [])
+      console.log({ paths })
+      return paths
     })
 };
 export const prerender = true;

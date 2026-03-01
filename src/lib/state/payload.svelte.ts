@@ -53,8 +53,10 @@ export class PayloadState {
   }
 
   setNav(tenant: Tenant) {
-    this.set('header', tenant?.nav?.header?.[0]); /// we wand undefined header since it shoudl be present
-    this.set('footer', tenant?.nav?.footer?.[0]);
+    this.set('nav', {
+      header: tenant?.nav?.header?.[0],
+      footer: tenant?.nav?.footer?.[0]
+    });
   }
 
   setPage(page: Page) {
@@ -191,4 +193,5 @@ export function getPayloadState() {
   return getContext<ReturnType<typeof setPayloadState>>(PAYLOAD_KEY)
 }
 
+export type PayloadStateContext = typeof setPayloadState;
 export type PayloadStateType = typeof PayloadState
