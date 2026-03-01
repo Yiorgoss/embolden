@@ -10,6 +10,7 @@
 	import { page } from '$app/state';
 	import LocaleSwitcher from '@/components/common/locale-switcher.svelte';
 	import { Menu } from '@lucide/svelte';
+	import { supportedLocales } from '@/config';
 
 	const { blockData }: { blockData: IImageHeader } = $props();
 
@@ -49,13 +50,13 @@
 				scrollingUp && '-translate-y-2/1'
 			)}
 		>
-			<a href={`/${locale ?? ''}`} aria-label="link to home page" class="">
+			<a href={`/${locale ?? ''}`} aria-label="home page" class="">
 				<div class="h-(--header-height) lg:p-2 md:p-4 w-auto">
 					<Picture class="object-contain py-2" loading="eager" {image} />
 				</div>
 			</a>
 			<Nav.List class="flex items-center justify-center pr-10 ">
-				{#if mounted}
+				{#if Object.entries(supportedLocales).length > 0}
 					<Nav.Item class="px-2">
 						<LocaleSwitcher />
 					</Nav.Item>

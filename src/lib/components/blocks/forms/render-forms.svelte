@@ -65,7 +65,7 @@
 	}}
 >
 	<div class=" mx-auto flex flex-wrap max-w-3xl gap-y-5 p-10">
-		{#each data.fields as f}
+		{#each data.fields ?? [] as f}
 			<form.Field name={f.name}>
 				{#snippet children(fieldAPI)}
 					<div style:flex-basis={`${f.width ?? 100}%`} class="px-2 flex flex-col gap-2">

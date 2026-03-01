@@ -12,4 +12,6 @@
 	const { locale } = page.params;
 </script>
 
-<RenderForms data={form} />
+{#if form}
+	<RenderForms data={form} />
+{/if}

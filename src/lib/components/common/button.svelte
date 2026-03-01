@@ -25,19 +25,21 @@
 	let variant = $derived(display?.variant ?? _variant);
 
 	let href = $derived.by(() => {
-		if (restProps['href']) return restProps['href']; // hardcoded
+		// hardcoded
+		if (restProps['href']) return restProps['href'];
 		// must be IButton
-		if (urlType == 'custom' && url) return url; // custom url
+		// custom url
+		if (urlType == 'custom' && url) return url;
+		// internal url
 		if (urlType == 'reference' && reference) {
 			//@ts-ignore
 			const slug = reference.value.slug; //slug is present if depth > 0 because of defaultPopulate
 			return locale ? `/${locale}/${slug}` : `/${slug}`;
 		}
 		// _href has not resolved or resolved undefined
-		if (!_href) return 'javascript:void(0);';
-		//if reached href must be resolved and must be of type reference
-		const { slug } = _href;
-		return locale ? `/${locale}/${slug}` : `/${slug}`;
+		if (!_href && typeof _href == 'string') return 'javascript:void(0);';
+
+		return '##';
 	});
 </script>
 
