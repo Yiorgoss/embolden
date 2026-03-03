@@ -25,6 +25,10 @@ import { site } from '@/config';
 
 // export type htmlConvertersType = typeof htmlConverters
 
+export const syncConverters: any = ({ defaultConverters }) => ({
+  ...defaultConverters,
+  text: customText
+})
 export const htmlConverters: any = ({ defaultConverters }) => ({
   ...defaultConverters,
   text: customText,

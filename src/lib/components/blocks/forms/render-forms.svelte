@@ -13,10 +13,17 @@
 	//  import { convertLexicalToHTML } from 'payload-richtext-fork/html';
 	import { convertLexicalToHTML } from '@payloadcms/richtext-lexical/html';
 	import DefaultRichText from '@/components/blocks/rich-text/default.svelte';
+	import RenderBlocks from '../render-blocks.svelte';
+	import { RichTextRender } from '../rich-text';
+	import type { Form } from '@payload-types';
+	import { cn } from '@/utils';
 
-	let { data } = $props();
+	let { data, class: className }: { data: Form; class?: string } = $props();
 
-	const html = $derived(convertLexicalToHTML({ data: data.confirmationMessage }));
+	const html = $derived(
+		convertLexicalToHTML({ data: data.confirmationMessage, converters: syncConverters })
+	);
+
 	const form = createForm(() => ({
 		onSubmit: async (args) => {
 			const { value } = args;
@@ -64,41 +71,45 @@
 		form.handleSubmit();
 	}}
 >
-	<div class=" mx-auto flex flex-wrap max-w-3xl gap-y-5 p-10">
+	<div class={cn('mx-auto flex flex-wrap max-w-3xl gap-y-5 p-10', className)}>
 		{#each data.fields ?? [] as f}
-			<form.Field name={f.name}>
-				{#snippet children(fieldAPI)}
-					<div style:flex-basis={`${f.width ?? 100}%`} class="px-2 flex flex-col gap-2">
-						<Label for={f.name}>{f.label ?? f.name}</Label>
-						{#if f.blockType == 'textarea'}
-							<Textarea
-								id={f.name}
-								class="h-[200px]"
-								placeholder={f.defaultValue ?? f.blockType}
-								value={fieldAPI.state.value}
-								onblur={() => fieldAPI.handleBlur()}
-								oninput={(e: Event) => {
-									const target = e.target as HTMLInputElement;
-									fieldAPI.handleChange(target.value);
-								}}
-							/>
-						{:else}
-							<Input
-								id={f.name}
-								type={f.blockType}
-								placeholder={f.defaultValue ?? f.blockType}
-								value={fieldAPI.state.value}
-								onblur={() => fieldAPI.handleBlur()}
-								oninput={(e: Event) => {
-									const target = e.target as HTMLInputElement;
-									fieldAPI.handleChange(target.value);
-								}}
-							/>
-						{/if}
-						<FieldInfo field={fieldAPI} />
-					</div>
-				{/snippet}
-			</form.Field>
+			{#if f.blockType == 'message'}
+				{@html convertLexicalToHTML({ data: data.confirmationMessage, converters: syncConverters })}
+			{:else}
+				<form.Field name={f.name}>
+					{#snippet children(fieldAPI)}
+						<div style:flex-basis={`${f.width ?? 100}%`} class="px-2 flex flex-col gap-2">
+							<Label for={f.name}>{f.label ?? f.name}</Label>
+							{#if f.blockType == 'textarea'}
+								<Textarea
+									id={f.name}
+									class="h-[200px]"
+									placeholder={f.defaultValue ?? f.blockType}
+									value={fieldAPI.state.value}
+									onblur={() => fieldAPI.handleBlur()}
+									oninput={(e: Event) => {
+										const target = e.target as HTMLInputElement;
+										fieldAPI.handleChange(target.value);
+									}}
+								/>
+							{:else}
+								<Input
+									id={f.name}
+									type={f.blockType}
+									placeholder={f.defaultValue ?? f.blockType}
+									value={fieldAPI.state.value}
+									onblur={() => fieldAPI.handleBlur()}
+									oninput={(e: Event) => {
+										const target = e.target as HTMLInputElement;
+										fieldAPI.handleChange(target.value);
+									}}
+								/>
+							{/if}
+							<FieldInfo field={fieldAPI} />
+						</div>
+					{/snippet}
+				</form.Field>
+			{/if}
 		{/each}
 		<div class="basis-full flex">
 			<form.Subscribe

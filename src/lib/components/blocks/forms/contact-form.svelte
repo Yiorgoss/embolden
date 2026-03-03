@@ -13,5 +13,5 @@
 </script>
 
 {#if form}
-	<RenderForms data={form} />
+	<RenderForms data={form as Form} />
 {/if}
