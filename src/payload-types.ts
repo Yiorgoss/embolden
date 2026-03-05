@@ -70,12 +70,15 @@ export interface Config {
     rtBlock: IRichText;
     image: IImage;
     gutter: IGutter;
+    button: IButtonBlock;
     blockColumnLayout: IBlockColumnLayout;
+    flexboxLayout: IFlexboxLayout;
     calistoFeatureCard: ICalistoFeatureCard;
     discountCard: IDiscountCard;
     singleCard: ISingleCard;
     hoverCard: IHoverCard;
     richTextCard: IRichTextCard;
+    cutoutCard: ICutoutCard;
     bentoGrid: BentoGrid;
     stickyContainers: IStickyContainers;
     accordion: IAccordion;
@@ -85,6 +88,7 @@ export interface Config {
     gradientBG: IGradientBG;
     mediumHero: IMediumHero;
     scrollGrowLanding: IScrollGrowLanding;
+    heroCutout: IHeroCutout;
     imageHeader: IImageHeader;
     floatingHeader: IFloatingHeader;
     richTextFooter: IRichTextFooter;
@@ -251,6 +255,8 @@ export interface IButton {
     variant?: ('default' | 'secondary' | 'outline' | 'ghost' | 'link') | null;
     size?: ('xs' | 'sm' | 'md' | 'lg' | 'xl') | null;
     text?: string | null;
+    includeIcon?: boolean | null;
+    icon?: IIcon;
   };
   style?: {
     padding?: string | null;
@@ -266,10 +272,11 @@ export interface Page {
   title?: string | null;
   slug?: string | null;
   'tenant-domain'?: string | null;
-  hero?: (IGradientBG | IMediumHero | ICalistoLanding | IScrollGrowLanding)[] | null;
+  hero?: (IGradientBG | IMediumHero | ICalistoLanding | IScrollGrowLanding | IHeroCutout)[] | null;
   layout?:
     | (
         | IInfoBanner
+        | IButtonBlock
         | IRichText
         | IImage
         | IGutter
@@ -278,13 +285,16 @@ export interface Page {
         | IAccordion
         | ICarousel
         | IBlockColumnLayout
+        | IFlexboxLayout
         | ICalistoFeatureCard
         | IDiscountCard
         | ISingleCard
         | IHoverCard
+        | ICutoutCard
         | IGradientBG
         | IMediumHero
         | IScrollGrowLanding
+        | IHeroCutout
         | IContactFormBlock
         | IMarquee
         | EmboldenEpubConverterI
@@ -529,236 +539,15 @@ export interface IScrollGrowLanding {
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
- * via the `definition` "IRichText".
+ * via the `definition` "IHeroCutout".
  */
-export interface IRichText {
-  richText?: IRichTextField;
-  id?: string | null;
-  blockName?: string | null;
-  blockType: 'rtBlock';
-}
-/**
- * This interface was referenced by `Config`'s JSON-Schema
- * via the `definition` "IImage".
- */
-export interface IImage {
+export interface IHeroCutout {
   image?: IImageField;
-  id?: string | null;
-  blockName?: string | null;
-  blockType: 'image';
-}
-/**
- * This interface was referenced by `Config`'s JSON-Schema
- * via the `definition` "IGutter".
- */
-export interface IGutter {
-  size?: ('small' | 'default' | 'medium' | 'large' | 'extraLarge') | null;
-  divider: 'none' | 'center' | 'above' | 'below';
-  bgColor?: {
-    value?: string | null;
-    onlyInContainer?: boolean | null;
-  };
-  id?: string | null;
-  blockName?: string | null;
-  blockType: 'gutter';
-}
-/**
- * This interface was referenced by `Config`'s JSON-Schema
- * via the `definition` "IStickyContainers".
- */
-export interface IStickyContainers {
-  title?: string | null;
-  list?:
-    | {
-        richText?: IRichTextField;
-        image?: IImageField;
-        id?: string | null;
-      }[]
-    | null;
-  style?: {
-    background?: string | null;
-  };
-  id?: string | null;
-  blockName?: string | null;
-  blockType: 'stickyContainers';
-}
-/**
- * This interface was referenced by `Config`'s JSON-Schema
- * via the `definition` "bentoGrid".
- */
-export interface BentoGrid {
-  grid?:
-    | {
-        content?: (IRichText | IImage)[] | null;
-        id?: string | null;
-      }[]
-    | null;
-  id?: string | null;
-  blockName?: string | null;
-  blockType: 'bentoGrid';
-}
-/**
- * This interface was referenced by `Config`'s JSON-Schema
- * via the `definition` "IAccordion".
- */
-export interface IAccordion {
-  icon?: IIcon;
-  list?:
-    | {
-        title?: string | null;
-        richText?: IRichTextField;
-        id?: string | null;
-      }[]
-    | null;
-  link?: IButton;
-  id?: string | null;
-  blockName?: string | null;
-  blockType: 'accordion';
-}
-/**
- * Icon sets: https://icon-sets.iconify.design/
- *
- * This interface was referenced by `Config`'s JSON-Schema
- * via the `definition` "IIcon".
- */
-export interface IIcon {
-  name?: string | null;
-  style?: string | null;
-}
-/**
- * This interface was referenced by `Config`'s JSON-Schema
- * via the `definition` "ICarousel".
- */
-export interface ICarousel {
-  items?: (IHoverCard | IRichTextCard | ISingleCard | IRichText | IImage)[] | null;
-  options?: {
-    loop?: boolean | null;
-  };
-  id?: string | null;
-  blockName?: string | null;
-  blockType: 'carousel';
-}
-/**
- * This interface was referenced by `Config`'s JSON-Schema
- * via the `definition` "IHoverCard".
- */
-export interface IHoverCard {
-  image?: IImageField;
-  title?: string | null;
-  description?: string | null;
-  style?: {
-    background?: string | null;
-    fontSize?: string | null;
-  };
-  id?: string | null;
-  blockName?: string | null;
-  blockType: 'hoverCard';
-}
-/**
- * This interface was referenced by `Config`'s JSON-Schema
- * via the `definition` "IRichTextCard".
- */
-export interface IRichTextCard {
   richText?: IRichTextField;
-  style?: {
-    alignX?: ('start' | 'center' | 'end' | 'space-around' | 'space-evenly') | null;
-    alignY?: ('start' | 'center' | 'end' | 'stretch') | null;
-    background?: string | null;
-  };
-  id?: string | null;
-  blockName?: string | null;
-  blockType: 'richTextCard';
-}
-/**
- * This interface was referenced by `Config`'s JSON-Schema
- * via the `definition` "ISingleCard".
- */
-export interface ISingleCard {
-  content?: {
-    richText?: IRichTextField;
-    image?: IImageField;
-    link?: IButton;
-  };
-  id?: string | null;
-  blockName?: string | null;
-  blockType: 'singleCard';
-}
-/**
- * This interface was referenced by `Config`'s JSON-Schema
- * via the `definition` "IBlockColumnLayout".
- */
-export interface IBlockColumnLayout {
-  layout?: ('oneColumn' | 'twoOneThird' | 'oneTwoThird' | 'halfAndHalf' | 'threeColumns') | null;
-  columnOne?:
-    | (
-        | ISingleCard
-        | IAccordion
-        | IHoverCard
-        | IRichTextCard
-        | IRichText
-        | IImage
-        | IStickyContainers
-        | BentoGrid
-        | IContactFormBlock
-        | ICarousel
-        | EmboldenEpubConverterI
-      )[]
-    | null;
-  columnTwo?:
-    | (
-        | ISingleCard
-        | IAccordion
-        | IHoverCard
-        | IRichTextCard
-        | IRichText
-        | IImage
-        | IStickyContainers
-        | BentoGrid
-        | IContactFormBlock
-        | ICarousel
-        | EmboldenEpubConverterI
-      )[]
-    | null;
-  columnThree?:
-    | (
-        | ISingleCard
-        | IAccordion
-        | IHoverCard
-        | IRichTextCard
-        | IRichText
-        | IImage
-        | IStickyContainers
-        | BentoGrid
-        | IContactFormBlock
-        | ICarousel
-        | EmboldenEpubConverterI
-      )[]
-    | null;
-  style?: {
-    overflow?: string | null;
-    padding?: string | null;
-    color?: string | null;
-    alignX?: ('start' | 'center' | 'end' | 'space-around' | 'space-evenly') | null;
-    alignY?: ('start' | 'center' | 'end' | 'stretch') | null;
-    gap?: string | null;
-  };
-  mobileStyle?: {
-    padding?: string | null;
-  };
-  animation?: IAnimation;
-  id?: string | null;
-  blockName?: string | null;
-  blockType: 'blockColumnLayout';
-}
-/**
- * This interface was referenced by `Config`'s JSON-Schema
- * via the `definition` "IContactFormBlock".
- */
-export interface IContactFormBlock {
   form: number | Form;
   id?: string | null;
   blockName?: string | null;
-  blockType: 'contactForm';
+  blockType: 'heroCutout';
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
@@ -936,12 +725,317 @@ export interface Form {
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "IButtonBlock".
+ */
+export interface IButtonBlock {
+  link?: IButton;
+  id?: string | null;
+  blockName?: string | null;
+  blockType: 'button';
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "IRichText".
+ */
+export interface IRichText {
+  richText?: IRichTextField;
+  id?: string | null;
+  blockName?: string | null;
+  blockType: 'rtBlock';
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "IImage".
+ */
+export interface IImage {
+  image?: IImageField;
+  id?: string | null;
+  blockName?: string | null;
+  blockType: 'image';
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "IGutter".
+ */
+export interface IGutter {
+  size?: ('small' | 'default' | 'medium' | 'large' | 'extraLarge') | null;
+  divider: 'none' | 'center' | 'above' | 'below';
+  bgColor?: {
+    value?: string | null;
+    onlyInContainer?: boolean | null;
+  };
+  id?: string | null;
+  blockName?: string | null;
+  blockType: 'gutter';
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "IStickyContainers".
+ */
+export interface IStickyContainers {
+  title?: string | null;
+  list?:
+    | {
+        richText?: IRichTextField;
+        image?: IImageField;
+        id?: string | null;
+      }[]
+    | null;
+  style?: {
+    background?: string | null;
+  };
+  id?: string | null;
+  blockName?: string | null;
+  blockType: 'stickyContainers';
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "bentoGrid".
+ */
+export interface BentoGrid {
+  grid?:
+    | {
+        content?: (IRichText | IImage)[] | null;
+        id?: string | null;
+      }[]
+    | null;
+  id?: string | null;
+  blockName?: string | null;
+  blockType: 'bentoGrid';
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "IAccordion".
+ */
+export interface IAccordion {
+  icon?: IIcon;
+  list?:
+    | {
+        title?: string | null;
+        richText?: IRichTextField;
+        id?: string | null;
+      }[]
+    | null;
+  link?: IButton;
+  id?: string | null;
+  blockName?: string | null;
+  blockType: 'accordion';
+}
+/**
+ * Icon sets: https://icon-sets.iconify.design/
+ *
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "IIcon".
+ */
+export interface IIcon {
+  name?: string | null;
+  style?: string | null;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "ICarousel".
+ */
+export interface ICarousel {
+  items?: (IHoverCard | IRichTextCard | ISingleCard | IRichText | IImage)[] | null;
+  options?: {
+    loop?: boolean | null;
+  };
+  id?: string | null;
+  blockName?: string | null;
+  blockType: 'carousel';
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "IHoverCard".
+ */
+export interface IHoverCard {
+  image?: IImageField;
+  title?: string | null;
+  description?: string | null;
+  style?: {
+    background?: string | null;
+    fontSize?: string | null;
+  };
+  id?: string | null;
+  blockName?: string | null;
+  blockType: 'hoverCard';
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "IRichTextCard".
+ */
+export interface IRichTextCard {
+  richText?: IRichTextField;
+  style?: {
+    alignX?: ('start' | 'center' | 'end' | 'space-around' | 'space-evenly') | null;
+    alignY?: ('start' | 'center' | 'end' | 'stretch') | null;
+    background?: string | null;
+  };
+  id?: string | null;
+  blockName?: string | null;
+  blockType: 'richTextCard';
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "ISingleCard".
+ */
+export interface ISingleCard {
+  content?: {
+    richText?: IRichTextField;
+    image?: IImageField;
+    link?: IButton;
+  };
+  id?: string | null;
+  blockName?: string | null;
+  blockType: 'singleCard';
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "IBlockColumnLayout".
+ */
+export interface IBlockColumnLayout {
+  layout?: ('oneColumn' | 'twoOneThird' | 'oneTwoThird' | 'halfAndHalf' | 'threeColumns') | null;
+  columnOne?:
+    | (
+        | ISingleCard
+        | IAccordion
+        | IHoverCard
+        | IRichTextCard
+        | ICutoutCard
+        | IButtonBlock
+        | IRichText
+        | IImage
+        | IStickyContainers
+        | BentoGrid
+        | IContactFormBlock
+        | ICarousel
+        | EmboldenEpubConverterI
+        | IFlexboxLayout
+      )[]
+    | null;
+  columnTwo?:
+    | (
+        | ISingleCard
+        | IAccordion
+        | IHoverCard
+        | IRichTextCard
+        | ICutoutCard
+        | IButtonBlock
+        | IRichText
+        | IImage
+        | IStickyContainers
+        | BentoGrid
+        | IContactFormBlock
+        | ICarousel
+        | EmboldenEpubConverterI
+        | IFlexboxLayout
+      )[]
+    | null;
+  columnThree?:
+    | (
+        | ISingleCard
+        | IAccordion
+        | IHoverCard
+        | IRichTextCard
+        | ICutoutCard
+        | IButtonBlock
+        | IRichText
+        | IImage
+        | IStickyContainers
+        | BentoGrid
+        | IContactFormBlock
+        | ICarousel
+        | EmboldenEpubConverterI
+        | IFlexboxLayout
+      )[]
+    | null;
+  style?: {
+    container?: boolean | null;
+    overflow?: string | null;
+    padding?: string | null;
+    color?: string | null;
+    alignX?: ('start' | 'center' | 'end' | 'space-around' | 'space-evenly') | null;
+    alignY?: ('start' | 'center' | 'end' | 'stretch') | null;
+    gap?: string | null;
+    borderRadius?: string | null;
+  };
+  mobileStyle?: {
+    padding?: string | null;
+  };
+  animation?: IAnimation;
+  id?: string | null;
+  blockName?: string | null;
+  blockType: 'blockColumnLayout';
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "ICutoutCard".
+ */
+export interface ICutoutCard {
+  image?: IImageField;
+  link?: IButton;
+  style?: {
+    padding?: string | null;
+    width?: string | null;
+  };
+  id?: string | null;
+  blockName?: string | null;
+  blockType: 'cutoutCard';
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "IContactFormBlock".
+ */
+export interface IContactFormBlock {
+  form: number | Form;
+  id?: string | null;
+  blockName?: string | null;
+  blockType: 'contactForm';
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
  * via the `definition` "EmboldenEpubConverterI".
  */
 export interface EmboldenEpubConverterI {
   id?: string | null;
   blockName?: string | null;
   blockType: 'emboldenEpubConverter';
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "IFlexboxLayout".
+ */
+export interface IFlexboxLayout {
+  list?:
+    | {
+        block?:
+          | (
+              | ISingleCard
+              | IAccordion
+              | IHoverCard
+              | IRichTextCard
+              | ICutoutCard
+              | IButtonBlock
+              | IRichText
+              | IImage
+              | IStickyContainers
+              | BentoGrid
+              | IContactFormBlock
+              | ICarousel
+              | EmboldenEpubConverterI
+            )[]
+          | null;
+        id?: string | null;
+      }[]
+    | null;
+  style?: {
+    gap?: string | null;
+    alignX?: ('start' | 'center' | 'end' | 'space-around' | 'space-evenly') | null;
+    alignY?: ('start' | 'center' | 'end' | 'stretch') | null;
+  };
+  id?: string | null;
+  blockName?: string | null;
+  blockType: 'flexboxLayout';
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema

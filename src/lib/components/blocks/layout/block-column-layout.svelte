@@ -50,29 +50,32 @@
 	id="block-column-layout"
 	style:--padding={mobile.current ? mobileStyle?.padding : style?.padding}
 	style:background={style?.color}
-	class="p-0 md:py-5"
+	style:border-radius={style?.borderRadius}
+	class:container={style?.container}
+	class="mx-auto p-0 md:py-5"
 >
 	<div
 		style:padding={style?.padding}
 		style:overflow={style?.overflow}
 		style:gap={style?.gap}
 		class:flex-wrap={layout == 'threeColumns'}
-		class="flex gap-0 md:gap-10 justify-center items-center md:items-stretch h-full flex-col md:flex-row container mx-auto"
+		class="flex container gap-0 md:gap-10 justify-center items-center md:items-stretch h-full flex-col md:flex-row mx-auto"
 		{@attach animate({ animation })}
 	>
-		{#if columnOne && columnOne.length != 0}
-			<div
-				style:align-items={style?.alignY}
-				style:justify-content={style?.alignX}
-				class={cn(
-					'animate-child w-full flex grow-1 justify-center items-center md:items-stretch',
-					widthClass[0]
-				)}
-			>
+		<div
+			style:align-items={style?.alignY}
+			style:justify-content={style?.alignX}
+			class={cn(
+				'animate-child w-full flex grow-1 justify-center items-center md:items-stretch',
+				widthClass[0]
+			)}
+		>
+			{#if columnOne && columnOne.length != 0}
 				<RenderBlocks blockData={columnOne[0]} />
-			</div>
-		{/if}
+			{/if}
+		</div>
 		{#if columnTwo && columnTwo.length != 0}
+			<!--  known bug -> cannot have 3 col 1_0_1 - must have soomething in second one for third to be active  -->
 			<div
 				style:align-items={style?.alignY}
 				style:justify-content={style?.alignX}

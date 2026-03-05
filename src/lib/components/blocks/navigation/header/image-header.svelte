@@ -42,7 +42,7 @@
 />
 
 <section class="fixed top-0 inset-x-0 z-30 w-screen mx-auto h-(--header-height) px-0 md:px-0">
-	<div class="w-full h-full pr-0 md:pr-(--scrollbar-width)">
+	<div class="w-full h-full pr-0">
 		<!-- desktop -->
 		<Nav.Root
 			class={cn(

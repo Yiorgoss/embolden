@@ -2,6 +2,7 @@ import type { Asset, Page, Tenant, IButton } from '@payload-types';
 import { defaultLocale, site, type SiteConfigType } from '@/config';
 import { error } from '@sveltejs/kit';
 import { buttonVariants } from '@/components/ui/button';
+import { cn } from '.';
 
 export function getRestPopulateFn({ apiURL, locale }: { apiURL: string, locale: string }) {
   return async ({ id, collection }: { id: number, collection: string }) => {
@@ -112,5 +113,8 @@ export const richTextBtn = ({ href, link }: { href: string, link: IButton }) => 
   const { text, variant, size } = display || {}
 
   const classList = buttonVariants({ variant, size })
-  return `<a class="${classList}" style="${style}" href="${href}">${text}</a>`
+  return `<a class="${cn('flex px-4 gap-5', classList)}" style="${style};" href="${href}">
+      ${text}
+      ${link.display?.includeIcon ? `<iconify-icon icon=${link.display.icon?.name}></iconify-icon>` : ""}
+    </a>`
 }

@@ -34,8 +34,6 @@
 				return import('./cards/hover-card.svelte');
 			case 'blockColumnLayout':
 				return import('./layout/block-column-layout.svelte');
-			//  case 'contentColLayout':
-			//  	return import('./layout/content-col-layout.svelte');
 			case 'image':
 				return import('./common/image.svelte');
 			case 'gutter':
@@ -64,14 +62,18 @@
 				return import('./unique/embolden/epub-converter.svelte');
 			case 'heroCutout':
 				return import('./hero/hero-cutout.svelte');
+			case 'flexboxLayout':
+				return import('./layout/flexbox-layout.svelte');
+			case 'button':
+				return import('./common/button-block.svelte');
+			case 'cutoutCard':
+				return import('./cards/cutout-card.svelte');
 		}
 	};
 
-	let calculatedBlockType = $state<any>();
-	$effect(() => {
-		const blockName = blockData?.blockType ?? undefined;
-		dynamicResolveBlock({ blockName }).then((block) => (calculatedBlockType = block));
-	});
+	let calculatedBlockType = $derived(
+		await dynamicResolveBlock({ blockName: blockData?.blockType ?? undefined })
+	);
 </script>
 
 {#if calculatedBlockType && calculatedBlockType.default}

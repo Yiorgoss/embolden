@@ -5,6 +5,7 @@
 	import { ButtonPrimitive } from '@/components/common/primitives';
 	import { Button, type ButtonProps as DefaultButtonProps } from '@/components/ui/button';
 	import { page } from '$app/state';
+	import Icon from './icon.svelte';
 
 	type ButtonProps = { link?: IButton } & DefaultButtonProps;
 	let {
@@ -44,8 +45,15 @@
 </script>
 
 <Button class={cn('wrap-anywhere mx-2', className)} {variant} {href} {...restProps}>
-	{#if display?.text}
-		{display.text}
+	{#if display?.text || display?.includeIcon}
+		<div class="flex gap-2">
+			<p class="">
+				{display.text}
+			</p>
+			{#if display.includeIcon}
+				<Icon icon={display.icon} />
+			{/if}
+		</div>
 	{:else}
 		{@render children?.()}
 	{/if}
