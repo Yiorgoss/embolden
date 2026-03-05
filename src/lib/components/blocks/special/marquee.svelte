@@ -1,6 +1,6 @@
 <script lang="ts">
 	import Picture from '@/components/common/picture.svelte';
-	import type { IMarquee } from '@payload-types';
+	import type { IMarquee, Page } from '@payload-types';
 	import { RichTextRender } from '../rich-text';
 	import { resolveID } from '@/utils';
 	import { page } from '$app/state';
@@ -11,13 +11,9 @@
 		items = [],
 		style: { font, background, color, height, border, padding, gap } = {},
 		options,
-		link: _link
+		link
 		//  animation
 	} = $derived(blockData);
-	//  const { nRepeat, maskEdges } = $derived(options || {});
-	//  const { background, height, border, padding } = $derived(style || {});
-
-	let link = $state<string>();
 </script>
 
 <section
@@ -29,7 +25,7 @@
 	class:mask-none={!options?.maskEdges}
 	class="mask-l-from-90% mask-r-from-90% overflow-clip"
 >
-	<a href={link} aria-hidden={!link}>
+	<a href={(link as Page)?.slug} aria-hidden={!(link as Page)?.slug}>
 		<div
 			style:height
 			style:gap
