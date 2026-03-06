@@ -18,36 +18,21 @@
 	const { locale } = $derived(page.params);
 
 	let open = $state(false);
-	let currentY = $state(0);
-	let previousY = $state(0);
-	let scrollingUp = $state(false);
 
 	let mounted = $state(false);
-
-	const handleScroll = () => {
-		if (currentY > previousY) {
-			scrollingUp = true;
-		} else {
-			scrollingUp = false;
-		}
-		previousY = currentY;
-	};
 
 	onMount(() => (mounted = true));
 </script>
 
-<svelte:window
-	bind:scrollY={currentY}
-	onscroll={throttle(handleScroll, 200, { leading: true, trailing: false })}
-/>
-
-<section class="fixed top-0 inset-x-0 z-30 w-screen mx-auto h-(--header-height) px-0 md:px-0">
-	<div class="w-full h-full pr-0">
+<section
+	class="absolute top-0 inset-x-0 overflow-hidden z-30 mx-auto h-(--header-height) px-0 md:px-0"
+>
+	<div class="w-full h-full pr-0 container">
 		<!-- desktop -->
 		<Nav.Root
 			class={cn(
-				'translate-y-0 shadow-xl px-10 bg-background mr-10 transition-transform ease-out duration-500 hidden w-full items-center justify-between md:flex',
-				scrollingUp && '-translate-y-2/1'
+				'px-10 bg-background w-screen items-center justify-between md:flex',
+				blockData.style?.hasShadow && 'shadow-xl'
 			)}
 		>
 			<a href={`/${locale ?? ''}`} aria-label="home page" class="">
@@ -77,8 +62,7 @@
 			<Sheet.Root bind:open>
 				<div
 					class={cn(
-						'bg-background shadow-xl flex justify-between items-center h-full w-full transition-transform ease-out duration-500 ',
-						scrollingUp && '-translate-y-2/1'
+						'bg-background shadow-xl flex justify-between items-center h-full w-full transition-transform ease-out duration-500 '
 					)}
 				>
 					<a href={`/${locale ?? ''}`} aria-label="home page" class="">

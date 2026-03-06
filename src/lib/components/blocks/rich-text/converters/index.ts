@@ -27,13 +27,29 @@ import { site } from '@/config';
 
 export const syncConverters: any = ({ defaultConverters }) => ({
   ...defaultConverters,
-  text: customText
+  text: customText,
+
 })
 export const htmlConverters: any = ({ defaultConverters }) => ({
   ...defaultConverters,
   text: customText,
   inlineBlocks: {
     // Each key should match your inline block's slug
+    listMarkerIcon: async (args: any) => {
+      const parent = args.parent
+      const { name, style, iconifyStyles } = args.node.fields.icon || {}
+
+      return `<div class="replace-marker" style="display:inline-block;">
+        <style>
+          ${style}
+
+          .replace-marker > iconify-icon {
+            ${iconifyStyles}
+          }
+        </style>
+        <iconify-icon icon=${name}></iconify-icon>
+      </div>`
+    },
     svgText: async (args: any) => {
       const { childIndex, node, parent } = args
       const siblings = parent.children

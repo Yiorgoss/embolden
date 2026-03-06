@@ -23,13 +23,12 @@
 	const clipped = new MediaQuery('min-width: 1024px');
 	let offsetWidth = $state() as number;
 	let offsetHeight = $state() as number;
-	$inspect({ clipped, current: clipped.current });
 </script>
 
 <svelte:window />
 <section id="block_hero_cutout">
 	<div
-		class="p-2 md:p-10 pt-[calc(var(--header-height)*1.2)] lg:min-h-auto h-full lg:h-lvh w-full bg-background"
+		class="p-2 md:p-10 md:pt-[calc(var(--header-height)*1.2)] pt-[calc(var(--header-height)*1.2)] lg:min-h-auto h-full lg:h-lvh w-full bg-background"
 	>
 		<div class="h-full w-full">
 			<div

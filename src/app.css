@@ -199,6 +199,9 @@ li::marker {
   color: var(--list-marker-color, var(--foreground, black));
 }
 
+.list-bullet:has(.replace-marker) {
+  list-style-type: none;
+}
 
 .list-bullet {
   list-style-type: disc;

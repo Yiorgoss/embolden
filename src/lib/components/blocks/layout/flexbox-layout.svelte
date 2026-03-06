@@ -4,18 +4,17 @@
 	import RenderBlocks from '../render-blocks.svelte';
 
 	const { blockData }: { blockData: IFlexboxLayout } = $props();
-	$inspect(blockData);
 </script>
 
 <section id="flexbox-layout">
 	<div
-		style:justify-center={blockData.style.alignX}
-		style:align-items={blockData.style.alignY}
+		style:justify-center={blockData.style?.alignX}
+		style:align-items={blockData.style?.alignY}
 		class="flex flex-wrap justify-center items-center gap-2"
 	>
 		{#each blockData.list ?? [] as { block }, i}
 			<div class="">
-				<RenderBlocks blockData={block[0]} />
+				<RenderBlocks blockData={block?.[0]} />
 			</div>
 		{/each}
 	</div>
