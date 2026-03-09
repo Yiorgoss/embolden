@@ -10,6 +10,8 @@
 	<div
 		style:justify-center={blockData.style?.alignX}
 		style:align-items={blockData.style?.alignY}
+		style:gap={blockData.style?.gap}
+		style:flex-direction={blockData.style?.flexDirection}
 		class="flex flex-wrap justify-center items-center gap-2"
 	>
 		{#each blockData.list ?? [] as { block }, i}

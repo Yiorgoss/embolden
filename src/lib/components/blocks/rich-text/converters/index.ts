@@ -37,17 +37,11 @@ export const htmlConverters: any = ({ defaultConverters }) => ({
     // Each key should match your inline block's slug
     listMarkerIcon: async (args: any) => {
       const parent = args.parent
-      const { name, style, iconifyStyles } = args.node.fields.icon || {}
+      const fields = args.node.fields || {}
+      const { name, style } = fields.icon || {}
 
-      return `<div class="replace-marker" style="display:inline-block;">
-        <style>
-          ${style}
-
-          .replace-marker > iconify-icon {
-            ${iconifyStyles}
-          }
-        </style>
-        <iconify-icon icon=${name}></iconify-icon>
+      return `<div id="replace-marker-id-${fields?.id}" class="replace-marker" style="display:inline;">
+        <iconify-icon width="${style.width}" height="${style.height}" style="${style.string}" icon="${name}"></iconify-icon>
       </div>`
     },
     svgText: async (args: any) => {

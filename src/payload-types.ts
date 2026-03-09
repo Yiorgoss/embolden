@@ -612,6 +612,10 @@ export interface Page {
                     }
                   | {
                       form: number | Form;
+                      design?: 'oneLineEmail' | null;
+                      style?: {
+                        width?: string | null;
+                      };
                       id?: string | null;
                       blockName?: string | null;
                       blockType: 'contactForm';
@@ -803,6 +807,10 @@ export interface Page {
                                     }
                                   | {
                                       form: number | Form;
+                                      design?: 'oneLineEmail' | null;
+                                      style?: {
+                                        width?: string | null;
+                                      };
                                       id?: string | null;
                                       blockName?: string | null;
                                       blockType: 'contactForm';
@@ -1010,6 +1018,10 @@ export interface Page {
                     }
                   | {
                       form: number | Form;
+                      design?: 'oneLineEmail' | null;
+                      style?: {
+                        width?: string | null;
+                      };
                       id?: string | null;
                       blockName?: string | null;
                       blockType: 'contactForm';
@@ -1201,6 +1213,10 @@ export interface Page {
                                     }
                                   | {
                                       form: number | Form;
+                                      design?: 'oneLineEmail' | null;
+                                      style?: {
+                                        width?: string | null;
+                                      };
                                       id?: string | null;
                                       blockName?: string | null;
                                       blockType: 'contactForm';
@@ -1408,6 +1424,10 @@ export interface Page {
                     }
                   | {
                       form: number | Form;
+                      design?: 'oneLineEmail' | null;
+                      style?: {
+                        width?: string | null;
+                      };
                       id?: string | null;
                       blockName?: string | null;
                       blockType: 'contactForm';
@@ -1599,6 +1619,10 @@ export interface Page {
                                     }
                                   | {
                                       form: number | Form;
+                                      design?: 'oneLineEmail' | null;
+                                      style?: {
+                                        width?: string | null;
+                                      };
                                       id?: string | null;
                                       blockName?: string | null;
                                       blockType: 'contactForm';
@@ -1828,6 +1852,10 @@ export interface Page {
                           }
                         | {
                             form: number | Form;
+                            design?: 'oneLineEmail' | null;
+                            style?: {
+                              width?: string | null;
+                            };
                             id?: string | null;
                             blockName?: string | null;
                             blockType: 'contactForm';
@@ -2021,6 +2049,10 @@ export interface Page {
           }
         | {
             form: number | Form;
+            design?: 'oneLineEmail' | null;
+            style?: {
+              width?: string | null;
+            };
             id?: string | null;
             blockName?: string | null;
             blockType: 'contactForm';
@@ -2150,105 +2182,174 @@ export interface INavigation {
             blockType: 'richTextFooter';
           }
         | {
-            columnOne?:
-              | (
-                  | {
-                      content?: {
-                        richText?: IRichTextField;
-                        image?: IImageField;
-                        link?: IButton;
-                      };
-                      id?: string | null;
-                      blockName?: string | null;
-                      blockType: 'singleCard';
-                    }
-                  | {
-                      icon?: IIcon;
-                      list?:
+            columns?:
+              | {
+                  block?:
+                    | (
                         | {
+                            content?: {
+                              richText?: IRichTextField;
+                              image?: IImageField;
+                              link?: IButton;
+                            };
+                            id?: string | null;
+                            blockName?: string | null;
+                            blockType: 'singleCard';
+                          }
+                        | {
+                            icon?: IIcon;
+                            list?:
+                              | {
+                                  title?: string | null;
+                                  richText?: IRichTextField;
+                                  id?: string | null;
+                                }[]
+                              | null;
+                            link?: IButton;
+                            id?: string | null;
+                            blockName?: string | null;
+                            blockType: 'accordion';
+                          }
+                        | {
+                            image?: IImageField;
                             title?: string | null;
+                            description?: string | null;
+                            style?: {
+                              background?: string | null;
+                              fontSize?: string | null;
+                            };
+                            id?: string | null;
+                            blockName?: string | null;
+                            blockType: 'hoverCard';
+                          }
+                        | {
+                            richText?: IRichTextField;
+                            style?: {
+                              alignX?: ('start' | 'center' | 'end' | 'space-around' | 'space-evenly') | null;
+                              alignY?: ('start' | 'center' | 'end' | 'stretch') | null;
+                              background?: string | null;
+                            };
+                            id?: string | null;
+                            blockName?: string | null;
+                            blockType: 'richTextCard';
+                          }
+                        | {
+                            image?: IImageField;
+                            link?: IButton;
+                            style?: {
+                              padding?: string | null;
+                              width?: string | null;
+                            };
+                            id?: string | null;
+                            blockName?: string | null;
+                            blockType: 'cutoutCard';
+                          }
+                        | {
+                            link?: IButton;
+                            id?: string | null;
+                            blockName?: string | null;
+                            blockType: 'button';
+                          }
+                        | {
                             richText?: IRichTextField;
                             id?: string | null;
-                          }[]
-                        | null;
-                      link?: IButton;
-                      id?: string | null;
-                      blockName?: string | null;
-                      blockType: 'accordion';
-                    }
-                  | {
-                      image?: IImageField;
-                      title?: string | null;
-                      description?: string | null;
-                      style?: {
-                        background?: string | null;
-                        fontSize?: string | null;
-                      };
-                      id?: string | null;
-                      blockName?: string | null;
-                      blockType: 'hoverCard';
-                    }
-                  | {
-                      richText?: IRichTextField;
-                      style?: {
-                        alignX?: ('start' | 'center' | 'end' | 'space-around' | 'space-evenly') | null;
-                        alignY?: ('start' | 'center' | 'end' | 'stretch') | null;
-                        background?: string | null;
-                      };
-                      id?: string | null;
-                      blockName?: string | null;
-                      blockType: 'richTextCard';
-                    }
-                  | {
-                      image?: IImageField;
-                      link?: IButton;
-                      style?: {
-                        padding?: string | null;
-                        width?: string | null;
-                      };
-                      id?: string | null;
-                      blockName?: string | null;
-                      blockType: 'cutoutCard';
-                    }
-                  | {
-                      link?: IButton;
-                      id?: string | null;
-                      blockName?: string | null;
-                      blockType: 'button';
-                    }
-                  | {
-                      richText?: IRichTextField;
-                      id?: string | null;
-                      blockName?: string | null;
-                      blockType: 'rtBlock';
-                    }
-                  | {
-                      image?: IImageField;
-                      id?: string | null;
-                      blockName?: string | null;
-                      blockType: 'image';
-                    }
-                  | {
-                      title?: string | null;
-                      list?:
+                            blockName?: string | null;
+                            blockType: 'rtBlock';
+                          }
                         | {
-                            richText?: IRichTextField;
                             image?: IImageField;
                             id?: string | null;
-                          }[]
-                        | null;
-                      style?: {
-                        background?: string | null;
-                      };
-                      id?: string | null;
-                      blockName?: string | null;
-                      blockType: 'stickyContainers';
-                    }
-                  | {
-                      grid?:
+                            blockName?: string | null;
+                            blockType: 'image';
+                          }
                         | {
-                            content?:
+                            title?: string | null;
+                            list?:
+                              | {
+                                  richText?: IRichTextField;
+                                  image?: IImageField;
+                                  id?: string | null;
+                                }[]
+                              | null;
+                            style?: {
+                              background?: string | null;
+                            };
+                            id?: string | null;
+                            blockName?: string | null;
+                            blockType: 'stickyContainers';
+                          }
+                        | {
+                            grid?:
+                              | {
+                                  content?:
+                                    | (
+                                        | {
+                                            richText?: IRichTextField;
+                                            id?: string | null;
+                                            blockName?: string | null;
+                                            blockType: 'rtBlock';
+                                          }
+                                        | {
+                                            image?: IImageField;
+                                            id?: string | null;
+                                            blockName?: string | null;
+                                            blockType: 'image';
+                                          }
+                                      )[]
+                                    | null;
+                                  id?: string | null;
+                                }[]
+                              | null;
+                            id?: string | null;
+                            blockName?: string | null;
+                            blockType: 'bentoGrid';
+                          }
+                        | {
+                            form: number | Form;
+                            design?: 'oneLineEmail' | null;
+                            style?: {
+                              width?: string | null;
+                            };
+                            id?: string | null;
+                            blockName?: string | null;
+                            blockType: 'contactForm';
+                          }
+                        | {
+                            items?:
                               | (
+                                  | {
+                                      image?: IImageField;
+                                      title?: string | null;
+                                      description?: string | null;
+                                      style?: {
+                                        background?: string | null;
+                                        fontSize?: string | null;
+                                      };
+                                      id?: string | null;
+                                      blockName?: string | null;
+                                      blockType: 'hoverCard';
+                                    }
+                                  | {
+                                      richText?: IRichTextField;
+                                      style?: {
+                                        alignX?: ('start' | 'center' | 'end' | 'space-around' | 'space-evenly') | null;
+                                        alignY?: ('start' | 'center' | 'end' | 'stretch') | null;
+                                        background?: string | null;
+                                      };
+                                      id?: string | null;
+                                      blockName?: string | null;
+                                      blockType: 'richTextCard';
+                                    }
+                                  | {
+                                      content?: {
+                                        richText?: IRichTextField;
+                                        image?: IImageField;
+                                        link?: IButton;
+                                      };
+                                      id?: string | null;
+                                      blockName?: string | null;
+                                      blockType: 'singleCard';
+                                    }
                                   | {
                                       richText?: IRichTextField;
                                       id?: string | null;
@@ -2263,87 +2364,249 @@ export interface INavigation {
                                     }
                                 )[]
                               | null;
+                            options?: {
+                              loop?: boolean | null;
+                            };
                             id?: string | null;
-                          }[]
-                        | null;
-                      id?: string | null;
-                      blockName?: string | null;
-                      blockType: 'bentoGrid';
-                    }
-                  | {
-                      form: number | Form;
-                      id?: string | null;
-                      blockName?: string | null;
-                      blockType: 'contactForm';
-                    }
-                  | {
-                      items?:
-                        | (
-                            | {
-                                image?: IImageField;
-                                title?: string | null;
-                                description?: string | null;
-                                style?: {
-                                  background?: string | null;
-                                  fontSize?: string | null;
-                                };
-                                id?: string | null;
-                                blockName?: string | null;
-                                blockType: 'hoverCard';
-                              }
-                            | {
-                                richText?: IRichTextField;
-                                style?: {
-                                  alignX?: ('start' | 'center' | 'end' | 'space-around' | 'space-evenly') | null;
-                                  alignY?: ('start' | 'center' | 'end' | 'stretch') | null;
-                                  background?: string | null;
-                                };
-                                id?: string | null;
-                                blockName?: string | null;
-                                blockType: 'richTextCard';
-                              }
-                            | {
-                                content?: {
-                                  richText?: IRichTextField;
-                                  image?: IImageField;
-                                  link?: IButton;
-                                };
-                                id?: string | null;
-                                blockName?: string | null;
-                                blockType: 'singleCard';
-                              }
-                            | {
-                                richText?: IRichTextField;
-                                id?: string | null;
-                                blockName?: string | null;
-                                blockType: 'rtBlock';
-                              }
-                            | {
-                                image?: IImageField;
-                                id?: string | null;
-                                blockName?: string | null;
-                                blockType: 'image';
-                              }
-                          )[]
-                        | null;
-                      options?: {
-                        loop?: boolean | null;
-                      };
-                      id?: string | null;
-                      blockName?: string | null;
-                      blockType: 'carousel';
-                    }
-                  | {
-                      id?: string | null;
-                      blockName?: string | null;
-                      blockType: 'emboldenEpubConverter';
-                    }
-                )[]
+                            blockName?: string | null;
+                            blockType: 'carousel';
+                          }
+                        | {
+                            id?: string | null;
+                            blockName?: string | null;
+                            blockType: 'emboldenEpubConverter';
+                          }
+                        | {
+                            list?:
+                              | {
+                                  block?:
+                                    | (
+                                        | {
+                                            content?: {
+                                              richText?: IRichTextField;
+                                              image?: IImageField;
+                                              link?: IButton;
+                                            };
+                                            id?: string | null;
+                                            blockName?: string | null;
+                                            blockType: 'singleCard';
+                                          }
+                                        | {
+                                            icon?: IIcon;
+                                            list?:
+                                              | {
+                                                  title?: string | null;
+                                                  richText?: IRichTextField;
+                                                  id?: string | null;
+                                                }[]
+                                              | null;
+                                            link?: IButton;
+                                            id?: string | null;
+                                            blockName?: string | null;
+                                            blockType: 'accordion';
+                                          }
+                                        | {
+                                            image?: IImageField;
+                                            title?: string | null;
+                                            description?: string | null;
+                                            style?: {
+                                              background?: string | null;
+                                              fontSize?: string | null;
+                                            };
+                                            id?: string | null;
+                                            blockName?: string | null;
+                                            blockType: 'hoverCard';
+                                          }
+                                        | {
+                                            richText?: IRichTextField;
+                                            style?: {
+                                              alignX?:
+                                                | ('start' | 'center' | 'end' | 'space-around' | 'space-evenly')
+                                                | null;
+                                              alignY?: ('start' | 'center' | 'end' | 'stretch') | null;
+                                              background?: string | null;
+                                            };
+                                            id?: string | null;
+                                            blockName?: string | null;
+                                            blockType: 'richTextCard';
+                                          }
+                                        | {
+                                            image?: IImageField;
+                                            link?: IButton;
+                                            style?: {
+                                              padding?: string | null;
+                                              width?: string | null;
+                                            };
+                                            id?: string | null;
+                                            blockName?: string | null;
+                                            blockType: 'cutoutCard';
+                                          }
+                                        | {
+                                            link?: IButton;
+                                            id?: string | null;
+                                            blockName?: string | null;
+                                            blockType: 'button';
+                                          }
+                                        | {
+                                            richText?: IRichTextField;
+                                            id?: string | null;
+                                            blockName?: string | null;
+                                            blockType: 'rtBlock';
+                                          }
+                                        | {
+                                            image?: IImageField;
+                                            id?: string | null;
+                                            blockName?: string | null;
+                                            blockType: 'image';
+                                          }
+                                        | {
+                                            title?: string | null;
+                                            list?:
+                                              | {
+                                                  richText?: IRichTextField;
+                                                  image?: IImageField;
+                                                  id?: string | null;
+                                                }[]
+                                              | null;
+                                            style?: {
+                                              background?: string | null;
+                                            };
+                                            id?: string | null;
+                                            blockName?: string | null;
+                                            blockType: 'stickyContainers';
+                                          }
+                                        | {
+                                            grid?:
+                                              | {
+                                                  content?:
+                                                    | (
+                                                        | {
+                                                            richText?: IRichTextField;
+                                                            id?: string | null;
+                                                            blockName?: string | null;
+                                                            blockType: 'rtBlock';
+                                                          }
+                                                        | {
+                                                            image?: IImageField;
+                                                            id?: string | null;
+                                                            blockName?: string | null;
+                                                            blockType: 'image';
+                                                          }
+                                                      )[]
+                                                    | null;
+                                                  id?: string | null;
+                                                }[]
+                                              | null;
+                                            id?: string | null;
+                                            blockName?: string | null;
+                                            blockType: 'bentoGrid';
+                                          }
+                                        | {
+                                            form: number | Form;
+                                            design?: 'oneLineEmail' | null;
+                                            style?: {
+                                              width?: string | null;
+                                            };
+                                            id?: string | null;
+                                            blockName?: string | null;
+                                            blockType: 'contactForm';
+                                          }
+                                        | {
+                                            items?:
+                                              | (
+                                                  | {
+                                                      image?: IImageField;
+                                                      title?: string | null;
+                                                      description?: string | null;
+                                                      style?: {
+                                                        background?: string | null;
+                                                        fontSize?: string | null;
+                                                      };
+                                                      id?: string | null;
+                                                      blockName?: string | null;
+                                                      blockType: 'hoverCard';
+                                                    }
+                                                  | {
+                                                      richText?: IRichTextField;
+                                                      style?: {
+                                                        alignX?:
+                                                          | (
+                                                              | 'start'
+                                                              | 'center'
+                                                              | 'end'
+                                                              | 'space-around'
+                                                              | 'space-evenly'
+                                                            )
+                                                          | null;
+                                                        alignY?: ('start' | 'center' | 'end' | 'stretch') | null;
+                                                        background?: string | null;
+                                                      };
+                                                      id?: string | null;
+                                                      blockName?: string | null;
+                                                      blockType: 'richTextCard';
+                                                    }
+                                                  | {
+                                                      content?: {
+                                                        richText?: IRichTextField;
+                                                        image?: IImageField;
+                                                        link?: IButton;
+                                                      };
+                                                      id?: string | null;
+                                                      blockName?: string | null;
+                                                      blockType: 'singleCard';
+                                                    }
+                                                  | {
+                                                      richText?: IRichTextField;
+                                                      id?: string | null;
+                                                      blockName?: string | null;
+                                                      blockType: 'rtBlock';
+                                                    }
+                                                  | {
+                                                      image?: IImageField;
+                                                      id?: string | null;
+                                                      blockName?: string | null;
+                                                      blockType: 'image';
+                                                    }
+                                                )[]
+                                              | null;
+                                            options?: {
+                                              loop?: boolean | null;
+                                            };
+                                            id?: string | null;
+                                            blockName?: string | null;
+                                            blockType: 'carousel';
+                                          }
+                                        | {
+                                            id?: string | null;
+                                            blockName?: string | null;
+                                            blockType: 'emboldenEpubConverter';
+                                          }
+                                      )[]
+                                    | null;
+                                  id?: string | null;
+                                }[]
+                              | null;
+                            style?: {
+                              gap?: string | null;
+                              alignX?: ('start' | 'center' | 'end' | 'space-around' | 'space-evenly') | null;
+                              alignY?: ('start' | 'center' | 'end' | 'stretch') | null;
+                              flexDirection?: string | null;
+                            };
+                            id?: string | null;
+                            blockName?: string | null;
+                            blockType: 'flexboxLayout';
+                          }
+                      )[]
+                    | null;
+                  id?: string | null;
+                }[]
               | null;
             style?: {
-              background?: string | null;
               container?: boolean | null;
+              background?: string | null;
               borderRadius?: string | null;
+              alignX?: ('start' | 'center' | 'end' | 'space-around' | 'space-evenly') | null;
+              alignY?: ('start' | 'center' | 'end' | 'stretch') | null;
             };
             id?: string | null;
             blockName?: string | null;
@@ -2440,7 +2703,11 @@ export interface Asset {
  */
 export interface IIcon {
   name?: string | null;
-  style?: string | null;
+  style?: {
+    width?: string | null;
+    height?: string | null;
+    string?: string | null;
+  };
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
@@ -2801,6 +3068,10 @@ export interface IBlockColumnLayout {
           }
         | {
             form: number | Form;
+            design?: 'oneLineEmail' | null;
+            style?: {
+              width?: string | null;
+            };
             id?: string | null;
             blockName?: string | null;
             blockType: 'contactForm';
@@ -2992,6 +3263,10 @@ export interface IBlockColumnLayout {
                           }
                         | {
                             form: number | Form;
+                            design?: 'oneLineEmail' | null;
+                            style?: {
+                              width?: string | null;
+                            };
                             id?: string | null;
                             blockName?: string | null;
                             blockType: 'contactForm';
@@ -3197,6 +3472,10 @@ export interface IBlockColumnLayout {
           }
         | {
             form: number | Form;
+            design?: 'oneLineEmail' | null;
+            style?: {
+              width?: string | null;
+            };
             id?: string | null;
             blockName?: string | null;
             blockType: 'contactForm';
@@ -3388,6 +3667,10 @@ export interface IBlockColumnLayout {
                           }
                         | {
                             form: number | Form;
+                            design?: 'oneLineEmail' | null;
+                            style?: {
+                              width?: string | null;
+                            };
                             id?: string | null;
                             blockName?: string | null;
                             blockType: 'contactForm';
@@ -3593,6 +3876,10 @@ export interface IBlockColumnLayout {
           }
         | {
             form: number | Form;
+            design?: 'oneLineEmail' | null;
+            style?: {
+              width?: string | null;
+            };
             id?: string | null;
             blockName?: string | null;
             blockType: 'contactForm';
@@ -3784,6 +4071,10 @@ export interface IBlockColumnLayout {
                           }
                         | {
                             form: number | Form;
+                            design?: 'oneLineEmail' | null;
+                            style?: {
+                              width?: string | null;
+                            };
                             id?: string | null;
                             blockName?: string | null;
                             blockType: 'contactForm';
@@ -3905,20 +4196,7 @@ export interface IFlexboxLayout {
                   blockName?: string | null;
                   blockType: 'singleCard';
                 }
-              | {
-                  icon?: IIcon;
-                  list?:
-                    | {
-                        title?: string | null;
-                        richText?: IRichTextField;
-                        id?: string | null;
-                      }[]
-                    | null;
-                  link?: IButton;
-                  id?: string | null;
-                  blockName?: string | null;
-                  blockType: 'accordion';
-                }
+              | IAccordion
               | {
                   image?: IImageField;
                   title?: string | null;
@@ -3942,23 +4220,8 @@ export interface IFlexboxLayout {
                   blockName?: string | null;
                   blockType: 'richTextCard';
                 }
-              | {
-                  image?: IImageField;
-                  link?: IButton;
-                  style?: {
-                    padding?: string | null;
-                    width?: string | null;
-                  };
-                  id?: string | null;
-                  blockName?: string | null;
-                  blockType: 'cutoutCard';
-                }
-              | {
-                  link?: IButton;
-                  id?: string | null;
-                  blockName?: string | null;
-                  blockType: 'button';
-                }
+              | ICutoutCard
+              | IButtonBlock
               | {
                   richText?: IRichTextField;
                   id?: string | null;
@@ -3971,22 +4234,7 @@ export interface IFlexboxLayout {
                   blockName?: string | null;
                   blockType: 'image';
                 }
-              | {
-                  title?: string | null;
-                  list?:
-                    | {
-                        richText?: IRichTextField;
-                        image?: IImageField;
-                        id?: string | null;
-                      }[]
-                    | null;
-                  style?: {
-                    background?: string | null;
-                  };
-                  id?: string | null;
-                  blockName?: string | null;
-                  blockType: 'stickyContainers';
-                }
+              | IStickyContainers
               | {
                   grid?:
                     | {
@@ -4015,67 +4263,15 @@ export interface IFlexboxLayout {
                 }
               | {
                   form: number | Form;
+                  design?: 'oneLineEmail' | null;
+                  style?: {
+                    width?: string | null;
+                  };
                   id?: string | null;
                   blockName?: string | null;
                   blockType: 'contactForm';
                 }
-              | {
-                  items?:
-                    | (
-                        | {
-                            image?: IImageField;
-                            title?: string | null;
-                            description?: string | null;
-                            style?: {
-                              background?: string | null;
-                              fontSize?: string | null;
-                            };
-                            id?: string | null;
-                            blockName?: string | null;
-                            blockType: 'hoverCard';
-                          }
-                        | {
-                            richText?: IRichTextField;
-                            style?: {
-                              alignX?: ('start' | 'center' | 'end' | 'space-around' | 'space-evenly') | null;
-                              alignY?: ('start' | 'center' | 'end' | 'stretch') | null;
-                              background?: string | null;
-                            };
-                            id?: string | null;
-                            blockName?: string | null;
-                            blockType: 'richTextCard';
-                          }
-                        | {
-                            content?: {
-                              richText?: IRichTextField;
-                              image?: IImageField;
-                              link?: IButton;
-                            };
-                            id?: string | null;
-                            blockName?: string | null;
-                            blockType: 'singleCard';
-                          }
-                        | {
-                            richText?: IRichTextField;
-                            id?: string | null;
-                            blockName?: string | null;
-                            blockType: 'rtBlock';
-                          }
-                        | {
-                            image?: IImageField;
-                            id?: string | null;
-                            blockName?: string | null;
-                            blockType: 'image';
-                          }
-                      )[]
-                    | null;
-                  options?: {
-                    loop?: boolean | null;
-                  };
-                  id?: string | null;
-                  blockName?: string | null;
-                  blockType: 'carousel';
-                }
+              | ICarousel
               | {
                   id?: string | null;
                   blockName?: string | null;
@@ -4095,6 +4291,117 @@ export interface IFlexboxLayout {
   id?: string | null;
   blockName?: string | null;
   blockType: 'flexboxLayout';
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "IAccordion".
+ */
+export interface IAccordion {
+  icon?: IIcon;
+  list?:
+    | {
+        title?: string | null;
+        richText?: IRichTextField;
+        id?: string | null;
+      }[]
+    | null;
+  link?: IButton;
+  id?: string | null;
+  blockName?: string | null;
+  blockType: 'accordion';
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "ICutoutCard".
+ */
+export interface ICutoutCard {
+  image?: IImageField;
+  link?: IButton;
+  style?: {
+    padding?: string | null;
+    width?: string | null;
+  };
+  id?: string | null;
+  blockName?: string | null;
+  blockType: 'cutoutCard';
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "IStickyContainers".
+ */
+export interface IStickyContainers {
+  title?: string | null;
+  list?:
+    | {
+        richText?: IRichTextField;
+        image?: IImageField;
+        id?: string | null;
+      }[]
+    | null;
+  style?: {
+    background?: string | null;
+  };
+  id?: string | null;
+  blockName?: string | null;
+  blockType: 'stickyContainers';
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "ICarousel".
+ */
+export interface ICarousel {
+  items?: (IHoverCard | IRichTextCard | ISingleCard | IRichText | IImage)[] | null;
+  options?: {
+    loop?: boolean | null;
+  };
+  id?: string | null;
+  blockName?: string | null;
+  blockType: 'carousel';
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "IHoverCard".
+ */
+export interface IHoverCard {
+  image?: IImageField;
+  title?: string | null;
+  description?: string | null;
+  style?: {
+    background?: string | null;
+    fontSize?: string | null;
+  };
+  id?: string | null;
+  blockName?: string | null;
+  blockType: 'hoverCard';
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "IRichTextCard".
+ */
+export interface IRichTextCard {
+  richText?: IRichTextField;
+  style?: {
+    alignX?: ('start' | 'center' | 'end' | 'space-around' | 'space-evenly') | null;
+    alignY?: ('start' | 'center' | 'end' | 'stretch') | null;
+    background?: string | null;
+  };
+  id?: string | null;
+  blockName?: string | null;
+  blockType: 'richTextCard';
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "ISingleCard".
+ */
+export interface ISingleCard {
+  content?: {
+    richText?: IRichTextField;
+    image?: IImageField;
+    link?: IButton;
+  };
+  id?: string | null;
+  blockName?: string | null;
+  blockType: 'singleCard';
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
@@ -4138,66 +4445,6 @@ export interface IDiscountCard {
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
- * via the `definition` "ISingleCard".
- */
-export interface ISingleCard {
-  content?: {
-    richText?: IRichTextField;
-    image?: IImageField;
-    link?: IButton;
-  };
-  id?: string | null;
-  blockName?: string | null;
-  blockType: 'singleCard';
-}
-/**
- * This interface was referenced by `Config`'s JSON-Schema
- * via the `definition` "IHoverCard".
- */
-export interface IHoverCard {
-  image?: IImageField;
-  title?: string | null;
-  description?: string | null;
-  style?: {
-    background?: string | null;
-    fontSize?: string | null;
-  };
-  id?: string | null;
-  blockName?: string | null;
-  blockType: 'hoverCard';
-}
-/**
- * This interface was referenced by `Config`'s JSON-Schema
- * via the `definition` "IRichTextCard".
- */
-export interface IRichTextCard {
-  richText?: IRichTextField;
-  style?: {
-    alignX?: ('start' | 'center' | 'end' | 'space-around' | 'space-evenly') | null;
-    alignY?: ('start' | 'center' | 'end' | 'stretch') | null;
-    background?: string | null;
-  };
-  id?: string | null;
-  blockName?: string | null;
-  blockType: 'richTextCard';
-}
-/**
- * This interface was referenced by `Config`'s JSON-Schema
- * via the `definition` "ICutoutCard".
- */
-export interface ICutoutCard {
-  image?: IImageField;
-  link?: IButton;
-  style?: {
-    padding?: string | null;
-    width?: string | null;
-  };
-  id?: string | null;
-  blockName?: string | null;
-  blockType: 'cutoutCard';
-}
-/**
- * This interface was referenced by `Config`'s JSON-Schema
  * via the `definition` "bentoGrid".
  */
 export interface BentoGrid {
@@ -4225,57 +4472,6 @@ export interface BentoGrid {
   id?: string | null;
   blockName?: string | null;
   blockType: 'bentoGrid';
-}
-/**
- * This interface was referenced by `Config`'s JSON-Schema
- * via the `definition` "IStickyContainers".
- */
-export interface IStickyContainers {
-  title?: string | null;
-  list?:
-    | {
-        richText?: IRichTextField;
-        image?: IImageField;
-        id?: string | null;
-      }[]
-    | null;
-  style?: {
-    background?: string | null;
-  };
-  id?: string | null;
-  blockName?: string | null;
-  blockType: 'stickyContainers';
-}
-/**
- * This interface was referenced by `Config`'s JSON-Schema
- * via the `definition` "IAccordion".
- */
-export interface IAccordion {
-  icon?: IIcon;
-  list?:
-    | {
-        title?: string | null;
-        richText?: IRichTextField;
-        id?: string | null;
-      }[]
-    | null;
-  link?: IButton;
-  id?: string | null;
-  blockName?: string | null;
-  blockType: 'accordion';
-}
-/**
- * This interface was referenced by `Config`'s JSON-Schema
- * via the `definition` "ICarousel".
- */
-export interface ICarousel {
-  items?: (IHoverCard | IRichTextCard | ISingleCard | IRichText | IImage)[] | null;
-  options?: {
-    loop?: boolean | null;
-  };
-  id?: string | null;
-  blockName?: string | null;
-  blockType: 'carousel';
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
@@ -4452,62 +4648,174 @@ export interface IRichTextFooter {
  * via the `definition` "IFooterSubscribe".
  */
 export interface IFooterSubscribe {
-  columnOne?:
-    | (
-        | {
-            content?: {
-              richText?: IRichTextField;
-              image?: IImageField;
-              link?: IButton;
-            };
-            id?: string | null;
-            blockName?: string | null;
-            blockType: 'singleCard';
-          }
-        | IAccordion
-        | {
-            image?: IImageField;
-            title?: string | null;
-            description?: string | null;
-            style?: {
-              background?: string | null;
-              fontSize?: string | null;
-            };
-            id?: string | null;
-            blockName?: string | null;
-            blockType: 'hoverCard';
-          }
-        | {
-            richText?: IRichTextField;
-            style?: {
-              alignX?: ('start' | 'center' | 'end' | 'space-around' | 'space-evenly') | null;
-              alignY?: ('start' | 'center' | 'end' | 'stretch') | null;
-              background?: string | null;
-            };
-            id?: string | null;
-            blockName?: string | null;
-            blockType: 'richTextCard';
-          }
-        | ICutoutCard
-        | IButtonBlock
-        | {
-            richText?: IRichTextField;
-            id?: string | null;
-            blockName?: string | null;
-            blockType: 'rtBlock';
-          }
-        | {
-            image?: IImageField;
-            id?: string | null;
-            blockName?: string | null;
-            blockType: 'image';
-          }
-        | IStickyContainers
-        | {
-            grid?:
+  columns?:
+    | {
+        block?:
+          | (
               | {
-                  content?:
+                  content?: {
+                    richText?: IRichTextField;
+                    image?: IImageField;
+                    link?: IButton;
+                  };
+                  id?: string | null;
+                  blockName?: string | null;
+                  blockType: 'singleCard';
+                }
+              | {
+                  icon?: IIcon;
+                  list?:
+                    | {
+                        title?: string | null;
+                        richText?: IRichTextField;
+                        id?: string | null;
+                      }[]
+                    | null;
+                  link?: IButton;
+                  id?: string | null;
+                  blockName?: string | null;
+                  blockType: 'accordion';
+                }
+              | {
+                  image?: IImageField;
+                  title?: string | null;
+                  description?: string | null;
+                  style?: {
+                    background?: string | null;
+                    fontSize?: string | null;
+                  };
+                  id?: string | null;
+                  blockName?: string | null;
+                  blockType: 'hoverCard';
+                }
+              | {
+                  richText?: IRichTextField;
+                  style?: {
+                    alignX?: ('start' | 'center' | 'end' | 'space-around' | 'space-evenly') | null;
+                    alignY?: ('start' | 'center' | 'end' | 'stretch') | null;
+                    background?: string | null;
+                  };
+                  id?: string | null;
+                  blockName?: string | null;
+                  blockType: 'richTextCard';
+                }
+              | {
+                  image?: IImageField;
+                  link?: IButton;
+                  style?: {
+                    padding?: string | null;
+                    width?: string | null;
+                  };
+                  id?: string | null;
+                  blockName?: string | null;
+                  blockType: 'cutoutCard';
+                }
+              | {
+                  link?: IButton;
+                  id?: string | null;
+                  blockName?: string | null;
+                  blockType: 'button';
+                }
+              | {
+                  richText?: IRichTextField;
+                  id?: string | null;
+                  blockName?: string | null;
+                  blockType: 'rtBlock';
+                }
+              | {
+                  image?: IImageField;
+                  id?: string | null;
+                  blockName?: string | null;
+                  blockType: 'image';
+                }
+              | {
+                  title?: string | null;
+                  list?:
+                    | {
+                        richText?: IRichTextField;
+                        image?: IImageField;
+                        id?: string | null;
+                      }[]
+                    | null;
+                  style?: {
+                    background?: string | null;
+                  };
+                  id?: string | null;
+                  blockName?: string | null;
+                  blockType: 'stickyContainers';
+                }
+              | {
+                  grid?:
+                    | {
+                        content?:
+                          | (
+                              | {
+                                  richText?: IRichTextField;
+                                  id?: string | null;
+                                  blockName?: string | null;
+                                  blockType: 'rtBlock';
+                                }
+                              | {
+                                  image?: IImageField;
+                                  id?: string | null;
+                                  blockName?: string | null;
+                                  blockType: 'image';
+                                }
+                            )[]
+                          | null;
+                        id?: string | null;
+                      }[]
+                    | null;
+                  id?: string | null;
+                  blockName?: string | null;
+                  blockType: 'bentoGrid';
+                }
+              | {
+                  form: number | Form;
+                  design?: 'oneLineEmail' | null;
+                  style?: {
+                    width?: string | null;
+                  };
+                  id?: string | null;
+                  blockName?: string | null;
+                  blockType: 'contactForm';
+                }
+              | {
+                  items?:
                     | (
+                        | {
+                            image?: IImageField;
+                            title?: string | null;
+                            description?: string | null;
+                            style?: {
+                              background?: string | null;
+                              fontSize?: string | null;
+                            };
+                            id?: string | null;
+                            blockName?: string | null;
+                            blockType: 'hoverCard';
+                          }
+                        | {
+                            richText?: IRichTextField;
+                            style?: {
+                              alignX?: ('start' | 'center' | 'end' | 'space-around' | 'space-evenly') | null;
+                              alignY?: ('start' | 'center' | 'end' | 'stretch') | null;
+                              background?: string | null;
+                            };
+                            id?: string | null;
+                            blockName?: string | null;
+                            blockType: 'richTextCard';
+                          }
+                        | {
+                            content?: {
+                              richText?: IRichTextField;
+                              image?: IImageField;
+                              link?: IButton;
+                            };
+                            id?: string | null;
+                            blockName?: string | null;
+                            blockType: 'singleCard';
+                          }
                         | {
                             richText?: IRichTextField;
                             id?: string | null;
@@ -4522,31 +4830,30 @@ export interface IFooterSubscribe {
                           }
                       )[]
                     | null;
+                  options?: {
+                    loop?: boolean | null;
+                  };
                   id?: string | null;
-                }[]
-              | null;
-            id?: string | null;
-            blockName?: string | null;
-            blockType: 'bentoGrid';
-          }
-        | {
-            form: number | Form;
-            id?: string | null;
-            blockName?: string | null;
-            blockType: 'contactForm';
-          }
-        | ICarousel
-        | {
-            id?: string | null;
-            blockName?: string | null;
-            blockType: 'emboldenEpubConverter';
-          }
-      )[]
+                  blockName?: string | null;
+                  blockType: 'carousel';
+                }
+              | {
+                  id?: string | null;
+                  blockName?: string | null;
+                  blockType: 'emboldenEpubConverter';
+                }
+              | IFlexboxLayout
+            )[]
+          | null;
+        id?: string | null;
+      }[]
     | null;
   style?: {
-    background?: string | null;
     container?: boolean | null;
+    background?: string | null;
     borderRadius?: string | null;
+    alignX?: ('start' | 'center' | 'end' | 'space-around' | 'space-evenly') | null;
+    alignY?: ('start' | 'center' | 'end' | 'stretch') | null;
   };
   id?: string | null;
   blockName?: string | null;
@@ -4611,6 +4918,10 @@ export interface ILexicalMarkerIcon {
  */
 export interface IContactFormBlock {
   form: number | Form;
+  design?: 'oneLineEmail' | null;
+  style?: {
+    width?: string | null;
+  };
   id?: string | null;
   blockName?: string | null;
   blockType: 'contactForm';

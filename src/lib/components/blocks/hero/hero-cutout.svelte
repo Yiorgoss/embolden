@@ -7,9 +7,9 @@
 	import Picture from '@/components/common/picture.svelte';
 	import Button from '@/components/common/button.svelte';
 	import { RichTextRender } from '@/components/blocks/rich-text';
-	import RenderForms from '@/components/blocks/forms/render-forms.svelte';
 	import EmailOnlyForm from '@/components/blocks/forms/email-only-form.svelte';
 	import SVG from '@/components/common/svg/svg.svelte';
+	import ContactForm from '../forms/contact-form.svelte';
 
 	const { blockData, cb }: { blockData: IHeroCutout; cb?: () => void } = $props();
 	const { image, richText, form } = $derived(blockData);
@@ -56,7 +56,7 @@
 						class="relative lg:absolute bottom-0 right-0 flex justify-center items-center mx-auto"
 					>
 						<div class="w-3/4 sm:w-full">
-							<EmailOnlyForm {form} />
+							<ContactForm {form} design="oneLineEmail" />
 						</div>
 					</div>
 				</div>

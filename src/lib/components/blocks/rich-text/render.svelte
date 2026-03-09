@@ -35,8 +35,8 @@
 		style:--list-marker-color={richText.style?.marker}
 		class=""
 	>
-		{#if richText.animation.type}
-			{#await import('./animated.svelte') then B: any}
+		{#if false && richText.animation.type}
+			<!--  {#await import('./animated.svelte') then B: any}
 				{@const Block = B.default}
 				<Block
 					overrides={cn(defaults, overrides)}
@@ -44,7 +44,7 @@
 					animation={richText.animation}
 					html={html ?? ''}
 				/>
-			{/await}
+			{/await}  -->
 		{:else}
 			<DefaultRichText
 				overrides={cn(defaults, overrides)}

@@ -16,7 +16,7 @@
 	width="none"
 	icon={name ?? icon?.name ?? ''}
 	class={className}
-	style:height="inherit"
-	style:width="inherit"
-	style={style ?? icon?.style}
+	style:height={icon?.style?.height ?? 'inherit'}
+	style:width={icon?.style?.width ?? 'inherit'}
+	style={style ?? icon?.style?.string}
 ></iconify-icon>

@@ -114,7 +114,7 @@ export const richTextBtn = ({ href, link }: { href: string, link: IButton }) => 
 
   const classList = buttonVariants({ variant, size })
   return `<a class="${cn('flex px-4 gap-5', classList)}" style="${style};" href="${href}">
-      ${text}
+      ${text ?? href.replaceAll("/", "")}
       ${link.display?.includeIcon ? `<iconify-icon icon=${link.display.icon?.name}></iconify-icon>` : ""}
     </a>`
 }

@@ -17,10 +17,10 @@
 	import Icon from '@/components/common/icon.svelte';
 	import { syncConverters } from '../rich-text/converters';
 
-	const { form: data } = $props();
+	const { data } = $props();
 
 	const html = $derived(
-		convertLexicalToHTML({ data: data.confirmationMessage, converters: syncConverters })
+		convertLexicalToHTML({ data: data?.confirmationMessage, converters: syncConverters })
 	);
 
 	const form = createForm(() => ({
