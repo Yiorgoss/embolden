@@ -20,7 +20,6 @@
 		cb?: () => void;
 	} = $props();
 
-	// let assetPromise = $state(resolveID({ collection: 'assets', data: data.url }))
 	//  FIX needs rewrite
 </script>
 
@@ -42,5 +41,5 @@
 	class={imageClass}
 	sizes={imageSizes}
 	{pictureClass}
-	asset={image}
+	asset={image?.url}
 />
