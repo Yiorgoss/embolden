@@ -29,7 +29,7 @@
 		<!-- desktop -->
 		<Nav.Root
 			class={cn(
-				'translate-y-0 px-10 bg-background shadow-xl rounded-theme transition-transform ease-out duration-500 hidden w-full items-center justify-between md:flex'
+				'px-10 bg-background shadow-xl rounded-theme hidden w-full items-center justify-between md:flex'
 			)}
 		>
 			<a href={`/${locale ?? ''}`} aria-label="home page" class="">

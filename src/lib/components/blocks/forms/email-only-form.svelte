@@ -60,7 +60,7 @@
 	}));
 </script>
 
-<div class="flex flex-col gap-4 justify-center items-center w-full xl:w-3/4">
+<div class="flex flex-col gap-4 justify-center items-center mx-auto w-full">
 	{#each data.fields ?? [] as field}
 		{#if field.blockType == 'message'}
 			<DefaultRichText

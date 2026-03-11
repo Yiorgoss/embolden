@@ -40,7 +40,7 @@ export const htmlConverters: any = ({ defaultConverters }) => ({
       const fields = args.node.fields || {}
       const { name, style } = fields.icon || {}
 
-      return `<div id="replace-marker-id-${fields?.id}" class="replace-marker" style="display:inline;">
+      return `<div id="replace-marker-id-${fields?.id}" class="replace-marker" style="height:${style.width}px;width:${style.width}px;display:inline;">
         <iconify-icon width="${style.width}" height="${style.height}" style="${style.string}" icon="${name}"></iconify-icon>
       </div>`
     },

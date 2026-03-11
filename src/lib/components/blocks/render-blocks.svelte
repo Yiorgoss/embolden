@@ -68,8 +68,10 @@
 				return import('./common/button-block.svelte');
 			case 'cutoutCard':
 				return import('./cards/cutout-card.svelte');
-			case 'footerSubscribe':
-				return import('./navigation/footer/footer-subscribe.svelte');
+			case 'footerDesign2':
+				return import('./navigation/footer/footer-design-2.svelte');
+			case 'flexItem':
+				return import('./special/flex-item.svelte');
 		}
 	};
 

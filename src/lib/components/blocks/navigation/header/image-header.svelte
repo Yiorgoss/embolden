@@ -31,7 +31,7 @@
 		<!-- desktop -->
 		<Nav.Root
 			class={cn(
-				'px-10 bg-background w-screen items-center justify-between md:flex',
+				'hidden px-10 bg-background w-screen items-center justify-between md:flex',
 				blockData.style?.hasShadow && 'shadow-xl'
 			)}
 		>
@@ -60,15 +60,11 @@
 		<!-- mobile -->
 		<div class="flex h-full items-center justify-end md:hidden">
 			<Sheet.Root bind:open>
-				<div
-					class={cn(
-						'bg-background shadow-xl flex justify-between items-center h-full w-full transition-transform ease-out duration-500 '
-					)}
-				>
+				<div class={cn('bg-background shadow-xl flex justify-between items-center h-full w-full ')}>
 					<a href={`/${locale ?? ''}`} aria-label="home page" class="">
 						<div class="h-(--header-height) p-2 lg:p-2 md:p-4">
 							<!--  max width needed on picture to prevent wierd img grow on safari  -->
-							<Picture class="object-contain max-w-(--header-height)" loading="eager" {image} />
+							<Picture class="object-contain max-h-(--header-height)" loading="eager" {image} />
 						</div>
 					</a>
 					<Sheet.Trigger class="h-full">

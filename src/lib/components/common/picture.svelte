@@ -34,12 +34,14 @@
 	{/await}
 {/if}
 -->
-<PicturePrimitive
-	{loading}
-	{cb}
-	{image}
-	class={imageClass}
-	sizes={imageSizes}
-	{pictureClass}
-	asset={image?.url}
-/>
+{#if image && image.url}
+	<PicturePrimitive
+		{loading}
+		{cb}
+		{image}
+		class={imageClass}
+		sizes={imageSizes}
+		{pictureClass}
+		asset={image?.url}
+	/>
+{/if}

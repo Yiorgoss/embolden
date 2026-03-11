@@ -55,7 +55,7 @@
 									height:${!clipped.current ? 'auto' : `${offsetHeight * (CUTOUT_DIMENSIONS.h - CUTOUT_DIMENSIONS.yInc) * 0.01}px`};`}
 						class="relative lg:absolute bottom-0 right-0 flex justify-center items-center mx-auto"
 					>
-						<div class="w-3/4 sm:w-full">
+						<div class="w-3/4 md:w-full xl:w-3/4">
 							<ContactForm {form} design="oneLineEmail" />
 						</div>
 					</div>
