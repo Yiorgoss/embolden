@@ -6,14 +6,14 @@
 	const { blockData }: { blockData: IFooterDesign2 } = $props();
 </script>
 
-<section id="footer-subscribe" class="pt-100">
+<section id="footer-design-2" class="">
 	<div
-		style:border-radius={blockData.style.borderRadius}
-		style:background={blockData.style.background}
-		style:flex-direction={blockData.style.flexDirection}
-		style:justify-content={blockData.style.alignX}
-		style:align-items={blockData.style.alignY}
-		class:container={blockData.style.container}
+		style:border-radius={blockData.style?.borderRadius}
+		style:background={blockData.style?.background}
+		style:flex-direction={blockData.style?.flexDirection}
+		style:justify-content={blockData.style?.alignX}
+		style:align-items={blockData.style?.alignY}
+		class:container={blockData.style?.container}
 		class="flex justify-center p-4 md:p-8 items-center flex-col sm:flex-row mx-auto gap-10"
 	>
 		<div class="w-full">

@@ -51,7 +51,7 @@
 				<RenderBlocks cb={() => (isHeroLoaded = true)} blockData={currentPage.hero[0]} />
 			</section>
 		{/if}
-		{#if isHeroLoaded}
+		{#if isHeroLoaded || currentPage.hero?.length <= 0}
 			<div
 				id="render-block-container"
 				class={` relative ${currentPage.hero?.[0] ? '' : 'pt-(--header-height)'}`}

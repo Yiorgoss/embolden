@@ -20,7 +20,6 @@
 	import { syncConverters } from '../rich-text/converters';
 
 	let { data, class: className }: { data: Form; class?: string } = $props();
-	console.log('render forms');
 
 	const html = $derived(
 		convertLexicalToHTML({ data: data.confirmationMessage, converters: syncConverters })
