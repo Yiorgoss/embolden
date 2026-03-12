@@ -24,12 +24,6 @@
 	const html = $derived(
 		convertLexicalToHTML({ data: data.confirmationMessage, converters: syncConverters })
 	);
-	// let html = $state();
-	// $effect(() => {
-	// 	convertLexicalToHTML({ data: data.confirmationMessage, converters: syncConverters }).then(
-	// 		(data) => (html = data)
-	// 	);
-	// });
 
 	const form = createForm(() => ({
 		onSubmit: async (args) => {
@@ -69,7 +63,6 @@
 </script>
 
 <Toaster position="top-right" richColors closeButton />
-
 <form
 	id={`form-${data.id}`}
 	onsubmit={(e) => {
@@ -103,7 +96,7 @@
 								<Input
 									id={f.name}
 									type={f.blockType}
-									placeholder={f.defaultValue ?? f.blockType}
+									placeholder={f.defaultValue ?? f.label ?? f.blockType}
 									value={fieldAPI.state.value}
 									onblur={() => fieldAPI.handleBlur()}
 									oninput={(e: Event) => {
