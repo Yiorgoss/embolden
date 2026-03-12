@@ -16,8 +16,8 @@
 
 	onMount(() => {
 		if (
-			page.url.searchParams.get('livePreview') !== 'true' &&
-			page.url.searchParams.get('collection') !== 'tenants' // will happen when tenants is being changed
+			page.url.searchParams.get('livePreview') !== 'true' ||
+			page.url.searchParams.get('collection') !== 'tenants' // will happen when tenants is not changed
 		) {
 			return;
 		}
@@ -27,7 +27,7 @@
 			callback: (doc) => {
 				nav = doc.nav;
 			},
-			depth: 0,
+			depth: 1,
 			initialData: page.data,
 			serverURL: site.CMS
 		});

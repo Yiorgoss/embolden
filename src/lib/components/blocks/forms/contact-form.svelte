@@ -26,7 +26,11 @@
 		}
 	};
 
-	const FormBlock = $derived(await getForm(blockData?.design ?? design));
+	let FormBlock = $state();
+	$effect(() => {
+		getForm(blockData?.design ?? design).then((data) => (FormBlock = data));
+	});
+	// const FormBlock = $derived(await getForm(blockData?.design ?? design));
 	const form = $derived(blockData?.form ?? _form);
 </script>
 

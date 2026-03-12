@@ -75,9 +75,16 @@
 		}
 	};
 
-	let calculatedBlockType = $derived(
-		await dynamicResolveBlock({ blockName: blockData?.blockType ?? undefined })
-	);
+	let calculatedBlockType = $state();
+	$effect(() => {
+		dynamicResolveBlock({ blockName: blockData?.blockType ?? undefined }).then(
+			(data) => (calculatedBlockType = data)
+		);
+	});
+
+	// let calculatedBlockType = $derived(
+	// 	await dynamicResolveBlock({ blockName: blockData?.blockType ?? undefined })
+	// );
 </script>
 
 {#if calculatedBlockType && calculatedBlockType.default}

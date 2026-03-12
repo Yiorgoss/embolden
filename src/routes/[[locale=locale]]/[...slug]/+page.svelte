@@ -18,7 +18,7 @@
 
 	onMount(() => {
 		if (
-			page.url.searchParams.get('livePreview') !== 'true' &&
+			page.url.searchParams.get('livePreview') !== 'true' ||
 			page.url.searchParams.get('collection') !== 'pages' // will happen when tenants is being changed
 		) {
 			return;
@@ -29,7 +29,7 @@
 			callback: (doc) => {
 				currentPage = doc;
 			},
-			depth: 0,
+			depth: 1,
 			initialData: page.data,
 			serverURL: site.CMS
 		});
@@ -46,7 +46,7 @@
 {#if currentPage}
 	<Meta meta={currentPage.meta} />
 	<div class="min-h-lvh">
-		{#if currentPage.hero.length > 0}
+		{#if currentPage.hero?.length > 0}
 			<section id="hero-container" class="">
 				<RenderBlocks cb={() => (isHeroLoaded = true)} blockData={currentPage.hero[0]} />
 			</section>

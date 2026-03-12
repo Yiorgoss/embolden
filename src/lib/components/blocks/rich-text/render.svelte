@@ -14,8 +14,20 @@
 		$props();
 	// let html = $state<string | undefined>();
 
-	const html = $derived(
-		await convertLexicalToHTMLAsync({
+	// const html = $derived(
+	// 	await convertLexicalToHTMLAsync({
+	// 		data: richText.text,
+	// 		converters: htmlConverters,
+	// 		//@ts-ignore
+	// 		populate: getRestPopulateFn({
+	// 			apiURL: `${site.CMS}/api`,
+	// 			locale: page.params.locale ?? 'en'
+	// 		})
+	// 	})
+	// );
+	let html = $state();
+	$effect(() => {
+		convertLexicalToHTMLAsync({
 			data: richText.text,
 			converters: htmlConverters,
 			//@ts-ignore
@@ -23,8 +35,9 @@
 				apiURL: `${site.CMS}/api`,
 				locale: page.params.locale ?? 'en'
 			})
-		})
-	);
+		}).then((data) => (html = data));
+	});
+
 	const defaults = 'container my-auto wrap-break-word w-full max-w-full ';
 </script>
 
