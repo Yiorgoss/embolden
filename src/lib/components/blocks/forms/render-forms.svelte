@@ -22,15 +22,15 @@
 	let { data, class: className }: { data: Form; class?: string } = $props();
 	console.log('render forms');
 
-	// const html = $derived(
-	// 	convertLexicalToHTML({ data: data.confirmationMessage, converters: syncConverters })
-	// );
-	let html = $state();
-	$effect(() => {
-		convertLexicalToHTML({ data: data.confirmationMessage, converters: syncConverters }).then(
-			(data) => (html = data)
-		);
-	});
+	const html = $derived(
+		convertLexicalToHTML({ data: data.confirmationMessage, converters: syncConverters })
+	);
+	// let html = $state();
+	// $effect(() => {
+	// 	convertLexicalToHTML({ data: data.confirmationMessage, converters: syncConverters }).then(
+	// 		(data) => (html = data)
+	// 	);
+	// });
 
 	const form = createForm(() => ({
 		onSubmit: async (args) => {
