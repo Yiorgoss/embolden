@@ -120,6 +120,7 @@ export function animateScroll(element: Element, { animation }: { animation: IAni
     // options,
     // offset,
   } = animation
+
   if (!scroll || scroll.length <= 0) return
   const preset = scroll[0] // cbf to add this prematurely. It does work however
 

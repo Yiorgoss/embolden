@@ -12,20 +12,9 @@
 	// there exists both richText overrides and component specific overrides
 	const { richText, overrides, cb }: { richText: any; overrides?: string; cb?: () => void } =
 		$props();
-	// let html = $state<string | undefined>();
 
-	// const html = $derived(
-	// 	await convertLexicalToHTMLAsync({
-	// 		data: richText.text,
-	// 		converters: htmlConverters,
-	// 		//@ts-ignore
-	// 		populate: getRestPopulateFn({
-	// 			apiURL: `${site.CMS}/api`,
-	// 			locale: page.params.locale ?? 'en'
-	// 		})
-	// 	})
-	// );
-	let html = $state();
+	let html = $state('');
+
 	$effect(() => {
 		convertLexicalToHTMLAsync({
 			data: richText.text,
@@ -48,8 +37,8 @@
 		style:--list-marker-color={richText.style?.marker}
 		class=""
 	>
-		{#if false && richText.animation.type}
-			<!--  {#await import('./animated.svelte') then B: any}
+		{#if richText.animation.type}
+			{#await import('./animated.svelte') then B: any}
 				{@const Block = B.default}
 				<Block
 					overrides={cn(defaults, overrides)}
@@ -57,7 +46,7 @@
 					animation={richText.animation}
 					html={html ?? ''}
 				/>
-			{/await}  -->
+			{/await}
 		{:else}
 			<DefaultRichText
 				overrides={cn(defaults, overrides)}
