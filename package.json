@@ -14,7 +14,7 @@
 		"check:watch": "svelte-kit sync && svelte-check --tsconfig ./tsconfig.json --watch",
 		"format": "prettier --write .",
 		"lint": "prettier --check . && eslint .",
-		"deploy": "pnpm install && pnpm payload-typegen && sh scripts/add_domain_wrangler.sh && PUBLIC_ENV=PROD vite build && wrangler deploy",
+		"deploy": "pnpm install && pnpm payload-typegen && sh scripts/add_domain_wrangler.sh && PUBLIC_ENV=PROD vite build && wrangler deploy && exit 1",
 		"deploy:staging": "PUBLIC_DEV_CMS=https://staging-cms.calisto.studio vite build && wrangler deploy --env=staging",
 		"payload-typegen": "cp ../cms-mt/src/payload-types.ts ./src/payload-types.ts",
 		"cf-typegen": "wrangler types && mv worker-configuration.d.ts src/",
@@ -74,6 +74,6 @@
 		"lexical": "^0.31.0",
 		"lodash-es": "^4.17.21",
 		"lucide": "^0.503.0",
-		"motion": "^12.23.24"
+		"motion": "^12.38.0"
 	}
 }
