@@ -1,8 +1,11 @@
 <script lang="ts">
+	import Picture from '@/components/common/picture.svelte';
 	import { cn } from '@/utils';
 	import { type IGutter } from '@payload-types';
+
 	const { blockData }: { blockData: IGutter } = $props();
 	const { size, bgColor, divider } = $derived(blockData || {});
+
 	const sizeInPx = $derived(
 		size === 'small'
 			? 'h-[10px] md:h-[30px]'
@@ -24,10 +27,15 @@
 	class:items-start={divider == 'above'}
 	class:items-center={divider == 'center'}
 	class:items-end={divider == 'below'}
-	class={cn('container mx-auto flex items-center', sizeInPx)}
+	class={cn('relative container mx-auto flex items-center', sizeInPx)}
 >
+	{#if blockData?.bgImage}
+		<div class="-z-0 absolute inset-0">
+			<Picture image={blockData?.bgImage} />
+		</div>
+	{/if}
 	<div
-		class="h-[1px] w-full"
+		class="z-0 h-[1px] w-full"
 		style:background-color={bgColor?.value ?? 'var(--color-background)'}
 	></div>
 </div>

@@ -46,7 +46,6 @@
 	const widthClass = $derived(normaliseWidth(layout ?? 'oneColumn'));
 
 	const mobile = new MediaQuery('max-width: 480px');
-	console.log({ blockData });
 </script>
 
 <section
@@ -55,7 +54,7 @@
 	style:background={style?.color}
 	style:border-radius={style?.borderRadius}
 	class:container={style?.container}
-	class="mx-auto p-0 md:py-5 bg-red-400 relative"
+	class="mx-auto p-0 md:py-5 relative"
 >
 	{#if blockData?.bgImage}
 		<div class="-z-0 absolute inset-0">
