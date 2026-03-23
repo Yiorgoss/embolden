@@ -1,7 +1,9 @@
 <script lang="ts">
 	import { MediaQuery } from 'svelte/reactivity';
 	import { type IBlockColumnLayout } from '@payload-types';
+
 	import RenderBlocks from '../render-blocks.svelte';
+	import Picture from '@/components/common/picture.svelte';
 	import { cn } from '@/utils';
 	import { animate } from '@/attachments/animations/animate.svelte';
 
@@ -44,6 +46,7 @@
 	const widthClass = $derived(normaliseWidth(layout ?? 'oneColumn'));
 
 	const mobile = new MediaQuery('max-width: 480px');
+	console.log({ blockData });
 </script>
 
 <section
@@ -52,14 +55,19 @@
 	style:background={style?.color}
 	style:border-radius={style?.borderRadius}
 	class:container={style?.container}
-	class="mx-auto p-0 md:py-5"
+	class="mx-auto p-0 md:py-5 bg-red-400 relative"
 >
+	{#if blockData?.bgImage}
+		<div class="-z-0 absolute inset-0">
+			<Picture image={blockData?.bgImage} />
+		</div>
+	{/if}
 	<div
 		style:padding={style?.padding}
 		style:overflow={style?.overflow}
 		style:gap={style?.gap}
 		class:flex-wrap={layout == 'threeColumns'}
-		class="flex container gap-0 md:gap-10 justify-center items-center md:items-stretch h-full flex-col md:flex-row mx-auto"
+		class="flex z-0 container gap-0 md:gap-10 justify-center items-center md:items-stretch h-full flex-col md:flex-row mx-auto"
 		{@attach animate({ animation })}
 	>
 		<div
