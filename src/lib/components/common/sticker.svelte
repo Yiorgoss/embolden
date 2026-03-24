@@ -5,7 +5,7 @@
 	const { data }: { data: IStickerField } = $props();
 </script>
 
-{#if data.url}
+{#if data?.url}
 	<div
 		style:top={data?.style?.top ?? 'auto'}
 		style:right={data?.style?.right ?? 'auto'}

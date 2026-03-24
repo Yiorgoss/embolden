@@ -108,5 +108,5 @@
 			</div>
 		{/if}
 	</div>
-	<Sticker />
+	<Sticker data={blockData?.sticker} />
 </section>
