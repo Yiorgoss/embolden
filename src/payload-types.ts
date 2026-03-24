@@ -372,6 +372,7 @@ export interface Page {
               value?: string | null;
               onlyInContainer?: boolean | null;
             };
+            bgImage?: IImageField;
             id?: string | null;
             blockName?: string | null;
             blockType: 'gutter';
@@ -449,10 +450,14 @@ export interface Page {
                     }
                   | {
                       richText?: IRichTextField;
+                      image?: IImageField;
                       style?: {
                         alignX?: ('start' | 'center' | 'end' | 'space-around' | 'space-evenly') | null;
                         alignY?: ('start' | 'center' | 'end' | 'stretch') | null;
+                        borderRadius?: string | null;
                         background?: string | null;
+                        maxWidth?: string | null;
+                        border?: string | null;
                       };
                       id?: string | null;
                       blockName?: string | null;
@@ -571,10 +576,14 @@ export interface Page {
                     }
                   | {
                       richText?: IRichTextField;
+                      image?: IImageField;
                       style?: {
                         alignX?: ('start' | 'center' | 'end' | 'space-around' | 'space-evenly') | null;
                         alignY?: ('start' | 'center' | 'end' | 'stretch') | null;
+                        borderRadius?: string | null;
                         background?: string | null;
+                        maxWidth?: string | null;
+                        border?: string | null;
                       };
                       id?: string | null;
                       blockName?: string | null;
@@ -678,10 +687,14 @@ export interface Page {
                               }
                             | {
                                 richText?: IRichTextField;
+                                image?: IImageField;
                                 style?: {
                                   alignX?: ('start' | 'center' | 'end' | 'space-around' | 'space-evenly') | null;
                                   alignY?: ('start' | 'center' | 'end' | 'stretch') | null;
+                                  borderRadius?: string | null;
                                   background?: string | null;
+                                  maxWidth?: string | null;
+                                  border?: string | null;
                                 };
                                 id?: string | null;
                                 blockName?: string | null;
@@ -806,10 +819,14 @@ export interface Page {
                                     }
                                   | {
                                       richText?: IRichTextField;
+                                      image?: IImageField;
                                       style?: {
                                         alignX?: ('start' | 'center' | 'end' | 'space-around' | 'space-evenly') | null;
                                         alignY?: ('start' | 'center' | 'end' | 'stretch') | null;
+                                        borderRadius?: string | null;
                                         background?: string | null;
+                                        maxWidth?: string | null;
+                                        border?: string | null;
                                       };
                                       id?: string | null;
                                       blockName?: string | null;
@@ -913,12 +930,16 @@ export interface Page {
                                               }
                                             | {
                                                 richText?: IRichTextField;
+                                                image?: IImageField;
                                                 style?: {
                                                   alignX?:
                                                     | ('start' | 'center' | 'end' | 'space-around' | 'space-evenly')
                                                     | null;
                                                   alignY?: ('start' | 'center' | 'end' | 'stretch') | null;
+                                                  borderRadius?: string | null;
                                                   background?: string | null;
+                                                  maxWidth?: string | null;
+                                                  border?: string | null;
                                                 };
                                                 id?: string | null;
                                                 blockName?: string | null;
@@ -1060,10 +1081,14 @@ export interface Page {
                     }
                   | {
                       richText?: IRichTextField;
+                      image?: IImageField;
                       style?: {
                         alignX?: ('start' | 'center' | 'end' | 'space-around' | 'space-evenly') | null;
                         alignY?: ('start' | 'center' | 'end' | 'stretch') | null;
+                        borderRadius?: string | null;
                         background?: string | null;
+                        maxWidth?: string | null;
+                        border?: string | null;
                       };
                       id?: string | null;
                       blockName?: string | null;
@@ -1167,10 +1192,14 @@ export interface Page {
                               }
                             | {
                                 richText?: IRichTextField;
+                                image?: IImageField;
                                 style?: {
                                   alignX?: ('start' | 'center' | 'end' | 'space-around' | 'space-evenly') | null;
                                   alignY?: ('start' | 'center' | 'end' | 'stretch') | null;
+                                  borderRadius?: string | null;
                                   background?: string | null;
+                                  maxWidth?: string | null;
+                                  border?: string | null;
                                 };
                                 id?: string | null;
                                 blockName?: string | null;
@@ -1295,10 +1324,14 @@ export interface Page {
                                     }
                                   | {
                                       richText?: IRichTextField;
+                                      image?: IImageField;
                                       style?: {
                                         alignX?: ('start' | 'center' | 'end' | 'space-around' | 'space-evenly') | null;
                                         alignY?: ('start' | 'center' | 'end' | 'stretch') | null;
+                                        borderRadius?: string | null;
                                         background?: string | null;
+                                        maxWidth?: string | null;
+                                        border?: string | null;
                                       };
                                       id?: string | null;
                                       blockName?: string | null;
@@ -1402,12 +1435,16 @@ export interface Page {
                                               }
                                             | {
                                                 richText?: IRichTextField;
+                                                image?: IImageField;
                                                 style?: {
                                                   alignX?:
                                                     | ('start' | 'center' | 'end' | 'space-around' | 'space-evenly')
                                                     | null;
                                                   alignY?: ('start' | 'center' | 'end' | 'stretch') | null;
+                                                  borderRadius?: string | null;
                                                   background?: string | null;
+                                                  maxWidth?: string | null;
+                                                  border?: string | null;
                                                 };
                                                 id?: string | null;
                                                 blockName?: string | null;
@@ -1549,10 +1586,14 @@ export interface Page {
                     }
                   | {
                       richText?: IRichTextField;
+                      image?: IImageField;
                       style?: {
                         alignX?: ('start' | 'center' | 'end' | 'space-around' | 'space-evenly') | null;
                         alignY?: ('start' | 'center' | 'end' | 'stretch') | null;
+                        borderRadius?: string | null;
                         background?: string | null;
+                        maxWidth?: string | null;
+                        border?: string | null;
                       };
                       id?: string | null;
                       blockName?: string | null;
@@ -1656,10 +1697,14 @@ export interface Page {
                               }
                             | {
                                 richText?: IRichTextField;
+                                image?: IImageField;
                                 style?: {
                                   alignX?: ('start' | 'center' | 'end' | 'space-around' | 'space-evenly') | null;
                                   alignY?: ('start' | 'center' | 'end' | 'stretch') | null;
+                                  borderRadius?: string | null;
                                   background?: string | null;
+                                  maxWidth?: string | null;
+                                  border?: string | null;
                                 };
                                 id?: string | null;
                                 blockName?: string | null;
@@ -1784,10 +1829,14 @@ export interface Page {
                                     }
                                   | {
                                       richText?: IRichTextField;
+                                      image?: IImageField;
                                       style?: {
                                         alignX?: ('start' | 'center' | 'end' | 'space-around' | 'space-evenly') | null;
                                         alignY?: ('start' | 'center' | 'end' | 'stretch') | null;
+                                        borderRadius?: string | null;
                                         background?: string | null;
+                                        maxWidth?: string | null;
+                                        border?: string | null;
                                       };
                                       id?: string | null;
                                       blockName?: string | null;
@@ -1891,12 +1940,16 @@ export interface Page {
                                               }
                                             | {
                                                 richText?: IRichTextField;
+                                                image?: IImageField;
                                                 style?: {
                                                   alignX?:
                                                     | ('start' | 'center' | 'end' | 'space-around' | 'space-evenly')
                                                     | null;
                                                   alignY?: ('start' | 'center' | 'end' | 'stretch') | null;
+                                                  borderRadius?: string | null;
                                                   background?: string | null;
+                                                  maxWidth?: string | null;
+                                                  border?: string | null;
                                                 };
                                                 id?: string | null;
                                                 blockName?: string | null;
@@ -2013,6 +2066,7 @@ export interface Page {
               padding?: string | null;
             };
             animation?: IAnimation;
+            sticker?: IStickerField;
             id?: string | null;
             blockName?: string | null;
             blockType: 'blockColumnLayout';
@@ -2060,10 +2114,14 @@ export interface Page {
                           }
                         | {
                             richText?: IRichTextField;
+                            image?: IImageField;
                             style?: {
                               alignX?: ('start' | 'center' | 'end' | 'space-around' | 'space-evenly') | null;
                               alignY?: ('start' | 'center' | 'end' | 'stretch') | null;
+                              borderRadius?: string | null;
                               background?: string | null;
+                              maxWidth?: string | null;
+                              border?: string | null;
                             };
                             id?: string | null;
                             blockName?: string | null;
@@ -2167,10 +2225,14 @@ export interface Page {
                                     }
                                   | {
                                       richText?: IRichTextField;
+                                      image?: IImageField;
                                       style?: {
                                         alignX?: ('start' | 'center' | 'end' | 'space-around' | 'space-evenly') | null;
                                         alignY?: ('start' | 'center' | 'end' | 'stretch') | null;
+                                        borderRadius?: string | null;
                                         background?: string | null;
+                                        maxWidth?: string | null;
+                                        border?: string | null;
                                       };
                                       id?: string | null;
                                       blockName?: string | null;
@@ -2332,6 +2394,21 @@ export interface Page {
             id?: string | null;
             blockName?: string | null;
             blockType: 'cutoutCard';
+          }
+        | {
+            richText?: IRichTextField;
+            image?: IImageField;
+            style?: {
+              alignX?: ('start' | 'center' | 'end' | 'space-around' | 'space-evenly') | null;
+              alignY?: ('start' | 'center' | 'end' | 'stretch') | null;
+              borderRadius?: string | null;
+              background?: string | null;
+              maxWidth?: string | null;
+              border?: string | null;
+            };
+            id?: string | null;
+            blockName?: string | null;
+            blockType: 'richTextCard';
           }
         | {
             richText?: IRichTextField;
@@ -2553,10 +2630,14 @@ export interface INavigation {
                     }
                   | {
                       richText?: IRichTextField;
+                      image?: IImageField;
                       style?: {
                         alignX?: ('start' | 'center' | 'end' | 'space-around' | 'space-evenly') | null;
                         alignY?: ('start' | 'center' | 'end' | 'stretch') | null;
+                        borderRadius?: string | null;
                         background?: string | null;
+                        maxWidth?: string | null;
+                        border?: string | null;
                       };
                       id?: string | null;
                       blockName?: string | null;
@@ -2660,10 +2741,14 @@ export interface INavigation {
                               }
                             | {
                                 richText?: IRichTextField;
+                                image?: IImageField;
                                 style?: {
                                   alignX?: ('start' | 'center' | 'end' | 'space-around' | 'space-evenly') | null;
                                   alignY?: ('start' | 'center' | 'end' | 'stretch') | null;
+                                  borderRadius?: string | null;
                                   background?: string | null;
+                                  maxWidth?: string | null;
+                                  border?: string | null;
                                 };
                                 id?: string | null;
                                 blockName?: string | null;
@@ -2788,10 +2873,14 @@ export interface INavigation {
                                     }
                                   | {
                                       richText?: IRichTextField;
+                                      image?: IImageField;
                                       style?: {
                                         alignX?: ('start' | 'center' | 'end' | 'space-around' | 'space-evenly') | null;
                                         alignY?: ('start' | 'center' | 'end' | 'stretch') | null;
+                                        borderRadius?: string | null;
                                         background?: string | null;
+                                        maxWidth?: string | null;
+                                        border?: string | null;
                                       };
                                       id?: string | null;
                                       blockName?: string | null;
@@ -2895,12 +2984,16 @@ export interface INavigation {
                                               }
                                             | {
                                                 richText?: IRichTextField;
+                                                image?: IImageField;
                                                 style?: {
                                                   alignX?:
                                                     | ('start' | 'center' | 'end' | 'space-around' | 'space-evenly')
                                                     | null;
                                                   alignY?: ('start' | 'center' | 'end' | 'stretch') | null;
+                                                  borderRadius?: string | null;
                                                   background?: string | null;
+                                                  maxWidth?: string | null;
+                                                  border?: string | null;
                                                 };
                                                 id?: string | null;
                                                 blockName?: string | null;
@@ -3042,10 +3135,14 @@ export interface INavigation {
                     }
                   | {
                       richText?: IRichTextField;
+                      image?: IImageField;
                       style?: {
                         alignX?: ('start' | 'center' | 'end' | 'space-around' | 'space-evenly') | null;
                         alignY?: ('start' | 'center' | 'end' | 'stretch') | null;
+                        borderRadius?: string | null;
                         background?: string | null;
+                        maxWidth?: string | null;
+                        border?: string | null;
                       };
                       id?: string | null;
                       blockName?: string | null;
@@ -3149,10 +3246,14 @@ export interface INavigation {
                               }
                             | {
                                 richText?: IRichTextField;
+                                image?: IImageField;
                                 style?: {
                                   alignX?: ('start' | 'center' | 'end' | 'space-around' | 'space-evenly') | null;
                                   alignY?: ('start' | 'center' | 'end' | 'stretch') | null;
+                                  borderRadius?: string | null;
                                   background?: string | null;
+                                  maxWidth?: string | null;
+                                  border?: string | null;
                                 };
                                 id?: string | null;
                                 blockName?: string | null;
@@ -3277,10 +3378,14 @@ export interface INavigation {
                                     }
                                   | {
                                       richText?: IRichTextField;
+                                      image?: IImageField;
                                       style?: {
                                         alignX?: ('start' | 'center' | 'end' | 'space-around' | 'space-evenly') | null;
                                         alignY?: ('start' | 'center' | 'end' | 'stretch') | null;
+                                        borderRadius?: string | null;
                                         background?: string | null;
+                                        maxWidth?: string | null;
+                                        border?: string | null;
                                       };
                                       id?: string | null;
                                       blockName?: string | null;
@@ -3384,12 +3489,16 @@ export interface INavigation {
                                               }
                                             | {
                                                 richText?: IRichTextField;
+                                                image?: IImageField;
                                                 style?: {
                                                   alignX?:
                                                     | ('start' | 'center' | 'end' | 'space-around' | 'space-evenly')
                                                     | null;
                                                   alignY?: ('start' | 'center' | 'end' | 'stretch') | null;
+                                                  borderRadius?: string | null;
                                                   background?: string | null;
+                                                  maxWidth?: string | null;
+                                                  border?: string | null;
                                                 };
                                                 id?: string | null;
                                                 blockName?: string | null;
@@ -3531,10 +3640,14 @@ export interface INavigation {
                     }
                   | {
                       richText?: IRichTextField;
+                      image?: IImageField;
                       style?: {
                         alignX?: ('start' | 'center' | 'end' | 'space-around' | 'space-evenly') | null;
                         alignY?: ('start' | 'center' | 'end' | 'stretch') | null;
+                        borderRadius?: string | null;
                         background?: string | null;
+                        maxWidth?: string | null;
+                        border?: string | null;
                       };
                       id?: string | null;
                       blockName?: string | null;
@@ -3638,10 +3751,14 @@ export interface INavigation {
                               }
                             | {
                                 richText?: IRichTextField;
+                                image?: IImageField;
                                 style?: {
                                   alignX?: ('start' | 'center' | 'end' | 'space-around' | 'space-evenly') | null;
                                   alignY?: ('start' | 'center' | 'end' | 'stretch') | null;
+                                  borderRadius?: string | null;
                                   background?: string | null;
+                                  maxWidth?: string | null;
+                                  border?: string | null;
                                 };
                                 id?: string | null;
                                 blockName?: string | null;
@@ -3766,10 +3883,14 @@ export interface INavigation {
                                     }
                                   | {
                                       richText?: IRichTextField;
+                                      image?: IImageField;
                                       style?: {
                                         alignX?: ('start' | 'center' | 'end' | 'space-around' | 'space-evenly') | null;
                                         alignY?: ('start' | 'center' | 'end' | 'stretch') | null;
+                                        borderRadius?: string | null;
                                         background?: string | null;
+                                        maxWidth?: string | null;
+                                        border?: string | null;
                                       };
                                       id?: string | null;
                                       blockName?: string | null;
@@ -3873,12 +3994,16 @@ export interface INavigation {
                                               }
                                             | {
                                                 richText?: IRichTextField;
+                                                image?: IImageField;
                                                 style?: {
                                                   alignX?:
                                                     | ('start' | 'center' | 'end' | 'space-around' | 'space-evenly')
                                                     | null;
                                                   alignY?: ('start' | 'center' | 'end' | 'stretch') | null;
+                                                  borderRadius?: string | null;
                                                   background?: string | null;
+                                                  maxWidth?: string | null;
+                                                  border?: string | null;
                                                 };
                                                 id?: string | null;
                                                 blockName?: string | null;
@@ -4013,6 +4138,7 @@ export interface IImageField {
     sizes?: string | null;
   };
   animation?: IAnimation;
+  sticker?: IStickerField;
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
@@ -4073,6 +4199,20 @@ export interface Asset {
       filename?: string | null;
     };
   };
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "IStickerField".
+ */
+export interface IStickerField {
+  url?: (number | null) | Asset;
+  style?: {
+    inset?: string | null;
+    height?: string | null;
+    width?: string | null;
+    objectFit?: string | null;
+  };
+  animation?: IAnimation;
 }
 /**
  * Icon sets: https://icon-sets.iconify.design/
@@ -4305,6 +4445,7 @@ export interface IGutter {
     value?: string | null;
     onlyInContainer?: boolean | null;
   };
+  bgImage?: IImageField;
   id?: string | null;
   blockName?: string | null;
   blockType: 'gutter';
@@ -4365,10 +4506,14 @@ export interface IBlockColumnLayout {
           }
         | {
             richText?: IRichTextField;
+            image?: IImageField;
             style?: {
               alignX?: ('start' | 'center' | 'end' | 'space-around' | 'space-evenly') | null;
               alignY?: ('start' | 'center' | 'end' | 'stretch') | null;
+              borderRadius?: string | null;
               background?: string | null;
+              maxWidth?: string | null;
+              border?: string | null;
             };
             id?: string | null;
             blockName?: string | null;
@@ -4472,10 +4617,14 @@ export interface IBlockColumnLayout {
                     }
                   | {
                       richText?: IRichTextField;
+                      image?: IImageField;
                       style?: {
                         alignX?: ('start' | 'center' | 'end' | 'space-around' | 'space-evenly') | null;
                         alignY?: ('start' | 'center' | 'end' | 'stretch') | null;
+                        borderRadius?: string | null;
                         background?: string | null;
+                        maxWidth?: string | null;
+                        border?: string | null;
                       };
                       id?: string | null;
                       blockName?: string | null;
@@ -4600,10 +4749,14 @@ export interface IBlockColumnLayout {
                           }
                         | {
                             richText?: IRichTextField;
+                            image?: IImageField;
                             style?: {
                               alignX?: ('start' | 'center' | 'end' | 'space-around' | 'space-evenly') | null;
                               alignY?: ('start' | 'center' | 'end' | 'stretch') | null;
+                              borderRadius?: string | null;
                               background?: string | null;
+                              maxWidth?: string | null;
+                              border?: string | null;
                             };
                             id?: string | null;
                             blockName?: string | null;
@@ -4707,10 +4860,14 @@ export interface IBlockColumnLayout {
                                     }
                                   | {
                                       richText?: IRichTextField;
+                                      image?: IImageField;
                                       style?: {
                                         alignX?: ('start' | 'center' | 'end' | 'space-around' | 'space-evenly') | null;
                                         alignY?: ('start' | 'center' | 'end' | 'stretch') | null;
+                                        borderRadius?: string | null;
                                         background?: string | null;
+                                        maxWidth?: string | null;
+                                        border?: string | null;
                                       };
                                       id?: string | null;
                                       blockName?: string | null;
@@ -4850,10 +5007,14 @@ export interface IBlockColumnLayout {
           }
         | {
             richText?: IRichTextField;
+            image?: IImageField;
             style?: {
               alignX?: ('start' | 'center' | 'end' | 'space-around' | 'space-evenly') | null;
               alignY?: ('start' | 'center' | 'end' | 'stretch') | null;
+              borderRadius?: string | null;
               background?: string | null;
+              maxWidth?: string | null;
+              border?: string | null;
             };
             id?: string | null;
             blockName?: string | null;
@@ -4957,10 +5118,14 @@ export interface IBlockColumnLayout {
                     }
                   | {
                       richText?: IRichTextField;
+                      image?: IImageField;
                       style?: {
                         alignX?: ('start' | 'center' | 'end' | 'space-around' | 'space-evenly') | null;
                         alignY?: ('start' | 'center' | 'end' | 'stretch') | null;
+                        borderRadius?: string | null;
                         background?: string | null;
+                        maxWidth?: string | null;
+                        border?: string | null;
                       };
                       id?: string | null;
                       blockName?: string | null;
@@ -5085,10 +5250,14 @@ export interface IBlockColumnLayout {
                           }
                         | {
                             richText?: IRichTextField;
+                            image?: IImageField;
                             style?: {
                               alignX?: ('start' | 'center' | 'end' | 'space-around' | 'space-evenly') | null;
                               alignY?: ('start' | 'center' | 'end' | 'stretch') | null;
+                              borderRadius?: string | null;
                               background?: string | null;
+                              maxWidth?: string | null;
+                              border?: string | null;
                             };
                             id?: string | null;
                             blockName?: string | null;
@@ -5192,10 +5361,14 @@ export interface IBlockColumnLayout {
                                     }
                                   | {
                                       richText?: IRichTextField;
+                                      image?: IImageField;
                                       style?: {
                                         alignX?: ('start' | 'center' | 'end' | 'space-around' | 'space-evenly') | null;
                                         alignY?: ('start' | 'center' | 'end' | 'stretch') | null;
+                                        borderRadius?: string | null;
                                         background?: string | null;
+                                        maxWidth?: string | null;
+                                        border?: string | null;
                                       };
                                       id?: string | null;
                                       blockName?: string | null;
@@ -5335,10 +5508,14 @@ export interface IBlockColumnLayout {
           }
         | {
             richText?: IRichTextField;
+            image?: IImageField;
             style?: {
               alignX?: ('start' | 'center' | 'end' | 'space-around' | 'space-evenly') | null;
               alignY?: ('start' | 'center' | 'end' | 'stretch') | null;
+              borderRadius?: string | null;
               background?: string | null;
+              maxWidth?: string | null;
+              border?: string | null;
             };
             id?: string | null;
             blockName?: string | null;
@@ -5442,10 +5619,14 @@ export interface IBlockColumnLayout {
                     }
                   | {
                       richText?: IRichTextField;
+                      image?: IImageField;
                       style?: {
                         alignX?: ('start' | 'center' | 'end' | 'space-around' | 'space-evenly') | null;
                         alignY?: ('start' | 'center' | 'end' | 'stretch') | null;
+                        borderRadius?: string | null;
                         background?: string | null;
+                        maxWidth?: string | null;
+                        border?: string | null;
                       };
                       id?: string | null;
                       blockName?: string | null;
@@ -5570,10 +5751,14 @@ export interface IBlockColumnLayout {
                           }
                         | {
                             richText?: IRichTextField;
+                            image?: IImageField;
                             style?: {
                               alignX?: ('start' | 'center' | 'end' | 'space-around' | 'space-evenly') | null;
                               alignY?: ('start' | 'center' | 'end' | 'stretch') | null;
+                              borderRadius?: string | null;
                               background?: string | null;
+                              maxWidth?: string | null;
+                              border?: string | null;
                             };
                             id?: string | null;
                             blockName?: string | null;
@@ -5677,10 +5862,14 @@ export interface IBlockColumnLayout {
                                     }
                                   | {
                                       richText?: IRichTextField;
+                                      image?: IImageField;
                                       style?: {
                                         alignX?: ('start' | 'center' | 'end' | 'space-around' | 'space-evenly') | null;
                                         alignY?: ('start' | 'center' | 'end' | 'stretch') | null;
+                                        borderRadius?: string | null;
                                         background?: string | null;
+                                        maxWidth?: string | null;
+                                        border?: string | null;
                                       };
                                       id?: string | null;
                                       blockName?: string | null;
@@ -5795,6 +5984,7 @@ export interface IBlockColumnLayout {
     padding?: string | null;
   };
   animation?: IAnimation;
+  sticker?: IStickerField;
   id?: string | null;
   blockName?: string | null;
   blockType: 'blockColumnLayout';
@@ -5833,10 +6023,14 @@ export interface IFlexboxLayout {
                 }
               | {
                   richText?: IRichTextField;
+                  image?: IImageField;
                   style?: {
                     alignX?: ('start' | 'center' | 'end' | 'space-around' | 'space-evenly') | null;
                     alignY?: ('start' | 'center' | 'end' | 'stretch') | null;
+                    borderRadius?: string | null;
                     background?: string | null;
+                    maxWidth?: string | null;
+                    border?: string | null;
                   };
                   id?: string | null;
                   blockName?: string | null;
@@ -6037,10 +6231,14 @@ export interface IHoverCard {
  */
 export interface IRichTextCard {
   richText?: IRichTextField;
+  image?: IImageField;
   style?: {
     alignX?: ('start' | 'center' | 'end' | 'space-around' | 'space-evenly') | null;
     alignY?: ('start' | 'center' | 'end' | 'stretch') | null;
+    borderRadius?: string | null;
     background?: string | null;
+    maxWidth?: string | null;
+    border?: string | null;
   };
   id?: string | null;
   blockName?: string | null;
@@ -6369,10 +6567,14 @@ export interface IFooterDesign2 {
           }
         | {
             richText?: IRichTextField;
+            image?: IImageField;
             style?: {
               alignX?: ('start' | 'center' | 'end' | 'space-around' | 'space-evenly') | null;
               alignY?: ('start' | 'center' | 'end' | 'stretch') | null;
+              borderRadius?: string | null;
               background?: string | null;
+              maxWidth?: string | null;
+              border?: string | null;
             };
             id?: string | null;
             blockName?: string | null;
@@ -6476,10 +6678,14 @@ export interface IFooterDesign2 {
                     }
                   | {
                       richText?: IRichTextField;
+                      image?: IImageField;
                       style?: {
                         alignX?: ('start' | 'center' | 'end' | 'space-around' | 'space-evenly') | null;
                         alignY?: ('start' | 'center' | 'end' | 'stretch') | null;
+                        borderRadius?: string | null;
                         background?: string | null;
+                        maxWidth?: string | null;
+                        border?: string | null;
                       };
                       id?: string | null;
                       blockName?: string | null;
@@ -6604,10 +6810,14 @@ export interface IFooterDesign2 {
                           }
                         | {
                             richText?: IRichTextField;
+                            image?: IImageField;
                             style?: {
                               alignX?: ('start' | 'center' | 'end' | 'space-around' | 'space-evenly') | null;
                               alignY?: ('start' | 'center' | 'end' | 'stretch') | null;
+                              borderRadius?: string | null;
                               background?: string | null;
+                              maxWidth?: string | null;
+                              border?: string | null;
                             };
                             id?: string | null;
                             blockName?: string | null;
@@ -6711,10 +6921,14 @@ export interface IFooterDesign2 {
                                     }
                                   | {
                                       richText?: IRichTextField;
+                                      image?: IImageField;
                                       style?: {
                                         alignX?: ('start' | 'center' | 'end' | 'space-around' | 'space-evenly') | null;
                                         alignY?: ('start' | 'center' | 'end' | 'stretch') | null;
+                                        borderRadius?: string | null;
                                         background?: string | null;
+                                        maxWidth?: string | null;
+                                        border?: string | null;
                                       };
                                       id?: string | null;
                                       blockName?: string | null;
@@ -6854,10 +7068,14 @@ export interface IFooterDesign2 {
           }
         | {
             richText?: IRichTextField;
+            image?: IImageField;
             style?: {
               alignX?: ('start' | 'center' | 'end' | 'space-around' | 'space-evenly') | null;
               alignY?: ('start' | 'center' | 'end' | 'stretch') | null;
+              borderRadius?: string | null;
               background?: string | null;
+              maxWidth?: string | null;
+              border?: string | null;
             };
             id?: string | null;
             blockName?: string | null;
@@ -6961,10 +7179,14 @@ export interface IFooterDesign2 {
                     }
                   | {
                       richText?: IRichTextField;
+                      image?: IImageField;
                       style?: {
                         alignX?: ('start' | 'center' | 'end' | 'space-around' | 'space-evenly') | null;
                         alignY?: ('start' | 'center' | 'end' | 'stretch') | null;
+                        borderRadius?: string | null;
                         background?: string | null;
+                        maxWidth?: string | null;
+                        border?: string | null;
                       };
                       id?: string | null;
                       blockName?: string | null;
@@ -7089,10 +7311,14 @@ export interface IFooterDesign2 {
                           }
                         | {
                             richText?: IRichTextField;
+                            image?: IImageField;
                             style?: {
                               alignX?: ('start' | 'center' | 'end' | 'space-around' | 'space-evenly') | null;
                               alignY?: ('start' | 'center' | 'end' | 'stretch') | null;
+                              borderRadius?: string | null;
                               background?: string | null;
+                              maxWidth?: string | null;
+                              border?: string | null;
                             };
                             id?: string | null;
                             blockName?: string | null;
@@ -7196,10 +7422,14 @@ export interface IFooterDesign2 {
                                     }
                                   | {
                                       richText?: IRichTextField;
+                                      image?: IImageField;
                                       style?: {
                                         alignX?: ('start' | 'center' | 'end' | 'space-around' | 'space-evenly') | null;
                                         alignY?: ('start' | 'center' | 'end' | 'stretch') | null;
+                                        borderRadius?: string | null;
                                         background?: string | null;
+                                        maxWidth?: string | null;
+                                        border?: string | null;
                                       };
                                       id?: string | null;
                                       blockName?: string | null;
@@ -7339,10 +7569,14 @@ export interface IFooterDesign2 {
           }
         | {
             richText?: IRichTextField;
+            image?: IImageField;
             style?: {
               alignX?: ('start' | 'center' | 'end' | 'space-around' | 'space-evenly') | null;
               alignY?: ('start' | 'center' | 'end' | 'stretch') | null;
+              borderRadius?: string | null;
               background?: string | null;
+              maxWidth?: string | null;
+              border?: string | null;
             };
             id?: string | null;
             blockName?: string | null;
@@ -7446,10 +7680,14 @@ export interface IFooterDesign2 {
                     }
                   | {
                       richText?: IRichTextField;
+                      image?: IImageField;
                       style?: {
                         alignX?: ('start' | 'center' | 'end' | 'space-around' | 'space-evenly') | null;
                         alignY?: ('start' | 'center' | 'end' | 'stretch') | null;
+                        borderRadius?: string | null;
                         background?: string | null;
+                        maxWidth?: string | null;
+                        border?: string | null;
                       };
                       id?: string | null;
                       blockName?: string | null;

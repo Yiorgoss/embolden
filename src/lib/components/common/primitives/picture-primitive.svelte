@@ -4,6 +4,7 @@
 	import { getContext, hasContext, onMount } from 'svelte';
 	import { MediaQuery } from 'svelte/reactivity';
 	import { fade, fly } from 'svelte/transition';
+	import Sticker from '@/components/common/sticker.svelte';
 	import { animate } from '@/attachments/animations/animate.svelte';
 	import { site } from '@/config';
 
@@ -29,8 +30,11 @@
 		cb && cb();
 	});
 
-	const { animation, style: { background, padding, borderRadius, opacity, height, sizes } = {} } =
-		$derived(image || {});
+	const {
+		sticker,
+		animation,
+		style: { background, padding, borderRadius, opacity, height, sizes } = {}
+	} = $derived(image || {});
 	//  const { background, padding, borderRadius, opacity, minHeight, height, sizes } = style || {};
 
 	let imageLoaded = $state(false);
@@ -117,4 +121,9 @@
 		style:border-radius={borderRadius}
 		class="z-10 col-start-1 row-start-1 h-full mix-blend-lighten w-full"
 	></div>
+
+	<!--  sticker  -->
+	<div class="z-10 col-start-1 relative row-start-1 h-full w-full">
+		<Sticker data={image?.sticker} />
+	</div>
 </div>

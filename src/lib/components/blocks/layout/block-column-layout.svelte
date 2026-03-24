@@ -4,6 +4,7 @@
 
 	import RenderBlocks from '../render-blocks.svelte';
 	import Picture from '@/components/common/picture.svelte';
+	import Sticker from '@/components/common/sticker.svelte';
 	import { cn } from '@/utils';
 	import { animate } from '@/attachments/animations/animate.svelte';
 
@@ -107,4 +108,5 @@
 			</div>
 		{/if}
 	</div>
+	<Sticker />
 </section>

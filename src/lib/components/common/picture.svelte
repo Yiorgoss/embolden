@@ -23,17 +23,6 @@
 	//  FIX needs rewrite
 </script>
 
-<!--  {#if image && image.url}
-	{#await resolveID({ collection: 'assets', data: image.url })}
-		<div class="flex h-full w-full items-center justify-center">
-			<Icon name="loader-circle" class="animate-[spin_2s_linear_infinite] " />
-		</div>  
-	{:then asset: Asset}
-	{:catch error}
-		<p>ERROR: {error}</p>
-	{/await}
-{/if}
--->
 {#if image && image.url}
 	<PicturePrimitive
 		{loading}
