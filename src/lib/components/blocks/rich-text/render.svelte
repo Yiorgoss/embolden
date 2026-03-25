@@ -34,6 +34,7 @@
 	<!--  when switching languages richText becomes undefined  -->
 	<div
 		style:padding={richText.style?.padding}
+		style:max-width={richText.style?.maxWidth}
 		style:--list-marker-color={richText.style?.marker}
 		class=""
 	>

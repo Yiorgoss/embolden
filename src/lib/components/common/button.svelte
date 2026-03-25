@@ -20,7 +20,7 @@
 	}: ButtonProps = $props();
 
 	const { locale } = $derived(page.params);
-	let { type: urlType, reference, url, display } = $derived(link || {});
+	let { type: urlType, reference, url, display, style } = $derived(link || {});
 
 	let _href = $state<Partial<Page> | undefined | null>(undefined);
 	let variant = $derived(display?.variant ?? _variant);
@@ -44,7 +44,13 @@
 	});
 </script>
 
-<Button class={cn('wrap-anywhere mx-2', className)} {variant} {href} {...restProps}>
+<Button
+	style={`padding=${style?.padding};`}
+	class={cn('wrap-anywhere mx-2', className)}
+	{variant}
+	{href}
+	{...restProps}
+>
 	{#if display?.text || display?.includeIcon}
 		<div class="flex gap-2">
 			<p class="">

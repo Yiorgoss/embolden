@@ -51,11 +51,10 @@
 
 <section
 	id="block-column-layout"
-	style:--padding={mobile.current ? mobileStyle?.padding : style?.padding}
 	style:background={style?.color}
 	style:border-radius={style?.borderRadius}
 	class:container={style?.container}
-	class="mx-auto p-0 md:py-5 relative"
+	class="mx-auto p-50 md:py-5 relative"
 >
 	{#if blockData?.bgImage}
 		<div class="-z-0 absolute inset-0">
@@ -63,11 +62,11 @@
 		</div>
 	{/if}
 	<div
-		style:padding={style?.padding}
 		style:overflow={style?.overflow}
 		style:gap={style?.gap}
+		style:padding={mobile.current ? mobileStyle?.padding : style?.padding}
 		class:flex-wrap={layout == 'threeColumns'}
-		class="flex z-0 container gap-0 md:gap-10 justify-center items-center md:items-stretch h-full flex-col md:flex-row mx-auto"
+		class=" flex z-0 container gap-0 md:gap-10 justify-center items-center md:items-stretch h-full flex-col md:flex-row mx-auto"
 		{@attach animate({ animation })}
 	>
 		<div
