@@ -26,7 +26,7 @@
 		cb && cb();
 	});
 
-	const { height, background, minHeight, textWrap } = $derived(style || {});
+	const { height, background, minHeight, textWrap, padding } = $derived(style || {});
 </script>
 
 <div id="animated-rich-text" class={cn('relative overflow-clip', overrides)}>
@@ -34,6 +34,7 @@
 		style:height
 		style:min-height={minHeight}
 		style:text-wrap={textWrap}
+		style:padding
 		style:background
 		class="grid grid-cols-1 grid-rows-1 justify-center items-center"
 	>

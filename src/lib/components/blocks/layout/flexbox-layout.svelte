@@ -13,6 +13,7 @@
 		style:gap={blockData.style?.gap}
 		style:flex-direction={blockData.style?.flexDirection}
 		style:flex-wrap={blockData.style?.flexWrap}
+		style:overflow={blockData.style?.overflow}
 		class="flex flex-wrap justify-center items-center gap-2"
 	>
 		{#each blockData.list ?? [] as { block }}

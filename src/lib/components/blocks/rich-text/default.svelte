@@ -21,7 +21,7 @@
 		cb?: () => void;
 	} = $props();
 
-	const { height, background, minHeight, textWrap } = $derived(style || {});
+	const { height, background, minHeight, textWrap, padding } = $derived(style || {});
 
 	onMount(() => {
 		cb && cb();
@@ -33,6 +33,7 @@
 		id="default-rich-text"
 		style:height
 		style:background
+		style:padding
 		style:text-wrap={textWrap}
 		style:min-height={minHeight}
 		class={cn('relative overflow-hidden', overrides)}

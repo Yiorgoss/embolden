@@ -16,7 +16,7 @@
   --multi-lingual-sans: "Inter", ui-sans-serif, sans-serif;
   --multi-lingual-cursive: var(--cursive), var(--multi-lingual-serif);
 
-  --radius: 30px;
+  --radius: 10px;
 
   /* Default background color of <body />...etc / */
   --background: oklch(96.89% 0.0215 95.28);

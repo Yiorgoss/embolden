@@ -54,7 +54,7 @@
 	style:background={style?.color}
 	style:border-radius={style?.borderRadius}
 	class:container={style?.container}
-	class="mx-auto p-50 md:py-5 relative"
+	class="mx-auto md:py-5 relative"
 >
 	{#if blockData?.bgImage}
 		<div class="-z-0 absolute inset-0">
