@@ -205,6 +205,7 @@ export interface IRichTextField {
   style?: {
     background?: string | null;
     padding?: string | null;
+    maxWidth?: string | null;
     height?: string | null;
     minHeight?: string | null;
     marker?: string | null;
@@ -349,6 +350,11 @@ export interface Page {
           }
         | {
             link?: IButton;
+            style?: {
+              padding?: string | null;
+              alignX?: ('start' | 'center' | 'end' | 'space-around' | 'space-evenly') | null;
+              alignY?: ('start' | 'center' | 'end' | 'stretch') | null;
+            };
             id?: string | null;
             blockName?: string | null;
             blockType: 'button';
@@ -602,6 +608,11 @@ export interface Page {
                     }
                   | {
                       link?: IButton;
+                      style?: {
+                        padding?: string | null;
+                        alignX?: ('start' | 'center' | 'end' | 'space-around' | 'space-evenly') | null;
+                        alignY?: ('start' | 'center' | 'end' | 'stretch') | null;
+                      };
                       id?: string | null;
                       blockName?: string | null;
                       blockType: 'button';
@@ -845,6 +856,11 @@ export interface Page {
                                     }
                                   | {
                                       link?: IButton;
+                                      style?: {
+                                        padding?: string | null;
+                                        alignX?: ('start' | 'center' | 'end' | 'space-around' | 'space-evenly') | null;
+                                        alignY?: ('start' | 'center' | 'end' | 'stretch') | null;
+                                      };
                                       id?: string | null;
                                       blockName?: string | null;
                                       blockType: 'button';
@@ -1107,6 +1123,11 @@ export interface Page {
                     }
                   | {
                       link?: IButton;
+                      style?: {
+                        padding?: string | null;
+                        alignX?: ('start' | 'center' | 'end' | 'space-around' | 'space-evenly') | null;
+                        alignY?: ('start' | 'center' | 'end' | 'stretch') | null;
+                      };
                       id?: string | null;
                       blockName?: string | null;
                       blockType: 'button';
@@ -1350,6 +1371,11 @@ export interface Page {
                                     }
                                   | {
                                       link?: IButton;
+                                      style?: {
+                                        padding?: string | null;
+                                        alignX?: ('start' | 'center' | 'end' | 'space-around' | 'space-evenly') | null;
+                                        alignY?: ('start' | 'center' | 'end' | 'stretch') | null;
+                                      };
                                       id?: string | null;
                                       blockName?: string | null;
                                       blockType: 'button';
@@ -1612,6 +1638,11 @@ export interface Page {
                     }
                   | {
                       link?: IButton;
+                      style?: {
+                        padding?: string | null;
+                        alignX?: ('start' | 'center' | 'end' | 'space-around' | 'space-evenly') | null;
+                        alignY?: ('start' | 'center' | 'end' | 'stretch') | null;
+                      };
                       id?: string | null;
                       blockName?: string | null;
                       blockType: 'button';
@@ -1855,6 +1886,11 @@ export interface Page {
                                     }
                                   | {
                                       link?: IButton;
+                                      style?: {
+                                        padding?: string | null;
+                                        alignX?: ('start' | 'center' | 'end' | 'space-around' | 'space-evenly') | null;
+                                        alignY?: ('start' | 'center' | 'end' | 'stretch') | null;
+                                      };
                                       id?: string | null;
                                       blockName?: string | null;
                                       blockType: 'button';
@@ -2140,6 +2176,11 @@ export interface Page {
                           }
                         | {
                             link?: IButton;
+                            style?: {
+                              padding?: string | null;
+                              alignX?: ('start' | 'center' | 'end' | 'space-around' | 'space-evenly') | null;
+                              alignY?: ('start' | 'center' | 'end' | 'stretch') | null;
+                            };
                             id?: string | null;
                             blockName?: string | null;
                             blockType: 'button';
@@ -2656,6 +2697,11 @@ export interface INavigation {
                     }
                   | {
                       link?: IButton;
+                      style?: {
+                        padding?: string | null;
+                        alignX?: ('start' | 'center' | 'end' | 'space-around' | 'space-evenly') | null;
+                        alignY?: ('start' | 'center' | 'end' | 'stretch') | null;
+                      };
                       id?: string | null;
                       blockName?: string | null;
                       blockType: 'button';
@@ -2899,6 +2945,11 @@ export interface INavigation {
                                     }
                                   | {
                                       link?: IButton;
+                                      style?: {
+                                        padding?: string | null;
+                                        alignX?: ('start' | 'center' | 'end' | 'space-around' | 'space-evenly') | null;
+                                        alignY?: ('start' | 'center' | 'end' | 'stretch') | null;
+                                      };
                                       id?: string | null;
                                       blockName?: string | null;
                                       blockType: 'button';
@@ -3161,6 +3212,11 @@ export interface INavigation {
                     }
                   | {
                       link?: IButton;
+                      style?: {
+                        padding?: string | null;
+                        alignX?: ('start' | 'center' | 'end' | 'space-around' | 'space-evenly') | null;
+                        alignY?: ('start' | 'center' | 'end' | 'stretch') | null;
+                      };
                       id?: string | null;
                       blockName?: string | null;
                       blockType: 'button';
@@ -3404,6 +3460,11 @@ export interface INavigation {
                                     }
                                   | {
                                       link?: IButton;
+                                      style?: {
+                                        padding?: string | null;
+                                        alignX?: ('start' | 'center' | 'end' | 'space-around' | 'space-evenly') | null;
+                                        alignY?: ('start' | 'center' | 'end' | 'stretch') | null;
+                                      };
                                       id?: string | null;
                                       blockName?: string | null;
                                       blockType: 'button';
@@ -3666,6 +3727,11 @@ export interface INavigation {
                     }
                   | {
                       link?: IButton;
+                      style?: {
+                        padding?: string | null;
+                        alignX?: ('start' | 'center' | 'end' | 'space-around' | 'space-evenly') | null;
+                        alignY?: ('start' | 'center' | 'end' | 'stretch') | null;
+                      };
                       id?: string | null;
                       blockName?: string | null;
                       blockType: 'button';
@@ -3909,6 +3975,11 @@ export interface INavigation {
                                     }
                                   | {
                                       link?: IButton;
+                                      style?: {
+                                        padding?: string | null;
+                                        alignX?: ('start' | 'center' | 'end' | 'space-around' | 'space-evenly') | null;
+                                        alignY?: ('start' | 'center' | 'end' | 'stretch') | null;
+                                      };
                                       id?: string | null;
                                       blockName?: string | null;
                                       blockType: 'button';
@@ -4207,10 +4278,19 @@ export interface Asset {
 export interface IStickerField {
   url?: (number | null) | Asset;
   style?: {
-    inset?: string | null;
+    top?: string | null;
+    left?: string | null;
+    right?: string | null;
+    bottom?: string | null;
     height?: string | null;
     width?: string | null;
     objectFit?: string | null;
+  };
+  mobileStyle?: {
+    top?: string | null;
+    left?: string | null;
+    right?: string | null;
+    bottom?: string | null;
   };
   animation?: IAnimation;
 }
@@ -4456,6 +4536,11 @@ export interface IGutter {
  */
 export interface IButtonBlock {
   link?: IButton;
+  style?: {
+    padding?: string | null;
+    alignX?: ('start' | 'center' | 'end' | 'space-around' | 'space-evenly') | null;
+    alignY?: ('start' | 'center' | 'end' | 'stretch') | null;
+  };
   id?: string | null;
   blockName?: string | null;
   blockType: 'button';
@@ -4532,6 +4617,11 @@ export interface IBlockColumnLayout {
           }
         | {
             link?: IButton;
+            style?: {
+              padding?: string | null;
+              alignX?: ('start' | 'center' | 'end' | 'space-around' | 'space-evenly') | null;
+              alignY?: ('start' | 'center' | 'end' | 'stretch') | null;
+            };
             id?: string | null;
             blockName?: string | null;
             blockType: 'button';
@@ -4775,6 +4865,11 @@ export interface IBlockColumnLayout {
                           }
                         | {
                             link?: IButton;
+                            style?: {
+                              padding?: string | null;
+                              alignX?: ('start' | 'center' | 'end' | 'space-around' | 'space-evenly') | null;
+                              alignY?: ('start' | 'center' | 'end' | 'stretch') | null;
+                            };
                             id?: string | null;
                             blockName?: string | null;
                             blockType: 'button';
@@ -5033,6 +5128,11 @@ export interface IBlockColumnLayout {
           }
         | {
             link?: IButton;
+            style?: {
+              padding?: string | null;
+              alignX?: ('start' | 'center' | 'end' | 'space-around' | 'space-evenly') | null;
+              alignY?: ('start' | 'center' | 'end' | 'stretch') | null;
+            };
             id?: string | null;
             blockName?: string | null;
             blockType: 'button';
@@ -5276,6 +5376,11 @@ export interface IBlockColumnLayout {
                           }
                         | {
                             link?: IButton;
+                            style?: {
+                              padding?: string | null;
+                              alignX?: ('start' | 'center' | 'end' | 'space-around' | 'space-evenly') | null;
+                              alignY?: ('start' | 'center' | 'end' | 'stretch') | null;
+                            };
                             id?: string | null;
                             blockName?: string | null;
                             blockType: 'button';
@@ -5534,6 +5639,11 @@ export interface IBlockColumnLayout {
           }
         | {
             link?: IButton;
+            style?: {
+              padding?: string | null;
+              alignX?: ('start' | 'center' | 'end' | 'space-around' | 'space-evenly') | null;
+              alignY?: ('start' | 'center' | 'end' | 'stretch') | null;
+            };
             id?: string | null;
             blockName?: string | null;
             blockType: 'button';
@@ -5777,6 +5887,11 @@ export interface IBlockColumnLayout {
                           }
                         | {
                             link?: IButton;
+                            style?: {
+                              padding?: string | null;
+                              alignX?: ('start' | 'center' | 'end' | 'space-around' | 'space-evenly') | null;
+                              alignY?: ('start' | 'center' | 'end' | 'stretch') | null;
+                            };
                             id?: string | null;
                             blockName?: string | null;
                             blockType: 'button';
@@ -6593,6 +6708,11 @@ export interface IFooterDesign2 {
           }
         | {
             link?: IButton;
+            style?: {
+              padding?: string | null;
+              alignX?: ('start' | 'center' | 'end' | 'space-around' | 'space-evenly') | null;
+              alignY?: ('start' | 'center' | 'end' | 'stretch') | null;
+            };
             id?: string | null;
             blockName?: string | null;
             blockType: 'button';
@@ -6836,6 +6956,11 @@ export interface IFooterDesign2 {
                           }
                         | {
                             link?: IButton;
+                            style?: {
+                              padding?: string | null;
+                              alignX?: ('start' | 'center' | 'end' | 'space-around' | 'space-evenly') | null;
+                              alignY?: ('start' | 'center' | 'end' | 'stretch') | null;
+                            };
                             id?: string | null;
                             blockName?: string | null;
                             blockType: 'button';
@@ -7094,6 +7219,11 @@ export interface IFooterDesign2 {
           }
         | {
             link?: IButton;
+            style?: {
+              padding?: string | null;
+              alignX?: ('start' | 'center' | 'end' | 'space-around' | 'space-evenly') | null;
+              alignY?: ('start' | 'center' | 'end' | 'stretch') | null;
+            };
             id?: string | null;
             blockName?: string | null;
             blockType: 'button';
@@ -7337,6 +7467,11 @@ export interface IFooterDesign2 {
                           }
                         | {
                             link?: IButton;
+                            style?: {
+                              padding?: string | null;
+                              alignX?: ('start' | 'center' | 'end' | 'space-around' | 'space-evenly') | null;
+                              alignY?: ('start' | 'center' | 'end' | 'stretch') | null;
+                            };
                             id?: string | null;
                             blockName?: string | null;
                             blockType: 'button';
@@ -7595,6 +7730,11 @@ export interface IFooterDesign2 {
           }
         | {
             link?: IButton;
+            style?: {
+              padding?: string | null;
+              alignX?: ('start' | 'center' | 'end' | 'space-around' | 'space-evenly') | null;
+              alignY?: ('start' | 'center' | 'end' | 'stretch') | null;
+            };
             id?: string | null;
             blockName?: string | null;
             blockType: 'button';
@@ -7806,6 +7946,11 @@ export interface IPillRTBlock {
  */
 export interface IImageRTBlock {
   link?: IButton;
+  style?: {
+    padding?: string | null;
+    alignX?: ('start' | 'center' | 'end' | 'space-around' | 'space-evenly') | null;
+    alignY?: ('start' | 'center' | 'end' | 'stretch') | null;
+  };
   id?: string | null;
   blockName?: string | null;
   blockType: 'buttonRT';
