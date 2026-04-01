@@ -34,8 +34,8 @@
 			class="marquee-default w-max flex justify-center items-center gap-x-10"
 		>
 			{#each [...items!, ...items!] as { image, text }, i}
-				<div aria-hidden={i > items!.length} class="">
-					<Image {image} class="object-contain" />
+				<div aria-hidden={i > items!.length} style:height class="">
+					<Image {image} class="object-contain h-full" />
 				</div>
 				<div style:font aria-hidden={i > items!.length} class="text-nowrap">{text}</div>
 			{/each}

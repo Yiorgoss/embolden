@@ -21,6 +21,8 @@
 				cb={() => {
 					bgLoaded = true;
 				}}
+				loading="eager"
+				fetchpriority="high"
 				{image}
 			/>
 		{/if}
