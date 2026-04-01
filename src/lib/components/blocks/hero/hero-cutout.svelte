@@ -4,7 +4,7 @@
 	import { fade } from 'svelte/transition';
 	import { onMount, setContext } from 'svelte';
 
-	import Picture from '@/components/common/picture.svelte';
+	import Image from '@/components/common/image.svelte';
 	import Button from '@/components/common/button.svelte';
 	import { RichTextRender } from '@/components/blocks/rich-text';
 	import EmailOnlyForm from '@/components/blocks/forms/email-only-form.svelte';
@@ -39,7 +39,7 @@
 				<div
 					class="clip-cutout-main max-h-full md:max-h-lvh opacity-40 h-full w-full col-start-1 row-start-1"
 				>
-					<Picture {image} class=" rounded-md " />
+					<Image {image} class=" rounded-md " />
 				</div>
 				<div
 					style={`width:calc(100% - ${clipped.current ? CUTOUT_DIMENSIONS.w * offsetWidth * 0.01 : '0'}px);`}

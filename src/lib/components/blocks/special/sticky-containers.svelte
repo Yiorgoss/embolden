@@ -1,7 +1,7 @@
 <script lang="ts">
 	import type { IStickyContainers } from '@payload-types';
 	import RichTextRender from '@/components/blocks/rich-text/render.svelte';
-	import Picture from '@/components/common/picture.svelte';
+	import Image from '@/components/common/image.svelte';
 	import { cn } from '@/utils';
 	import { MediaQuery } from 'svelte/reactivity';
 
@@ -37,11 +37,7 @@
 						class="h-[300px] overflow-hidden md:h-auto w-full md:w-1/2 px-4 py-10 md:px-10"
 					>
 						{#if image}
-							<Picture
-								{image}
-								pictureClass="min-h-0 h-full w-full flex justify-center items-center"
-								class=""
-							/>
+							<Image {image} class="" />
 						{/if}
 					</div>
 					<div class:md:pl-10={left} class="h-full grow-2 shrink-0 flex-2 py-10 px-2">

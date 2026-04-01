@@ -2,7 +2,7 @@
 	import type { IRichTextCard } from '@payload-types';
 	import { RichTextRender } from '../rich-text';
 	import * as Card from '@/components/ui/card';
-	import Picture from '@/components/common/picture.svelte';
+	import Image from '@/components/common/image.svelte';
 
 	const { blockData }: { blockData: IRichTextCard } = $props();
 	const { richText, style: { background, alignX, alignY, borderRadius, maxWidth, border } = {} } =
@@ -16,7 +16,7 @@
 	>
 		{#if blockData?.image}
 			<div class="-z-0 absolute inset-0">
-				<Picture image={blockData?.image} />
+				<Image image={blockData?.image} />
 			</div>
 		{/if}
 		<Card.Content

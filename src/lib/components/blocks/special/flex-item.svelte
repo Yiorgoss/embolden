@@ -2,7 +2,7 @@
 	import type { IFlexItem } from '@payload-types';
 	import { cn } from '@/utils';
 	import Icon from '@/components/common/icon.svelte';
-	import Picture from '@/components/common/picture.svelte';
+	import Image from '@/components/common/image.svelte';
 	import RichTextRender from '@/components/blocks/rich-text/render.svelte';
 
 	const { blockData, className }: { blockData: IFlexItem; className: string } = $props();
@@ -19,7 +19,7 @@
 	>
 		{#each blockData.list ?? [] as { icon, image, richText }, i}
 			<Icon {icon} />
-			<Picture {image} />
+			<Image {image} />
 			<RichTextRender {richText} />
 		{/each}
 	</div>

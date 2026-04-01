@@ -1,5 +1,5 @@
 <script lang="ts">
-	import Picture from '@/components/common/picture.svelte';
+	import Image from '@/components/common/image.svelte';
 	import type { IMarquee, Page } from '@payload-types';
 	import { RichTextRender } from '../rich-text';
 	import { resolveID } from '@/utils';
@@ -35,7 +35,7 @@
 		>
 			{#each [...items!, ...items!] as { image, text }, i}
 				<div aria-hidden={i > items!.length} class="">
-					<Picture {image} class="object-contain" />
+					<Image {image} class="object-contain" />
 				</div>
 				<div style:font aria-hidden={i > items!.length} class="text-nowrap">{text}</div>
 			{/each}

@@ -1,5 +1,5 @@
 <script lang="ts">
-	import Picture from '@/components/common/picture.svelte';
+	import Image from '@/components/common/image.svelte';
 	import { cn } from '@/utils';
 	import { type IGutter } from '@payload-types';
 
@@ -31,7 +31,7 @@
 >
 	{#if blockData?.bgImage}
 		<div class="-z-0 absolute inset-0">
-			<Picture image={blockData?.bgImage} />
+			<Image image={blockData?.bgImage} />
 		</div>
 	{/if}
 	<div

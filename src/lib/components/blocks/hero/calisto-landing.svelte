@@ -2,11 +2,8 @@
 	import { type ICalistoLanding } from '@payload-types';
 
 	import Image from '@/components/common/image.svelte';
-	import Picture from '@/components/common/picture.svelte';
-	import Button from '@/components/common/button.svelte';
 	import { RichTextRender } from '@/components/blocks/rich-text';
-	import { fade } from 'svelte/transition';
-	import { onMount, setContext } from 'svelte';
+	import { onMount } from 'svelte';
 
 	const { blockData, cb }: { blockData: ICalistoLanding; cb?: () => void } = $props();
 	const { image, richText } = $derived(blockData);

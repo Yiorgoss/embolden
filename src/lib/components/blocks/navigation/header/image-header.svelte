@@ -1,6 +1,6 @@
 <script lang="ts">
 	import { NavigationMenu as Nav } from 'bits-ui';
-	import Picture from '@/components/common/picture.svelte';
+	import Image from '@/components/common/image.svelte';
 	import Button from '@/components/common/button.svelte';
 	import * as Sheet from '@/components/ui/sheet';
 	import { type IImageHeader } from '@payload-types';
@@ -37,7 +37,7 @@
 		>
 			<a href={`/${locale ?? ''}`} aria-label="home page" class="">
 				<div class="h-(--header-height) lg:p-2 md:p-4 w-auto">
-					<Picture class="object-contain py-2" loading="eager" {image} />
+					<Image class="object-contain py-2" loading="eager" {image} />
 				</div>
 			</a>
 			<Nav.List class="flex items-center justify-center pr-10 ">
@@ -64,7 +64,7 @@
 					<a href={`/${locale ?? ''}`} aria-label="home page" class="">
 						<div class="h-(--header-height) p-2 lg:p-2 md:p-4">
 							<!--  max width needed on picture to prevent wierd img grow on safari  -->
-							<Picture class="object-contain max-h-(--header-height)" loading="eager" {image} />
+							<Image class="object-contain max-h-(--header-height)" loading="eager" {image} />
 						</div>
 					</a>
 					<Sheet.Trigger class="h-full">

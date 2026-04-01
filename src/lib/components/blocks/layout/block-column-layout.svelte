@@ -3,7 +3,7 @@
 	import { type IBlockColumnLayout } from '@payload-types';
 
 	import RenderBlocks from '../render-blocks.svelte';
-	import Picture from '@/components/common/picture.svelte';
+	import Image from '@/components/common/image.svelte';
 	import Sticker from '@/components/common/sticker.svelte';
 	import { cn } from '@/utils';
 	import { animate } from '@/attachments/animations/animate.svelte';
@@ -58,7 +58,7 @@
 >
 	{#if blockData?.bgImage}
 		<div class="-z-0 absolute inset-0">
-			<Picture image={blockData?.bgImage} />
+			<Image image={blockData?.bgImage} />
 		</div>
 	{/if}
 	<div
