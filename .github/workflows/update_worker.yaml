@@ -2,6 +2,15 @@ name: Update Worker
 on:
   workflow_dispatch:
 
+env:
+  # get vars
+  PUBLIC_ENV: ${{ vars.PUBLIC_ENV}}
+  PUBLIC_DEV_CMS: ${{ vars.PUBLIC_DEV_CMS}}
+  PUBLIC_PROD_CMS: ${{ vars.PUBLIC_PROD_CMS}}
+  PUBLIC_TEST_ASSET_URL: ${{ vars.PUBLIC_TEST_ASSET_URL}}
+  PUBLIC_ASSET_URL: ${{ vars.PUBLIC_ASSET_URL}}
+  PUBLIC_DOMAIN_NAME: ${{ vars.PUBLIC_DOMAIN_NAME}}
+
 jobs:
   deploy:
     runs-on: ubuntu-latest
