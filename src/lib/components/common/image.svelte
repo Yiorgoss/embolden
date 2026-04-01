@@ -1,29 +1,45 @@
 <script lang="ts">
 	import { type Asset, type IImage } from '@payload-types';
 	import { site } from '@/config';
+	import { cn } from '@/utils';
 	import { onMount } from 'svelte';
 	import Sticker from './sticker.svelte';
 
 	let {
 		image,
+		class: className,
 		cb,
-		loading = 'lazy'
-	}: { image: IImage['image']; cb?: () => void; loading?: string } = $props();
+		sizes: _sizes,
+		loading = 'lazy',
+		fetchpriority = 'low'
+	}: {
+		image: IImage['image'];
+		class?: string;
+		cb?: () => void;
+		sizes?: 'string';
+		loading?: 'eager' | 'lazy' | null | undefined;
+		fetchpriority?: string;
+	} = $props();
 
 	let { url: asset, style, alt, ignoreSizes, animation, sticker } = $derived(image || {});
 
 	onMount(() => cb && cb());
 
-	let complete = $state(false);
-	let { srcset, sizes } = $derived(
-		Object.values(asset?.sizes).reduce(
+	let loaded = $state(false);
+
+	let { srcset, sizes } = $derived.by(() => {
+		let { srcset, sizes } = Object.values(asset?.sizes ?? {}).reduce(
 			(acc: any, cur: any) => ({
-				srcset: `${site.storage}/${cur.filename} ${cur.width}w, ${acc.srcset}`,
-				sizes: `(width <= ${cur.width}px) ${cur.width}px, ${acc.sizes} `
+				srcset: `${acc.srcset ?? ''} ${site.storage}/${encodeURI(cur.filename)} ${cur.width}w,`,
+				sizes: `${acc.sizes ?? ''} (max-width: ${cur.width}px) 100vw, `
 			}),
 			{ srcset: '', sizes: '' }
-		)
-	);
+		);
+		srcset += `${site.storage}/${encodeURI(asset?.filename)} ${asset?.width}w`;
+		sizes += `${asset?.width}px`; //defaultvalue
+
+		return { srcset, sizes };
+	});
 </script>
 
 <svelte:head>
@@ -48,26 +64,33 @@
 	{/if}
 </svelte:head>
 
-<div
-	class="relative grid grid-cols-1 grid-rows-1 place-items-center h-full w-full overflow-hidden bg-(image:--placeholder) bg-cover bg-no-repeat backdrop-blur-3xl"
-	style:--placeholder={`url(${site.storage}/${asset?.sizes?.placeholder?.filename})`}
->
-	<img
-		onload={() => (complete = true)}
-		class:hidden={!complete}
-		class="col-start-1 row-start-1"
-		alt={alt ?? ''}
-		{sizes}
-		{srcset}
-	/>
+{#if asset?.sizes}
 	<div
-		style:opacity={style?.opacity}
-		style:background={style?.background}
-		style:border-radius={style?.borderRadius}
-		style:mix-blend-mode={style?.mixBlendMode}
-		class="col-start-1 row-start-1 h-full w-full"
-	></div>
-	<div class="col-start-1 relative row-start-1 h-full w-full">
-		<Sticker data={image?.sticker} />
+		class="relative grid grid-cols-1 grid-rows-1 place-items-center h-full w-full overflow-hidden bg-(image:--placeholder) bg-cover bg-no-repeat"
+		style:--placeholder={`url(${site.storage}/${asset?.sizes?.placeholder?.filename})`}
+	>
+		<div class:hidden={loaded} class="absolute inset-0 bg-white/40 animate-pulse"></div>
+		<img
+			onload={() => (loaded = true)}
+			class={cn(
+				'object-contain w-full h-full col-start-1 row-start-1 ease-in-out transition-all duration-200',
+				className
+			)}
+			style:opacity={loaded ? '100%' : '0'}
+			alt={alt ?? ''}
+			sizes={_sizes ?? sizes}
+			{srcset}
+			{loading}
+		/>
+		<div
+			style:opacity={style?.opacity}
+			style:background={style?.background}
+			style:border-radius={style?.borderRadius}
+			style:mix-blend-mode={style?.mixBlendMode}
+			class="col-start-1 row-start-1 h-full w-full"
+		></div>
+		<div class="col-start-1 relative row-start-1 h-full w-full">
+			<Sticker data={image?.sticker} />
+		</div>
 	</div>
-</div>
+{/if}

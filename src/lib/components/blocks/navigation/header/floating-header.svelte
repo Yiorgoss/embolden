@@ -1,12 +1,10 @@
 <script lang="ts">
 	import { NavigationMenu as Nav } from 'bits-ui';
-	import Picture from '@/components/common/picture.svelte';
+	import Image from '@/components/common/image.svelte';
 	import Button from '@/components/common/button.svelte';
 	import * as Sheet from '@/components/ui/sheet';
 	import { type IFloatingHeader } from '@payload-types';
-	import { onMount } from 'svelte';
 	import { cn } from '@/utils';
-	import { throttle } from '@/utils';
 	import { page } from '$app/state';
 	import LocaleSwitcher from '@/components/common/locale-switcher.svelte';
 	import { supportedLocales } from '@/config';
@@ -34,7 +32,7 @@
 		>
 			<a href={`/${locale ?? ''}`} aria-label="home page" class="">
 				<div class="h-(--header-height) lg:p-2 md:p-4 w-auto">
-					<Picture class="object-contain py-2" loading="eager" {image} />
+					<Image class="object-contain h-full w-full py-2" {image} />
 				</div>
 			</a>
 			<Nav.List class="flex items-center justify-center pr-10 md:pr-0 ">
@@ -65,7 +63,7 @@
 					<a href={`/${locale ?? ''}`} aria-label="home page" class="h-full px-2">
 						<div class="h-full p-2 lg:p-2 md:p-4">
 							<!--  max width needed on picture to prevent wierd img grow on safari  -->
-							<Picture
+							<Image
 								class="object-contain h-full max-w-(--header-height)"
 								loading="eager"
 								{image}
