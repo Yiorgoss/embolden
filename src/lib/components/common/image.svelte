@@ -71,6 +71,11 @@
 		class:bg-none={loaded}
 		class="relative grid grid-cols-1 grid-rows-1 place-items-center h-full w-full overflow-hidden bg-(image:--placeholder) bg-center bg-cover bg-no-repeat"
 		style:--placeholder={`url(${site.storage}/${asset?.sizes?.placeholder?.filename})`}
+		style:height={style?.height}
+		style:width={style?.width}
+		style:object-fit={style?.objectFit}
+		style:padding={style?.padding}
+		style:border-radius={style?.borderRadius}
 	>
 		<div class:hidden={loaded} class="absolute inset-0 bg-white/40 animate-pulse"></div>
 		{#if ignoreSizes}
@@ -104,7 +109,6 @@
 		<div
 			style:opacity={style?.opacity}
 			style:background={style?.background}
-			style:border-radius={style?.borderRadius}
 			style:mix-blend-mode={style?.mixBlendMode}
 			class="col-start-1 row-start-1 h-full w-full"
 		></div>
