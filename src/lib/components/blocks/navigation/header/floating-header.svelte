@@ -32,7 +32,7 @@
 		>
 			<a href={`/${locale ?? ''}`} aria-label="home page" class="">
 				<div class="h-(--header-height) lg:p-2 md:p-4 w-auto">
-					<Image class="object-contain h-full w-full py-2" {image} />
+					<Image class="p-2 object-contain" {image} />
 				</div>
 			</a>
 			<Nav.List class="flex items-center justify-center pr-10 md:pr-0 ">

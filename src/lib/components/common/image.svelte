@@ -73,7 +73,7 @@
 		<img
 			onload={() => (loaded = true)}
 			class={cn(
-				'object-contain w-full h-full col-start-1 row-start-1 ease-in-out transition-all duration-200',
+				'object-cover w-full h-full col-start-1 row-start-1 ease-in-out transition-all duration-200',
 				className
 			)}
 			style:opacity={loaded ? '100%' : '0'}
