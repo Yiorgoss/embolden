@@ -3,7 +3,7 @@
 	import { site } from '@/config';
 	import { MediaQuery } from 'svelte/reactivity';
 
-	const { data }: { data: IStickerField } = $props();
+	const { data }: { data: IStickerField | undefined } = $props();
 	const mobile = new MediaQuery('max-width: 480px');
 </script>
 
@@ -16,7 +16,7 @@
 		class="absolute"
 	>
 		<img
-			style:width={data?.style?.width ?? data?.url?.width ?? '100px'}
+			style:width={data?.style?.width ?? data?.url?.width ?? 'auto'}
 			style:height={data?.style?.height ?? data?.url?.height ?? '100px'}
 			src={`${site.storage}/${data?.url?.filename}`}
 			alt=""

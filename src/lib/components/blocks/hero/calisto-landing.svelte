@@ -1,6 +1,7 @@
 <script lang="ts">
 	import { type ICalistoLanding } from '@payload-types';
 
+	import Image from '@/components/common/image.svelte';
 	import Picture from '@/components/common/picture.svelte';
 	import Button from '@/components/common/button.svelte';
 	import { RichTextRender } from '@/components/blocks/rich-text';
@@ -17,10 +18,9 @@
 </script>
 
 <div id="calisto-landing" class="grid min-h-lvh grid-cols-1 grid-rows-1 md:h-auto md:min-h-lvh">
-	<div class="z-0 col-span-full row-span-full">
+	<div class="-z-0 col-span-full row-span-full">
 		{#if image}
-			<Picture
-				loading="eager"
+			<Image
 				cb={() => {
 					bgLoaded = true;
 				}}
