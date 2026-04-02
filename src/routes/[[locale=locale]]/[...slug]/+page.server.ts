@@ -19,8 +19,9 @@ export const load: PageServerLoad = async (args) => {
       }
     })
     .then((res: any) => res.json())
-    .then((json: any) => json.docs[0])
+    .then((json: any) => { console.log(json); return json.docs[0] })
     .catch((err: any) => error(404, { message: err }))
+
 
   return {
     pages: [data]
