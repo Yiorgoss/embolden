@@ -41,7 +41,7 @@
 		</DropdownMenu.Trigger>
 		<DropdownMenu.Content class="rounded-[10px] py-2 px-2 ">
 			<DropdownMenu.RadioGroup bind:value={currentLang}>
-				{#each Object.entries(supportedLocales) as [key, value]}
+				{#each Object.entries(supportedLocales) as [key, value], i}
 					<DropdownMenu.Item class="rounded-xxs">
 						<Button
 							onclick={async (e) => {

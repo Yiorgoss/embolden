@@ -1,6 +1,6 @@
 <script lang="ts">
 	import { NavigationMenu as Nav } from 'bits-ui';
-	import Picture from '@/components/common/picture.svelte';
+	import Image from '@/components/common/image.svelte';
 	import Button from '@/components/common/button.svelte';
 	import * as Sheet from '@/components/ui/sheet';
 	import { type IImageHeader } from '@payload-types';
@@ -9,54 +9,45 @@
 	import { throttle } from '@/utils';
 	import { page } from '$app/state';
 	import LocaleSwitcher from '@/components/common/locale-switcher.svelte';
-	import { Menu } from '@lucide/svelte';
+	import { supportedLocales } from '@/config';
+	import Icon from '@/components/common/icon.svelte';
 
-	const { blockData, hasLocaleSwitch }: { blockData: IImageHeader; hasLocaleSwitch: boolean } =
-		$props();
+	const { blockData }: { blockData: IImageHeader } = $props();
 
 	const { image, nav } = $derived(blockData);
 	const { locale } = $derived(page.params);
 
 	let open = $state(false);
-	let currentY = $state(0);
-	let previousY = $state(0);
-	let scrollingUp = $state(false);
 
 	let mounted = $state(false);
-
-	const handleScroll = () => {
-		if (currentY > previousY) {
-			scrollingUp = true;
-		} else {
-			scrollingUp = false;
-		}
-		previousY = currentY;
-	};
 
 	onMount(() => (mounted = true));
 </script>
 
-<svelte:window
-	bind:scrollY={currentY}
-	onscroll={throttle(handleScroll, 200, { leading: true, trailing: false })}
-/>
-
-<section class="fixed top-0 inset-x-0 z-30 w-screen mx-auto h-(--header-height) px-0 md:px-0">
-	<div class="w-full h-full pr-0 md:pr-(--scrollbar-width)">
+<section
+	class="absolute top-0 inset-x-0 overflow-hidden z-30 mx-auto h-(--header-height) px-0 md:px-0"
+>
+	<div class="w-full h-full pr-0 container">
 		<!-- desktop -->
 		<Nav.Root
 			class={cn(
-				'translate-y-0 shadow-xl px-10 bg-background mr-10 transition-transform ease-out duration-500 hidden w-full items-center justify-between md:flex',
-				scrollingUp && '-translate-y-2/1'
+				'hidden px-10 bg-background w-screen items-center justify-between md:flex',
+				blockData.style?.hasShadow && 'shadow-xl'
 			)}
 		>
-			<a href={`/${locale ?? ''}`} class="">
+			<a href={`/${locale ?? ''}`} aria-label="home page" class="">
 				<div class="h-(--header-height) lg:p-2 md:p-4 w-auto">
-					<Picture class="object-contain py-2" loading="eager" {image} />
+					<Image
+						class="object-contain py-2"
+						loading="eager"
+						fetchpriority="high"
+						sizes="500px"
+						{image}
+					/>
 				</div>
 			</a>
 			<Nav.List class="flex items-center justify-center pr-10 ">
-				{#if hasLocaleSwitch && mounted}
+				{#if Object.entries(supportedLocales).length > 0}
 					<Nav.Item class="px-2">
 						<LocaleSwitcher />
 					</Nav.Item>
@@ -75,24 +66,19 @@
 		<!-- mobile -->
 		<div class="flex h-full items-center justify-end md:hidden">
 			<Sheet.Root bind:open>
-				<div
-					class={cn(
-						'bg-background shadow-xl flex justify-between items-center h-full w-full transition-transform ease-out duration-500 ',
-						scrollingUp && '-translate-y-2/1'
-					)}
-				>
-					<a href={`/${locale ?? ''}`} class="">
+				<div class={cn('bg-background shadow-xl flex justify-between items-center h-full w-full ')}>
+					<a href={`/${locale ?? ''}`} aria-label="home page" class="">
 						<div class="h-(--header-height) p-2 lg:p-2 md:p-4">
 							<!--  max width needed on picture to prevent wierd img grow on safari  -->
-							<Picture class="object-contain max-w-(--header-height)" loading="eager" {image} />
+							<Image class="object-contain max-h-(--header-height)" loading="eager" {image} />
 						</div>
 					</a>
 					<Sheet.Trigger class="h-full">
 						<div
 							aria-label="navigation menu "
-							class="focus-visible:ring-offset-background mr-4 w-fit p-2 focus-visible:outline-hidden"
+							class="focus-visible:ring-offset-background size-8 justify-center items-center flex mr-4 p-2 focus-visible:outline-hidden"
 						>
-							<Menu class="size-8" />
+							<Icon name="lucide:menu" class="size-8" />
 						</div>
 					</Sheet.Trigger>
 				</div>

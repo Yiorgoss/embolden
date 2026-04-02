@@ -1,4 +1,4 @@
-import init, { convert, insert_into_content_opf } from "$lib/wasm/embolden.js";
+import init, { convert, insert_into_content_opf } from "@/assets/wasm/embolden/embolden.js";
 import { Zip, unzip, ZipDeflate, ZipPassThrough } from "fflate";
 import {
   generateCSS,

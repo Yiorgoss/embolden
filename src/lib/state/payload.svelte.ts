@@ -21,17 +21,19 @@ export class PayloadState {
 
   // _state = new SvelteMap<string, any>()
   _state = $state<Record<string, any>>({})
-  isLivePreview = $derived(page.url.searchParams.get('livePreview') === 'true');
+  isLivePreview = $state(false);
   payloadListener: ((event: MessageEvent<any>) => void) | undefined = $state()
 
   constructor() {
-    // console.log("constructor")
-    if (this.isLivePreview && !this.payloadListener) {
-      // console.log("setup listener")
-      this.setupListener()
-    }
+
+
 
     $effect.root(() => {
+      if (
+        page.url.searchParams.get('livePreview') === 'true'
+        && !this.payloadListener) {
+        this.setupListener()
+      }
       $effect(() => {
         page.params.locale;
         untrack(() => { this.setTenant({ tenant: page.data as Tenant }) })
@@ -52,8 +54,10 @@ export class PayloadState {
   }
 
   setNav(tenant: Tenant) {
-    this.set('header', tenant?.nav?.header?.[0]); /// we wand undefined header since it shoudl be present
-    this.set('footer', tenant?.nav?.footer?.[0]);
+    this.set('nav', {
+      header: tenant?.nav?.header?.[0],
+      footer: tenant?.nav?.footer?.[0]
+    });
   }
 
   setPage(page: Page) {
@@ -194,3 +198,6 @@ export function setPayloadState() {
 export function getPayloadState() {
   return getContext<ReturnType<typeof setPayloadState>>(PAYLOAD_KEY)
 }
+
+export type PayloadStateContext = typeof setPayloadState;
+export type PayloadStateType = typeof PayloadState

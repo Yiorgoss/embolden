@@ -3,6 +3,7 @@ import { objToCSS } from './text-state';
 import { customText } from "./text"
 import { resolveID, richTextImg } from '@/utils';
 import { richTextBtn } from '@/utils/payload-utils';
+import { site } from '@/config';
 
 
 
@@ -25,11 +26,25 @@ import { richTextBtn } from '@/utils/payload-utils';
 
 // export type htmlConvertersType = typeof htmlConverters
 
+export const syncConverters: any = ({ defaultConverters }) => ({
+  ...defaultConverters,
+  text: customText,
+
+})
 export const htmlConverters: any = ({ defaultConverters }) => ({
   ...defaultConverters,
   text: customText,
   inlineBlocks: {
     // Each key should match your inline block's slug
+    listMarkerIcon: async (args: any) => {
+      const parent = args.parent
+      const fields = args.node.fields || {}
+      const { name, style } = fields.icon || {}
+
+      return `<div id="replace-marker-id-${fields?.id}" class="replace-marker" style="height:${style.width}px;width:${style.width}px;display:inline;">
+        <iconify-icon width="${style.width}" height="${style.height}" style="${style.string}" icon="${name}"></iconify-icon>
+      </div>`
+    },
     svgText: async (args: any) => {
       const { childIndex, node, parent } = args
       const siblings = parent.children
@@ -76,11 +91,14 @@ export const htmlConverters: any = ({ defaultConverters }) => ({
       if (!link || !(link.reference || link.url)) return
 
       try {
-        const href = link.type == 'reference'
-          ? await args.populate({ id: link.reference.value, collection: link.reference.relationTo })
-            .then((data: any) => data.slug)
-            .catch((err: any) => console.error(`Error populating link  ${err}`, { link }))
-          : link.url
+        let href = link.url
+        if (link.type == 'reference') {
+          // in theory whenever value is not a number it will have a slug
+          href = typeof link.reference.value == 'number'
+            ? await args.populate({ id: link.reference.value, collection: link.reference.relationTo })
+            : link.reference.value.slug
+        }
+
         const buttonHTML = richTextBtn({ href, link });
         return `<span class="animate-word">${buttonHTML}</span>`
       } catch (err) {
@@ -91,9 +109,13 @@ export const htmlConverters: any = ({ defaultConverters }) => ({
       const { image, width, height, vertAlign, phone } = args.node.fields;
       const { width: phoneWidth, height: phoneHeight } = phone
 
-      const id = typeof image == 'number' ? image : image.id
-      const doc = await args.populate({ collection: "assets", id })
-      const src = doc.sizes.sm.url
+      // const id = typeof image == 'number' ? image : image.id
+      //     if (typeof link.reference.value === "number") console.log({ xx: link.reference })
+      const doc = typeof image == 'number' ? await args.populate({ collection: "assets", id: image }) : image
+      // const src = doc.sizes.sm.url
+      const id = image.id
+      const src = `${site.storage}/${image.sizes.sm.filename}`
+      // console.log({ image, src })
 
       const imageString = richTextImg(src);
 

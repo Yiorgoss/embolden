@@ -91,7 +91,7 @@
 			<RichTextRender {richText} />
 		</div>
 		<div class="">
-			<RichTextRender {richText} overrides="bg-green-400 h-fit w-fit" />
+			<RichTextRender {richText} overrides="h-fit w-fit" />
 		</div>
 	</div>
 </section>

@@ -3,7 +3,7 @@
 	import * as Card from '@/components/ui/card';
 	import { RichTextRender } from '../rich-text';
 	import Button from '@/components/common/button.svelte';
-	import Picture from '@/components/common/picture.svelte';
+	import Image from '@/components/common/image.svelte';
 
 	const { blockData }: { blockData: ISingleCard } = $props();
 	const { content: { richText, link, image } = {} } = $derived(blockData);
@@ -11,7 +11,7 @@
 
 <Card.Root class="h-full w-full">
 	<Card.Header>
-		<Picture class="rounded-lg p-5 " {image} />
+		<Image class="rounded-lg p-5 " {image} />
 	</Card.Header>
 	<Card.Content class="h-full">
 		<RichTextRender

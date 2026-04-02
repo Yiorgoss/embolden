@@ -3,7 +3,6 @@
 	import { cn, resolveID } from '@/utils';
 	import Icon from '@/components/common/icon.svelte';
 	import { PicturePrimitive } from '@/components/common/primitives';
-	import { getPayloadState } from '@/state/payload.svelte';
 
 	const {
 		image,
@@ -21,26 +20,17 @@
 		cb?: () => void;
 	} = $props();
 
-	// let assetPromise = $state(resolveID({ collection: 'assets', data: data.url }))
 	//  FIX needs rewrite
 </script>
 
 {#if image && image.url}
-	{#await resolveID({ collection: 'assets', data: image.url })}
-		<!--  <div class="flex h-full w-full items-center justify-center">
-			<Icon name="loader-circle" class="animate-[spin_2s_linear_infinite] " />
-		</div>  -->
-	{:then asset: Asset}
-		<PicturePrimitive
-			{loading}
-			{cb}
-			{image}
-			class={imageClass}
-			sizes={imageSizes}
-			{pictureClass}
-			{asset}
-		/>
-	{:catch error}
-		<p>ERROR: {error}</p>
-	{/await}
+	<PicturePrimitive
+		{loading}
+		{cb}
+		{image}
+		class={imageClass}
+		sizes={imageSizes}
+		{pictureClass}
+		asset={image?.url}
+	/>
 {/if}

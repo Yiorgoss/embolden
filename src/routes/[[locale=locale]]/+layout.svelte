@@ -5,20 +5,46 @@
 	import { type INavigation, type Page, type Tenant } from '@payload-types';
 	import { page } from '$app/state';
 	import { site } from '@/config';
-	import { getPayloadState } from '@/state/payload.svelte';
+	import {
+		subscribe as payloadSubscribe,
+		unsubscribe as payloadUnsubscribe,
+		ready
+	} from '@payloadcms/live-preview';
+	import DialogClose from '@/components/ui/dialog/dialog-close.svelte';
 
-	const { children, data: tenant }: LayoutProps = $props();
-	const payload = getPayloadState();
+	const { children }: LayoutProps = $props();
+
+	onMount(() => {
+		if (
+			page.url.searchParams.get('livePreview') !== 'true' ||
+			page.url.searchParams.get('collection') !== 'tenants' // will happen when tenants is not changed
+		) {
+			return;
+		}
+		ready({ serverURL: site.CMS });
+
+		const payloadLivePreview = payloadSubscribe({
+			callback: (doc) => {
+				nav = doc.nav;
+			},
+			depth: 1,
+			initialData: page.data,
+			serverURL: site.CMS
+		});
+		return () => payloadLivePreview && payloadUnsubscribe(payloadLivePreview);
+	});
+
+	let nav = $derived(page.data.nav);
 </script>
 
 <div class="text-base">
 	<header class="text-foreground bg-background">
-		<RenderBlocks hasLocaleSwitch={true} blockData={payload.get('header')} />
+		<RenderBlocks blockData={nav?.header?.[0]} />
 	</header>
-	<div class="text-foreground bg-background h-full w-full">
+	<main class="text-foreground bg-background h-full w-full">
 		{@render children()}
-	</div>
+	</main>
 	<footer class="text-foreground bg-background">
-		<RenderBlocks blockData={payload.get('footer')} />
+		<RenderBlocks blockData={nav?.footer?.[0]} />
 	</footer>
 </div>

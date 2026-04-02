@@ -1,5 +1,4 @@
 <script lang="ts">
-	import Picture from '@/components/common/picture.svelte';
 	import { type IRichTextFooter } from '@payload-types';
 	import { RichTextRender } from '../../rich-text';
 	import Icon from '@/components/common/icon.svelte';

@@ -18,10 +18,8 @@ const animationList = {
   ],
   'slideFadeSlow': [
     {
-      prepare: (el: HTMLElement) => {
-        Array.from(el.children).forEach((child) => child.classList.add("animate-child"));
-        return el.querySelectorAll(".animate-child")
-      },
+      prepare: (el: HTMLElement) =>
+        Array.from(el.children).forEach((child) => child.classList.add("animate-child")),
       transforms: { opacity: [0, 1], y: [50, 0] },
       options: { duration: 0.3, ease: 'easeOut', delay: 0 }
     },
@@ -32,7 +30,10 @@ const animationList = {
   ],
   "bubbleLetters": [
     {
-      prepare: (el: HTMLElement) => wrapLetters({ el }),
+      prepare: (el: HTMLElement) => {
+        wrapLetters({ el })
+        return el.querySelectorAll(".animate-child")
+      },
       transforms: { opacity: [0, 1], y: [0, "-40%", 0] },
       options: { duration: 0.3, ease: 'easeOut', delay: stagger(0.02) }
     },
@@ -43,7 +44,10 @@ const animationList = {
   ],
   "slideLetters": [
     {
-      prepare: (el: HTMLElement) => { wrapLetters({ el }) },
+      prepare: (el: HTMLElement) => {
+        wrapLetters({ el })
+        return el.querySelectorAll(".animate-child")
+      },
       transforms: { opacity: [0, 1], transform: ['translateY(50%)', 'translateY(0px)'] },
       options: { duration: 0.1, ease: 'easeOut', delay: stagger(0.03) }
     },
@@ -56,8 +60,7 @@ const animationList = {
     {
       prepare: (element: Element) => {
         const el = element.querySelectorAll(".animate-svg path")
-        el.forEach(e => e.classList.add("animate-child")
-        )
+        el.forEach(e => e.classList.add("animate-child"))
       },
       transforms: { pathLength: [0, 1] },
       options: { duration: 0.5, ease: "linear" },
@@ -87,34 +90,40 @@ export function animateViewport(element: Element, { animation }: { animation: IA
   const entry = animationArr[0]
   const exit = animationArr[1]
 
-
   if (!entry) return
 
-  let elementList = element
+  let elementList = element;
   if (entry.prepare) {
     elementList = entry.prepare(element)
-    if (exit) animate(elementList, exit.transforms, exit.options)
+    if (!elementList) elementList = element.querySelectorAll('.animate-child')
   }
 
   if (!stagger) {
-    entry.options.delay = 0;
+    entry.options.delay = 0.2;
     exit.options.delay = 0;
   }
-  if (customAmount && customAmount <= 1 && customAmount >= 0) {
-    amount = customAmount
-  }
-  // there should never be reason for an exit preparation step
-  // if (exit && exit.prepare) exit.prepare(element)
 
-  // element.setAttribute("style", entry.initialCSS)
+  if (exit) {
+    animate(
+      elementList,
+      exit.transforms,
+      //@ts-ignore
+      exit.options
+    );
+  }
+
+  let parsed
+
+  try {
+    parsed = parseFloat(customAmount!)
+    if (customAmount && parsed <= 1 && parsed >= 0) {
+      amount = parsed
+    }
+  } catch (err) { console.log("Invalid Amount - ", err) }
+
   const cleanup = inView(
     element,
     (el) => {
-      // const children = el.querySelectorAll(".animate-child");
-      // const elementList = children.length > 0 ? children : el
-      // let elementList = [el]
-      console.log({ elementList })
-      // let elementList = ".animate-child"
       const stopEntry = animate(
         elementList,
         entry.transforms,

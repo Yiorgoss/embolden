@@ -34,8 +34,6 @@
 				return import('./cards/hover-card.svelte');
 			case 'blockColumnLayout':
 				return import('./layout/block-column-layout.svelte');
-			//  case 'contentColLayout':
-			//  	return import('./layout/content-col-layout.svelte');
 			case 'image':
 				return import('./common/image.svelte');
 			case 'gutter':
@@ -62,26 +60,31 @@
 				return import('./hero/gradient-bg.svelte');
 			case 'emboldenEpubConverter':
 				return import('./unique/embolden/epub-converter.svelte');
+			case 'heroCutout':
+				return import('./hero/hero-cutout.svelte');
+			case 'flexboxLayout':
+				return import('./layout/flexbox-layout.svelte');
+			case 'button':
+				return import('./common/button-block.svelte');
+			case 'cutoutCard':
+				return import('./cards/cutout-card.svelte');
+			case 'footerDesign2':
+				return import('./navigation/footer/footer-design-2.svelte');
+			case 'flexItem':
+				return import('./special/flex-item.svelte');
 		}
 	};
 
-	let calculatedBlockType = $state<any>();
+	let calculatedBlockType = $state();
 	$effect(() => {
-		const blockName = blockData?.blockType ?? undefined;
-
-		//  console.log({ block: $state.snapshot(blockData) });
-
-		dynamicResolveBlock({ blockName }).then((block) => (calculatedBlockType = block));
+		dynamicResolveBlock({ blockName: blockData?.blockType ?? undefined }).then(
+			(data) => (calculatedBlockType = data)
+		);
 	});
 
-	//  $effect(() => {
-	//  	blockData;
-	//  	if (blockData?.blockType == 'richTextFooter') console.log({ renderBlock: blockData.contact.q });
-	//  });
-	//  $inspect(blockData);
-
-	//  const calculatedBlockType = blockList.get(blockData?.blockType ?? undefined) ?? undefined;
-	//  const SvelteComponent = $derived(calculatedBlockType.default);
+	// let calculatedBlockType = $derived(
+	// 	await dynamicResolveBlock({ blockName: blockData?.blockType ?? undefined })
+	// );
 </script>
 
 {#if calculatedBlockType && calculatedBlockType.default}

@@ -1,11 +1,9 @@
 <script lang="ts">
 	import { type ICalistoLanding } from '@payload-types';
 
-	import Picture from '@/components/common/picture.svelte';
-	import Button from '@/components/common/button.svelte';
+	import Image from '@/components/common/image.svelte';
 	import { RichTextRender } from '@/components/blocks/rich-text';
-	import { fade } from 'svelte/transition';
-	import { onMount, setContext } from 'svelte';
+	import { onMount } from 'svelte';
 
 	const { blockData, cb }: { blockData: ICalistoLanding; cb?: () => void } = $props();
 	const { image, richText } = $derived(blockData);
@@ -17,13 +15,14 @@
 </script>
 
 <div id="calisto-landing" class="grid min-h-lvh grid-cols-1 grid-rows-1 md:h-auto md:min-h-lvh">
-	<div class="z-0 col-span-full row-span-full">
+	<div class="-z-0 col-span-full row-span-full">
 		{#if image}
-			<Picture
-				loading="eager"
+			<Image
 				cb={() => {
 					bgLoaded = true;
 				}}
+				loading="eager"
+				fetchpriority="high"
 				{image}
 			/>
 		{/if}

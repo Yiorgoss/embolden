@@ -21,26 +21,29 @@
 		cb?: () => void;
 	} = $props();
 
-	const { height, background, minHeight, textWrap } = $derived(style || {});
+	const { height, background, minHeight, textWrap, padding } = $derived(style || {});
 
 	onMount(() => {
 		cb && cb();
 	});
 </script>
 
-<div
-	id="default-rich-text"
-	style:height
-	style:background
-	style:text-wrap={textWrap}
-	style:min-height={minHeight}
-	class={cn('relative overflow-hidden', overrides)}
->
-	{#if loading}
-		<Spinner class="size-12" />
-	{:else}
-		<div class="">
-			{@html html}
-		</div>
-	{/if}
-</div>
+{#if html}
+	<div
+		id="default-rich-text"
+		style:height
+		style:background
+		style:padding
+		style:text-wrap={textWrap}
+		style:min-height={minHeight}
+		class={cn('relative overflow-hidden', overrides)}
+	>
+		{#if loading}
+			<Spinner class="size-12" />
+		{:else}
+			<div class="">
+				{@html html}
+			</div>
+		{/if}
+	</div>
+{/if}

@@ -1,0 +1,44 @@
+name: Update Worker
+on:
+  workflow_dispatch:
+
+env:
+  # get vars
+  PUBLIC_ENV: ${{ vars.PUBLIC_ENV}}
+  PUBLIC_DEV_CMS: ${{ vars.PUBLIC_DEV_CMS}}
+  PUBLIC_PROD_CMS: ${{ vars.PUBLIC_PROD_CMS}}
+  PUBLIC_TEST_ASSET_URL: ${{ vars.PUBLIC_TEST_ASSET_URL}}
+  PUBLIC_ASSET_URL: ${{ vars.PUBLIC_ASSET_URL}}
+  PUBLIC_DOMAIN_NAME: ${{ vars.PUBLIC_DOMAIN_NAME}}
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v6
+
+      - name: Setup pnpm
+        uses: pnpm/action-setup@v5
+        with:
+          version: latest
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v6
+        with:
+          node-version: 24
+          cache: 'pnpm'
+
+      - name: Install dependencies
+        run: pnpm install --frozen-lockfile
+
+      - name: Build
+        run: pnpm run build
+        env:
+          PUBLIC_ENV: PROD
+
+      - name: Deploy
+        uses: cloudflare/wrangler-action@v3
+        with:
+          apiToken: ${{ secrets.CF_API_TOKEN }}
+          accountId: ${{ secrets.CF_ACCOUNT_ID }}
+          command: deploy

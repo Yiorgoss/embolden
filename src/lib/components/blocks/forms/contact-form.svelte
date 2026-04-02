@@ -6,28 +6,34 @@
 	import Spinner from '@/components/common/spinner.svelte';
 	import { page } from '$app/state';
 	import { untrack } from 'svelte';
-	import { getPayloadState } from '@/state/payload.svelte';
 
-	const { blockData }: { blockData: IContactFormBlock } = $props();
-	const { form: _formData } = $derived(blockData);
+	const {
+		blockData,
+		design, //hardcoded
+		form: _form
+	}: { blockData: IContactFormBlock; design?: string; form?: Form } = $props();
+
 	const { locale } = page.params;
 
-	let payload = getPayloadState();
+	const getForm = async (name: string) => {
+		switch (name) {
+			case 'oneLineEmail':
+				return import('./email-only-form.svelte');
+			case 'default':
+				return import('./render-forms.svelte');
+			default:
+				return undefined;
+		}
+	};
 
-	let loading = $state(false);
-	let data = $state();
-
+	let FormBlock = $state();
 	$effect(() => {
-		untrack(() => (loading = true));
-		payload
-			.resolveID({ collection: 'forms', data: _formData, lang: locale })
-			.then((form) => (data = form))
-			.then(() => (loading = false));
+		getForm(blockData?.design ?? design).then((data) => (FormBlock = data));
 	});
+	// const FormBlock = $derived(await getForm(blockData?.design ?? design));
+	const form = $derived(blockData?.form ?? _form);
 </script>
 
-{#if loading || !data}
-	<Spinner />
-{:else}
-	<RenderForms {data} />
+{#if FormBlock && FormBlock.default && form}
+	<FormBlock.default data={form}></FormBlock.default>
 {/if}

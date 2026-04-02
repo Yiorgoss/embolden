@@ -1,11 +1,11 @@
 <script lang="ts">
-	import Picture from '@/components/common/picture.svelte';
+	import Image from '@/components/common/image.svelte';
 	import { cn } from '@/utils';
 	import { type IImage } from '@payload-types';
 
 	const { blockData }: { blockData: IImage } = $props();
 </script>
 
-<div id="image-block" class="h-full w-full p-3 md:p-6">
-	<Picture class="" image={blockData.image} />
+<div id="image-block" class="h-full w-full">
+	<Image class="" image={blockData.image} />
 </div>

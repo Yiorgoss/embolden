@@ -2,22 +2,7 @@ import type { Asset, Page, Tenant, IButton } from '@payload-types';
 import { defaultLocale, site, type SiteConfigType } from '@/config';
 import { error } from '@sveltejs/kit';
 import { buttonVariants } from '@/components/ui/button';
-
-export function mergeUpdateData({ oldData, newData }: { oldData: any, newData: any }) {
-  let updatedData = oldData
-  if (newData.nav) {
-    //update from Tenant collection
-    updatedData = newData
-  }
-  else if (newData.hero) { // page has a hero section tenant doesnt ... maybe need to add name of collectioon?
-    // update from Pages collection
-    // updatedData.pages.docs = [...updatedData.pages.docs.map((page: Page) => page.id == newData.id ? newData : page)]
-    const idx = updatedData.pages.docs.findIndex((doc) => doc.id == newData.id)
-    updatedData.pages.docs[idx] = newData;
-  }
-
-  return updatedData
-}
+import { cn } from '.';
 
 export function getRestPopulateFn({ apiURL, locale }: { apiURL: string, locale: string }) {
   return async ({ id, collection }: { id: number, collection: string }) => {
@@ -129,5 +114,8 @@ export const richTextBtn = ({ href, link }: { href: string, link: IButton }) => 
   const { text, variant, size } = display || {}
 
   const classList = buttonVariants({ variant, size })
-  return `<a class="${classList}" style="${style}" href="${href}">${text}</a>`
+  return `<a class="${cn('flex px-4 gap-5', classList)}" style="${style};" href="${href}">
+      ${text ?? href.replaceAll("/", "")}
+      ${link.display?.includeIcon ? `<iconify-icon icon=${link.display.icon?.name}></iconify-icon>` : ""}
+    </a>`
 }

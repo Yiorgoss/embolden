@@ -1,5 +1,5 @@
 <script lang="ts">
-	import Picture from '@/components/common/picture.svelte';
+	import Image from '@/components/common/image.svelte';
 	import type { IHoverCard } from '@payload-types';
 	import { RichTextRender } from '@/components/blocks/rich-text';
 	import * as Card from '@/components/ui/card';
@@ -29,7 +29,7 @@
 					class="row-start-1 h-full w-full col-start-1 duration-500 transition-transform group-hover/card:scale-120"
 				>
 					{#if image}
-						<Picture loading="eager" {image} />
+						<Image loading="eager" {image} />
 					{/if}
 				</div>
 				<div
